@@ -1,7 +1,8 @@
+import { CASE_STATUS_LABEL, POLICY_CATEGORY_LABEL, PRIORITY_LABEL, RISK_LABEL, SENTIMENT_LABEL } from "@/lib/i18n/labels";
 import type { AnalysisContext } from "@/lib/services/analysis";
 import { evidenceIntegrity } from "@/lib/services/evidence";
 import { PLATFORM_LABEL } from "@/lib/utils/platforms";
-import { formatDate, formatDateTime, truncate } from "@/lib/utils/format";
+import { formatDate, formatDateTime, formatNumber, truncate } from "@/lib/utils/format";
 import type { CaseRecord, EvidenceRecord, ReportSection, Sentiment } from "@/types";
 
 const pct = (n: number) => `${Math.round(n * 100)}%`;
@@ -22,46 +23,46 @@ export function buildReportSections(
   const top = analyses.reduce((m, a) => (a.risk.score > (m?.risk.score ?? -1) ? a : m), analyses[0]);
 
   const summary: ReportSection = {
-    title: "Executive Summary",
+    title: "Ringkasan Eksekutif",
     body: [
       `${c.id} — ${c.title}`,
-      `Platform: ${PLATFORM_LABEL[c.platform]} · Category: ${c.category} · Priority: ${c.priority} · Case status: ${c.status}`,
-      ...(ctx.source.isMock ? ["DATA SOURCE: MOCK / SIMULATED (prototype data, not live content)"] : [`Data source: ${ctx.source.label}`]),
-      `${posts.length} post(s), ${accounts.length} account(s) and ${evidence.length} evidence item(s) reviewed.`,
-      top ? `Highest post risk indicator: ${top.risk.score} (${top.risk.level.toUpperCase()}).` : "No posts attached.",
-      "Automated indicators are analytical aids that require human review. They are not findings that a violation occurred.",
+      `Platform: ${PLATFORM_LABEL[c.platform]} · Kategori: ${POLICY_CATEGORY_LABEL[c.category]} · Prioritas: ${PRIORITY_LABEL[c.priority]} · Status kasus: ${CASE_STATUS_LABEL[c.status]}`,
+      ...(ctx.source.isMock ? ["SUMBER DATA: MOCK / SIMULASI (data prototipe, bukan konten sebenarnya)"] : [`Sumber data: ${ctx.source.label}`]),
+      `${posts.length} postingan, ${accounts.length} akun, dan ${evidence.length} butir bukti ditinjau.`,
+      top ? `Indikator risiko postingan tertinggi: ${top.risk.score} (${RISK_LABEL[top.risk.level]}).` : "Belum ada postingan yang dilampirkan.",
+      "Indikator otomatis adalah alat bantu analisis yang memerlukan tinjauan manusia. Indikator ini bukan temuan bahwa telah terjadi pelanggaran.",
     ],
   };
 
   const issueIds = [...new Set(posts.map((p) => p.issueId).filter((x): x is string => Boolean(x)))];
   const issueSection: ReportSection = {
-    title: "Issue Overview",
+    title: "Gambaran Isu",
     body: issueIds.length
       ? issueIds.map((id) => {
           const i = ctx.issues.find((x) => x.id === id);
-          return i ? `${i.title} (${i.hashtag}) — volume ${i.volume.toLocaleString("en-US")}, growth ${i.growth}%, first detected ${formatDate(i.firstDetectedAt)}, status ${i.status}` : id;
+          return i ? `${i.title} (${i.hashtag}): volume ${formatNumber(i.volume)}, pertumbuhan ${i.growth}%, pertama terdeteksi ${formatDate(i.firstDetectedAt)}, status ${i.status}` : id;
         })
-      : ["No related issue is linked to these posts."],
+      : ["Tidak ada isu terkait yang terhubung dengan postingan ini."],
   };
 
   const contentSection: ReportSection = {
-    title: "Content Details",
+    title: "Detail Konten",
     body: posts.slice(0, 15).flatMap((p) => [
       `${p.id} · ${PLATFORM_LABEL[p.platform]} · ${ctx.accountById.get(p.authorId)?.handle ?? p.authorId} · ${formatDateTime(p.createdAt)}`,
       `URL: ${p.url}`,
-      `Text: ${truncate(p.text, 300)}`,
-      `Engagement: ${p.likes} likes, ${p.comments} comments, ${p.shares} shares, ${p.views} views`,
+      `Teks: ${truncate(p.text, 300)}`,
+      `Interaksi: ${formatNumber(p.likes)} suka, ${formatNumber(p.comments)} komentar, ${formatNumber(p.shares)} bagikan, ${formatNumber(p.views)} tayangan`,
     ]),
   };
 
   const accountSection: ReportSection = {
-    title: "Account Analysis",
+    title: "Analisis Akun",
     body: accounts.flatMap((a) => {
       const an = ctx.accountAnalysis.get(a.id)!;
       const flagged = an.signals.filter((s) => s.flagged).map((s) => s.label);
       return [
-        `${a.handle} (${PLATFORM_LABEL[a.platform]}) — ${an.authenticityLabel}, concern ${an.authenticityConcern}/100; risk ${an.risk.score} (${an.risk.level.toUpperCase()})`,
-        `Followers ${a.followers}, following ${a.following}, created ${formatDate(a.createdAt)}. Flagged signals: ${flagged.length ? flagged.join(", ") : "none"}.`,
+        `${a.handle} (${PLATFORM_LABEL[a.platform]}): ${an.authenticityLabel}, skor kekhawatiran ${an.authenticityConcern}/100; risiko ${an.risk.score} (${RISK_LABEL[an.risk.level]})`,
+        `Pengikut ${formatNumber(a.followers)}, mengikuti ${formatNumber(a.following)}, dibuat ${formatDate(a.createdAt)}. Sinyal yang ditandai: ${flagged.length ? flagged.join(", ") : "tidak ada"}.`,
       ];
     }),
   };
@@ -72,25 +73,25 @@ export function buildReportSections(
   const postIdSet = new Set(c.postIds);
   for (const cm of ctx.comments) if (postIdSet.has(cm.postId)) cc[ctx.commentAnalysis.get(cm.id)!.sentiment]++;
   const sentimentSection: ReportSection = {
-    title: "Sentiment Analysis",
+    title: "Analisis Sentimen",
     body: [
-      `Posts — positive ${counts.positive}, neutral ${counts.neutral}, negative ${counts.negative}.`,
-      `Comments on these posts — positive ${cc.positive}, neutral ${cc.neutral}, negative ${cc.negative}.`,
-      "Sentiment comes from a keyword-based analyzer and may misread sarcasm and context.",
+      `Postingan: ${SENTIMENT_LABEL.positive.toLowerCase()} ${counts.positive}, ${SENTIMENT_LABEL.neutral.toLowerCase()} ${counts.neutral}, ${SENTIMENT_LABEL.negative.toLowerCase()} ${counts.negative}.`,
+      `Komentar pada postingan ini: ${SENTIMENT_LABEL.positive.toLowerCase()} ${cc.positive}, ${SENTIMENT_LABEL.neutral.toLowerCase()} ${cc.neutral}, ${SENTIMENT_LABEL.negative.toLowerCase()} ${cc.negative}.`,
+      "Sentimen berasal dari penganalisis berbasis kata kunci dan dapat keliru membaca sarkasme serta konteks.",
     ],
   };
 
   const clusterByIndex = new Map(ctx.network.clusters.map((cl) => [cl.index, cl]));
   const snaSection: ReportSection = {
-    title: "SNA Findings",
+    title: "Temuan SNA",
     body: [
       ...accounts.map((a) => {
         const m = ctx.network.metrics[a.id];
         const cl = m ? clusterByIndex.get(m.community) : undefined;
         const role = ctx.network.roles[a.id];
-        return `${a.handle}: ${cl ? cl.name : "no cluster"}, degree ${m?.degree ?? 0}, betweenness ${(m?.betweenness ?? 0).toFixed(3)}${role ? `, ${role}` : ""}`;
+        return `${a.handle}: ${cl ? cl.name : "tanpa klaster"}, derajat ${m?.degree ?? 0}, betweenness ${(m?.betweenness ?? 0).toFixed(3)}${role ? `, ${role}` : ""}`;
       }),
-      "Connections reflect the data available and do not by themselves show intent, coordination or control.",
+      "Koneksi mencerminkan data yang tersedia dan tidak dengan sendirinya menunjukkan niat, koordinasi, atau kendali.",
     ],
   };
 
@@ -101,33 +102,33 @@ export function buildReportSections(
       if (g) {
         g.count++;
         g.confidence = Math.max(g.confidence, m.confidence);
-      } else grouped.set(m.ruleId, { rule: m.rule, platform: PLATFORM_LABEL[m.platform], category: m.category, confidence: m.confidence, count: 1, verified: m.ruleVerified, url: m.officialUrl });
+      } else grouped.set(m.ruleId, { rule: m.rule, platform: PLATFORM_LABEL[m.platform], category: POLICY_CATEGORY_LABEL[m.category], confidence: m.confidence, count: 1, verified: m.ruleVerified, url: m.officialUrl });
     }
   }
   const policySection: ReportSection = {
-    title: "Policy Analysis",
+    title: "Analisis Kebijakan",
     body: grouped.size
       ? [
           ...[...grouped.values()].sort((a, b) => b.confidence - a.confidence).map(
-            (g) => `Potential match: ${g.platform} — ${g.rule} (${g.category}), confidence ${pct(g.confidence)}, ${g.count} post(s)${g.verified ? "" : " [rule text NOT yet verified against the official source]"} — ${g.url}`,
+            (g) => `Potensi kecocokan: ${g.platform}, ${g.rule} (${g.category}), keyakinan ${pct(g.confidence)}, ${g.count} postingan${g.verified ? "" : " [teks aturan BELUM diverifikasi terhadap sumber resmi]"}. ${g.url}`,
           ),
-          "Status: NEEDS REVIEW. Confirm the exact policy wording at the official URL before reporting.",
+          "Status: PERLU DITINJAU. Pastikan bunyi kebijakan yang tepat di URL resmi sebelum melapor.",
         ]
-      : ["No potential policy matches were suggested by the automated analysis."],
+      : ["Analisis otomatis tidak menyarankan kecocokan kebijakan."],
   };
 
   const evidenceSection: ReportSection = {
-    title: "Evidence",
+    title: "Bukti",
     body: evidence.length
-      ? evidence.map((e) => `${e.id} — ${e.postId ?? e.url}, captured ${formatDateTime(e.capturedAt)} by ${e.collectedBy}; SHA-256 ${e.hash}; integrity ${evidenceIntegrity(e) ? "OK" : "MISMATCH"}`)
-      : ["No evidence has been captured for this case yet."],
+      ? evidence.map((e) => `${e.id}: ${e.postId ?? e.url}, diambil ${formatDateTime(e.capturedAt)} oleh ${e.collectedBy}; SHA-256 ${e.hash}; integritas ${evidenceIntegrity(e) ? "SESUAI" : "TIDAK SESUAI"}`)
+      : ["Belum ada bukti yang diambil untuk kasus ini."],
   };
 
   const riskSection: ReportSection = {
-    title: "Risk Assessment",
+    title: "Penilaian Risiko",
     body: [
-      ...analyses.map((a) => `${a.postId}: ${a.risk.score} (${a.risk.level.toUpperCase()}) — content ${a.risk.components.content}, behavior ${a.risk.components.behavior}, network ${a.risk.components.network}, coordination ${a.risk.components.coordination}`),
-      "Risk scores are analytical indicators for prioritising review, not decisions.",
+      ...analyses.map((a) => `${a.postId}: ${a.risk.score} (${RISK_LABEL[a.risk.level]}); konten ${a.risk.components.content}, perilaku ${a.risk.components.behavior}, jaringan ${a.risk.components.network}, koordinasi ${a.risk.components.coordination}`),
+      "Skor risiko adalah indikator analitis untuk menentukan prioritas tinjauan, bukan keputusan.",
     ],
   };
 

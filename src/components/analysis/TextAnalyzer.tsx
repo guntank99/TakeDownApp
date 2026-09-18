@@ -13,7 +13,7 @@ export function TextAnalyzer() {
     <div className="space-y-4">
       <form action={action} className="space-y-3">
         <label htmlFor="text" className="block text-sm font-medium text-slate-300">
-          Text to analyze
+          Teks yang akan dianalisis
         </label>
         <textarea
           id="text"
@@ -22,7 +22,7 @@ export function TextAnalyzer() {
           maxLength={5000}
           required
           defaultValue={state.text}
-          placeholder="Paste a post or comment (English or Indonesian)…"
+          placeholder="Tempel postingan atau komentar (bahasa Indonesia atau Inggris)…"
           className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
         />
         {state.error ? <p role="alert" className="text-sm text-red-300">{state.error}</p> : null}
@@ -31,10 +31,10 @@ export function TextAnalyzer() {
           disabled={pending}
           className="rounded-lg bg-sky-500 px-4 py-1.5 text-sm font-semibold text-slate-950 hover:bg-sky-400 disabled:opacity-60"
         >
-          {pending ? "Analyzing..." : "Analyze"}
+          {pending ? "Menganalisis..." : "Analisis"}
         </button>
       </form>
-      {state.analysis ? <AnalysisCard analysis={state.analysis} title="Result" /> : null}
+      {state.analysis ? <AnalysisCard analysis={state.analysis} title="Hasil" /> : null}
     </div>
   );
 }

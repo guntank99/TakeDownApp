@@ -1,7 +1,7 @@
 import { Inbox } from "lucide-react";
 
 export function EmptyState({
-  message = "No data available.",
+  message = "Tidak ada data.",
 }: {
   message?: string;
 }) {

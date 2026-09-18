@@ -13,7 +13,7 @@ export function DataTable<T>({
   columns,
   rows,
   rowKey,
-  empty = "No data available.",
+  empty = "Tidak ada data.",
 }: {
   caption: string;
   columns: Column<T>[];
@@ -65,19 +65,19 @@ export function Pagination({
   params: Record<string, string | undefined>;
 }) {
   if (pages <= 1) {
-    return <p className="mt-3 text-xs text-slate-500">{total} result{total === 1 ? "" : "s"}</p>;
+    return <p className="mt-3 text-xs text-slate-500">{total} hasil</p>;
   }
   const href = (p: number) => `${basePath}${buildQuery({ ...params, page: p === 1 ? undefined : p })}`;
   const link = "rounded-md border border-slate-700 px-3 py-1 text-sm text-slate-200 hover:bg-slate-800";
   const off = "rounded-md border border-slate-800 px-3 py-1 text-sm text-slate-600";
   return (
-    <nav aria-label="Pagination" className="mt-3 flex items-center justify-between gap-3 text-xs text-slate-500">
+    <nav aria-label="Halaman" className="mt-3 flex items-center justify-between gap-3 text-xs text-slate-500">
       <span>
-        {total} results · page {page} of {pages}
+        {total} hasil · halaman {page} dari {pages}
       </span>
       <span className="flex gap-2">
-        {page > 1 ? <Link href={href(page - 1)} className={link}>Previous</Link> : <span className={off} aria-disabled="true">Previous</span>}
-        {page < pages ? <Link href={href(page + 1)} className={link}>Next</Link> : <span className={off} aria-disabled="true">Next</span>}
+        {page > 1 ? <Link href={href(page - 1)} className={link}>Sebelumnya</Link> : <span className={off} aria-disabled="true">Sebelumnya</span>}
+        {page < pages ? <Link href={href(page + 1)} className={link}>Berikutnya</Link> : <span className={off} aria-disabled="true">Berikutnya</span>}
       </span>
     </nav>
   );

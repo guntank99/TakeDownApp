@@ -119,7 +119,7 @@ async function build(): Promise<AnalysisContext> {
       accountId: a.id,
       signals,
       authenticityConcern: concern,
-      authenticityLabel: concern >= 50 ? "Potentially Inauthentic" : "No strong authenticity concerns",
+      authenticityLabel: concern >= 50 ? "Berpotensi Tidak Autentik" : "Tidak ada kekhawatiran autentisitas yang kuat",
       risk: calculateRisk(
         { content: contentRisk, behavior: behaviorPoints(signals), network: networkRisk, coordination: coordinationPoints(coordAccounts) },
         factors,
@@ -139,8 +139,8 @@ async function build(): Promise<AnalysisContext> {
     const authorRisk = author?.risk.components;
     const factors = [
       ...c.flagged.map((k) => c.indicators[k].label),
-      ...(coord ? [`Near-identical text posted by ${coord.accounts} accounts`] : []),
-      ...(author?.authenticityLabel === "Potentially Inauthentic" ? ["Author shows potentially inauthentic behaviour"] : []),
+      ...(coord ? [`Teks hampir identik diposting oleh ${coord.accounts} akun`] : []),
+      ...(author?.authenticityLabel === "Berpotensi Tidak Autentik" ? ["Penulis menunjukkan perilaku yang berpotensi tidak autentik"] : []),
     ];
     postAnalysis.set(p.id, {
       postId: p.id,

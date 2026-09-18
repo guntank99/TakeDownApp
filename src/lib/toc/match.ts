@@ -66,7 +66,7 @@ export function matchPolicy(input: MatchInput, rules: PolicyRule[]): PolicyMatch
   if ((input.coordinationAccounts ?? 0) >= 3) {
     const n = input.coordinationAccounts!;
     consider("Platform Manipulation", Math.min(0.8, 0.3 + 0.1 * n), [
-      `${n} accounts posted near-identical text within 48 hours`,
+      `${n} akun memposting teks hampir identik dalam 48 jam`,
     ]);
   }
 

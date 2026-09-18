@@ -49,8 +49,8 @@ describe("calculateRisk", () => {
 
 describe("contentRiskPoints", () => {
   it("is 0 for benign text and high for group-targeting hate", () => {
-    expect(contentRiskPoints(analyzeContent("Thank you all for the great event."))).toBe(0);
-    const hate = contentRiskPoints(analyzeContent("The Vellani are vermin. Disgusting people, drive them out."));
+    expect(contentRiskPoints(analyzeContent("Terima kasih semuanya atas acara yang bagus."))).toBe(0);
+    const hate = contentRiskPoints(analyzeContent("Orang-orang Vellani itu hama. Menjijikkan, usir mereka dari kota kita."));
     expect(hate).toBeGreaterThanOrEqual(30);
     expect(hate).toBeLessThanOrEqual(RISK_MAX.content);
   });

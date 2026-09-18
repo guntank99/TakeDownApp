@@ -193,14 +193,14 @@ export interface PostAnalysis {
 }
 
 export type CommentCategory =
-  | "Positive"
-  | "Neutral"
-  | "Negative"
-  | "Hate Speech Indicator"
-  | "Harassment"
+  | "Positif"
+  | "Netral"
+  | "Negatif"
+  | "Indikator Ujaran Kebencian"
+  | "Pelecehan"
   | "Spam"
-  | "Threat Indicator"
-  | "Other";
+  | "Indikator Ancaman"
+  | "Lainnya";
 
 export interface CommentAnalysis {
   commentId: string;
@@ -226,7 +226,7 @@ export interface AccountAnalysis {
   /** 0–100, higher = more indicators of inauthentic behaviour. */
   authenticityConcern: number;
   /** Deliberately hedged wording: never "fake". */
-  authenticityLabel: "Potentially Inauthentic" | "No strong authenticity concerns";
+  authenticityLabel: "Berpotensi Tidak Autentik" | "Tidak ada kekhawatiran autentisitas yang kuat";
   risk: RiskAssessment;
   degreeCentrality: number;
   networkRole: NetworkRole | null;
@@ -256,6 +256,28 @@ export interface Claim extends Traceable {
   text: string;
   extractedFromPostId: string;
   assessment: ClaimAssessment | null;
+}
+
+// ------------------------------------------------------------------ news
+
+/** One headline from a publisher's official RSS feed. Only title, snippet and link are kept. */
+export interface NewsItem {
+  id: string;
+  title: string;
+  link: string;
+  source: string; // outlet name, e.g. "Antara"
+  publishedAt: string; // ISO 8601
+  summary: string;
+}
+
+/** The same story reported by several outlets (grouped automatically, may be imperfect). */
+export interface NewsCluster {
+  id: string;
+  headline: string;
+  items: NewsItem[];
+  outlets: string[];
+  firstAt: string;
+  latestAt: string;
 }
 
 // ------------------------------------------------------------------- SNA
@@ -290,7 +312,7 @@ export interface NetworkGraph {
 }
 
 /** Neutral wording only; never "mastermind", "controller" or "main culprit". */
-export type NetworkRole = "Highly Connected Account" | "Potential Network Hub";
+export type NetworkRole = "Akun Sangat Terhubung" | "Potensi Hub Jaringan";
 
 export interface NodeMetrics {
   id: string;
@@ -479,6 +501,7 @@ export type AuditAction =
   | "GENERATE_REPORT"
   | "UPDATE_REPORT"
   | "EXPORT_REPORT"
+  | "SEARCH"
   | "SUBMIT_REPORT"
   | "UPDATE_POLICY";
 

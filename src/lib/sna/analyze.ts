@@ -34,7 +34,7 @@ const top = <T,>(counts: Map<T, number>, n: number): T[] =>
 
 /**
  * Full network analysis. Roles use neutral wording only: a highly central
- * account is a "Highly Connected Account" or "Potential Network Hub" — the
+ * account is a "Akun Sangat Terhubung" or "Potensi Hub Jaringan" — the
  * data shows connections, not intent or control.
  */
 export function analyzeNetwork(
@@ -64,8 +64,8 @@ export function analyzeNetwork(
   const roles: Record<string, NetworkRole> = {};
   for (const a of accounts) {
     const m = metrics[a.id];
-    if (m.betweenness > 0 && m.betweenness >= btwThreshold) roles[a.id] = "Potential Network Hub";
-    else if (m.degree > 0 && m.degreeCentrality >= degThreshold) roles[a.id] = "Highly Connected Account";
+    if (m.betweenness > 0 && m.betweenness >= btwThreshold) roles[a.id] = "Potensi Hub Jaringan";
+    else if (m.degree > 0 && m.degreeCentrality >= degThreshold) roles[a.id] = "Akun Sangat Terhubung";
   }
 
   // Clusters: communities with at least three nodes, at least one of them an account.

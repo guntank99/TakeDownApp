@@ -39,7 +39,7 @@ export async function createCaseAction(formData: FormData) {
     accountIds: [],
   });
   if (!result.ok) back("/cases/new", "error", result.error);
-  back(`/cases/${result.value.id}`, "notice", "Case created.");
+  back(`/cases/${result.value.id}`, "notice", "Kasus dibuat.");
 }
 
 export async function updateCaseAction(formData: FormData) {
@@ -53,7 +53,7 @@ export async function updateCaseAction(formData: FormData) {
   }
   const result = await updateCase(user, id, body);
   if (!result.ok) back(safePath(str(formData, "returnTo"), path), "error", result.error);
-  back(safePath(str(formData, "returnTo"), path), "notice", "Case updated.");
+  back(safePath(str(formData, "returnTo"), path), "notice", "Kasus diperbarui.");
 }
 
 export async function createEvidenceAction(formData: FormData) {
@@ -66,14 +66,14 @@ export async function createEvidenceAction(formData: FormData) {
   });
   const path = `/cases/${encodeURIComponent(caseId)}`;
   if (!result.ok) back(path, "error", result.error);
-  back(path, "notice", `Evidence ${result.value.id} captured and hashed.`);
+  back(path, "notice", `Bukti ${result.value.id} diambil dan di-hash.`);
 }
 
 export async function createReportAction(formData: FormData) {
   const user = await verifySession();
   const result = await createReport(user, { caseId: str(formData, "caseId") });
   if (!result.ok) back(`/cases/${encodeURIComponent(str(formData, "caseId"))}`, "error", result.error);
-  back(`/reports/${result.value.id}`, "notice", "Draft report generated.");
+  back(`/reports/${result.value.id}`, "notice", "Draf laporan dibuat.");
 }
 
 export async function updateReportAction(formData: FormData) {
@@ -86,7 +86,7 @@ export async function updateReportAction(formData: FormData) {
   const result = await updateReport(user, id, body);
   const path = `/reports/${encodeURIComponent(id)}`;
   if (!result.ok) back(path, "error", result.error);
-  back(path, "notice", "Report updated.");
+  back(path, "notice", "Laporan diperbarui.");
 }
 
 export async function submitReportAction(formData: FormData) {
@@ -95,7 +95,7 @@ export async function submitReportAction(formData: FormData) {
   const result = await submitReport(user, id, formData.get("confirmed") === "on");
   const path = `/reports/${encodeURIComponent(id)}`;
   if (!result.ok) back(path, "error", result.error);
-  back(path, "notice", "Submission recorded. The case is now REPORTED.");
+  back(path, "notice", "Pengajuan tercatat. Kasus kini berstatus Sudah dilaporkan.");
 }
 
 export interface AnalyzeState {
@@ -108,7 +108,7 @@ export interface AnalyzeState {
 export async function analyzeTextAction(_prev: AnalyzeState, formData: FormData): Promise<AnalyzeState> {
   const user = await verifySession();
   const parsed = textSchema.safeParse({ text: str(formData, "text") });
-  if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? "Invalid text.", text: str(formData, "text") };
-  logAudit({ user, action: "ANALYZE_POST", object: `manual text (${parsed.data.text.length} chars)` });
+  if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? "Teks tidak valid.", text: str(formData, "text") };
+  logAudit({ user, action: "ANALYZE_POST", object: `analisis teks manual (${parsed.data.text.length} karakter)` });
   return { text: parsed.data.text, analysis: analyzeContent(parsed.data.text) };
 }

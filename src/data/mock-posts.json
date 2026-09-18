@@ -4,17 +4,17 @@
   "platform": "news",
   "url": "mock://news/POST-001",
   "authorId": "ACC-034",
-  "text": "Update on regional transit schedule update: the published schedule for the coming week is available. #TransitUpdate",
+  "text": "Informasi terbaru: jadwal operasional transportasi umum. Jadwal lengkap sudah diumumkan untuk pekan ini. #JadwalTransportasi",
   "mediaType": "image",
   "hashtags": [
-   "#TransitUpdate"
+   "#JadwalTransportasi"
   ],
   "mentions": [
-   "@calm_watch_57"
+   "@sejuk_nusa_57"
   ],
   "issueId": "ISS-001",
   "claimId": null,
-  "createdAt": "2026-09-04T22:00:00Z",
+  "createdAt": "2026-09-06T15:00:00Z",
   "likes": 2364,
   "comments": 1468,
   "shares": 1352,
@@ -26,15 +26,15 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-002",
   "authorId": "ACC-031",
-  "text": "Here is a summary of today's discussion about regional transit schedule update, according to the published report. #TransitUpdate",
+  "text": "Ringkasan diskusi hari ini tentang jadwal operasional transportasi umum, menurut laporan resmi yang dipublikasikan. #JadwalTransportasi",
   "mediaType": "link",
   "hashtags": [
-   "#TransitUpdate"
+   "#JadwalTransportasi"
   ],
   "mentions": [],
   "issueId": "ISS-001",
   "claimId": null,
-  "createdAt": "2026-09-08T21:00:00Z",
+  "createdAt": "2026-09-10T14:00:00Z",
   "likes": 10972,
   "comments": 1450,
   "shares": 4162,
@@ -46,15 +46,15 @@
   "platform": "x",
   "url": "mock://x/POST-003",
   "authorId": "ACC-011",
-  "text": "Question for the community: what do you think about regional transit schedule update? #TransitUpdate",
+  "text": "Bagaimana pendapat warga tentang jadwal operasional transportasi umum? Mari berdiskusi dengan santun. #JadwalTransportasi",
   "mediaType": "link",
   "hashtags": [
-   "#TransitUpdate"
+   "#JadwalTransportasi"
   ],
   "mentions": [],
   "issueId": "ISS-001",
   "claimId": null,
-  "createdAt": "2026-09-17T09:00:00Z",
+  "createdAt": "2026-09-19T02:00:00Z",
   "likes": 162,
   "comments": 66,
   "shares": 44,
@@ -66,15 +66,15 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-004",
   "authorId": "ACC-033",
-  "text": "Pembaruan terkait public library extended hours: jadwal resmi sudah dipublikasikan. #LibraryHours",
+  "text": "Pembaruan terkait perpanjangan jam layanan perpustakaan daerah: pengumuman resmi sudah tersedia. #JamPerpustakaan",
   "mediaType": "text",
   "hashtags": [
-   "#LibraryHours"
+   "#JamPerpustakaan"
   ],
   "mentions": [],
   "issueId": "ISS-002",
   "claimId": null,
-  "createdAt": "2026-09-15T09:00:00Z",
+  "createdAt": "2026-09-17T02:00:00Z",
   "likes": 2824,
   "comments": 704,
   "shares": 1834,
@@ -86,15 +86,15 @@
   "platform": "x",
   "url": "mock://x/POST-005",
   "authorId": "ACC-014",
-  "text": "Question for the community: what do you think about public library extended hours? #LibraryHours",
+  "text": "Bagaimana pendapat warga tentang perpanjangan jam layanan perpustakaan daerah? Mari berdiskusi dengan santun. #JamPerpustakaan",
   "mediaType": "link",
   "hashtags": [
-   "#LibraryHours"
+   "#JamPerpustakaan"
   ],
   "mentions": [],
   "issueId": "ISS-002",
   "claimId": null,
-  "createdAt": "2026-09-06T09:00:00Z",
+  "createdAt": "2026-09-08T02:00:00Z",
   "likes": 519,
   "comments": 60,
   "shares": 202,
@@ -106,15 +106,15 @@
   "platform": "telegram",
   "url": "mock://telegram/POST-006",
   "authorId": "ACC-013",
-  "text": "Pembaruan terkait public library extended hours: jadwal resmi sudah dipublikasikan. #LibraryHours",
+  "text": "Pembaruan terkait perpanjangan jam layanan perpustakaan daerah: pengumuman resmi sudah tersedia. #JamPerpustakaan",
   "mediaType": "link",
   "hashtags": [
-   "#LibraryHours"
+   "#JamPerpustakaan"
   ],
   "mentions": [],
   "issueId": "ISS-002",
   "claimId": null,
-  "createdAt": "2026-09-06T23:00:00Z",
+  "createdAt": "2026-09-08T16:00:00Z",
   "likes": 43,
   "comments": 3,
   "shares": 11,
@@ -126,15 +126,15 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-007",
   "authorId": "ACC-033",
-  "text": "Here is a summary of today's discussion about weather advisory for the coast, according to the published report. #CoastAdvisory",
+  "text": "Ringkasan diskusi hari ini tentang peringatan cuaca ekstrem di wilayah pesisir, menurut laporan resmi yang dipublikasikan. #CuacaPesisir",
   "mediaType": "text",
   "hashtags": [
-   "#CoastAdvisory"
+   "#CuacaPesisir"
   ],
   "mentions": [],
   "issueId": "ISS-003",
   "claimId": null,
-  "createdAt": "2026-09-06T10:00:00Z",
+  "createdAt": "2026-09-08T03:00:00Z",
   "likes": 3514,
   "comments": 1417,
   "shares": 2319,
@@ -146,15 +146,15 @@
   "platform": "news",
   "url": "mock://news/POST-008",
   "authorId": "ACC-032",
-  "text": "Here is a summary of today's discussion about weather advisory for the coast, according to the published report. #CoastAdvisory",
+  "text": "Ringkasan diskusi hari ini tentang peringatan cuaca ekstrem di wilayah pesisir, menurut laporan resmi yang dipublikasikan. #CuacaPesisir",
   "mediaType": "text",
   "hashtags": [
-   "#CoastAdvisory"
+   "#CuacaPesisir"
   ],
   "mentions": [],
   "issueId": "ISS-003",
   "claimId": null,
-  "createdAt": "2026-09-16T02:00:00Z",
+  "createdAt": "2026-09-17T19:00:00Z",
   "likes": 4829,
   "comments": 1099,
   "shares": 2092,
@@ -166,15 +166,15 @@
   "platform": "news",
   "url": "mock://news/POST-009",
   "authorId": "ACC-032",
-  "text": "Update on weather advisory for the coast: the published schedule for the coming week is available. #CoastAdvisory",
+  "text": "Informasi terbaru: peringatan cuaca ekstrem di wilayah pesisir. Jadwal lengkap sudah diumumkan untuk pekan ini. #CuacaPesisir",
   "mediaType": "text",
   "hashtags": [
-   "#CoastAdvisory"
+   "#CuacaPesisir"
   ],
   "mentions": [],
   "issueId": "ISS-003",
   "claimId": null,
-  "createdAt": "2026-09-09T05:00:00Z",
+  "createdAt": "2026-09-10T22:00:00Z",
   "likes": 9855,
   "comments": 1275,
   "shares": 3656,
@@ -186,17 +186,17 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-010",
   "authorId": "ACC-035",
-  "text": "Pembaruan terkait city budget consultation: jadwal resmi sudah dipublikasikan. #BudgetTalk",
+  "text": "Pembaruan terkait konsultasi publik anggaran daerah: pengumuman resmi sudah tersedia. #AnggaranDaerah",
   "mediaType": "link",
   "hashtags": [
-   "#BudgetTalk"
+   "#AnggaranDaerah"
   ],
   "mentions": [
-   "@north_post_89"
+   "@cerdas_lentera_89"
   ],
   "issueId": "ISS-004",
   "claimId": null,
-  "createdAt": "2026-09-12T01:00:00Z",
+  "createdAt": "2026-09-13T18:00:00Z",
   "likes": 10827,
   "comments": 1177,
   "shares": 5294,
@@ -208,15 +208,15 @@
   "platform": "x",
   "url": "mock://x/POST-011",
   "authorId": "ACC-014",
-  "text": "Here is a summary of today's discussion about city budget consultation, according to the published report. #BudgetTalk",
+  "text": "Ringkasan diskusi hari ini tentang konsultasi publik anggaran daerah, menurut laporan resmi yang dipublikasikan. #AnggaranDaerah",
   "mediaType": "link",
   "hashtags": [
-   "#BudgetTalk"
+   "#AnggaranDaerah"
   ],
   "mentions": [],
   "issueId": "ISS-004",
   "claimId": null,
-  "createdAt": "2026-09-15T17:00:00Z",
+  "createdAt": "2026-09-17T10:00:00Z",
   "likes": 52,
   "comments": 29,
   "shares": 73,
@@ -228,15 +228,15 @@
   "platform": "x",
   "url": "mock://x/POST-012",
   "authorId": "ACC-030",
-  "text": "Here is a summary of today's discussion about city budget consultation, according to the published report. #BudgetTalk",
+  "text": "Ringkasan diskusi hari ini tentang konsultasi publik anggaran daerah, menurut laporan resmi yang dipublikasikan. #AnggaranDaerah",
   "mediaType": "link",
   "hashtags": [
-   "#BudgetTalk"
+   "#AnggaranDaerah"
   ],
   "mentions": [],
   "issueId": "ISS-004",
   "claimId": null,
-  "createdAt": "2026-09-13T22:00:00Z",
+  "createdAt": "2026-09-15T15:00:00Z",
   "likes": 109,
   "comments": 26,
   "shares": 13,
@@ -248,17 +248,17 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-013",
   "authorId": "ACC-033",
-  "text": "Pembaruan terkait school term calendar: jadwal resmi sudah dipublikasikan. #TermCalendar",
+  "text": "Pembaruan terkait kalender akademik tahun ajaran baru: pengumuman resmi sudah tersedia. #TahunAjaranBaru",
   "mediaType": "text",
   "hashtags": [
-   "#TermCalendar"
+   "#TahunAjaranBaru"
   ],
   "mentions": [
-   "@urban_signal_62"
+   "@lantang_suara_62"
   ],
   "issueId": "ISS-005",
   "claimId": null,
-  "createdAt": "2026-09-07T16:00:00Z",
+  "createdAt": "2026-09-09T09:00:00Z",
   "likes": 14105,
   "comments": 1110,
   "shares": 3021,
@@ -270,15 +270,15 @@
   "platform": "x",
   "url": "mock://x/POST-014",
   "authorId": "ACC-021",
-  "text": "Pembaruan terkait school term calendar: jadwal resmi sudah dipublikasikan. #TermCalendar",
+  "text": "Pembaruan terkait kalender akademik tahun ajaran baru: pengumuman resmi sudah tersedia. #TahunAjaranBaru",
   "mediaType": "text",
   "hashtags": [
-   "#TermCalendar"
+   "#TahunAjaranBaru"
   ],
   "mentions": [],
   "issueId": "ISS-005",
   "claimId": null,
-  "createdAt": "2026-09-12T00:00:00Z",
+  "createdAt": "2026-09-13T17:00:00Z",
   "likes": 650,
   "comments": 31,
   "shares": 178,
@@ -290,15 +290,15 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-015",
   "authorId": "ACC-031",
-  "text": "Question for the community: what do you think about school term calendar? #TermCalendar",
+  "text": "Bagaimana pendapat warga tentang kalender akademik tahun ajaran baru? Mari berdiskusi dengan santun. #TahunAjaranBaru",
   "mediaType": "text",
   "hashtags": [
-   "#TermCalendar"
+   "#TahunAjaranBaru"
   ],
   "mentions": [],
   "issueId": "ISS-005",
   "claimId": null,
-  "createdAt": "2026-09-05T18:00:00Z",
+  "createdAt": "2026-09-07T11:00:00Z",
   "likes": 6141,
   "comments": 703,
   "shares": 363,
@@ -310,15 +310,15 @@
   "platform": "facebook",
   "url": "mock://facebook/POST-016",
   "authorId": "ACC-028",
-  "text": "Wonderful news about community clean-up campaign, very helpful for everyone. #CleanUpDay",
+  "text": "Kabar baik tentang gerakan kerja bakti bersih sungai, sangat bermanfaat bagi banyak orang. #KerjaBakti",
   "mediaType": "text",
   "hashtags": [
-   "#CleanUpDay"
+   "#KerjaBakti"
   ],
   "mentions": [],
   "issueId": "ISS-006",
   "claimId": null,
-  "createdAt": "2026-09-08T19:00:00Z",
+  "createdAt": "2026-09-10T12:00:00Z",
   "likes": 290,
   "comments": 28,
   "shares": 61,
@@ -330,15 +330,15 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-017",
   "authorId": "ACC-033",
-  "text": "Really proud of the community effort on community clean-up campaign. Excellent result! #CleanUpDay",
+  "text": "Bangga dengan kerja sama warga dalam gerakan kerja bakti bersih sungai. Hasilnya luar biasa! #KerjaBakti",
   "mediaType": "link",
   "hashtags": [
-   "#CleanUpDay"
+   "#KerjaBakti"
   ],
   "mentions": [],
   "issueId": "ISS-006",
   "claimId": null,
-  "createdAt": "2026-09-05T11:00:00Z",
+  "createdAt": "2026-09-07T04:00:00Z",
   "likes": 3890,
   "comments": 1574,
   "shares": 543,
@@ -350,15 +350,15 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-018",
   "authorId": "ACC-031",
-  "text": "Terima kasih semuanya, community clean-up campaign berjalan dengan bagus dan sukses. #CleanUpDay",
+  "text": "Terima kasih semuanya, gerakan kerja bakti bersih sungai berjalan lancar dan sukses. #KerjaBakti",
   "mediaType": "video",
   "hashtags": [
-   "#CleanUpDay"
+   "#KerjaBakti"
   ],
   "mentions": [],
   "issueId": "ISS-006",
   "claimId": null,
-  "createdAt": "2026-09-13T16:00:00Z",
+  "createdAt": "2026-09-15T09:00:00Z",
   "likes": 10506,
   "comments": 838,
   "shares": 6288,
@@ -370,15 +370,15 @@
   "platform": "x",
   "url": "mock://x/POST-019",
   "authorId": "ACC-024",
-  "text": "Really proud of the community effort on local hospital new wing opening. Excellent result! #NewWing",
+  "text": "Bangga dengan kerja sama warga dalam peresmian gedung baru puskesmas. Hasilnya luar biasa! #GedungBaruPuskesmas",
   "mediaType": "text",
   "hashtags": [
-   "#NewWing"
+   "#GedungBaruPuskesmas"
   ],
   "mentions": [],
   "issueId": "ISS-007",
   "claimId": null,
-  "createdAt": "2026-09-16T07:00:00Z",
+  "createdAt": "2026-09-18T00:00:00Z",
   "likes": 252,
   "comments": 19,
   "shares": 63,
@@ -390,17 +390,17 @@
   "platform": "x",
   "url": "mock://x/POST-020",
   "authorId": "ACC-014",
-  "text": "Terima kasih semuanya, local hospital new wing opening berjalan dengan bagus dan sukses. #NewWing",
+  "text": "Terima kasih semuanya, peresmian gedung baru puskesmas berjalan lancar dan sukses. #GedungBaruPuskesmas",
   "mediaType": "text",
   "hashtags": [
-   "#NewWing"
+   "#GedungBaruPuskesmas"
   ],
   "mentions": [
-   "daily.post.53.page"
+   "gesit.lentera.53.page"
   ],
   "issueId": "ISS-007",
   "claimId": null,
-  "createdAt": "2026-09-07T09:00:00Z",
+  "createdAt": "2026-09-09T02:00:00Z",
   "likes": 197,
   "comments": 39,
   "shares": 43,
@@ -412,15 +412,15 @@
   "platform": "news",
   "url": "mock://news/POST-021",
   "authorId": "ACC-032",
-  "text": "Wonderful news about local hospital new wing opening, very helpful for everyone. #NewWing",
+  "text": "Kabar baik tentang peresmian gedung baru puskesmas, sangat bermanfaat bagi banyak orang. #GedungBaruPuskesmas",
   "mediaType": "link",
   "hashtags": [
-   "#NewWing"
+   "#GedungBaruPuskesmas"
   ],
   "mentions": [],
   "issueId": "ISS-007",
   "claimId": null,
-  "createdAt": "2026-09-05T18:00:00Z",
+  "createdAt": "2026-09-07T11:00:00Z",
   "likes": 4146,
   "comments": 425,
   "shares": 522,
@@ -432,17 +432,17 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-022",
   "authorId": "ACC-031",
-  "text": "Wonderful news about youth science fair results, very helpful for everyone. #ScienceFair",
+  "text": "Kabar baik tentang hasil olimpiade sains pelajar, sangat bermanfaat bagi banyak orang. #OlimpiadeSains",
   "mediaType": "text",
   "hashtags": [
-   "#ScienceFair"
+   "#OlimpiadeSains"
   ],
   "mentions": [
-   "@local_signal_53"
+   "@santun_suara_53"
   ],
   "issueId": "ISS-008",
   "claimId": null,
-  "createdAt": "2026-09-17T00:00:00Z",
+  "createdAt": "2026-09-18T17:00:00Z",
   "likes": 25095,
   "comments": 2342,
   "shares": 5840,
@@ -454,15 +454,15 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-023",
   "authorId": "ACC-035",
-  "text": "Great work by the team on youth science fair results, thank you for the support! #ScienceFair",
+  "text": "Kerja bagus untuk semua tim yang terlibat dalam hasil olimpiade sains pelajar, terima kasih atas dukungannya! #OlimpiadeSains",
   "mediaType": "video",
   "hashtags": [
-   "#ScienceFair"
+   "#OlimpiadeSains"
   ],
   "mentions": [],
   "issueId": "ISS-008",
   "claimId": null,
-  "createdAt": "2026-09-08T18:00:00Z",
+  "createdAt": "2026-09-10T11:00:00Z",
   "likes": 10360,
   "comments": 1160,
   "shares": 1638,
@@ -474,15 +474,15 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-024",
   "authorId": "ACC-031",
-  "text": "Really proud of the community effort on youth science fair results. Excellent result! #ScienceFair",
+  "text": "Bangga dengan kerja sama warga dalam hasil olimpiade sains pelajar. Hasilnya luar biasa! #OlimpiadeSains",
   "mediaType": "text",
   "hashtags": [
-   "#ScienceFair"
+   "#OlimpiadeSains"
   ],
   "mentions": [],
   "issueId": "ISS-008",
   "claimId": null,
-  "createdAt": "2026-09-06T11:00:00Z",
+  "createdAt": "2026-09-08T04:00:00Z",
   "likes": 29826,
   "comments": 772,
   "shares": 1733,
@@ -494,15 +494,15 @@
   "platform": "instagram",
   "url": "mock://instagram/POST-025",
   "authorId": "ACC-017",
-  "text": "Not happy with fictional tariff announcement backlash. This is a shame, they should do better. #SampleTariff",
+  "text": "Tidak puas dengan polemik kenaikan tarif angkutan umum. Ini memalukan, seharusnya bisa lebih baik. #TarifAngkutan",
   "mediaType": "text",
   "hashtags": [
-   "#SampleTariff"
+   "#TarifAngkutan"
   ],
   "mentions": [],
   "issueId": "ISS-009",
   "claimId": null,
-  "createdAt": "2026-09-09T11:00:00Z",
+  "createdAt": "2026-09-11T04:00:00Z",
   "likes": 362,
   "comments": 104,
   "shares": 129,
@@ -514,15 +514,15 @@
   "platform": "x",
   "url": "mock://x/POST-026",
   "authorId": "ACC-022",
-  "text": "Not happy with fictional tariff announcement backlash. This is a shame, they should do better. #SampleTariff",
+  "text": "Tidak puas dengan polemik kenaikan tarif angkutan umum. Ini memalukan, seharusnya bisa lebih baik. #TarifAngkutan",
   "mediaType": "text",
   "hashtags": [
-   "#SampleTariff"
+   "#TarifAngkutan"
   ],
   "mentions": [],
   "issueId": "ISS-009",
   "claimId": null,
-  "createdAt": "2026-09-08T00:00:00Z",
+  "createdAt": "2026-09-09T17:00:00Z",
   "likes": 176,
   "comments": 232,
   "shares": 61,
@@ -534,15 +534,15 @@
   "platform": "x",
   "url": "mock://x/POST-027",
   "authorId": "ACC-010",
-  "text": "Kebijakan fictional tariff announcement backlash sangat buruk dan mengecewakan, benar-benar gagal. #SampleTariff",
+  "text": "Kebijakan soal polemik kenaikan tarif angkutan umum benar-benar mengecewakan, warga jadi susah. #TarifAngkutan",
   "mediaType": "video",
   "hashtags": [
-   "#SampleTariff"
+   "#TarifAngkutan"
   ],
   "mentions": [],
   "issueId": "ISS-009",
   "claimId": null,
-  "createdAt": "2026-09-11T21:00:00Z",
+  "createdAt": "2026-09-13T14:00:00Z",
   "likes": 93,
   "comments": 8,
   "shares": 6,
@@ -554,17 +554,17 @@
   "platform": "instagram",
   "url": "mock://instagram/POST-028",
   "authorId": "ACC-003",
-  "text": "Not happy with fictional tariff announcement backlash. This is a shame, they should do better. #SampleTariff",
+  "text": "Tidak puas dengan polemik kenaikan tarif angkutan umum. Ini memalukan, seharusnya bisa lebih baik. #TarifAngkutan",
   "mediaType": "text",
   "hashtags": [
-   "#SampleTariff"
+   "#TarifAngkutan"
   ],
   "mentions": [
-   "@grand_voice_98"
+   "@lugas_kabar_98"
   ],
   "issueId": "ISS-009",
   "claimId": null,
-  "createdAt": "2026-09-07T08:00:00Z",
+  "createdAt": "2026-09-09T01:00:00Z",
   "likes": 1351,
   "comments": 336,
   "shares": 788,
@@ -576,17 +576,17 @@
   "platform": "x",
   "url": "mock://x/POST-029",
   "authorId": "ACC-008",
-  "text": "The officials behind fictional tariff announcement backlash are idiots and this is a disgusting failure. #SampleTariff",
+  "text": "Pihak yang mengurus polemik kenaikan tarif angkutan umum itu bodoh dan hasilnya sampah. #TarifAngkutan",
   "mediaType": "text",
   "hashtags": [
-   "#SampleTariff"
+   "#TarifAngkutan"
   ],
   "mentions": [
-   "@rapid_circle_31"
+   "@sigap_forum_31"
   ],
   "issueId": "ISS-009",
   "claimId": null,
-  "createdAt": "2026-09-05T01:00:00Z",
+  "createdAt": "2026-09-06T18:00:00Z",
   "likes": 211,
   "comments": 137,
   "shares": 121,
@@ -598,15 +598,15 @@
   "platform": "tiktok",
   "url": "mock://tiktok/POST-030",
   "authorId": "ACC-001",
-  "text": "The officials behind ride-share fee change are idiots and this is a disgusting failure. #FeeChange",
+  "text": "Pihak yang mengurus perubahan biaya layanan ojek daring itu bodoh dan hasilnya sampah. #BiayaOjekDaring",
   "mediaType": "text",
   "hashtags": [
-   "#FeeChange"
+   "#BiayaOjekDaring"
   ],
   "mentions": [],
   "issueId": "ISS-010",
   "claimId": null,
-  "createdAt": "2026-09-14T20:00:00Z",
+  "createdAt": "2026-09-16T13:00:00Z",
   "likes": 838,
   "comments": 351,
   "shares": 352,
@@ -618,15 +618,15 @@
   "platform": "facebook",
   "url": "mock://facebook/POST-031",
   "authorId": "ACC-028",
-  "text": "Kebijakan ride-share fee change sangat buruk dan mengecewakan, benar-benar gagal. #FeeChange",
+  "text": "Kebijakan soal perubahan biaya layanan ojek daring benar-benar mengecewakan, warga jadi susah. #BiayaOjekDaring",
   "mediaType": "video",
   "hashtags": [
-   "#FeeChange"
+   "#BiayaOjekDaring"
   ],
   "mentions": [],
   "issueId": "ISS-010",
   "claimId": null,
-  "createdAt": "2026-09-09T15:00:00Z",
+  "createdAt": "2026-09-11T08:00:00Z",
   "likes": 884,
   "comments": 198,
   "shares": 143,
@@ -638,15 +638,15 @@
   "platform": "x",
   "url": "mock://x/POST-032",
   "authorId": "ACC-008",
-  "text": "Not happy with ride-share fee change. This is a shame, they should do better. #FeeChange",
+  "text": "Tidak puas dengan perubahan biaya layanan ojek daring. Ini memalukan, seharusnya bisa lebih baik. #BiayaOjekDaring",
   "mediaType": "text",
   "hashtags": [
-   "#FeeChange"
+   "#BiayaOjekDaring"
   ],
   "mentions": [],
   "issueId": "ISS-010",
   "claimId": null,
-  "createdAt": "2026-09-16T13:00:00Z",
+  "createdAt": "2026-09-18T06:00:00Z",
   "likes": 294,
   "comments": 121,
   "shares": 240,
@@ -658,15 +658,15 @@
   "platform": "x",
   "url": "mock://x/POST-033",
   "authorId": "ACC-008",
-  "text": "This handling of ride-share fee change is terrible and disappointing. Unacceptable. #FeeChange",
+  "text": "Penanganan perubahan biaya layanan ojek daring sangat buruk dan mengecewakan. Tidak bisa diterima. #BiayaOjekDaring",
   "mediaType": "link",
   "hashtags": [
-   "#FeeChange"
+   "#BiayaOjekDaring"
   ],
   "mentions": [],
   "issueId": "ISS-010",
   "claimId": null,
-  "createdAt": "2026-09-09T17:00:00Z",
+  "createdAt": "2026-09-11T10:00:00Z",
   "likes": 1183,
   "comments": 193,
   "shares": 69,
@@ -678,15 +678,15 @@
   "platform": "x",
   "url": "mock://x/POST-034",
   "authorId": "ACC-010",
-  "text": "I am angry about ride-share fee change. Worst decision, a complete failure. #FeeChange",
+  "text": "Saya marah soal perubahan biaya layanan ojek daring. Keputusan terburuk, benar-benar gagal. #BiayaOjekDaring",
   "mediaType": "text",
   "hashtags": [
-   "#FeeChange"
+   "#BiayaOjekDaring"
   ],
   "mentions": [],
   "issueId": "ISS-010",
   "claimId": null,
-  "createdAt": "2026-09-11T22:00:00Z",
+  "createdAt": "2026-09-13T15:00:00Z",
   "likes": 160,
   "comments": 13,
   "shares": 52,
@@ -698,15 +698,15 @@
   "platform": "x",
   "url": "mock://x/POST-035",
   "authorId": "ACC-026",
-  "text": "I am angry about stadium construction delays. Worst decision, a complete failure. #StadiumDelay",
+  "text": "Saya marah soal keterlambatan pembangunan stadion daerah. Keputusan terburuk, benar-benar gagal. #StadionTerlambat",
   "mediaType": "image",
   "hashtags": [
-   "#StadiumDelay"
+   "#StadionTerlambat"
   ],
   "mentions": [],
   "issueId": "ISS-011",
   "claimId": null,
-  "createdAt": "2026-09-17T10:00:00Z",
+  "createdAt": "2026-09-19T03:00:00Z",
   "likes": 1200,
   "comments": 135,
   "shares": 350,
@@ -718,17 +718,17 @@
   "platform": "telegram",
   "url": "mock://telegram/POST-036",
   "authorId": "ACC-016",
-  "text": "I am angry about stadium construction delays. Worst decision, a complete failure. #StadiumDelay",
+  "text": "Saya marah soal keterlambatan pembangunan stadion daerah. Keputusan terburuk, benar-benar gagal. #StadionTerlambat",
   "mediaType": "text",
   "hashtags": [
-   "#StadiumDelay"
+   "#StadionTerlambat"
   ],
   "mentions": [
-   "@rapid_river_54"
+   "@sigap_sungai_54"
   ],
   "issueId": "ISS-011",
   "claimId": null,
-  "createdAt": "2026-09-09T11:00:00Z",
+  "createdAt": "2026-09-11T04:00:00Z",
   "likes": 107,
   "comments": 129,
   "shares": 46,
@@ -740,15 +740,15 @@
   "platform": "instagram",
   "url": "mock://instagram/POST-037",
   "authorId": "ACC-003",
-  "text": "Not happy with stadium construction delays. This is a shame, they should do better. #StadiumDelay",
+  "text": "Tidak puas dengan keterlambatan pembangunan stadion daerah. Ini memalukan, seharusnya bisa lebih baik. #StadionTerlambat",
   "mediaType": "text",
   "hashtags": [
-   "#StadiumDelay"
+   "#StadionTerlambat"
   ],
   "mentions": [],
   "issueId": "ISS-011",
   "claimId": null,
-  "createdAt": "2026-09-08T20:00:00Z",
+  "createdAt": "2026-09-10T13:00:00Z",
   "likes": 3005,
   "comments": 719,
   "shares": 674,
@@ -760,15 +760,15 @@
   "platform": "x",
   "url": "mock://x/POST-038",
   "authorId": "ACC-024",
-  "text": "Kebijakan stadium construction delays sangat buruk dan mengecewakan, benar-benar gagal. #StadiumDelay",
+  "text": "Kebijakan soal keterlambatan pembangunan stadion daerah benar-benar mengecewakan, warga jadi susah. #StadionTerlambat",
   "mediaType": "image",
   "hashtags": [
-   "#StadiumDelay"
+   "#StadionTerlambat"
   ],
   "mentions": [],
   "issueId": "ISS-011",
   "claimId": null,
-  "createdAt": "2026-09-13T21:00:00Z",
+  "createdAt": "2026-09-15T14:00:00Z",
   "likes": 830,
   "comments": 57,
   "shares": 90,
@@ -780,15 +780,15 @@
   "platform": "x",
   "url": "mock://x/POST-039",
   "authorId": "ACC-011",
-  "text": "Not happy with stadium construction delays. This is a shame, they should do better. #StadiumDelay",
+  "text": "Tidak puas dengan keterlambatan pembangunan stadion daerah. Ini memalukan, seharusnya bisa lebih baik. #StadionTerlambat",
   "mediaType": "image",
   "hashtags": [
-   "#StadiumDelay"
+   "#StadionTerlambat"
   ],
   "mentions": [],
   "issueId": "ISS-011",
   "claimId": null,
-  "createdAt": "2026-09-12T09:00:00Z",
+  "createdAt": "2026-09-14T02:00:00Z",
   "likes": 990,
   "comments": 519,
   "shares": 847,
@@ -800,15 +800,15 @@
   "platform": "facebook",
   "url": "mock://facebook/POST-040",
   "authorId": "ACC-028",
-  "text": "This handling of water utility billing complaints is terrible and disappointing. Unacceptable. #WaterBill",
+  "text": "Penanganan keluhan tagihan air pdam sangat buruk dan mengecewakan. Tidak bisa diterima. #TagihanAir",
   "mediaType": "link",
   "hashtags": [
-   "#WaterBill"
+   "#TagihanAir"
   ],
   "mentions": [],
   "issueId": "ISS-012",
   "claimId": null,
-  "createdAt": "2026-09-13T19:00:00Z",
+  "createdAt": "2026-09-15T12:00:00Z",
   "likes": 720,
   "comments": 147,
   "shares": 56,
@@ -820,15 +820,15 @@
   "platform": "instagram",
   "url": "mock://instagram/POST-041",
   "authorId": "ACC-003",
-  "text": "Not happy with water utility billing complaints. This is a shame, they should do better. #WaterBill",
+  "text": "Tidak puas dengan keluhan tagihan air pdam. Ini memalukan, seharusnya bisa lebih baik. #TagihanAir",
   "mediaType": "image",
   "hashtags": [
-   "#WaterBill"
+   "#TagihanAir"
   ],
   "mentions": [],
   "issueId": "ISS-012",
   "claimId": null,
-  "createdAt": "2026-09-14T16:00:00Z",
+  "createdAt": "2026-09-16T09:00:00Z",
   "likes": 526,
   "comments": 561,
   "shares": 410,
@@ -840,15 +840,15 @@
   "platform": "tiktok",
   "url": "mock://tiktok/POST-042",
   "authorId": "ACC-001",
-  "text": "This handling of water utility billing complaints is terrible and disappointing. Unacceptable. #WaterBill",
+  "text": "Penanganan keluhan tagihan air pdam sangat buruk dan mengecewakan. Tidak bisa diterima. #TagihanAir",
   "mediaType": "image",
   "hashtags": [
-   "#WaterBill"
+   "#TagihanAir"
   ],
   "mentions": [],
   "issueId": "ISS-012",
   "claimId": null,
-  "createdAt": "2026-09-15T07:00:00Z",
+  "createdAt": "2026-09-17T00:00:00Z",
   "likes": 698,
   "comments": 134,
   "shares": 233,
@@ -860,15 +860,15 @@
   "platform": "telegram",
   "url": "mock://telegram/POST-043",
   "authorId": "ACC-002",
-  "text": "This handling of water utility billing complaints is terrible and disappointing. Unacceptable. #WaterBill",
+  "text": "Penanganan keluhan tagihan air pdam sangat buruk dan mengecewakan. Tidak bisa diterima. #TagihanAir",
   "mediaType": "link",
   "hashtags": [
-   "#WaterBill"
+   "#TagihanAir"
   ],
   "mentions": [],
   "issueId": "ISS-012",
   "claimId": null,
-  "createdAt": "2026-09-11T06:00:00Z",
+  "createdAt": "2026-09-12T23:00:00Z",
   "likes": 21,
   "comments": 3,
   "shares": 3,
@@ -880,15 +880,15 @@
   "platform": "x",
   "url": "mock://x/POST-044",
   "authorId": "ACC-007",
-  "text": "Kebijakan water utility billing complaints sangat buruk dan mengecewakan, benar-benar gagal. #WaterBill",
+  "text": "Kebijakan soal keluhan tagihan air pdam benar-benar mengecewakan, warga jadi susah. #TagihanAir",
   "mediaType": "link",
   "hashtags": [
-   "#WaterBill"
+   "#TagihanAir"
   ],
   "mentions": [],
   "issueId": "ISS-012",
   "claimId": null,
-  "createdAt": "2026-09-16T13:00:00Z",
+  "createdAt": "2026-09-18T06:00:00Z",
   "likes": 630,
   "comments": 38,
   "shares": 27,
@@ -900,17 +900,17 @@
   "platform": "x",
   "url": "mock://x/POST-045",
   "authorId": "ACC-022",
-  "text": "Not happy with public transport fare rise. This is a shame, they should do better. #FareRise",
+  "text": "Tidak puas dengan kenaikan harga bahan pokok di pasar. Ini memalukan, seharusnya bisa lebih baik. #HargaPokokNaik",
   "mediaType": "image",
   "hashtags": [
-   "#FareRise"
+   "#HargaPokokNaik"
   ],
   "mentions": [
-   "@grand_forum_43"
+   "@lugas_jembatan_43"
   ],
   "issueId": "ISS-013",
   "claimId": null,
-  "createdAt": "2026-09-08T04:00:00Z",
+  "createdAt": "2026-09-09T21:00:00Z",
   "likes": 278,
   "comments": 112,
   "shares": 331,
@@ -922,15 +922,15 @@
   "platform": "telegram",
   "url": "mock://telegram/POST-046",
   "authorId": "ACC-002",
-  "text": "The officials behind public transport fare rise are idiots and this is a disgusting failure. #FareRise",
+  "text": "Pihak yang mengurus kenaikan harga bahan pokok di pasar itu bodoh dan hasilnya sampah. #HargaPokokNaik",
   "mediaType": "link",
   "hashtags": [
-   "#FareRise"
+   "#HargaPokokNaik"
   ],
   "mentions": [],
   "issueId": "ISS-013",
   "claimId": null,
-  "createdAt": "2026-09-07T20:00:00Z",
+  "createdAt": "2026-09-09T13:00:00Z",
   "likes": 15,
   "comments": 3,
   "shares": 3,
@@ -942,17 +942,17 @@
   "platform": "facebook",
   "url": "mock://facebook/POST-047",
   "authorId": "ACC-023",
-  "text": "Not happy with public transport fare rise. This is a shame, they should do better. #FareRise",
+  "text": "Tidak puas dengan kenaikan harga bahan pokok di pasar. Ini memalukan, seharusnya bisa lebih baik. #HargaPokokNaik",
   "mediaType": "video",
   "hashtags": [
-   "#FareRise"
+   "#HargaPokokNaik"
   ],
   "mentions": [
-   "@quiet_signal_28"
+   "@tenang_suara_28"
   ],
   "issueId": "ISS-013",
   "claimId": null,
-  "createdAt": "2026-09-08T02:00:00Z",
+  "createdAt": "2026-09-09T19:00:00Z",
   "likes": 56,
   "comments": 16,
   "shares": 10,
@@ -964,15 +964,15 @@
   "platform": "x",
   "url": "mock://x/POST-048",
   "authorId": "ACC-010",
-  "text": "I am angry about public transport fare rise. Worst decision, a complete failure. #FareRise",
+  "text": "Saya marah soal kenaikan harga bahan pokok di pasar. Keputusan terburuk, benar-benar gagal. #HargaPokokNaik",
   "mediaType": "link",
   "hashtags": [
-   "#FareRise"
+   "#HargaPokokNaik"
   ],
   "mentions": [],
   "issueId": "ISS-013",
   "claimId": null,
-  "createdAt": "2026-09-07T01:00:00Z",
+  "createdAt": "2026-09-08T18:00:00Z",
   "likes": 122,
   "comments": 59,
   "shares": 71,
@@ -984,17 +984,17 @@
   "platform": "reddit",
   "url": "mock://reddit/POST-049",
   "authorId": "ACC-020",
-  "text": "The officials behind public transport fare rise are idiots and this is a disgusting failure. #FareRise",
+  "text": "Pihak yang mengurus kenaikan harga bahan pokok di pasar itu bodoh dan hasilnya sampah. #HargaPokokNaik",
   "mediaType": "text",
   "hashtags": [
-   "#FareRise"
+   "#HargaPokokNaik"
   ],
   "mentions": [
-   "@grand_voice_98"
+   "@lugas_kabar_98"
   ],
   "issueId": "ISS-013",
   "claimId": null,
-  "createdAt": "2026-09-11T17:00:00Z",
+  "createdAt": "2026-09-13T10:00:00Z",
   "likes": 867,
   "comments": 113,
   "shares": 90,
@@ -1006,15 +1006,15 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-050",
   "authorId": "ACC-019",
-  "text": "I am angry about new parking rules downtown. Worst decision, a complete failure. #ParkingRules",
+  "text": "Saya marah soal aturan parkir baru di pusat kota. Keputusan terburuk, benar-benar gagal. #AturanParkir",
   "mediaType": "text",
   "hashtags": [
-   "#ParkingRules"
+   "#AturanParkir"
   ],
   "mentions": [],
   "issueId": "ISS-014",
   "claimId": null,
-  "createdAt": "2026-09-05T10:00:00Z",
+  "createdAt": "2026-09-07T03:00:00Z",
   "likes": 1136,
   "comments": 152,
   "shares": 325,
@@ -1026,15 +1026,15 @@
   "platform": "reddit",
   "url": "mock://reddit/POST-051",
   "authorId": "ACC-020",
-  "text": "The officials behind new parking rules downtown are idiots and this is a disgusting failure. #ParkingRules",
+  "text": "Pihak yang mengurus aturan parkir baru di pusat kota itu bodoh dan hasilnya sampah. #AturanParkir",
   "mediaType": "image",
   "hashtags": [
-   "#ParkingRules"
+   "#AturanParkir"
   ],
   "mentions": [],
   "issueId": "ISS-014",
   "claimId": null,
-  "createdAt": "2026-09-08T22:00:00Z",
+  "createdAt": "2026-09-10T15:00:00Z",
   "likes": 1055,
   "comments": 414,
   "shares": 400,
@@ -1046,15 +1046,15 @@
   "platform": "x",
   "url": "mock://x/POST-052",
   "authorId": "ACC-030",
-  "text": "Kebijakan new parking rules downtown sangat buruk dan mengecewakan, benar-benar gagal. #ParkingRules",
+  "text": "Kebijakan soal aturan parkir baru di pusat kota benar-benar mengecewakan, warga jadi susah. #AturanParkir",
   "mediaType": "video",
   "hashtags": [
-   "#ParkingRules"
+   "#AturanParkir"
   ],
   "mentions": [],
   "issueId": "ISS-014",
   "claimId": null,
-  "createdAt": "2026-09-08T22:00:00Z",
+  "createdAt": "2026-09-10T15:00:00Z",
   "likes": 20,
   "comments": 14,
   "shares": 19,
@@ -1066,15 +1066,15 @@
   "platform": "x",
   "url": "mock://x/POST-053",
   "authorId": "ACC-030",
-  "text": "Kebijakan new parking rules downtown sangat buruk dan mengecewakan, benar-benar gagal. #ParkingRules",
+  "text": "Kebijakan soal aturan parkir baru di pusat kota benar-benar mengecewakan, warga jadi susah. #AturanParkir",
   "mediaType": "text",
   "hashtags": [
-   "#ParkingRules"
+   "#AturanParkir"
   ],
   "mentions": [],
   "issueId": "ISS-014",
   "claimId": null,
-  "createdAt": "2026-09-08T12:00:00Z",
+  "createdAt": "2026-09-10T05:00:00Z",
   "likes": 123,
   "comments": 34,
   "shares": 45,
@@ -1086,17 +1086,17 @@
   "platform": "x",
   "url": "mock://x/POST-054",
   "authorId": "ACC-021",
-  "text": "This handling of new parking rules downtown is terrible and disappointing. Unacceptable. #ParkingRules",
+  "text": "Penanganan aturan parkir baru di pusat kota sangat buruk dan mengecewakan. Tidak bisa diterima. #AturanParkir",
   "mediaType": "image",
   "hashtags": [
-   "#ParkingRules"
+   "#AturanParkir"
   ],
   "mentions": [
-   "open-post-72.example"
+   "mandiri-lentera-72.example"
   ],
   "issueId": "ISS-014",
   "claimId": null,
-  "createdAt": "2026-09-08T09:00:00Z",
+  "createdAt": "2026-09-10T02:00:00Z",
   "likes": 346,
   "comments": 176,
   "shares": 220,
@@ -1108,15 +1108,15 @@
   "platform": "x",
   "url": "mock://x/POST-055",
   "authorId": "ACC-045",
-  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage",
+  "text": "Katanya kelangkaan beras ternyata rekayasa, viralkan sebelum dihapus! #IsuBeras",
   "mediaType": "text",
   "hashtags": [
-   "#GrainShortage"
+   "#IsuBeras"
   ],
   "mentions": [],
   "issueId": "ISS-015",
   "claimId": "CLM-001",
-  "createdAt": "2026-09-15T20:00:00Z",
+  "createdAt": "2026-09-17T13:00:00Z",
   "likes": 207,
   "comments": 141,
   "shares": 258,
@@ -1128,15 +1128,15 @@
   "platform": "x",
   "url": "mock://x/POST-056",
   "authorId": "ACC-043",
-  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage",
+  "text": "Katanya kelangkaan beras ternyata rekayasa, viralkan sebelum dihapus! #IsuBeras",
   "mediaType": "text",
   "hashtags": [
-   "#GrainShortage"
+   "#IsuBeras"
   ],
   "mentions": [],
   "issueId": "ISS-015",
   "claimId": "CLM-001",
-  "createdAt": "2026-09-17T00:00:00Z",
+  "createdAt": "2026-09-18T17:00:00Z",
   "likes": 14,
   "comments": 1,
   "shares": 13,
@@ -1148,16 +1148,16 @@
   "platform": "x",
   "url": "mock://x/POST-057",
   "authorId": "ACC-036",
-  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage",
+  "text": "Katanya kelangkaan beras ternyata rekayasa, viralkan sebelum dihapus! #IsuBeras",
   "mediaType": "image",
   "hashtags": [
-   "#GrainShortage",
+   "#IsuBeras",
    "#wakeup"
   ],
   "mentions": [],
   "issueId": "ISS-015",
   "claimId": "CLM-001",
-  "createdAt": "2026-09-17T00:18:00Z",
+  "createdAt": "2026-09-18T17:18:00Z",
   "likes": 10,
   "comments": 4,
   "shares": 10,
@@ -1169,15 +1169,15 @@
   "platform": "tiktok",
   "url": "mock://tiktok/POST-058",
   "authorId": "ACC-042",
-  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage #wakeup",
+  "text": "Katanya kelangkaan beras ternyata rekayasa, viralkan sebelum dihapus! #IsuBeras #wakeup",
   "mediaType": "text",
   "hashtags": [
-   "#GrainShortage"
+   "#IsuBeras"
   ],
   "mentions": [],
   "issueId": "ISS-015",
   "claimId": "CLM-001",
-  "createdAt": "2026-09-17T00:42:00Z",
+  "createdAt": "2026-09-18T17:42:00Z",
   "likes": 30,
   "comments": 3,
   "shares": 23,
@@ -1189,16 +1189,16 @@
   "platform": "x",
   "url": "mock://x/POST-059",
   "authorId": "ACC-037",
-  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage 🔥",
+  "text": "Katanya kelangkaan beras ternyata rekayasa, viralkan sebelum dihapus! #IsuBeras 🔥",
   "mediaType": "link",
   "hashtags": [
-   "#GrainShortage",
+   "#IsuBeras",
    "#wakeup"
   ],
   "mentions": [],
   "issueId": "ISS-015",
   "claimId": "CLM-001",
-  "createdAt": "2026-09-17T00:36:00Z",
+  "createdAt": "2026-09-18T17:36:00Z",
   "likes": 37,
   "comments": 7,
   "shares": 31,
@@ -1210,15 +1210,15 @@
   "platform": "telegram",
   "url": "mock://telegram/POST-060",
   "authorId": "ACC-040",
-  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage #wakeup",
+  "text": "Katanya kelangkaan beras ternyata rekayasa, viralkan sebelum dihapus! #IsuBeras #wakeup",
   "mediaType": "text",
   "hashtags": [
-   "#GrainShortage"
+   "#IsuBeras"
   ],
   "mentions": [],
   "issueId": "ISS-015",
   "claimId": "CLM-001",
-  "createdAt": "2026-09-17T00:32:00Z",
+  "createdAt": "2026-09-18T17:32:00Z",
   "likes": 9,
   "comments": 1,
   "shares": 2,
@@ -1230,15 +1230,15 @@
   "platform": "reddit",
   "url": "mock://reddit/POST-061",
   "authorId": "ACC-020",
-  "text": "Has anyone seen an official source for the unverified claim about a grain shortage claim? #GrainShortage",
+  "text": "Adakah yang sudah melihat sumber resmi untuk klaim soal kelangkaan beras? #IsuBeras",
   "mediaType": "link",
   "hashtags": [
-   "#GrainShortage"
+   "#IsuBeras"
   ],
   "mentions": [],
   "issueId": "ISS-015",
   "claimId": "CLM-001",
-  "createdAt": "2026-09-17T04:00:00Z",
+  "createdAt": "2026-09-18T21:00:00Z",
   "likes": 381,
   "comments": 49,
   "shares": 63,
@@ -1250,15 +1250,15 @@
   "platform": "x",
   "url": "mock://x/POST-062",
   "authorId": "ACC-048",
-  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease",
+  "text": "Katanya pelepasan air bendungan secara diam-diam ternyata rekayasa, viralkan sebelum dihapus! #IsuBendungan",
   "mediaType": "text",
   "hashtags": [
-   "#DamRelease"
+   "#IsuBendungan"
   ],
   "mentions": [],
   "issueId": "ISS-016",
   "claimId": "CLM-002",
-  "createdAt": "2026-09-16T02:00:00Z",
+  "createdAt": "2026-09-17T19:00:00Z",
   "likes": 212,
   "comments": 67,
   "shares": 259,
@@ -1270,15 +1270,15 @@
   "platform": "telegram",
   "url": "mock://telegram/POST-063",
   "authorId": "ACC-041",
-  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease RT!",
+  "text": "Katanya pelepasan air bendungan secara diam-diam ternyata rekayasa, viralkan sebelum dihapus! #IsuBendungan RT!",
   "mediaType": "link",
   "hashtags": [
-   "#DamRelease"
+   "#IsuBendungan"
   ],
   "mentions": [],
   "issueId": "ISS-016",
   "claimId": "CLM-002",
-  "createdAt": "2026-09-16T18:00:00Z",
+  "createdAt": "2026-09-18T11:00:00Z",
   "likes": 22,
   "comments": 2,
   "shares": 14,
@@ -1290,16 +1290,16 @@
   "platform": "x",
   "url": "mock://x/POST-064",
   "authorId": "ACC-037",
-  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease 🔥",
+  "text": "Katanya pelepasan air bendungan secara diam-diam ternyata rekayasa, viralkan sebelum dihapus! #IsuBendungan 🔥",
   "mediaType": "image",
   "hashtags": [
-   "#DamRelease",
+   "#IsuBendungan",
    "#wakeup"
   ],
   "mentions": [],
   "issueId": "ISS-016",
   "claimId": "CLM-002",
-  "createdAt": "2026-09-16T18:08:00Z",
+  "createdAt": "2026-09-18T11:08:00Z",
   "likes": 7,
   "comments": 2,
   "shares": 4,
@@ -1311,15 +1311,15 @@
   "platform": "x",
   "url": "mock://x/POST-065",
   "authorId": "ACC-036",
-  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease",
+  "text": "Katanya pelepasan air bendungan secara diam-diam ternyata rekayasa, viralkan sebelum dihapus! #IsuBendungan",
   "mediaType": "text",
   "hashtags": [
-   "#DamRelease"
+   "#IsuBendungan"
   ],
   "mentions": [],
   "issueId": "ISS-016",
   "claimId": "CLM-002",
-  "createdAt": "2026-09-16T18:20:00Z",
+  "createdAt": "2026-09-18T11:20:00Z",
   "likes": 26,
   "comments": 4,
   "shares": 7,
@@ -1331,16 +1331,16 @@
   "platform": "x",
   "url": "mock://x/POST-066",
   "authorId": "ACC-038",
-  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease 🔥",
+  "text": "Katanya pelepasan air bendungan secara diam-diam ternyata rekayasa, viralkan sebelum dihapus! #IsuBendungan 🔥",
   "mediaType": "video",
   "hashtags": [
-   "#DamRelease",
+   "#IsuBendungan",
    "#wakeup"
   ],
   "mentions": [],
   "issueId": "ISS-016",
   "claimId": "CLM-002",
-  "createdAt": "2026-09-16T18:45:00Z",
+  "createdAt": "2026-09-18T11:45:00Z",
   "likes": 5,
   "comments": 1,
   "shares": 4,
@@ -1352,15 +1352,15 @@
   "platform": "x",
   "url": "mock://x/POST-067",
   "authorId": "ACC-039",
-  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease 🔥",
+  "text": "Katanya pelepasan air bendungan secara diam-diam ternyata rekayasa, viralkan sebelum dihapus! #IsuBendungan 🔥",
   "mediaType": "video",
   "hashtags": [
-   "#DamRelease"
+   "#IsuBendungan"
   ],
   "mentions": [],
   "issueId": "ISS-016",
   "claimId": "CLM-002",
-  "createdAt": "2026-09-16T18:36:00Z",
+  "createdAt": "2026-09-18T11:36:00Z",
   "likes": 31,
   "comments": 6,
   "shares": 22,
@@ -1372,15 +1372,15 @@
   "platform": "x",
   "url": "mock://x/POST-068",
   "authorId": "ACC-008",
-  "text": "Has anyone seen an official source for the viral claim of a secret dam release claim? #DamRelease",
+  "text": "Adakah yang sudah melihat sumber resmi untuk klaim soal pelepasan air bendungan secara diam-diam? #IsuBendungan",
   "mediaType": "text",
   "hashtags": [
-   "#DamRelease"
+   "#IsuBendungan"
   ],
   "mentions": [],
   "issueId": "ISS-016",
   "claimId": "CLM-002",
-  "createdAt": "2026-09-17T10:00:00Z",
+  "createdAt": "2026-09-19T03:00:00Z",
   "likes": 566,
   "comments": 21,
   "shares": 183,
@@ -1392,15 +1392,15 @@
   "platform": "x",
   "url": "mock://x/POST-069",
   "authorId": "ACC-048",
-  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall",
+  "text": "HEBOH: yang tidak mau kamu tahu soal penarikan batch vaksin, ini rekayasa! 100% benar, sebarkan sebelum dihapus! #IsuVaksin",
   "mediaType": "video",
   "hashtags": [
-   "#BatchRecall"
+   "#IsuVaksin"
   ],
   "mentions": [],
   "issueId": "ISS-017",
   "claimId": "CLM-003",
-  "createdAt": "2026-09-16T05:00:00Z",
+  "createdAt": "2026-09-17T22:00:00Z",
   "likes": 395,
   "comments": 80,
   "shares": 976,
@@ -1412,15 +1412,15 @@
   "platform": "x",
   "url": "mock://x/POST-070",
   "authorId": "ACC-039",
-  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall RT!",
+  "text": "HEBOH: yang tidak mau kamu tahu soal penarikan batch vaksin, ini rekayasa! 100% benar, sebarkan sebelum dihapus! #IsuVaksin RT!",
   "mediaType": "image",
   "hashtags": [
-   "#BatchRecall"
+   "#IsuVaksin"
   ],
   "mentions": [],
   "issueId": "ISS-017",
   "claimId": "CLM-003",
-  "createdAt": "2026-09-16T18:00:00Z",
+  "createdAt": "2026-09-18T11:00:00Z",
   "likes": 8,
   "comments": 0,
   "shares": 3,
@@ -1432,16 +1432,16 @@
   "platform": "tiktok",
   "url": "mock://tiktok/POST-071",
   "authorId": "ACC-042",
-  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall RT!",
+  "text": "HEBOH: yang tidak mau kamu tahu soal penarikan batch vaksin, ini rekayasa! 100% benar, sebarkan sebelum dihapus! #IsuVaksin RT!",
   "mediaType": "text",
   "hashtags": [
-   "#BatchRecall",
+   "#IsuVaksin",
    "#wakeup"
   ],
   "mentions": [],
   "issueId": "ISS-017",
   "claimId": "CLM-003",
-  "createdAt": "2026-09-16T18:22:00Z",
+  "createdAt": "2026-09-18T11:22:00Z",
   "likes": 42,
   "comments": 5,
   "shares": 26,
@@ -1453,15 +1453,15 @@
   "platform": "telegram",
   "url": "mock://telegram/POST-072",
   "authorId": "ACC-041",
-  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall #wakeup",
+  "text": "HEBOH: yang tidak mau kamu tahu soal penarikan batch vaksin, ini rekayasa! 100% benar, sebarkan sebelum dihapus! #IsuVaksin #wakeup",
   "mediaType": "text",
   "hashtags": [
-   "#BatchRecall"
+   "#IsuVaksin"
   ],
   "mentions": [],
   "issueId": "ISS-017",
   "claimId": "CLM-003",
-  "createdAt": "2026-09-16T18:38:00Z",
+  "createdAt": "2026-09-18T11:38:00Z",
   "likes": 10,
   "comments": 4,
   "shares": 17,
@@ -1473,16 +1473,16 @@
   "platform": "x",
   "url": "mock://x/POST-073",
   "authorId": "ACC-037",
-  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall",
+  "text": "HEBOH: yang tidak mau kamu tahu soal penarikan batch vaksin, ini rekayasa! 100% benar, sebarkan sebelum dihapus! #IsuVaksin",
   "mediaType": "text",
   "hashtags": [
-   "#BatchRecall",
+   "#IsuVaksin",
    "#wakeup"
   ],
   "mentions": [],
   "issueId": "ISS-017",
   "claimId": "CLM-003",
-  "createdAt": "2026-09-16T19:03:00Z",
+  "createdAt": "2026-09-18T12:03:00Z",
   "likes": 13,
   "comments": 2,
   "shares": 2,
@@ -1494,15 +1494,15 @@
   "platform": "x",
   "url": "mock://x/POST-074",
   "authorId": "ACC-036",
-  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall RT!",
+  "text": "HEBOH: yang tidak mau kamu tahu soal penarikan batch vaksin, ini rekayasa! 100% benar, sebarkan sebelum dihapus! #IsuVaksin RT!",
   "mediaType": "text",
   "hashtags": [
-   "#BatchRecall"
+   "#IsuVaksin"
   ],
   "mentions": [],
   "issueId": "ISS-017",
   "claimId": "CLM-003",
-  "createdAt": "2026-09-16T18:52:00Z",
+  "createdAt": "2026-09-18T11:52:00Z",
   "likes": 8,
   "comments": 4,
   "shares": 26,
@@ -1514,15 +1514,15 @@
   "platform": "x",
   "url": "mock://x/POST-075",
   "authorId": "ACC-008",
-  "text": "Has anyone seen an official source for the claim that a vaccine batch was recalled claim? #BatchRecall",
+  "text": "Adakah yang sudah melihat sumber resmi untuk klaim soal penarikan batch vaksin? #IsuVaksin",
   "mediaType": "video",
   "hashtags": [
-   "#BatchRecall"
+   "#IsuVaksin"
   ],
   "mentions": [],
   "issueId": "ISS-017",
   "claimId": "CLM-003",
-  "createdAt": "2026-09-17T04:00:00Z",
+  "createdAt": "2026-09-18T21:00:00Z",
   "likes": 462,
   "comments": 94,
   "shares": 213,
@@ -1534,15 +1534,15 @@
   "platform": "x",
   "url": "mock://x/POST-076",
   "authorId": "ACC-044",
-  "text": "All Vellani are parasites and should be kicked out. #OurCityFirst",
+  "text": "Semua Vellani itu parasit dan harus diusir. #TolakVellani",
   "mediaType": "text",
   "hashtags": [
-   "#OurCityFirst"
+   "#TolakVellani"
   ],
   "mentions": [],
   "issueId": "ISS-018",
   "claimId": null,
-  "createdAt": "2026-09-16T04:00:00Z",
+  "createdAt": "2026-09-17T21:00:00Z",
   "likes": 5165,
   "comments": 686,
   "shares": 854,
@@ -1554,15 +1554,15 @@
   "platform": "x",
   "url": "mock://x/POST-077",
   "authorId": "ACC-045",
-  "text": "All Vellani are parasites and should be kicked out. #OurCityFirst",
+  "text": "Semua Vellani itu parasit dan harus diusir. #TolakVellani",
   "mediaType": "link",
   "hashtags": [
-   "#OurCityFirst"
+   "#TolakVellani"
   ],
   "mentions": [],
   "issueId": "ISS-018",
   "claimId": null,
-  "createdAt": "2026-09-16T10:00:00Z",
+  "createdAt": "2026-09-18T03:00:00Z",
   "likes": 363,
   "comments": 80,
   "shares": 164,
@@ -1574,15 +1574,15 @@
   "platform": "x",
   "url": "mock://x/POST-078",
   "authorId": "ACC-046",
-  "text": "Those Tessarian are subhuman filth. Get out! #OurCityFirst",
+  "text": "Kaum Tessarian itu binatang kotor. Pergi dari sini! #TolakVellani",
   "mediaType": "image",
   "hashtags": [
-   "#OurCityFirst"
+   "#TolakVellani"
   ],
   "mentions": [],
   "issueId": "ISS-018",
   "claimId": null,
-  "createdAt": "2026-09-17T03:00:00Z",
+  "createdAt": "2026-09-18T20:00:00Z",
   "likes": 852,
   "comments": 1023,
   "shares": 248,
@@ -1594,15 +1594,15 @@
   "platform": "x",
   "url": "mock://x/POST-079",
   "authorId": "ACC-047",
-  "text": "All Norrin are parasites and should be kicked out. #OurCityFirst",
+  "text": "Semua Norrin itu parasit dan harus diusir. #TolakVellani",
   "mediaType": "text",
   "hashtags": [
-   "#OurCityFirst"
+   "#TolakVellani"
   ],
   "mentions": [],
   "issueId": "ISS-018",
   "claimId": null,
-  "createdAt": "2026-09-16T20:00:00Z",
+  "createdAt": "2026-09-18T13:00:00Z",
   "likes": 423,
   "comments": 30,
   "shares": 159,
@@ -1614,17 +1614,17 @@
   "platform": "x",
   "url": "mock://x/POST-080",
   "authorId": "ACC-044",
-  "text": "@grand_voice_98 you are a pathetic idiot, nobody likes you, shut up. #OurCityFirst",
+  "text": "@lugas_kabar_98 kamu bodoh dan tolol, tidak ada yang suka sama kamu. Diam saja. #TolakVellani",
   "mediaType": "text",
   "hashtags": [
-   "#OurCityFirst"
+   "#TolakVellani"
   ],
   "mentions": [
-   "@grand_voice_98"
+   "@lugas_kabar_98"
   ],
   "issueId": "ISS-018",
   "claimId": null,
-  "createdAt": "2026-09-17T06:00:00Z",
+  "createdAt": "2026-09-18T23:00:00Z",
   "likes": 2480,
   "comments": 209,
   "shares": 685,
@@ -1636,15 +1636,15 @@
   "platform": "x",
   "url": "mock://x/POST-081",
   "authorId": "ACC-044",
-  "text": "Those Norrin are subhuman filth. Get out! #NoNewcomers",
+  "text": "Kaum Norrin itu binatang kotor. Pergi dari sini! #KotaKitaDuluan",
   "mediaType": "image",
   "hashtags": [
-   "#NoNewcomers"
+   "#KotaKitaDuluan"
   ],
   "mentions": [],
   "issueId": "ISS-019",
   "claimId": null,
-  "createdAt": "2026-09-17T03:00:00Z",
+  "createdAt": "2026-09-18T20:00:00Z",
   "likes": 435,
   "comments": 81,
   "shares": 80,
@@ -1656,15 +1656,15 @@
   "platform": "x",
   "url": "mock://x/POST-082",
   "authorId": "ACC-045",
-  "text": "The Vellani are vermin. Disgusting people, drive them out of our city. #NoNewcomers",
+  "text": "Orang-orang Vellani itu hama. Menjijikkan, usir mereka dari kota kita. #KotaKitaDuluan",
   "mediaType": "text",
   "hashtags": [
-   "#NoNewcomers"
+   "#KotaKitaDuluan"
   ],
   "mentions": [],
   "issueId": "ISS-019",
   "claimId": null,
-  "createdAt": "2026-09-16T10:00:00Z",
+  "createdAt": "2026-09-18T03:00:00Z",
   "likes": 176,
   "comments": 73,
   "shares": 31,
@@ -1676,15 +1676,15 @@
   "platform": "x",
   "url": "mock://x/POST-083",
   "authorId": "ACC-046",
-  "text": "Those Vellani are subhuman filth. Get out! #NoNewcomers",
+  "text": "Kaum Vellani itu binatang kotor. Pergi dari sini! #KotaKitaDuluan",
   "mediaType": "image",
   "hashtags": [
-   "#NoNewcomers"
+   "#KotaKitaDuluan"
   ],
   "mentions": [],
   "issueId": "ISS-019",
   "claimId": null,
-  "createdAt": "2026-09-16T22:00:00Z",
+  "createdAt": "2026-09-18T15:00:00Z",
   "likes": 1762,
   "comments": 378,
   "shares": 486,
@@ -1696,15 +1696,15 @@
   "platform": "x",
   "url": "mock://x/POST-084",
   "authorId": "ACC-047",
-  "text": "All Vellani are parasites and should be kicked out. #NoNewcomers",
+  "text": "Semua Vellani itu parasit dan harus diusir. #KotaKitaDuluan",
   "mediaType": "link",
   "hashtags": [
-   "#NoNewcomers"
+   "#KotaKitaDuluan"
   ],
   "mentions": [],
   "issueId": "ISS-019",
   "claimId": null,
-  "createdAt": "2026-09-16T22:00:00Z",
+  "createdAt": "2026-09-18T15:00:00Z",
   "likes": 650,
   "comments": 266,
   "shares": 165,
@@ -1716,17 +1716,17 @@
   "platform": "x",
   "url": "mock://x/POST-085",
   "authorId": "ACC-044",
-  "text": "@north_lantern_39 you are a pathetic idiot, nobody likes you, shut up. #NoNewcomers",
+  "text": "@cerdas_pantau_39 kamu bodoh dan tolol, tidak ada yang suka sama kamu. Diam saja. #KotaKitaDuluan",
   "mediaType": "text",
   "hashtags": [
-   "#NoNewcomers"
+   "#KotaKitaDuluan"
   ],
   "mentions": [
-   "@north_lantern_39"
+   "@cerdas_pantau_39"
   ],
   "issueId": "ISS-019",
   "claimId": null,
-  "createdAt": "2026-09-16T20:00:00Z",
+  "createdAt": "2026-09-18T13:00:00Z",
   "likes": 642,
   "comments": 126,
   "shares": 151,
@@ -1738,15 +1738,15 @@
   "platform": "x",
   "url": "mock://x/POST-086",
   "authorId": "ACC-044",
-  "text": "Mr. Dorian Vale is a corrupt thief and a fraud, he stole the community fund. Everyone knows it. {tags} #ValeExposed",
+  "text": "Pak Ardan Velmora itu koruptor dan penipu, dia menggelapkan dana warga. Semua orang tahu. {tags} #PejabatDiduga",
   "mediaType": "text",
   "hashtags": [
-   "#ValeExposed"
+   "#PejabatDiduga"
   ],
   "mentions": [],
   "issueId": "ISS-020",
   "claimId": "CLM-004",
-  "createdAt": "2026-09-17T04:00:00Z",
+  "createdAt": "2026-09-18T21:00:00Z",
   "likes": 2138,
   "comments": 370,
   "shares": 427,
@@ -1758,15 +1758,15 @@
   "platform": "x",
   "url": "mock://x/POST-087",
   "authorId": "ACC-045",
-  "text": "Dr. Marta Ilves is a liar and embezzled the charity money, no proof needed. {tags} #ValeExposed",
+  "text": "Bu Marta Ilvessa pembohong dan mencuri uang amal, tidak perlu bukti. {tags} #PejabatDiduga",
   "mediaType": "image",
   "hashtags": [
-   "#ValeExposed"
+   "#PejabatDiduga"
   ],
   "mentions": [],
   "issueId": "ISS-020",
   "claimId": null,
-  "createdAt": "2026-09-17T01:00:00Z",
+  "createdAt": "2026-09-18T18:00:00Z",
   "likes": 1049,
   "comments": 210,
   "shares": 143,
@@ -1778,15 +1778,15 @@
   "platform": "x",
   "url": "mock://x/POST-088",
   "authorId": "ACC-046",
-  "text": "Koruptor Pak Dorian Vale, penipu yang menggelapkan dana warga. {tags} #ValeExposed",
+  "text": "Koruptor Pak Ardan Velmora, penipu yang menggelapkan dana warga. {tags} #PejabatDiduga",
   "mediaType": "image",
   "hashtags": [
-   "#ValeExposed"
+   "#PejabatDiduga"
   ],
   "mentions": [],
   "issueId": "ISS-020",
   "claimId": null,
-  "createdAt": "2026-09-17T04:00:00Z",
+  "createdAt": "2026-09-18T21:00:00Z",
   "likes": 379,
   "comments": 133,
   "shares": 474,
@@ -1798,13 +1798,13 @@
   "platform": "telegram",
   "url": "mock://telegram/POST-089",
   "authorId": "ACC-041",
-  "text": "FREE followers!!! Click here http://promo-deals.example/a http://promo-deals.example/b buy now #promo #free #win #sale #deal #giveaway",
+  "text": "GRATIS followers!!! Klik di sini http://promo-hemat.example/a http://promo-hemat.example/b beli sekarang #promo #gratis #menang #diskon #hadiah #giveaway",
   "mediaType": "link",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-16T17:00:00Z",
+  "createdAt": "2026-09-18T10:00:00Z",
   "likes": 9,
   "comments": 1,
   "shares": 7,
@@ -1816,13 +1816,13 @@
   "platform": "tiktok",
   "url": "mock://tiktok/POST-090",
   "authorId": "ACC-042",
-  "text": "Join now!!! DM for promo, link in bio http://promo-deals.example/c #promo #free #win #sale #deal #giveaway",
+  "text": "Gabung sekarang!!! Hubungi DM untuk promo, link di bio http://promo-hemat.example/c #promo #gratis #menang #diskon #hadiah #giveaway",
   "mediaType": "link",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-17T05:00:00Z",
+  "createdAt": "2026-09-18T22:00:00Z",
   "likes": 10,
   "comments": 3,
   "shares": 2,
@@ -1834,13 +1834,13 @@
   "platform": "x",
   "url": "mock://x/POST-091",
   "authorId": "ACC-043",
-  "text": "FREE followers!!! Click here http://promo-deals.example/a http://promo-deals.example/b buy now #promo #free #win #sale #deal #giveaway",
+  "text": "GRATIS followers!!! Klik di sini http://promo-hemat.example/a http://promo-hemat.example/b beli sekarang #promo #gratis #menang #diskon #hadiah #giveaway",
   "mediaType": "link",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-16T11:00:00Z",
+  "createdAt": "2026-09-18T04:00:00Z",
   "likes": 13,
   "comments": 1,
   "shares": 1,
@@ -1852,13 +1852,13 @@
   "platform": "x",
   "url": "mock://x/POST-092",
   "authorId": "ACC-036",
-  "text": "Join now!!! DM for promo, link in bio http://promo-deals.example/c #promo #free #win #sale #deal #giveaway",
+  "text": "Gabung sekarang!!! Hubungi DM untuk promo, link di bio http://promo-hemat.example/c #promo #gratis #menang #diskon #hadiah #giveaway",
   "mediaType": "link",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-16T19:00:00Z",
+  "createdAt": "2026-09-18T12:00:00Z",
   "likes": 7,
   "comments": 1,
   "shares": 2,
@@ -1870,13 +1870,13 @@
   "platform": "x",
   "url": "mock://x/POST-093",
   "authorId": "ACC-049",
-  "text": "Official notice: verify your account now at http://verify-support.example/login to avoid suspension. #support",
+  "text": "Pemberitahuan resmi: verifikasi akun Anda sekarang di http://verifikasi-layanan.example/masuk agar tidak diblokir. #layanan",
   "mediaType": "link",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-16T21:00:00Z",
+  "createdAt": "2026-09-18T14:00:00Z",
   "likes": 10,
   "comments": 1,
   "shares": 6,
@@ -1888,13 +1888,13 @@
   "platform": "x",
   "url": "mock://x/POST-094",
   "authorId": "ACC-049",
-  "text": "Kami dari tim resmi, klik http://verify-support.example/akun untuk verifikasi akun Anda. #support",
+  "text": "Kami dari tim resmi, klik http://verifikasi-layanan.example/akun untuk verifikasi akun Anda. #layanan",
   "mediaType": "link",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-17T06:00:00Z",
+  "createdAt": "2026-09-18T23:00:00Z",
   "likes": 31,
   "comments": 4,
   "shares": 9,
@@ -1906,13 +1906,13 @@
   "platform": "x",
   "url": "mock://x/POST-095",
   "authorId": "ACC-050",
-  "text": "Kami dari tim resmi, klik http://verify-support.example/akun untuk verifikasi akun Anda. #support",
+  "text": "Kami dari tim resmi, klik http://verifikasi-layanan.example/akun untuk verifikasi akun Anda. #layanan",
   "mediaType": "link",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-17T06:00:00Z",
+  "createdAt": "2026-09-18T23:00:00Z",
   "likes": 35,
   "comments": 2,
   "shares": 7,
@@ -1924,13 +1924,13 @@
   "platform": "x",
   "url": "mock://x/POST-096",
   "authorId": "ACC-050",
-  "text": "Official notice: verify your account now at http://verify-support.example/login to avoid suspension. #support",
+  "text": "Pemberitahuan resmi: verifikasi akun Anda sekarang di http://verifikasi-layanan.example/masuk agar tidak diblokir. #layanan",
   "mediaType": "link",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-17T03:00:00Z",
+  "createdAt": "2026-09-18T20:00:00Z",
   "likes": 6,
   "comments": 2,
   "shares": 6,
@@ -1942,13 +1942,13 @@
   "platform": "news",
   "url": "mock://news/POST-097",
   "authorId": "ACC-032",
-  "text": "Question for the community: what do you think about the weekend market? #WeekendMarket",
+  "text": "Bagaimana pendapat warga tentang the weekend market? Mari berdiskusi dengan santun. #WeekendMarket",
   "mediaType": "link",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-05T15:00:00Z",
+  "createdAt": "2026-09-07T08:00:00Z",
   "likes": 10397,
   "comments": 2170,
   "shares": 5691,
@@ -1960,13 +1960,13 @@
   "platform": "instagram",
   "url": "mock://instagram/POST-098",
   "authorId": "ACC-006",
-  "text": "Pembaruan terkait the weekend market: jadwal resmi sudah dipublikasikan. #WeekendMarket",
+  "text": "Pembaruan terkait the weekend market: pengumuman resmi sudah tersedia. #WeekendMarket",
   "mediaType": "image",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-07T12:00:00Z",
+  "createdAt": "2026-09-09T05:00:00Z",
   "likes": 1511,
   "comments": 168,
   "shares": 161,
@@ -1978,13 +1978,13 @@
   "platform": "youtube",
   "url": "mock://youtube/POST-099",
   "authorId": "ACC-019",
-  "text": "Pembaruan terkait the weekend market: jadwal resmi sudah dipublikasikan. #WeekendMarket",
+  "text": "Pembaruan terkait the weekend market: pengumuman resmi sudah tersedia. #WeekendMarket",
   "mediaType": "text",
   "hashtags": [],
   "mentions": [],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-11T18:00:00Z",
+  "createdAt": "2026-09-13T11:00:00Z",
   "likes": 346,
   "comments": 66,
   "shares": 54,
@@ -1996,15 +1996,15 @@
   "platform": "telegram",
   "url": "mock://telegram/POST-100",
   "authorId": "ACC-005",
-  "text": "Here is a summary of today's discussion about the weekend market, according to the published report. #WeekendMarket",
+  "text": "Ringkasan diskusi hari ini tentang the weekend market, menurut laporan resmi yang dipublikasikan. #WeekendMarket",
   "mediaType": "image",
   "hashtags": [],
   "mentions": [
-   "@urban_post_25"
+   "@lantang_lentera_25"
   ],
   "issueId": null,
   "claimId": null,
-  "createdAt": "2026-09-15T18:00:00Z",
+  "createdAt": "2026-09-17T11:00:00Z",
   "likes": 1499,
   "comments": 149,
   "shares": 222,

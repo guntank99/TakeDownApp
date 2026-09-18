@@ -4,7 +4,7 @@ import { ShieldCheck } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth/dal";
 import { LoginForm } from "./LoginForm";
 
-export const metadata: Metadata = { title: "Login" };
+export const metadata: Metadata = { title: "Masuk" };
 
 export default async function LoginPage() {
   // Checks the user really exists, not just that a cookie is present, so a
@@ -23,14 +23,14 @@ export default async function LoginPage() {
             SOCIAL SENTINEL
           </h1>
           <p className="mt-1 text-xs text-slate-400">
-            Monitor • Analyze • Verify • Document • Report
+            Pantau • Analisis • Verifikasi • Dokumentasikan • Laporkan
           </p>
         </div>
 
         <LoginForm />
 
         <p className="mt-6 text-center text-xs text-slate-500">
-          Prototype build. Demo accounts and simulated data only.
+          Versi prototipe. Hanya akun demo dan data simulasi.
         </p>
       </div>
     </main>

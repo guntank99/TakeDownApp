@@ -16,7 +16,7 @@ const rules = [
   rule("4", "facebook", "Harassment"),
 ];
 
-const hateText = "The Vellani are vermin. Disgusting people, drive them out of our city.";
+const hateText = "Orang-orang Vellani itu hama. Menjijikkan, usir mereka dari kota kita.";
 
 describe("matchPolicy", () => {
   it("matches only rules of the post's platform and marks them for review", () => {
@@ -33,14 +33,14 @@ describe("matchPolicy", () => {
   });
 
   it("returns nothing for benign content and for platforms without rules", () => {
-    const benign = analyzeContent("Thanks everyone, great event.");
+    const benign = analyzeContent("Terima kasih semuanya, acara yang bagus.");
     expect(matchPolicy({ platform: "facebook", content: benign }, rules)).toEqual([]);
     expect(matchPolicy({ platform: "news", content: analyzeContent(hateText) }, rules)).toEqual([]);
   });
 
   it("adds a Platform Manipulation match for coordinated posting", () => {
     const m = matchPolicy(
-      { platform: "facebook", content: analyzeContent("Nice day"), coordinationAccounts: 5 },
+      { platform: "facebook", content: analyzeContent("Hari yang cerah"), coordinationAccounts: 5 },
       rules,
     );
     expect(m.map((x) => x.ruleId)).toEqual(["3"]);
@@ -48,7 +48,7 @@ describe("matchPolicy", () => {
   });
 
   it("lowers confidence when defamation is mapped onto harassment", () => {
-    const content = analyzeContent("Mr. Dorian Vale is a corrupt thief and a fraud, he stole the fund.");
+    const content = analyzeContent("Pak Ardan Velmora itu koruptor dan penipu, dia menggelapkan dana warga. Semua orang tahu.");
     const m = matchPolicy({ platform: "facebook", content }, rules);
     const h = m.find((x) => x.category === "Harassment")!;
     expect(h.confidence).toBeLessThan(content.indicators.defamation.confidence);

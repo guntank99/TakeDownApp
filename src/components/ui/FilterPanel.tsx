@@ -35,7 +35,7 @@ export function FilterPanel({
               <input id={`f-${f.name}`} name={f.name} defaultValue={values[f.name] ?? ""} placeholder={f.placeholder} className={control} maxLength={200} />
             ) : (
               <select id={`f-${f.name}`} name={f.name} defaultValue={values[f.name] ?? ""} className={control}>
-                <option value="">All</option>
+                <option value="">Semua</option>
                 {f.options?.map((o) => (
                   <option key={o.value} value={o.value}>
                     {o.label}
@@ -48,10 +48,10 @@ export function FilterPanel({
       </div>
       <div className="mt-3 flex gap-2">
         <button type="submit" className="rounded-lg bg-sky-500 px-4 py-1.5 text-sm font-semibold text-slate-950 hover:bg-sky-400">
-          Apply filters
+          Terapkan filter
         </button>
         <Link href={action} className="rounded-lg border border-slate-700 px-4 py-1.5 text-sm text-slate-300 hover:bg-slate-800">
-          Reset
+          Atur ulang
         </Link>
       </div>
     </form>

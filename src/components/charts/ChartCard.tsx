@@ -19,13 +19,13 @@ export function ChartCard({
 }) {
   return (
     <Card title={title} description={description} className={className}>
-      {empty ? <EmptyState message="No data available." /> : children}
+      {empty ? <EmptyState message="Tidak ada data." /> : children}
       {!empty ? (
         <details className="mt-3 text-xs text-slate-500">
-          <summary className="cursor-pointer select-none text-slate-400 hover:text-slate-200">View data table</summary>
+          <summary className="cursor-pointer select-none text-slate-400 hover:text-slate-200">Lihat tabel data</summary>
           <div className="mt-2 max-h-56 overflow-auto rounded-lg border border-slate-800">
             <table className="w-full text-left">
-              <caption className="sr-only">{title} data</caption>
+              <caption className="sr-only">Data {title}</caption>
               <thead className="bg-slate-900 text-slate-400">
                 <tr>
                   {table.columns.map((c) => (

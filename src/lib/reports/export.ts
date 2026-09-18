@@ -1,26 +1,27 @@
 import { PDFDocument, StandardFonts, rgb, type PDFFont } from "pdf-lib";
+import { REPORT_STATUS_LABEL } from "@/lib/i18n/labels";
 import type { CaseRecord, ReportRecord } from "@/types";
 
 /** Ordered list of (heading, lines) including the editable closing sections. */
 function allSections(report: ReportRecord) {
   return [
     ...report.sections.map((s) => ({ title: s.title, lines: s.body })),
-    { title: "Reviewer Notes", lines: [report.reviewerNotes.trim() || "No reviewer notes recorded."] },
-    { title: "Recommended Next Action", lines: [report.recommendedAction.trim() || "None recorded."] },
+    { title: "Catatan Peninjau", lines: [report.reviewerNotes.trim() || "Belum ada catatan peninjau."] },
+    { title: "Rekomendasi Tindakan Berikutnya", lines: [report.recommendedAction.trim() || "Belum ada."] },
   ];
 }
 
 function metaLines(report: ReportRecord, c: CaseRecord): [string, string][] {
   return [
-    ["Report ID", report.id],
-    ["Case ID", c.id],
-    ["Title", report.title],
-    ["Status", report.status],
-    ["Created", report.createdAt],
-    ["Created by", report.createdBy],
-    ["Approved by", report.approvedBy ?? "—"],
+    ["ID Laporan", report.id],
+    ["ID Kasus", c.id],
+    ["Judul", report.title],
+    ["Status", REPORT_STATUS_LABEL[report.status]],
+    ["Dibuat", report.createdAt],
+    ["Dibuat oleh", report.createdBy],
+    ["Disetujui oleh", report.approvedBy ?? "—"],
     ...(report.submission
-      ? ([["Submitted", `${report.submission.submittedAt} via ${report.submission.method.replace("_", " ")} (${report.submission.platform})`]] as [string, string][])
+      ? ([["Diajukan", `${report.submission.submittedAt} melalui ${report.submission.method === "official_page" ? "halaman pelaporan resmi" : "API resmi"} (${report.submission.platform})`]] as [string, string][])
       : []),
   ];
 }
@@ -31,7 +32,7 @@ export function reportToJson(report: ReportRecord, c: CaseRecord): string {
       report: { ...report, sections: undefined },
       case: { id: c.id, title: c.title, platform: c.platform, category: c.category, priority: c.priority, status: c.status },
       sections: allSections(report).map((s) => ({ title: s.title, lines: s.lines })),
-      disclaimer: "Automated indicators require human review and are not findings that a violation occurred.",
+      disclaimer: "Indikator otomatis memerlukan tinjauan manusia dan bukan temuan bahwa telah terjadi pelanggaran.",
     },
     null,
     2,
@@ -45,8 +46,8 @@ export function csvCell(value: string): string {
 }
 
 export function reportToCsv(report: ReportRecord, c: CaseRecord): string {
-  const rows: string[][] = [["section", "item"]];
-  for (const [k, v] of metaLines(report, c)) rows.push(["Report", `${k}: ${v}`]);
+  const rows: string[][] = [["bagian", "butir"]];
+  for (const [k, v] of metaLines(report, c)) rows.push(["Laporan", `${k}: ${v}`]);
   for (const s of allSections(report)) for (const line of s.lines) rows.push([s.title, line]);
   return rows.map((r) => r.map(csvCell).join(",")).join("\r\n") + "\r\n";
 }
@@ -109,8 +110,8 @@ export async function reportToPdf(report: ReportRecord, c: CaseRecord, isMock: b
     y -= opts.gap ?? 0;
   };
 
-  draw("SOCIAL SENTINEL - Case Report", { size: 16, bold: true, gap: 4 });
-  if (isMock) draw("DATA SOURCE: MOCK / SIMULATED", { size: 9, bold: true, color: [0.7, 0.4, 0], gap: 4 });
+  draw("SOCIAL SENTINEL - Laporan Kasus", { size: 16, bold: true, gap: 4 });
+  if (isMock) draw("SUMBER DATA: MOCK / SIMULASI", { size: 9, bold: true, color: [0.7, 0.4, 0], gap: 4 });
   for (const [k, v] of metaLines(report, c)) draw(`${k}: ${v}`, { size: 9, color: [0.3, 0.3, 0.33] });
   y -= 8;
 
@@ -120,11 +121,11 @@ export async function reportToPdf(report: ReportRecord, c: CaseRecord, isMock: b
     for (const line of s.lines) draw(line, { size: 9.5, gap: 2 });
     y -= 6;
   }
-  draw("Automated indicators require human review and are not findings that a violation occurred.", { size: 8, color: [0.4, 0.4, 0.44] });
+  draw("Indikator otomatis memerlukan tinjauan manusia dan bukan temuan bahwa telah terjadi pelanggaran.", { size: 8, color: [0.4, 0.4, 0.44] });
 
   const pages = pdf.getPages();
   pages.forEach((p, i) =>
-    p.drawText(`${report.id} - page ${i + 1} of ${pages.length}`, { x: M, y: 28, size: 8, font, color: rgb(0.5, 0.5, 0.55) }),
+    p.drawText(`${report.id} - halaman ${i + 1} dari ${pages.length}`, { x: M, y: 28, size: 8, font, color: rgb(0.5, 0.5, 0.55) }),
   );
   return pdf.save();
 }

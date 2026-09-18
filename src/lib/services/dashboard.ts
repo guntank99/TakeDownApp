@@ -23,7 +23,7 @@ export interface DashboardSummary {
   submittedReports: number;
   mentionsOverTime: { date: string; posts: number; comments: number }[];
   platformDistribution: { platform: Platform; label: string; count: number }[];
-  sentiment: { name: "Positive" | "Neutral" | "Negative"; value: number }[];
+  sentiment: { name: "Positif" | "Netral" | "Negatif"; value: number }[];
   riskDistribution: { level: RiskLevel; count: number }[];
   violationCategories: { label: string; count: number }[];
   trendingIssues: { title: string; volume: number; growth: number }[];
@@ -64,7 +64,7 @@ export async function getDashboardSummary(): Promise<DashboardSummary> {
     violationCounts.set(INDICATOR_LABELS[k], (violationCounts.get(INDICATOR_LABELS[k]) ?? 0) + 1);
   }
   const coordinated = analyses.filter((a) => a.coordinationGroupSize >= 3).length;
-  if (coordinated) violationCounts.set("Coordinated Posting Indicator", coordinated);
+  if (coordinated) violationCounts.set("Indikator Posting Terkoordinasi", coordinated);
 
   const levels: RiskLevel[] = ["low", "medium", "high", "critical"];
   const sentimentCount = { positive: 0, neutral: 0, negative: 0 };
@@ -88,9 +88,9 @@ export async function getDashboardSummary(): Promise<DashboardSummary> {
       .filter((x) => x.count > 0)
       .sort((a, b) => b.count - a.count),
     sentiment: [
-      { name: "Positive", value: sentimentCount.positive },
-      { name: "Neutral", value: sentimentCount.neutral },
-      { name: "Negative", value: sentimentCount.negative },
+      { name: "Positif", value: sentimentCount.positive },
+      { name: "Netral", value: sentimentCount.neutral },
+      { name: "Negatif", value: sentimentCount.negative },
     ],
     riskDistribution: levels.map((level) => ({ level, count: analyses.filter((a) => getRiskLevel(a.risk.score) === level).length })),
     violationCategories: [...violationCounts].map(([label, count]) => ({ label, count })).sort((a, b) => b.count - a.count),

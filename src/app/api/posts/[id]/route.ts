@@ -4,7 +4,7 @@ import { getAnalysisContext } from "@/lib/services/analysis";
 export const GET = withApi<{ id: string }>({}, async (_req, { params }) => {
   const ctx = await getAnalysisContext();
   const post = ctx.postById.get(params.id);
-  if (!post) throw new HttpError(404, "Post not found.");
+  if (!post) throw new HttpError(404, "Postingan tidak ditemukan.");
   return {
     post,
     analysis: ctx.postAnalysis.get(post.id),

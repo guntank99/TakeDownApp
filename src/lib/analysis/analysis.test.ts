@@ -5,94 +5,102 @@ import { analyzeContent } from "./indicators";
 import { analyzeSentiment } from "./sentiment";
 
 describe("analyzeSentiment", () => {
-  it("detects positive text (English)", () => {
-    const r = analyzeSentiment("Great work by the team, thank you for the support!");
+  it("mendeteksi teks positif (Indonesia)", () => {
+    const r = analyzeSentiment("Kerja bagus untuk timnya, terima kasih atas dukungannya!");
     expect(r.sentiment).toBe("positive");
-    expect(r.keywords).toContain("great");
+    expect(r.keywords).toContain("bagus");
   });
 
-  it("detects negative text (Indonesian)", () => {
+  it("mendeteksi teks negatif (Indonesia dan Inggris)", () => {
     expect(analyzeSentiment("Kebijakan ini buruk dan mengecewakan").sentiment).toBe("negative");
+    expect(analyzeSentiment("This is terrible and disappointing").sentiment).toBe("negative");
   });
 
-  it("handles negation", () => {
+  it("menangani negasi", () => {
+    expect(analyzeSentiment("Pelayanannya tidak bagus").sentiment).toBe("negative");
+    expect(analyzeSentiment("Hasilnya gak buruk").sentiment).toBe("positive");
     expect(analyzeSentiment("This is not good").sentiment).toBe("negative");
-    expect(analyzeSentiment("This is not bad").sentiment).toBe("positive");
   });
 
-  it("returns neutral with a reason when nothing matches", () => {
-    const r = analyzeSentiment("The schedule was published on Monday.");
+  it("menghasilkan netral beserta alasan bila tidak ada kata kunci", () => {
+    const r = analyzeSentiment("Jadwal dipublikasikan pada hari Senin.");
     expect(r.sentiment).toBe("neutral");
-    expect(r.reason).toMatch(/no sentiment keywords/i);
+    expect(r.reason).toMatch(/tidak ada kata kunci/i);
   });
 
-  it("keeps confidence within 0.5–0.95", () => {
-    const r = analyzeSentiment("terrible awful worst bad hate failure");
+  it("menjaga confidence dalam rentang 0.5–0.95", () => {
+    const r = analyzeSentiment("buruk jelek parah gagal benci memalukan");
     expect(r.confidence).toBeGreaterThanOrEqual(0.5);
     expect(r.confidence).toBeLessThanOrEqual(0.95);
   });
 });
 
-describe("analyzeContent indicators", () => {
-  it("flags group-targeting derogatory language for human review", () => {
-    const a = analyzeContent("The Vellani are vermin. Disgusting people, drive them out of our city.");
+describe("analyzeContent: indikator", () => {
+  it("menandai bahasa merendahkan yang menyasar kelompok untuk ditinjau manusia", () => {
+    const a = analyzeContent("Orang-orang Vellani itu hama. Menjijikkan, usir mereka dari kota kita.");
     expect(a.indicators.hate_speech.detected).toBe(true);
     expect(a.indicators.hate_speech.confidence).toBeGreaterThanOrEqual(0.5);
     expect(a.status).toBe("NEEDS_HUMAN_REVIEW");
-    expect(a.indicators.hate_speech.reason).toMatch(/potential/i);
+    expect(a.indicators.hate_speech.reason).toMatch(/potensi/i);
   });
 
-  it("does not flag a neutral announcement", () => {
-    const a = analyzeContent("Update: the published schedule for the coming week is available. #TransitUpdate");
+  it("tetap mendeteksi contoh berbahasa Inggris", () => {
+    const a = analyzeContent("The Vellani are vermin. Disgusting people, drive them out of our city.");
+    expect(a.indicators.hate_speech.detected).toBe(true);
+  });
+
+  it("tidak menandai pengumuman netral", () => {
+    const a = analyzeContent("Informasi terbaru: jadwal lengkap sudah diumumkan untuk pekan ini. #JadwalTransportasi");
     expect(a.flagged).toEqual([]);
     expect(a.status).toBe("NO_INDICATORS");
     expect(a.toxicity).toBe(0);
   });
 
-  it("insulting a non-group is toxicity but not hate speech", () => {
-    const a = analyzeContent("The officials behind this are idiots and it is a disgusting failure.");
+  it("menghina pihak non-kelompok adalah toksisitas, bukan ujaran kebencian", () => {
+    const a = analyzeContent("Pihak yang mengurus ini bodoh dan hasilnya sampah.");
     expect(a.indicators.hate_speech.detected).toBe(false);
     expect(a.toxicity).toBeGreaterThan(0);
   });
 
-  it("detects threats", () => {
-    const a = analyzeContent("You will regret this, watch your back.");
+  it("mendeteksi ancaman", () => {
+    const a = analyzeContent("Awas kamu, tunggu saja akibatnya, kuhabisi.");
     expect(a.indicators.threat.detected).toBe(true);
-    expect(a.indicators.threat.evidence.length).toBe(2);
+    expect(a.indicators.threat.evidence.length).toBeGreaterThanOrEqual(2);
+    expect(analyzeContent("You will regret this, watch your back.").indicators.threat.detected).toBe(true);
   });
 
-  it("detects harassment aimed at a person", () => {
-    const a = analyzeContent("@someone you are a pathetic idiot, shut up.");
-    expect(a.indicators.harassment.detected).toBe(true);
+  it("mendeteksi pelecehan yang ditujukan kepada seseorang", () => {
+    expect(analyzeContent("@warga_sungai kamu bodoh dan tolol, diam saja.").indicators.harassment.detected).toBe(true);
+    expect(analyzeContent("@someone you are a pathetic idiot, shut up.").indicators.harassment.detected).toBe(true);
   });
 
-  it("detects spam and phishing-style impersonation", () => {
+  it("mendeteksi spam dan peniruan identitas gaya phishing", () => {
     const spam = analyzeContent(
-      "FREE followers!!! Click here http://promo-deals.example/a http://promo-deals.example/b buy now #promo #free #win #sale #deal",
+      "GRATIS followers!!! Klik di sini http://promo-hemat.example/a http://promo-hemat.example/b beli sekarang #promo #gratis #menang #diskon #hadiah",
     );
     expect(spam.indicators.spam.detected).toBe(true);
-    const phish = analyzeContent("Official notice: verify your account now at http://verify-support.example/login to avoid suspension.");
+    const phish = analyzeContent("Pemberitahuan resmi: verifikasi akun Anda sekarang di http://verifikasi-layanan.example/masuk agar tidak diblokir.");
     expect(phish.indicators.impersonation.detected).toBe(true);
   });
 
-  it("flags misinformation cues but not claims that cite a source", () => {
-    const cue = analyzeContent("They don't want you to know this. 100% true, share before it's deleted!");
+  it("menandai pola misinformasi tetapi tidak klaim yang menyebut sumber", () => {
+    const cue = analyzeContent("HEBOH: yang tidak mau kamu tahu soal ini rekayasa! 100% benar, sebarkan sebelum dihapus!");
     expect(cue.indicators.misinformation.detected).toBe(true);
-    expect(cue.indicators.misinformation.reason).toMatch(/not a finding/i);
-    const sourced = analyzeContent("According to the official published report, the schedule changed.");
+    expect(cue.indicators.misinformation.reason).toMatch(/bukan temuan/i);
+    const sourced = analyzeContent("Menurut laporan resmi yang dipublikasikan, jadwal berubah.");
     expect(sourced.indicators.misinformation.detected).toBe(false);
   });
 
-  it("requires a named target for defamation indicators", () => {
-    const named = analyzeContent("Mr. Dorian Vale is a corrupt thief and a fraud, he stole the fund.");
+  it("indikator pencemaran nama baik memerlukan orang yang disebut", () => {
+    const named = analyzeContent("Pak Ardan Velmora itu koruptor dan penipu, dia menggelapkan dana warga. Semua orang tahu.");
     expect(named.indicators.defamation.detected).toBe(true);
-    expect(named.indicators.defamation.reason).toMatch(/human \/ legal review/i);
-    const unnamed = analyzeContent("The company is corrupt.");
+    expect(named.indicators.defamation.reason).toMatch(/peninjauan manusia \/ hukum/i);
+    const unnamed = analyzeContent("Perusahaan itu korup.");
     expect(unnamed.indicators.defamation.detected).toBe(false);
   });
 
-  it("never reports confidence above 0.95 or for undetected indicators", () => {
-    const a = analyzeContent("Those Vellani are vermin, subhuman filth. Get out! Drive them out. Kicked out.");
+  it("tidak pernah melaporkan confidence di atas 0.95 atau untuk indikator yang tidak terdeteksi", () => {
+    const a = analyzeContent("Kaum Vellani itu binatang kotor, parasit. Usir! Pergi dari sini. Diusir semuanya.");
     for (const ind of Object.values(a.indicators)) {
       expect(ind.confidence).toBeLessThanOrEqual(0.95);
       if (!ind.detected) expect(ind.confidence).toBe(0);
@@ -102,34 +110,34 @@ describe("analyzeContent indicators", () => {
 
 describe("analyzeComment", () => {
   const cat = (text: string) => analyzeComment({ id: "c", text }).category;
-  it("prioritises threat > hate > harassment > spam > sentiment", () => {
-    expect(cat("You will regret this, watch your back.")).toBe("Threat Indicator");
-    expect(cat("Those Vellani are vermin.")).toBe("Hate Speech Indicator");
-    expect(cat("Shut up, nobody likes you.")).toBe("Harassment");
-    expect(cat("DM for promo!!! join now")).toBe("Spam");
-    expect(cat("Thanks for sharing, very helpful.")).toBe("Positive");
-    expect(cat("Total failure, shame on them.")).toBe("Negative");
-    expect(cat("Any update on this?")).toBe("Neutral");
-    expect(cat("👍")).toBe("Other");
+  it("memprioritaskan ancaman > ujaran kebencian > pelecehan > spam > sentimen", () => {
+    expect(cat("Kamu akan menyesal, awas kamu.")).toBe("Indikator Ancaman");
+    expect(cat("Orang-orang Vellani itu hama.")).toBe("Indikator Ujaran Kebencian");
+    expect(cat("Diam saja, tidak ada yang suka sama kamu.")).toBe("Pelecehan");
+    expect(cat("Hubungi DM untuk promo!!! gabung sekarang")).toBe("Spam");
+    expect(cat("Terima kasih infonya, sangat membantu.")).toBe("Positif");
+    expect(cat("Gagal total, memalukan.")).toBe("Negatif");
+    expect(cat("Ada pembaruan lagi soal ini?")).toBe("Netral");
+    expect(cat("👍")).toBe("Lainnya");
   });
 });
 
 describe("findCoordinatedGroups", () => {
-  const base = "BREAKING: secret claim about the dam. Share before it is deleted!";
+  const base = "HEBOH: klaim rahasia soal bendungan. Sebarkan sebelum dihapus!";
   const mk = (id: string, authorId: string, text: string, iso: string) => ({ id, authorId, text, createdAt: iso });
 
-  it("groups near-duplicate posts from 3+ accounts inside the window", () => {
+  it("mengelompokkan posting hampir identik dari 3+ akun dalam jendela waktu", () => {
     const groups = findCoordinatedGroups([
       mk("p1", "a1", base, "2026-09-16T10:00:00Z"),
       mk("p2", "a2", base + " RT!", "2026-09-16T10:20:00Z"),
-      mk("p3", "a3", base + " #wakeup", "2026-09-16T10:40:00Z"),
-      mk("p4", "a4", "Completely unrelated recipe for soup", "2026-09-16T10:50:00Z"),
+      mk("p3", "a3", base + " #bangun", "2026-09-16T10:40:00Z"),
+      mk("p4", "a4", "Resep sayur asem yang enak untuk keluarga", "2026-09-16T10:50:00Z"),
     ]);
     expect(groups.get("p1")?.accounts).toBe(3);
     expect(groups.has("p4")).toBe(false);
   });
 
-  it("ignores repeats by the same account and posts outside the window", () => {
+  it("mengabaikan pengulangan oleh akun yang sama dan posting di luar jendela waktu", () => {
     expect(
       findCoordinatedGroups([
         mk("p1", "a1", base, "2026-09-16T10:00:00Z"),
@@ -140,7 +148,7 @@ describe("findCoordinatedGroups", () => {
     ).toBe(0);
   });
 
-  it("scales coordination points to a 15 maximum", () => {
+  it("menskalakan poin koordinasi dengan maksimum 15", () => {
     expect(coordinationPoints(2)).toBe(0);
     expect(coordinationPoints(3)).toBe(8);
     expect(coordinationPoints(5)).toBe(15);

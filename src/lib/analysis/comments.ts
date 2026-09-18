@@ -21,16 +21,16 @@ export function analyzeComment(comment: Pick<Comment, "id" | "text">): CommentAn
 
   // Priority: threat > hate speech > harassment > spam > plain sentiment.
   const verdict = ((): Verdict => {
-    if (threat.detected) return fromIndicator(threat, "Threat Indicator");
-    if (hate_speech.detected) return fromIndicator(hate_speech, "Hate Speech Indicator");
-    if (harassment.detected) return fromIndicator(harassment, "Harassment");
+    if (threat.detected) return fromIndicator(threat, "Indikator Ancaman");
+    if (hate_speech.detected) return fromIndicator(hate_speech, "Indikator Ujaran Kebencian");
+    if (harassment.detected) return fromIndicator(harassment, "Pelecehan");
     if (spam.detected) return fromIndicator(spam, "Spam");
     if (alnum.length < 3) {
-      return { category: "Other", confidence: 0.6, reason: "No readable text (emoji, punctuation or very short)." };
+      return { category: "Lainnya", confidence: 0.6, reason: "Tidak ada teks yang dapat dibaca (emoji, tanda baca, atau terlalu pendek)." };
     }
     const s = a.sentiment;
     return {
-      category: s.sentiment === "positive" ? "Positive" : s.sentiment === "negative" ? "Negative" : "Neutral",
+      category: s.sentiment === "positive" ? "Positif" : s.sentiment === "negative" ? "Negatif" : "Netral",
       confidence: s.confidence,
       reason: s.reason,
     };

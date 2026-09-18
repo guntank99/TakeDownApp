@@ -53,14 +53,14 @@ function sameOrigin(req: NextRequest): boolean {
 
 export async function readJson(req: NextRequest): Promise<unknown> {
   const length = Number(req.headers.get("content-length") ?? 0);
-  if (length > MAX_BODY_BYTES) throw new HttpError(413, "Request body too large.");
+  if (length > MAX_BODY_BYTES) throw new HttpError(413, "Ukuran isi permintaan terlalu besar.");
   const text = await req.text();
-  if (text.length > MAX_BODY_BYTES) throw new HttpError(413, "Request body too large.");
+  if (text.length > MAX_BODY_BYTES) throw new HttpError(413, "Ukuran isi permintaan terlalu besar.");
   if (!text.trim()) return {};
   try {
     return JSON.parse(text);
   } catch {
-    throw new HttpError(400, "Request body must be valid JSON.");
+    throw new HttpError(400, "Isi permintaan harus berupa JSON yang valid.");
   }
 }
 
@@ -72,14 +72,14 @@ export function withApi<P = Record<string, never>>(
     try {
       const session = await getSession();
       const user = session ? findUserById(session.userId) : null;
-      if (!user) return errorJson(401, "Authentication required.");
+      if (!user) return errorJson(401, "Autentikasi diperlukan.");
 
       const write = WRITE_METHODS.has(req.method);
       const limited = rateLimit(`${user.id}:${write ? "w" : "r"}`, write ? 30 : 120);
-      if (!limited.ok) return errorJson(429, "Too many requests.", { "Retry-After": String(limited.retryAfter) });
+      if (!limited.ok) return errorJson(429, "Terlalu banyak permintaan.", { "Retry-After": String(limited.retryAfter) });
 
-      if (write && !sameOrigin(req)) return errorJson(403, "Cross-origin requests are not allowed.");
-      if (options.permission && !can(user.role, options.permission)) return errorJson(403, "Your role cannot perform this action.");
+      if (write && !sameOrigin(req)) return errorJson(403, "Permintaan lintas asal tidak diizinkan.");
+      if (options.permission && !can(user.role, options.permission)) return errorJson(403, "Peran Anda tidak dapat melakukan tindakan ini.");
 
       const params = (routeCtx ? await routeCtx.params : {}) as P;
       const result = await handler(req, { user, params });
@@ -87,7 +87,7 @@ export function withApi<P = Record<string, never>>(
     } catch (error) {
       if (error instanceof HttpError) return errorJson(error.status, error.message);
       console.error("API error", error);
-      return errorJson(500, "Internal server error.");
+      return errorJson(500, "Terjadi kesalahan pada server.");
     }
   };
 }

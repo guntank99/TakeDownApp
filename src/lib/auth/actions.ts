@@ -12,7 +12,7 @@ export interface LoginState {
   identifier?: string;
 }
 
-const INVALID = "Invalid username/email or password.";
+const INVALID = "Nama pengguna/email atau kata sandi salah.";
 
 export async function login(
   _prev: LoginState,
@@ -24,13 +24,13 @@ export async function login(
 
   if (!demoLoginEnabled()) {
     return {
-      error: "Sign-in is disabled: no user store is configured for this deployment. An administrator must set DEMO_MODE=true and DEMO_PASSWORD_HASH to enable the demo accounts.",
+      error: "Masuk dinonaktifkan: belum ada penyimpanan pengguna yang dikonfigurasi untuk deployment ini. Administrator harus mengatur DEMO_MODE=true dan DEMO_PASSWORD_HASH untuk mengaktifkan akun demo.",
       identifier,
     };
   }
 
   if (!identifier || !password) {
-    return { error: "Enter your username/email and password.", identifier };
+    return { error: "Masukkan nama pengguna/email dan kata sandi.", identifier };
   }
   if (identifier.length > 254 || password.length > 128) {
     return { error: INVALID, identifier };
@@ -45,7 +45,7 @@ export async function login(
 
   if (!user || !passwordOk) {
     // Log the attempted identifier (not the password) for detection of guessing.
-    logAudit({ user: { id: user?.id ?? "unknown", name: user?.name ?? identifier.slice(0, 60) }, action: "LOGIN_FAILED", object: "session", result: "FAILED" });
+    logAudit({ user: { id: user?.id ?? "unknown", name: user?.name ?? identifier.slice(0, 60) }, action: "LOGIN_FAILED", object: "sesi", result: "FAILED" });
     return { error: INVALID, identifier };
   }
 
@@ -53,14 +53,14 @@ export async function login(
     { id: user.id, username: user.username, name: user.name, role: user.role },
     remember,
   );
-  logAudit({ user, action: "LOGIN", object: "session" });
+  logAudit({ user, action: "LOGIN", object: "sesi" });
   redirect("/dashboard");
 }
 
 export async function logout() {
   const session = await getSession();
   const who = session ? findUserById(session.userId) : null;
-  if (who) logAudit({ user: who, action: "LOGOUT", object: "session" });
+  if (who) logAudit({ user: who, action: "LOGOUT", object: "sesi" });
   await deleteSession();
   redirect("/login");
 }

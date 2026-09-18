@@ -40,6 +40,8 @@ export interface GraphEdgeData {
 }
 
 const NODE_TYPES = ["account", "post", "hashtag", "topic"] as const;
+const NODE_TYPE_ID: Record<string, string> = { account: "akun", post: "postingan", hashtag: "tagar", topic: "topik" };
+const EDGE_TYPE_ID: Record<string, string> = { mention: "sebutan", reply: "balasan", share: "bagikan", quote: "kutipan", hashtag: "tagar", interaction: "interaksi" };
 const SHAPE: Record<GraphNodeData["type"], string> = {
   account: "rounded-full",
   post: "rounded-[3px]",
@@ -156,50 +158,50 @@ function Inner({ nodes, edges, clusters }: Props) {
     <div className="space-y-3">
       <div className="flex flex-wrap items-end gap-x-6 gap-y-3 rounded-xl border border-slate-800 bg-slate-900/60 p-4">
         <div>
-          <label htmlFor="graph-search" className="mb-1 block text-xs text-slate-400">Search node</label>
+          <label htmlFor="graph-search" className="mb-1 block text-xs text-slate-400">Cari simpul</label>
           <div className="relative">
             <Search className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-slate-500" aria-hidden="true" />
-            <input id="graph-search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="handle, #hashtag, topic…" className={`${ctl} pl-8`} />
+            <input id="graph-search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="nama pengguna, #tagar, topik…" className={`${ctl} pl-8`} />
           </div>
-          <p className="mt-1 text-xs text-slate-500" aria-live="polite">{q ? `${matches.length} match(es)` : " "}</p>
+          <p className="mt-1 text-xs text-slate-500" aria-live="polite">{q ? `${matches.length} cocok` : " "}</p>
         </div>
         <fieldset>
-          <legend className="mb-1 text-xs text-slate-400">Node types</legend>
+          <legend className="mb-1 text-xs text-slate-400">Jenis simpul</legend>
           <div className="flex gap-3 text-sm text-slate-300">
             {NODE_TYPES.map((t) => (
               <label key={t} className="flex items-center gap-1.5">
                 <input type="checkbox" className="accent-sky-500" checked={types.has(t)} onChange={() => toggle(types, t, setTypes)} />
-                {t}
+                {NODE_TYPE_ID[t] ?? t}
               </label>
             ))}
           </div>
         </fieldset>
         <fieldset>
-          <legend className="mb-1 text-xs text-slate-400">Edge types</legend>
+          <legend className="mb-1 text-xs text-slate-400">Jenis sisi</legend>
           <div className="flex flex-wrap gap-3 text-sm text-slate-300">
             {allEdgeTypes.map((t) => (
               <label key={t} className="flex items-center gap-1.5">
                 <input type="checkbox" className="accent-sky-500" checked={edgeTypes.has(t)} onChange={() => toggle(edgeTypes, t, setEdgeTypes)} />
-                {t}
+                {EDGE_TYPE_ID[t] ?? t}
               </label>
             ))}
           </div>
         </fieldset>
         <div>
-          <label htmlFor="graph-degree" className="mb-1 block text-xs text-slate-400">Min. connections: {minDegree}</label>
+          <label htmlFor="graph-degree" className="mb-1 block text-xs text-slate-400">Koneksi minimum: {minDegree}</label>
           <input id="graph-degree" type="range" min={0} max={20} value={minDegree} onChange={(e) => setMinDegree(Number(e.target.value))} className="accent-sky-500" />
         </div>
         <div>
-          <label htmlFor="graph-color" className="mb-1 block text-xs text-slate-400">Colour by</label>
+          <label htmlFor="graph-color" className="mb-1 block text-xs text-slate-400">Warna menurut</label>
           <select id="graph-color" value={colorBy} onChange={(e) => setColorBy(e.target.value as "type" | "cluster")} className={ctl}>
-            <option value="type">Platform / type</option>
-            <option value="cluster">Cluster</option>
+            <option value="type">Platform / jenis</option>
+            <option value="cluster">Klaster</option>
           </select>
         </div>
       </div>
 
       <div className="grid gap-3 lg:grid-cols-[1fr_20rem]">
-        <div className="h-[42rem] overflow-hidden rounded-xl border border-slate-800 bg-slate-950" aria-label="Network graph. Use the filters above or the side panel for a text view.">
+        <div className="h-[42rem] overflow-hidden rounded-xl border border-slate-800 bg-slate-950" aria-label="Graf jaringan. Gunakan filter di atas atau panel samping untuk tampilan teks.">
           <ReactFlow
             nodes={flowNodes}
             edges={flowEdges}
@@ -221,29 +223,29 @@ function Inner({ nodes, edges, clusters }: Props) {
           </ReactFlow>
         </div>
 
-        <aside className="space-y-3 rounded-xl border border-slate-800 bg-slate-900/70 p-4 text-sm" aria-label="Selected node">
+        <aside className="space-y-3 rounded-xl border border-slate-800 bg-slate-900/70 p-4 text-sm" aria-label="Simpul terpilih">
           {selected ? (
             <>
               <div>
-                <p className="text-xs uppercase tracking-wider text-slate-500">{selected.type}</p>
+                <p className="text-xs uppercase tracking-wider text-slate-500">{NODE_TYPE_ID[selected.type]}</p>
                 <p className="break-all text-base font-semibold text-slate-50">{selected.label}</p>
-                {selected.type === "account" ? <a href={`/accounts/${selected.id}`} className="text-xs text-sky-400 hover:underline">Open account</a> : null}
-                {selected.type === "post" ? <a href={`/posts/${selected.label}`} className="text-xs text-sky-400 hover:underline">Open post</a> : null}
+                {selected.type === "account" ? <a href={`/accounts/${selected.id}`} className="text-xs text-sky-400 hover:underline">Buka akun</a> : null}
+                {selected.type === "post" ? <a href={`/posts/${selected.label}`} className="text-xs text-sky-400 hover:underline">Buka postingan</a> : null}
               </div>
               <dl className="grid grid-cols-2 gap-2 text-xs">
-                <div><dt className="text-slate-500">Connections</dt><dd className="text-slate-200">{selected.degree}</dd></div>
-                <div><dt className="text-slate-500">Degree centrality</dt><dd className="text-slate-200">{selected.degreeCentrality.toFixed(3)}</dd></div>
+                <div><dt className="text-slate-500">Koneksi</dt><dd className="text-slate-200">{selected.degree}</dd></div>
+                <div><dt className="text-slate-500">Sentralitas derajat</dt><dd className="text-slate-200">{selected.degreeCentrality.toFixed(3)}</dd></div>
                 <div><dt className="text-slate-500">Betweenness</dt><dd className="text-slate-200">{selected.betweenness.toFixed(3)}</dd></div>
-                <div><dt className="text-slate-500">Cluster</dt><dd className="text-slate-200">{selected.clusterName ?? "—"}</dd></div>
+                <div><dt className="text-slate-500">Klaster</dt><dd className="text-slate-200">{selected.clusterName ?? "—"}</dd></div>
               </dl>
               {selected.role ? <p className="rounded-md border border-slate-700 px-2 py-1 text-xs text-slate-300">{selected.role}</p> : null}
               <div>
-                <p className="mb-1 text-xs uppercase tracking-wider text-slate-500">Strongest connections</p>
+                <p className="mb-1 text-xs uppercase tracking-wider text-slate-500">Koneksi terkuat</p>
                 <ul className="space-y-1">
                   {neighbors.map(({ node, types: t }) => (
                     <li key={node.id}>
                       <button type="button" className="w-full text-left text-slate-300 hover:text-sky-300" onClick={() => { setSelectedId(node.id); setCenter(node.x, node.y, { zoom: 1.2, duration: 400 }); }}>
-                        {node.label} <span className="text-xs text-slate-500">{[...t].join(", ")}</span>
+                        {node.label} <span className="text-xs text-slate-500">{[...t].map((x) => EDGE_TYPE_ID[x] ?? x).join(", ")}</span>
                       </button>
                     </li>
                   ))}
@@ -251,16 +253,16 @@ function Inner({ nodes, edges, clusters }: Props) {
               </div>
             </>
           ) : (
-            <p className="text-slate-400">Select a node to see its metrics and connections. Zoom with the wheel, pan by dragging.</p>
+            <p className="text-slate-400">Pilih sebuah simpul untuk melihat metrik dan koneksinya. Zoom dengan roda mouse, geser dengan menyeret.</p>
           )}
           <hr className="border-slate-800" />
           <div>
-            <p className="mb-1 text-xs uppercase tracking-wider text-slate-500">Legend</p>
-            <p className="text-xs text-slate-400">Shape: ● account · ■ post · ◆ hashtag · ▢ topic. Size grows with connections. Account colour = platform.</p>
+            <p className="mb-1 text-xs uppercase tracking-wider text-slate-500">Legenda</p>
+            <p className="text-xs text-slate-400">Bentuk: ● akun · ■ postingan · ◆ tagar · ▢ topik. Ukuran bertambah seiring koneksi. Warna akun = platform.</p>
             {colorBy === "cluster" ? (
               <ul className="mt-2 space-y-1 text-xs text-slate-300">
                 {clusters.map((c) => (
-                  <li key={c.name} className="flex items-center gap-2"><span className="size-2.5 rounded-full" style={{ background: c.color }} aria-hidden="true" />{c.name} · {c.nodeCount} nodes</li>
+                  <li key={c.name} className="flex items-center gap-2"><span className="size-2.5 rounded-full" style={{ background: c.color }} aria-hidden="true" />{c.name} · {c.nodeCount} simpul</li>
                 ))}
               </ul>
             ) : null}

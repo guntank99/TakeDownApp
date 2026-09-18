@@ -46,13 +46,13 @@ export async function getReport(id: string): Promise<ReportRecord | null> {
 export async function createReport(user: SessionUser, raw: unknown): Promise<Result<ReportRecord>> {
   if (!can(user.role, "report:create")) {
     logAudit({ user, action: "GENERATE_REPORT", object: "report", result: "DENIED" });
-    return failure("Your role cannot create reports.", 403);
+    return failure("Peran Anda tidak dapat membuat laporan.", 403);
   }
   const parsed = createReportSchema.safeParse(raw);
   if (!parsed.success) return failure(formatZodError(parsed.error));
   const c = getCase(parsed.data.caseId);
-  if (!c) return failure("Case not found.", 404);
-  if (c.status === "CLOSED") return failure("Cannot create a report for a closed case.", 409);
+  if (!c) return failure("Kasus tidak ditemukan.", 404);
+  if (c.status === "CLOSED") return failure("Tidak dapat membuat laporan untuk kasus yang sudah ditutup.", 409);
 
   await ensureSeeded();
   const ctx = await getAnalysisContext();
@@ -61,19 +61,19 @@ export async function createReport(user: SessionUser, raw: unknown): Promise<Res
   const record: ReportRecord = {
     id: nextId("RPT", store.reports.map((r) => r.id)),
     caseId: c.id,
-    title: `Report: ${c.title}`,
+    title: `Laporan: ${c.title}`,
     status: "draft",
     createdBy: user.id,
     createdAt: now,
     updatedAt: now,
     sections: buildReportSections(c, ctx, listEvidence(c.id)),
     reviewerNotes: "",
-    recommendedAction: `Review the findings, then file a report through ${PLATFORM_LABEL[c.platform]}'s official reporting mechanism.`,
+    recommendedAction: `Tinjau temuan, lalu ajukan laporan melalui mekanisme pelaporan resmi ${PLATFORM_LABEL[c.platform]}.`,
     approvedBy: null,
     submission: null,
   };
   store.reports.push(record);
-  c.timeline.push({ id: `TL-${c.timeline.length + 1}`, at: now, actorId: user.id, type: "REPORT_CREATED", message: `Report ${record.id} generated` });
+  c.timeline.push({ id: `TL-${c.timeline.length + 1}`, at: now, actorId: user.id, type: "REPORT_CREATED", message: `Laporan ${record.id} dibuat` });
   c.updatedAt = now;
   logAudit({ user, action: "GENERATE_REPORT", object: record.id, caseId: c.id });
   return success(record);
@@ -81,10 +81,10 @@ export async function createReport(user: SessionUser, raw: unknown): Promise<Res
 
 export async function updateReport(user: SessionUser, id: string, raw: unknown): Promise<Result<ReportRecord>> {
   const report = await getReport(id);
-  if (!report) return failure("Report not found.", 404);
+  if (!report) return failure("Laporan tidak ditemukan.", 404);
   const c = getCase(report.caseId);
-  if (!c) return failure("Case not found.", 404);
-  if (report.status === "submitted") return failure("A submitted report can no longer be edited.", 409);
+  if (!c) return failure("Kasus tidak ditemukan.", 404);
+  if (report.status === "submitted") return failure("Laporan yang sudah diajukan tidak dapat diubah lagi.", 409);
 
   const parsed = updateReportSchema.safeParse(raw);
   if (!parsed.success) return failure(formatZodError(parsed.error));
@@ -94,8 +94,8 @@ export async function updateReport(user: SessionUser, id: string, raw: unknown):
     return failure(reason, 403);
   };
 
-  if (u.reviewerNotes !== undefined && !can(user.role, "report:review")) return deny("Only a reviewer can write reviewer notes.");
-  if (u.recommendedAction !== undefined && !can(user.role, "report:create") && !can(user.role, "report:review")) return deny("Your role cannot edit this field.");
+  if (u.reviewerNotes !== undefined && !can(user.role, "report:review")) return deny("Hanya peninjau yang dapat menulis catatan peninjau.");
+  if (u.recommendedAction !== undefined && !can(user.role, "report:create") && !can(user.role, "report:review")) return deny("Peran Anda tidak dapat mengubah kolom ini.");
 
   // Apply text edits first so an approval in the same request sees the new notes.
   const draftState = { ...report, reviewerNotes: u.reviewerNotes ?? report.reviewerNotes };
@@ -122,23 +122,23 @@ export async function updateReport(user: SessionUser, id: string, raw: unknown):
  */
 export async function submitReport(user: SessionUser, id: string, confirmed: boolean): Promise<Result<ReportRecord>> {
   const report = await getReport(id);
-  if (!report) return failure("Report not found.", 404);
+  if (!report) return failure("Laporan tidak ditemukan.", 404);
   const c = getCase(report.caseId);
-  if (!c) return failure("Case not found.", 404);
+  if (!c) return failure("Kasus tidak ditemukan.", 404);
 
   const d = canSubmitReport(user, report, c.status);
   if (!d.ok) {
     logAudit({ user, action: "SUBMIT_REPORT", object: id, caseId: c.id, result: "DENIED" });
     return failure(d.reason, 403);
   }
-  if (!confirmed) return failure("Please confirm the submission.", 400);
+  if (!confirmed) return failure("Mohon konfirmasi pengajuan.", 400);
 
   const now = new Date().toISOString();
   report.status = "submitted";
   report.updatedAt = now;
   report.submission = { platform: c.platform, method: "official_page", submittedAt: now, submittedBy: user.id, status: "SUBMITTED" };
   c.status = "REPORTED";
-  c.timeline.push({ id: `TL-${c.timeline.length + 1}`, at: now, actorId: user.id, type: "REPORT_SUBMITTED", message: `Report ${id} recorded as submitted via the official reporting page` });
+  c.timeline.push({ id: `TL-${c.timeline.length + 1}`, at: now, actorId: user.id, type: "REPORT_SUBMITTED", message: `Laporan ${id} dicatat sudah diajukan melalui halaman pelaporan resmi` });
   c.updatedAt = now;
   logAudit({ user, action: "SUBMIT_REPORT", object: id, caseId: c.id });
   return success(report);

@@ -28,7 +28,7 @@ export function analyzeSentiment(text: string): SentimentResult {
     const positive = negated ? !isPos : isPos;
     if (positive) pos++;
     else neg++;
-    keywords.push(negated ? `not ${token}` : token);
+    keywords.push(negated ? `tidak ${token}` : token);
   });
   for (const p of POSITIVE_PHRASES) {
     if (!lower.includes(p)) continue;
@@ -46,7 +46,7 @@ export function analyzeSentiment(text: string): SentimentResult {
     return {
       sentiment: "neutral",
       confidence: 0.55,
-      reason: "No sentiment keywords detected.",
+      reason: "Tidak ada kata kunci sentimen yang terdeteksi.",
       keywords: [],
     };
   }
@@ -56,8 +56,8 @@ export function analyzeSentiment(text: string): SentimentResult {
   const confidence = clamp(0.5 + 0.08 * Math.min(hits, 4) + 0.2 * Math.abs(score), 0.5, 0.95);
   const reason =
     sentiment === "neutral"
-      ? `Mixed or balanced sentiment keywords (${pos} positive, ${neg} negative).`
-      : `${sentiment === "positive" ? pos : neg} of ${hits} sentiment keywords point ${sentiment}.`;
+      ? `Kata kunci sentimen campuran atau seimbang (${pos} positif, ${neg} negatif).`
+      : `${sentiment === "positive" ? pos : neg} dari ${hits} kata kunci sentimen mengarah ${sentiment === "positive" ? "positif" : "negatif"}.`;
 
   return { sentiment, confidence: Math.round(confidence * 100) / 100, reason, keywords };
 }

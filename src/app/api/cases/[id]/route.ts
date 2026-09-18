@@ -3,7 +3,7 @@ import { getCase, updateCase } from "@/lib/services/cases";
 
 export const GET = withApi<{ id: string }>({}, async (_req, { params }) => {
   const c = getCase(params.id);
-  if (!c) throw new HttpError(404, "Case not found.");
+  if (!c) throw new HttpError(404, "Kasus tidak ditemukan.");
   return c;
 });
 

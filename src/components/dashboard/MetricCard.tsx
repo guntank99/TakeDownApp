@@ -8,7 +8,7 @@ interface MetricCardProps {
   tone?: "default" | "danger";
 }
 
-const numberFormat = new Intl.NumberFormat("en-US");
+const numberFormat = new Intl.NumberFormat("id-ID");
 
 export function MetricCard({
   label,

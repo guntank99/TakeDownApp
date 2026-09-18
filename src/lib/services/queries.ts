@@ -12,14 +12,14 @@ export const CATEGORY_KEYS = [
   "hate_speech", "harassment", "threat", "spam", "misinformation", "defamation", "impersonation", "coordinated",
 ] as const;
 export const CATEGORY_LABELS: Record<(typeof CATEGORY_KEYS)[number], string> = {
-  hate_speech: "Hate speech",
-  harassment: "Harassment",
-  threat: "Threat",
+  hate_speech: "Ujaran kebencian",
+  harassment: "Pelecehan",
+  threat: "Ancaman",
   spam: "Spam",
-  misinformation: "Misinformation",
-  defamation: "Defamation",
-  impersonation: "Impersonation",
-  coordinated: "Coordinated posting",
+  misinformation: "Misinformasi",
+  defamation: "Pencemaran nama baik",
+  impersonation: "Peniruan identitas",
+  coordinated: "Posting terkoordinasi",
 };
 
 export interface PostFilters {

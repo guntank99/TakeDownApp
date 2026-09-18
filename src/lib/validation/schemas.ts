@@ -11,13 +11,13 @@ export const CASE_STATUSES = ["OPEN", "INVESTIGATING", "NEEDS_REVIEW", "VERIFIED
 export const PRIORITIES = ["low", "medium", "high", "critical"] as const;
 export const REPORT_STATUSES = ["draft", "in_review", "approved"] as const;
 
-const id = (label: string) => z.string().trim().min(1, `${label} is required`).max(64);
+const id = (label: string) => z.string().trim().min(1, `${label} wajib diisi`).max(64);
 const idList = z.array(z.string().trim().min(1).max(64)).max(50);
 
 export const platformSchema = z.enum(PLATFORMS as [string, ...string[]]);
 
 export const createCaseSchema = z.object({
-  title: z.string().trim().min(3, "Title must be at least 3 characters").max(140),
+  title: z.string().trim().min(3, "Judul minimal 3 karakter").max(140),
   description: z.string().trim().max(2000).default(""),
   platform: platformSchema,
   category: z.enum(POLICY_CATEGORIES),
@@ -33,18 +33,18 @@ export const updateCaseSchema = z
     title: z.string().trim().min(3).max(140).optional(),
     description: z.string().trim().max(2000).optional(),
     note: z.string().trim().min(1).max(2000).optional(),
-    addPostId: id("Post").optional(),
-    addAccountId: id("Account").optional(),
+    addPostId: id("Postingan").optional(),
+    addAccountId: id("Akun").optional(),
   })
-  .refine((v) => Object.values(v).some((x) => x !== undefined), "Nothing to update");
+  .refine((v) => Object.values(v).some((x) => x !== undefined), "Tidak ada yang diperbarui");
 
 export const createEvidenceSchema = z.object({
-  caseId: id("Case"),
-  postId: id("Post"),
+  caseId: id("Kasus"),
+  postId: id("Postingan"),
   screenshotRef: z.string().trim().max(300).optional(),
 });
 
-export const createReportSchema = z.object({ caseId: id("Case") });
+export const createReportSchema = z.object({ caseId: id("Kasus") });
 
 export const updateReportSchema = z
   .object({
@@ -52,16 +52,16 @@ export const updateReportSchema = z
     reviewerNotes: z.string().trim().max(4000).optional(),
     recommendedAction: z.string().trim().max(2000).optional(),
   })
-  .refine((v) => Object.values(v).some((x) => x !== undefined), "Nothing to update");
+  .refine((v) => Object.values(v).some((x) => x !== undefined), "Tidak ada yang diperbarui");
 
-export const textSchema = z.object({ text: z.string().trim().min(1, "Text is required").max(5000) });
+export const textSchema = z.object({ text: z.string().trim().min(1, "Teks wajib diisi").max(5000) });
 
 export const sentimentSchema = z
   .object({
     text: z.string().trim().min(1).max(5000).optional(),
     texts: z.array(z.string().trim().min(1).max(5000)).min(1).max(100).optional(),
   })
-  .refine((v) => Boolean(v.text) !== Boolean(v.texts), "Provide either text or texts");
+  .refine((v) => Boolean(v.text) !== Boolean(v.texts), "Isi salah satu: text atau texts");
 
 export const snaSchema = z.object({
   nodeTypes: z.array(z.enum(["account", "post", "hashtag", "topic"])).optional(),

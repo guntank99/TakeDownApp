@@ -19,7 +19,7 @@ export const PLATFORM_LABEL: Record<Platform, string> = {
   youtube: "YouTube",
   reddit: "Reddit",
   telegram: "Telegram",
-  news: "News/Web",
+  news: "Berita/Web",
 };
 
 /**

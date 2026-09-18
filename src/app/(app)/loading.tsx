@@ -9,7 +9,7 @@ export default function Loading() {
         className="size-4 animate-spin rounded-full border-2 border-slate-700 border-t-sky-400"
         aria-hidden="true"
       />
-      Loading analysis...
+      Memuat analisis...
     </div>
   );
 }

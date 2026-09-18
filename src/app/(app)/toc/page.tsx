@@ -7,11 +7,12 @@ import { verifySession } from "@/lib/auth/dal";
 import { PLATFORM_REPORTING } from "@/lib/toc/reporting";
 import { listPolicyRules } from "@/lib/toc/rules";
 import { POLICY_CATEGORIES } from "@/lib/validation/schemas";
-import { formatDate, titleCase } from "@/lib/utils/format";
+import { formatDate } from "@/lib/utils/format";
+import { POLICY_CATEGORY_LABEL, SEVERITY_LABEL } from "@/lib/i18n/labels";
 import { enumParam, pageParam, paginate, param } from "@/lib/utils/params";
 import { PLATFORMS, PLATFORM_LABEL } from "@/lib/utils/platforms";
 
-export const metadata: Metadata = { title: "ToC / ToS" };
+export const metadata: Metadata = { title: "Kebijakan (ToC/ToS)" };
 
 export default async function TocPage({ searchParams }: PageProps<"/toc">) {
   await verifySession();
@@ -33,24 +34,24 @@ export default async function TocPage({ searchParams }: PageProps<"/toc">) {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="ToC / ToS policy database"
-        description="Platform rules used for policy matching. Entries come from official pages only; anything that could not be verified is marked and must be checked before it is relied on."
+        title="Basis data kebijakan ToC / ToS"
+        description="Aturan platform yang dipakai untuk pencocokan kebijakan. Entri hanya berasal dari halaman resmi; yang tidak dapat diverifikasi ditandai dan harus dicek sebelum diandalkan. Nama aturan mengikuti judul resmi aslinya."
         mock={false}
       />
       <Notice tone="warning">
-        {verified} of {rules.length} entries are verified against an official source (Meta, YouTube, Telegram). The X, TikTok and Reddit entries are placeholders because their rule text could not be retrieved automatically; read the official page before reporting. Rule descriptions are short summaries, not legal text.
+        {verified} dari {rules.length} entri terverifikasi terhadap sumber resmi (Meta, YouTube, Telegram). Entri X, TikTok, dan Reddit hanyalah placeholder karena teks aturannya tidak dapat diambil otomatis; baca halaman resminya sebelum melapor. Deskripsi aturan adalah ringkasan singkat, bukan teks hukum.
       </Notice>
 
-      <Card title="Official reporting mechanisms" description="Reports are filed by a person through these pages. No submission API is integrated.">
+      <Card title="Mekanisme pelaporan resmi" description="Laporan diajukan oleh manusia melalui halaman-halaman ini. Tidak ada API pengajuan yang terintegrasi.">
         <DataTable
-          caption="Official reporting pages"
+          caption="Halaman pelaporan resmi"
           rows={PLATFORMS.map((p) => PLATFORM_REPORTING[p])}
           rowKey={(r) => r.platform}
           columns={[
             { header: "Platform", cell: (r) => <PlatformBadge platform={r.platform} /> },
-            { header: "Report", className: "max-w-xs whitespace-normal", cell: (r) => r.officialReportingUrl ? <a href={r.officialReportingUrl} target="_blank" rel="noopener noreferrer" className="break-all text-sky-400 hover:underline">{r.officialReportingUrl} ↗</a> : <span className="text-slate-500">none</span> },
-            { header: "Policy index", className: "max-w-xs whitespace-normal", cell: (r) => r.policyIndexUrl ? <a href={r.policyIndexUrl} target="_blank" rel="noopener noreferrer" className="break-all text-sky-400 hover:underline">{r.policyIndexUrl} ↗</a> : <span className="text-slate-500">—</span> },
-            { header: "Note", className: "max-w-sm whitespace-normal text-slate-400", cell: (r) => r.note },
+            { header: "Pelaporan", className: "max-w-xs whitespace-normal", cell: (r) => r.officialReportingUrl ? <a href={r.officialReportingUrl} target="_blank" rel="noopener noreferrer" className="break-all text-sky-400 hover:underline">{r.officialReportingUrl} ↗</a> : <span className="text-slate-500">tidak ada</span> },
+            { header: "Indeks kebijakan", className: "max-w-xs whitespace-normal", cell: (r) => r.policyIndexUrl ? <a href={r.policyIndexUrl} target="_blank" rel="noopener noreferrer" className="break-all text-sky-400 hover:underline">{r.policyIndexUrl} ↗</a> : <span className="text-slate-500">—</span> },
+            { header: "Catatan", className: "max-w-sm whitespace-normal text-slate-400", cell: (r) => r.note },
           ]}
         />
       </Card>
@@ -60,33 +61,33 @@ export default async function TocPage({ searchParams }: PageProps<"/toc">) {
           action="/toc"
           values={values}
           fields={[
-            { name: "q", label: "Search", type: "text" },
+            { name: "q", label: "Cari", type: "text" },
             { name: "platform", label: "Platform", options: PLATFORMS.map((p) => ({ value: p, label: PLATFORM_LABEL[p] })) },
-            { name: "category", label: "Policy category", options: POLICY_CATEGORIES.map((c) => ({ value: c, label: c })) },
-            { name: "verification", label: "Verification", options: [{ value: "verified_against_official_source", label: "Verified" }, { value: "needs_verification", label: "Needs verification" }] },
+            { name: "category", label: "Kategori kebijakan", options: POLICY_CATEGORIES.map((c) => ({ value: c, label: POLICY_CATEGORY_LABEL[c] })) },
+            { name: "verification", label: "Verifikasi", options: [{ value: "verified_against_official_source", label: "Terverifikasi" }, { value: "needs_verification", label: "Perlu verifikasi" }] },
           ]}
         />
         <DataTable
-          caption="Policy rules"
+          caption="Aturan kebijakan"
           rows={rows}
           rowKey={(r) => r.id}
-          empty="No policy rules match these filters."
+          empty="Tidak ada aturan kebijakan yang cocok dengan filter ini."
           columns={[
             { header: "Platform", cell: (r) => <PlatformBadge platform={r.platform} /> },
-            { header: "Category", cell: (r) => r.category },
-            { header: "Rule", className: "max-w-[14rem] whitespace-normal font-medium", cell: (r) => r.rule },
-            { header: "Description", className: "max-w-sm whitespace-normal text-slate-400", cell: (r) => r.description },
-            { header: "Evidence to collect", className: "max-w-xs whitespace-normal text-slate-400", cell: (r) => r.evidenceRequirement },
-            { header: "Severity", cell: (r) => <Badge tone={r.severity === "high" ? "danger" : r.severity === "medium" ? "warning" : "neutral"}>{titleCase(r.severity).toUpperCase()}</Badge> },
-            { header: "Policy version", className: "max-w-[12rem] whitespace-normal text-slate-400", cell: (r) => r.policyVersion },
-            { header: "Verification", cell: (r) => r.verification === "verified_against_official_source" ? <Badge tone="success">VERIFIED</Badge> : <Badge tone="warning">NEEDS VERIFICATION</Badge> },
-            { header: "Official URL", cell: (r) => <a href={r.officialUrl} target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:underline">Open ↗</a> },
-            { header: "Checked", className: "whitespace-nowrap", cell: (r) => formatDate(r.lastUpdated) },
+            { header: "Kategori", cell: (r) => POLICY_CATEGORY_LABEL[r.category] },
+            { header: "Aturan", className: "max-w-[14rem] whitespace-normal font-medium", cell: (r) => r.rule },
+            { header: "Deskripsi", className: "max-w-sm whitespace-normal text-slate-400", cell: (r) => r.description },
+            { header: "Bukti yang dikumpulkan", className: "max-w-xs whitespace-normal text-slate-400", cell: (r) => r.evidenceRequirement },
+            { header: "Tingkat", cell: (r) => <Badge tone={r.severity === "high" ? "danger" : r.severity === "medium" ? "warning" : "neutral"}>{SEVERITY_LABEL[r.severity].toUpperCase()}</Badge> },
+            { header: "Versi kebijakan", className: "max-w-[12rem] whitespace-normal text-slate-400", cell: (r) => r.policyVersion },
+            { header: "Verifikasi", cell: (r) => r.verification === "verified_against_official_source" ? <Badge tone="success">TERVERIFIKASI</Badge> : <Badge tone="warning">PERLU VERIFIKASI</Badge> },
+            { header: "URL resmi", cell: (r) => <a href={r.officialUrl} target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:underline">Buka ↗</a> },
+            { header: "Dicek", className: "whitespace-nowrap", cell: (r) => formatDate(r.lastUpdated) },
           ]}
         />
         <Pagination page={page} pages={pages} total={total} basePath="/toc" params={values} />
       </section>
-      <p className="text-xs text-slate-500">The policy database is read-only in this prototype. Editing (admin only, audited as UPDATE_POLICY) arrives with the database-backed store.</p>
+      <p className="text-xs text-slate-500">Basis data kebijakan bersifat baca-saja pada prototipe ini. Pengeditan (khusus admin, tercatat sebagai UPDATE_POLICY) hadir bersama penyimpanan berbasis database.</p>
     </div>
   );
 }

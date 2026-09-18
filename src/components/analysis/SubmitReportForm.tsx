@@ -21,7 +21,7 @@ export function SubmitReportForm({
     <form
       action={submitReportAction}
       onSubmit={(e) => {
-        if (!window.confirm("Are you sure you want to submit this report?")) e.preventDefault();
+        if (!window.confirm("Apakah Anda yakin ingin mengajukan laporan ini?")) e.preventDefault();
       }}
       className="space-y-3"
     >
@@ -30,22 +30,22 @@ export function SubmitReportForm({
         <li>
           {reportingUrl ? (
             <a href={reportingUrl} target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:underline">
-              Open Official Reporting Page ({platformLabel}) ↗
+              Buka Halaman Pelaporan Resmi ({platformLabel}) ↗
             </a>
           ) : (
-            <span>{platformLabel} has no platform reporting page. {note}</span>
+            <span>{platformLabel} tidak memiliki halaman pelaporan platform. {note}</span>
           )}
         </li>
-        <li>File the report there yourself, using the evidence and findings from this report.</li>
-        <li>Come back and confirm below so the submission is recorded.</li>
+        <li>Ajukan laporan di sana sendiri, memakai bukti dan temuan dari laporan ini.</li>
+        <li>Kembali ke sini dan konfirmasi di bawah agar pengajuan tercatat.</li>
       </ol>
       {reportingUrl ? <p className="text-xs text-slate-500">{note}</p> : null}
       <label className="flex items-start gap-2 text-sm text-slate-300">
         <input type="checkbox" name="confirmed" required className="mt-0.5 size-4 accent-sky-500" />
-        I have filed this report through the platform&apos;s official mechanism.
+        Saya telah mengajukan laporan ini melalui mekanisme resmi platform.
       </label>
       <button type="submit" className="rounded-lg bg-sky-500 px-4 py-1.5 text-sm font-semibold text-slate-950 hover:bg-sky-400">
-        Record submission
+        Catat pengajuan
       </button>
     </form>
   );

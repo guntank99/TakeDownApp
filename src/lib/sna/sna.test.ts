@@ -70,9 +70,9 @@ describe("analyzeNetwork", () => {
   it("only uses neutral role wording", () => {
     const a = analyzeNetwork(g);
     const roles = new Set(Object.values(a.roles));
-    for (const r of roles) expect(["Highly Connected Account", "Potential Network Hub"]).toContain(r);
+    for (const r of roles) expect(["Akun Sangat Terhubung", "Potensi Hub Jaringan"]).toContain(r);
     expect(a.roles["h"]).toBeDefined();
-    expect(JSON.stringify(a.roles)).not.toMatch(/mastermind|leader|controller|culprit|dalang/i);
+    expect(JSON.stringify(a.roles)).not.toMatch(/mastermind|leader|controller|culprit|dalang|otak|pemimpin|pengendali/i);
   });
   it("summarises only clusters of 3+ nodes that contain an account", () => {
     const a = analyzeNetwork(g);

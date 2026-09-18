@@ -6,16 +6,17 @@ import { MetricCard } from "@/components/dashboard/MetricCard";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { PageHeader } from "@/components/ui/layout";
 import { verifySession } from "@/lib/auth/dal";
+import { RISK_LABEL } from "@/lib/i18n/labels";
 import { getDashboardSummary } from "@/lib/services/dashboard";
 import { PLATFORM_COLOR } from "@/lib/utils/platforms";
 import type { RiskLevel } from "@/types";
 
-export const metadata: Metadata = { title: "Dashboard" };
+export const metadata: Metadata = { title: "Dasbor" };
 
 const BLUE = "#3987e5";
 const ORANGE = "#d95926";
 const AQUA = "#199e70";
-const SENTIMENT_COLOR = { Positive: BLUE, Neutral: "#94a3b8", Negative: ORANGE } as const;
+const SENTIMENT_COLOR = { Positif: BLUE, Netral: "#94a3b8", Negatif: ORANGE } as const;
 /** Status palette: severity always ships with its text label as well. */
 const RISK_COLOR: Record<RiskLevel, string> = { low: "#0ca30c", medium: "#fab219", high: "#ec835a", critical: "#d03b3b" };
 
@@ -27,118 +28,118 @@ export default async function DashboardPage() {
   return (
     <div>
       <PageHeader
-        title="Dashboard"
-        description="Overview of monitored activity, analytical indicators and case workload."
+        title="Dasbor"
+        description="Ringkasan aktivitas yang dipantau, indikator analitis, dan beban kerja kasus."
         mock={s.dataSource.isMock}
       />
       {isEmpty ? (
         <EmptyState />
       ) : (
         <div className="space-y-6">
-          <section aria-label="Key indicators" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <MetricCard label="Total Posts" value={s.totalPosts} hint={`${s.postsNeedingReview} need review`} icon={FileText} />
-            <MetricCard label="Total Accounts" value={s.totalAccounts} hint="monitored" icon={Users} />
-            <MetricCard label="Active Issues" value={s.activeIssues} hint={`of ${s.trackedIssues} tracked`} icon={Activity} />
-            <MetricCard label="High Risk Accounts" value={s.highRiskAccounts} hint={`of ${s.totalAccounts} accounts`} icon={ShieldAlert} tone="danger" />
-            <MetricCard label="Potential Violations" value={s.potentialViolations} hint="posts with policy matches (unreviewed)" icon={ShieldQuestion} tone="danger" />
-            <MetricCard label="Cases" value={s.totalCases} hint={`${s.openCases} not closed`} icon={Briefcase} />
-            <MetricCard label="Reports" value={s.totalReports} hint={`${s.submittedReports} submitted`} icon={ClipboardList} />
+          <section aria-label="Indikator utama" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <MetricCard label="Total Postingan" value={s.totalPosts} hint={`${s.postsNeedingReview} perlu ditinjau`} icon={FileText} />
+            <MetricCard label="Total Akun" value={s.totalAccounts} hint="dipantau" icon={Users} />
+            <MetricCard label="Isu Aktif" value={s.activeIssues} hint={`dari ${s.trackedIssues} isu dipantau`} icon={Activity} />
+            <MetricCard label="Akun Berisiko Tinggi" value={s.highRiskAccounts} hint={`dari ${s.totalAccounts} akun`} icon={ShieldAlert} tone="danger" />
+            <MetricCard label="Potensi Pelanggaran" value={s.potentialViolations} hint="postingan dengan kecocokan kebijakan (belum ditinjau)" icon={ShieldQuestion} tone="danger" />
+            <MetricCard label="Kasus" value={s.totalCases} hint={`${s.openCases} belum ditutup`} icon={Briefcase} />
+            <MetricCard label="Laporan" value={s.totalReports} hint={`${s.submittedReports} sudah diajukan`} icon={ClipboardList} />
           </section>
 
-          <section aria-label="Charts" className="grid gap-4 lg:grid-cols-2">
+          <section aria-label="Grafik" className="grid gap-4 lg:grid-cols-2">
             <ChartCard
-              title="Mentions over time"
-              description="Posts and comments per day (UTC), last 14 days"
-              table={{ columns: ["Date", "Posts", "Comments"], rows: s.mentionsOverTime.map((d) => [d.date, d.posts, d.comments]) }}
+              title="Penyebutan dari waktu ke waktu"
+              description="Postingan dan komentar per hari (WIB), 14 hari terakhir"
+              table={{ columns: ["Tanggal", "Postingan", "Komentar"], rows: s.mentionsOverTime.map((d) => [d.date, d.posts, d.comments]) }}
               className="lg:col-span-2"
             >
               <TimeSeriesChart
                 data={s.mentionsOverTime}
                 xKey="date"
-                ariaLabel="Line chart of posts and comments per day"
+                ariaLabel="Grafik garis postingan dan komentar per hari"
                 series={[
-                  { key: "posts", label: "Posts", color: BLUE },
-                  { key: "comments", label: "Comments", color: ORANGE },
+                  { key: "posts", label: "Postingan", color: BLUE },
+                  { key: "comments", label: "Komentar", color: ORANGE },
                 ]}
               />
             </ChartCard>
 
             <ChartCard
-              title="Platform distribution"
-              description="Monitored posts by platform"
-              table={{ columns: ["Platform", "Posts"], rows: s.platformDistribution.map((p) => [p.label, p.count]) }}
+              title="Distribusi platform"
+              description="Postingan yang dipantau menurut platform"
+              table={{ columns: ["Platform", "Postingan"], rows: s.platformDistribution.map((p) => [p.label, p.count]) }}
             >
               <HorizontalBarChart
-                ariaLabel="Bar chart of posts per platform"
+                ariaLabel="Grafik batang postingan per platform"
                 data={s.platformDistribution.map((p) => ({ label: p.label, value: p.count, color: PLATFORM_COLOR[p.platform] }))}
               />
             </ChartCard>
 
             <ChartCard
-              title="Sentiment"
-              description="Automated keyword-based sentiment of posts"
-              table={{ columns: ["Sentiment", "Posts"], rows: s.sentiment.map((x) => [x.name, x.value]) }}
+              title="Sentimen"
+              description="Sentimen postingan berbasis kata kunci otomatis"
+              table={{ columns: ["Sentimen", "Postingan"], rows: s.sentiment.map((x) => [x.name, x.value]) }}
             >
               <HorizontalBarChart
-                ariaLabel="Bar chart of post sentiment"
+                ariaLabel="Grafik batang sentimen postingan"
                 data={s.sentiment.map((x) => ({ label: x.name, value: x.value, color: SENTIMENT_COLOR[x.name] }))}
               />
             </ChartCard>
 
             <ChartCard
-              title="Risk distribution"
-              description="Posts by analytical risk level (indicator, not a decision)"
-              table={{ columns: ["Level", "Posts"], rows: s.riskDistribution.map((x) => [x.level.toUpperCase(), x.count]) }}
+              title="Distribusi risiko"
+              description="Postingan menurut tingkat risiko analitis (indikator, bukan keputusan)"
+              table={{ columns: ["Tingkat", "Postingan"], rows: s.riskDistribution.map((x) => [RISK_LABEL[x.level], x.count]) }}
             >
               <HorizontalBarChart
-                ariaLabel="Bar chart of posts per risk level"
-                data={s.riskDistribution.map((x) => ({ label: x.level.toUpperCase(), value: x.count, color: RISK_COLOR[x.level] }))}
+                ariaLabel="Grafik batang postingan per tingkat risiko"
+                data={s.riskDistribution.map((x) => ({ label: RISK_LABEL[x.level], value: x.count, color: RISK_COLOR[x.level] }))}
               />
             </ChartCard>
 
             <ChartCard
-              title="Violation categories"
-              description="Indicators detected across posts (all need human review)"
-              table={{ columns: ["Category", "Posts"], rows: s.violationCategories.map((x) => [x.label, x.count]) }}
+              title="Kategori pelanggaran"
+              description="Indikator yang terdeteksi pada postingan (semuanya perlu tinjauan manusia)"
+              table={{ columns: ["Kategori", "Postingan"], rows: s.violationCategories.map((x) => [x.label, x.count]) }}
               empty={s.violationCategories.length === 0}
             >
               <HorizontalBarChart
-                labelWidth={170}
-                ariaLabel="Bar chart of detected indicator categories"
+                labelWidth={190}
+                ariaLabel="Grafik batang kategori indikator yang terdeteksi"
                 data={s.violationCategories.map((x) => ({ label: x.label, value: x.count, color: BLUE }))}
               />
             </ChartCard>
 
             <ChartCard
-              title="Trending issues"
-              description="Top issues by mention volume"
-              table={{ columns: ["Issue", "Volume", "Growth %"], rows: s.trendingIssues.map((x) => [x.title, x.volume, x.growth]) }}
+              title="Isu yang sedang tren"
+              description="Isu teratas menurut volume penyebutan"
+              table={{ columns: ["Isu", "Volume", "Pertumbuhan %"], rows: s.trendingIssues.map((x) => [x.title, x.volume, x.growth]) }}
             >
               <HorizontalBarChart
-                labelWidth={190}
-                valueName="Mentions"
-                ariaLabel="Bar chart of issue mention volume"
-                data={s.trendingIssues.map((x) => ({ label: x.title.length > 28 ? `${x.title.slice(0, 27)}…` : x.title, value: x.volume, color: BLUE }))}
+                labelWidth={210}
+                valueName="Penyebutan"
+                ariaLabel="Grafik batang volume penyebutan isu"
+                data={s.trendingIssues.map((x) => ({ label: x.title.length > 30 ? `${x.title.slice(0, 29)}…` : x.title, value: x.volume, color: BLUE }))}
               />
             </ChartCard>
 
             <ChartCard
-              title="Network growth"
-              description="Cumulative distinct accounts seen posting or commenting"
-              table={{ columns: ["Date", "Accounts"], rows: s.networkGrowth.map((x) => [x.date, x.accounts]) }}
+              title="Pertumbuhan jaringan"
+              description="Jumlah kumulatif akun berbeda yang memposting atau berkomentar"
+              table={{ columns: ["Tanggal", "Akun"], rows: s.networkGrowth.map((x) => [x.date, x.accounts]) }}
             >
               <TimeSeriesChart
                 data={s.networkGrowth}
                 xKey="date"
-                ariaLabel="Line chart of cumulative accounts in the network"
-                series={[{ key: "accounts", label: "Accounts", color: AQUA }]}
+                ariaLabel="Grafik garis jumlah kumulatif akun dalam jaringan"
+                series={[{ key: "accounts", label: "Akun", color: AQUA }]}
               />
             </ChartCard>
           </section>
         </div>
       )}
       <p className="mt-6 text-xs text-slate-500">
-        Risk indicators are analytical aids for human review, not final determinations.
+        Indikator risiko adalah alat bantu tinjauan manusia, bukan keputusan akhir.
       </p>
     </div>
   );

@@ -8,12 +8,13 @@ import { FilterPanel } from "@/components/ui/FilterPanel";
 import { PageHeader } from "@/components/ui/layout";
 import { verifySession } from "@/lib/auth/dal";
 import { getAnalysisContext } from "@/lib/services/analysis";
-import { formatDate, formatNumber, titleCase, truncate } from "@/lib/utils/format";
+import { formatDate, formatNumber, truncate } from "@/lib/utils/format";
+import { ISSUE_STATUS_LABEL, SENTIMENT_LABEL } from "@/lib/i18n/labels";
 import { enumParam, pageParam, paginate, param } from "@/lib/utils/params";
 import { PLATFORMS, PLATFORM_COLOR, PLATFORM_LABEL } from "@/lib/utils/platforms";
 import type { Sentiment } from "@/types";
 
-export const metadata: Metadata = { title: "Issues" };
+export const metadata: Metadata = { title: "Isu" };
 
 const BLUE = "#3987e5";
 const ORANGE = "#d95926";
@@ -53,7 +54,7 @@ export default async function IssuesPage({ searchParams }: PageProps<"/issues">)
   // charts (over the filtered set)
   const top = filtered.slice(0, 8);
   const short = (t: string) => truncate(t, 26);
-  const days = ["D-6", "D-5", "D-4", "D-3", "D-2", "D-1", "Today"];
+  const days = ["H-6", "H-5", "H-4", "H-3", "H-2", "H-1", "Hari ini"];
   const volumeSeries = days.map((d, i) => ({ day: d, volume: filtered.reduce((s, e) => s + (e.issue.series[i] ?? 0), 0) }));
   const platformCounts = PLATFORMS.map((p) => ({ p, n: filtered.filter((e) => e.issue.platforms.includes(p)).length })).filter((x) => x.n > 0);
   const sentTimeline = (() => {
@@ -69,26 +70,26 @@ export default async function IssuesPage({ searchParams }: PageProps<"/issues">)
 
   return (
     <div>
-      <PageHeader title="Issues" description="Trending issues with volume, growth, engagement and sentiment. Volume figures are aggregate counts from the provider." mock={ctx.source.isMock} />
+      <PageHeader title="Isu" description="Isu yang sedang tren beserta volume, pertumbuhan, interaksi, dan sentimen. Angka volume adalah agregat dari penyedia data." mock={ctx.source.isMock} />
 
-      <section aria-label="Issue charts" className="mb-6 grid gap-4 lg:grid-cols-2">
-        <ChartCard title="Mention volume" description="Top issues by mentions" table={{ columns: ["Issue", "Volume"], rows: top.map((e) => [e.issue.title, e.issue.volume]) }} empty={top.length === 0}>
-          <HorizontalBarChart labelWidth={170} valueName="Mentions" ariaLabel="Bar chart of mention volume per issue" data={top.map((e) => ({ label: short(e.issue.title), value: e.issue.volume, color: BLUE }))} />
+      <section aria-label="Grafik isu" className="mb-6 grid gap-4 lg:grid-cols-2">
+        <ChartCard title="Volume penyebutan" description="Isu teratas menurut penyebutan" table={{ columns: ["Isu", "Volume"], rows: top.map((e) => [e.issue.title, e.issue.volume]) }} empty={top.length === 0}>
+          <HorizontalBarChart labelWidth={170} valueName="Penyebutan" ariaLabel="Grafik batang volume penyebutan per isu" data={top.map((e) => ({ label: short(e.issue.title), value: e.issue.volume, color: BLUE }))} />
         </ChartCard>
-        <ChartCard title="Growth" description="Change vs previous period (%)" table={{ columns: ["Issue", "Growth %"], rows: top.map((e) => [e.issue.title, e.issue.growth]) }} empty={top.length === 0}>
-          <HorizontalBarChart labelWidth={170} valueName="Growth %" ariaLabel="Bar chart of growth per issue" data={top.map((e) => ({ label: short(e.issue.title), value: e.issue.growth, color: e.issue.growth >= 0 ? ORANGE : BLUE }))} />
+        <ChartCard title="Pertumbuhan" description="Perubahan dibanding periode sebelumnya (%)" table={{ columns: ["Isu", "Pertumbuhan %"], rows: top.map((e) => [e.issue.title, e.issue.growth]) }} empty={top.length === 0}>
+          <HorizontalBarChart labelWidth={170} valueName="Pertumbuhan %" ariaLabel="Grafik batang pertumbuhan per isu" data={top.map((e) => ({ label: short(e.issue.title), value: e.issue.growth, color: e.issue.growth >= 0 ? ORANGE : BLUE }))} />
         </ChartCard>
-        <ChartCard title="Engagement" description="Likes + comments + shares of related posts" table={{ columns: ["Issue", "Engagement"], rows: top.map((e) => [e.issue.title, e.engagement]) }} empty={top.length === 0}>
-          <HorizontalBarChart labelWidth={170} valueName="Engagement" ariaLabel="Bar chart of engagement per issue" data={top.map((e) => ({ label: short(e.issue.title), value: e.engagement, color: BLUE }))} />
+        <ChartCard title="Interaksi" description="Suka + komentar + bagikan pada postingan terkait" table={{ columns: ["Isu", "Interaksi"], rows: top.map((e) => [e.issue.title, e.engagement]) }} empty={top.length === 0}>
+          <HorizontalBarChart labelWidth={170} valueName="Interaksi" ariaLabel="Grafik batang interaksi per isu" data={top.map((e) => ({ label: short(e.issue.title), value: e.engagement, color: BLUE }))} />
         </ChartCard>
-        <ChartCard title="Platform distribution" description="Issues touching each platform" table={{ columns: ["Platform", "Issues"], rows: platformCounts.map((x) => [PLATFORM_LABEL[x.p], x.n]) }} empty={platformCounts.length === 0}>
-          <HorizontalBarChart ariaLabel="Bar chart of issues per platform" data={platformCounts.map((x) => ({ label: PLATFORM_LABEL[x.p], value: x.n, color: PLATFORM_COLOR[x.p] }))} />
+        <ChartCard title="Distribusi platform" description="Jumlah isu yang menyentuh tiap platform" table={{ columns: ["Platform", "Isu"], rows: platformCounts.map((x) => [PLATFORM_LABEL[x.p], x.n]) }} empty={platformCounts.length === 0}>
+          <HorizontalBarChart ariaLabel="Grafik batang isu per platform" data={platformCounts.map((x) => ({ label: PLATFORM_LABEL[x.p], value: x.n, color: PLATFORM_COLOR[x.p] }))} />
         </ChartCard>
-        <ChartCard title="Mention volume timeline" description="Daily mentions, last 7 days (all listed issues)" table={{ columns: ["Day", "Mentions"], rows: volumeSeries.map((d) => [d.day, d.volume]) }} empty={filtered.length === 0}>
-          <TimeSeriesChart data={volumeSeries} xKey="day" ariaLabel="Line chart of daily mention volume" series={[{ key: "volume", label: "Mentions", color: BLUE }]} />
+        <ChartCard title="Lini masa volume penyebutan" description="Penyebutan harian, 7 hari terakhir (semua isu terdaftar)" table={{ columns: ["Hari", "Penyebutan"], rows: volumeSeries.map((d) => [d.day, d.volume]) }} empty={filtered.length === 0}>
+          <TimeSeriesChart data={volumeSeries} xKey="day" ariaLabel="Grafik garis volume penyebutan harian" series={[{ key: "volume", label: "Penyebutan", color: BLUE }]} />
         </ChartCard>
-        <ChartCard title="Sentiment timeline" description="Posts per day by sentiment (related posts)" table={{ columns: ["Date", "Positive", "Neutral", "Negative"], rows: sentTimeline.map((r) => [r.date, r.positive, r.neutral, r.negative]) }} empty={sentTimeline.length === 0}>
-          <TimeSeriesChart data={sentTimeline} xKey="date" ariaLabel="Line chart of post sentiment per day" series={(["positive", "neutral", "negative"] as const).map((k) => ({ key: k, label: titleCase(k), color: SENT_COLOR[k] }))} />
+        <ChartCard title="Lini masa sentimen" description="Postingan per hari menurut sentimen (postingan terkait)" table={{ columns: ["Tanggal", "Positif", "Netral", "Negatif"], rows: sentTimeline.map((r) => [r.date, r.positive, r.neutral, r.negative]) }} empty={sentTimeline.length === 0}>
+          <TimeSeriesChart data={sentTimeline} xKey="date" ariaLabel="Grafik garis sentimen postingan per hari" series={(["positive", "neutral", "negative"] as const).map((k) => ({ key: k, label: SENTIMENT_LABEL[k], color: SENT_COLOR[k] }))} />
         </ChartCard>
       </section>
 
@@ -96,30 +97,30 @@ export default async function IssuesPage({ searchParams }: PageProps<"/issues">)
         action="/issues"
         values={values}
         fields={[
-          { name: "q", label: "Search", type: "text", placeholder: "issue or #hashtag" },
+          { name: "q", label: "Cari", type: "text", placeholder: "isu atau #tagar" },
           { name: "platform", label: "Platform", options: PLATFORMS.map((p) => ({ value: p, label: PLATFORM_LABEL[p] })) },
-          { name: "status", label: "Status", options: ["active", "monitoring", "closed"].map((s) => ({ value: s, label: titleCase(s) })) },
+          { name: "status", label: "Status", options: (["active", "monitoring", "closed"] as const).map((s) => ({ value: s, label: ISSUE_STATUS_LABEL[s] })) },
         ]}
       />
       <DataTable
-        caption="Trending issues"
+        caption="Isu yang sedang tren"
         rows={rows}
         rowKey={(e) => e.issue.id}
-        empty="No issues match these filters."
+        empty="Tidak ada isu yang cocok dengan filter ini."
         columns={[
-          { header: "Issue", className: "max-w-xs whitespace-normal", cell: (e) => <span className="font-medium">{e.issue.title}</span> },
-          { header: "Hashtag", cell: (e) => e.issue.hashtag },
+          { header: "Isu", className: "max-w-xs whitespace-normal", cell: (e) => <span className="font-medium">{e.issue.title}</span> },
+          { header: "Tagar", cell: (e) => e.issue.hashtag },
           { header: "Platform", cell: (e) => <span className="flex flex-col gap-0.5">{e.issue.platforms.map((p) => <PlatformBadge key={p} platform={p} />)}</span> },
           { header: "Volume", className: "text-right tabular-nums", cell: (e) => formatNumber(e.issue.volume) },
-          { header: "Growth", className: "text-right tabular-nums", cell: (e) => `${e.issue.growth > 0 ? "+" : ""}${e.issue.growth}%` },
-          { header: "Engagement", className: "text-right tabular-nums", cell: (e) => formatNumber(e.engagement) },
-          { header: "Sentiment", cell: (e) => <SentimentBadge sentiment={e.sentiment} /> },
-          { header: "Accounts", className: "text-right tabular-nums", cell: (e) => e.accounts },
-          { header: "Posts", className: "text-right tabular-nums", cell: (e) => <Link href={`/monitoring?issue=${e.issue.id}`} className="text-sky-400 hover:underline">{e.posts.length}</Link> },
-          { header: "Risk", cell: (e) => <RiskBadge score={e.risk} /> },
+          { header: "Pertumbuhan", className: "text-right tabular-nums", cell: (e) => `${e.issue.growth > 0 ? "+" : ""}${e.issue.growth}%` },
+          { header: "Interaksi", className: "text-right tabular-nums", cell: (e) => formatNumber(e.engagement) },
+          { header: "Sentimen", cell: (e) => <SentimentBadge sentiment={e.sentiment} /> },
+          { header: "Akun", className: "text-right tabular-nums", cell: (e) => e.accounts },
+          { header: "Postingan", className: "text-right tabular-nums", cell: (e) => <Link href={`/monitoring?issue=${e.issue.id}`} className="text-sky-400 hover:underline">{e.posts.length}</Link> },
+          { header: "Risiko", cell: (e) => <RiskBadge score={e.risk} /> },
           { header: "Status", cell: (e) => <StatusBadge status={e.issue.status} /> },
-          { header: "First detected", className: "whitespace-nowrap", cell: (e) => formatDate(e.issue.firstDetectedAt) },
-          { header: "Updated", className: "whitespace-nowrap", cell: (e) => formatDate(e.issue.lastUpdatedAt) },
+          { header: "Pertama terdeteksi", className: "whitespace-nowrap", cell: (e) => formatDate(e.issue.firstDetectedAt) },
+          { header: "Diperbarui", className: "whitespace-nowrap", cell: (e) => formatDate(e.issue.lastUpdatedAt) },
         ]}
       />
       <Pagination page={page} pages={pages} total={total} basePath="/issues" params={values} />

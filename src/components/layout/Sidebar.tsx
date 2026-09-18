@@ -13,7 +13,7 @@ export function Sidebar({ collapsed, onNavigate }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Main navigation" className="flex-1 overflow-y-auto p-3">
+    <nav aria-label="Navigasi utama" className="flex-1 overflow-y-auto p-3">
       <ul className="space-y-1">
         {NAV_ITEMS.map(({ label, href, icon: Icon, enabled }) => {
           const base =
@@ -26,7 +26,7 @@ export function Sidebar({ collapsed, onNavigate }: SidebarProps) {
               </span>
               {!enabled && !collapsed ? (
                 <span className="rounded bg-slate-800 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-slate-500">
-                  Soon
+                  Segera
                 </span>
               ) : null}
             </>
@@ -37,7 +37,7 @@ export function Sidebar({ collapsed, onNavigate }: SidebarProps) {
               <li key={href}>
                 <span
                   aria-disabled="true"
-                  title={`${label} — coming in a later step`}
+                  title={`${label}: segera hadir`}
                   className={`${base} cursor-not-allowed text-slate-600`}
                 >
                   {content}

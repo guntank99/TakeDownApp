@@ -10,14 +10,14 @@ export default function ErrorState({ reset }: { reset: () => void }) {
     >
       <TriangleAlert className="size-8 text-red-300" aria-hidden="true" />
       <p className="text-sm text-slate-300">
-        Unable to load data. Try again.
+        Tidak dapat memuat data. Coba lagi.
       </p>
       <button
         type="button"
         onClick={reset}
         className="rounded-lg border border-slate-700 px-4 py-1.5 text-sm text-slate-200 transition-colors hover:bg-slate-800"
       >
-        Try again
+        Coba lagi
       </button>
     </div>
   );

@@ -3,6 +3,7 @@ import { analyzeSentiment } from "./sentiment";
 import {
   ACCUSATION_TERMS,
   ATTRIBUTION_MARKERS,
+  BOAST_RE,
   DEHUMANIZING,
   DEROGATORY,
   GROUP_TERMS,
@@ -21,16 +22,20 @@ import { clamp, countHashtags, countUrls, tokenize, unique } from "./text";
 export const ENGINE_NAME = "lexicon-v1";
 
 export const INDICATOR_LABELS: Record<IndicatorKey, string> = {
-  hate_speech: "Hate Speech Indicator",
-  harassment: "Harassment Indicator",
-  threat: "Threat Indicator",
-  spam: "Spam Indicator",
-  misinformation: "Misinformation Indicator",
-  defamation: "Defamation Indicator",
-  impersonation: "Impersonation Indicator",
+  hate_speech: "Indikator Ujaran Kebencian",
+  harassment: "Indikator Pelecehan",
+  threat: "Indikator Ancaman",
+  spam: "Indikator Spam",
+  misinformation: "Indikator Misinformasi",
+  defamation: "Indikator Pencemaran Nama Baik",
+  impersonation: "Indikator Peniruan Identitas",
 };
 
+/** Short form for tables, e.g. "Ujaran Kebencian". */
+export const indicatorShort = (key: IndicatorKey) => INDICATOR_LABELS[key].replace("Indikator ", "");
+
 const r2 = (n: number) => Math.round(n * 100) / 100;
+const NO_INDICATOR = "Tidak ada indikator yang terdeteksi.";
 
 function make(
   key: IndicatorKey,
@@ -44,19 +49,19 @@ function make(
     label: INDICATOR_LABELS[key],
     detected,
     confidence: detected ? r2(clamp(confidence, 0, 0.95)) : 0,
-    reason: detected ? reason : "No indicators detected.",
+    reason: detected ? reason : NO_INDICATOR,
     evidence: detected ? unique(evidence).slice(0, 6) : [],
   };
 }
 
 const GROUP_RE = new RegExp(`\\b(?:${[...GROUP_TERMS].join("|")})\\b`, "i");
-const CAPS_GROUP_RE = /\b(?:those|these|all)\s+[A-Z][a-z]{3,}s?\b/;
+const CAPS_GROUP_RE = /\b(?:[Tt]hose|[Tt]hese|[Aa]ll|[Oo]rang-orang|[Kk]aum|[Pp]ara|[Ss]emua)\s+[A-Z][a-z]{3,}s?\b/;
 const INSULT_RE = new RegExp(
-  `\\b(?:you|you're|you are|kamu|lu|lo|elu|anda)\\b[^.!?]{0,20}\\b(?:${HARASS_INSULTS})\\b`,
+  `\\b(?:you|you're|you are|kamu|lu|lo|elu|anda|dirimu)\\b[^.!?]{0,20}\\b(?:${HARASS_INSULTS})\\b`,
   "i",
 );
 const DASAR_RE = new RegExp(`\\bdasar\\s+(?:${HARASS_INSULTS})\\b`, "i");
-const TARGET_RE = /\b(?:Mr|Ms|Mrs|Dr|Prof|Pak|Bu)\.?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?/;
+const TARGET_RE = /\b(?:Mr|Ms|Mrs|Dr|Prof|Pak|Bu|Bapak|Ibu|Sdr|Saudara|Saudari|Hj?)\.?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?/;
 
 function detectHate(text: string, lower: string, tokens: string[]): Indicator {
   const derog = unique(tokens.filter((t) => DEROGATORY.has(t)));
@@ -69,16 +74,16 @@ function detectHate(text: string, lower: string, tokens: string[]): Indicator {
   const detected = confidence >= 0.5 && (group !== null || dehum.length > 0);
 
   const parts = [
-    derog.length && "derogatory language",
-    group && "reference to a group",
-    dehum.length && "dehumanizing comparison",
-    incite.length && "incitement wording",
+    derog.length && "bahasa merendahkan",
+    group && "rujukan pada suatu kelompok",
+    dehum.length && "perbandingan yang merendahkan martabat",
+    incite.length && "kata bernada hasutan",
   ].filter(Boolean);
   return make(
     "hate_speech",
     detected,
     confidence,
-    `Potential derogatory targeting detected (${parts.join(", ")}).`,
+    `Terdeteksi potensi penargetan yang merendahkan (${parts.join(", ")}).`,
     [...derog, ...(group ? [group] : []), ...incite],
   );
 }
@@ -94,7 +99,7 @@ function detectHarassment(text: string, lower: string): Indicator {
     "harassment",
     evidence.length > 0,
     Math.min(confidence, 0.92),
-    `Personal insult or hostile phrasing aimed at a person${hasMention ? " (mention present)" : ""}.`,
+    `Hinaan pribadi atau bahasa bermusuhan yang ditujukan kepada seseorang${hasMention ? " (ada sebutan akun)" : ""}.`,
     evidence,
   );
 }
@@ -105,7 +110,7 @@ function detectThreat(text: string): Indicator {
     "threat",
     hits.length > 0,
     0.7 + 0.1 * Math.max(0, hits.length - 1),
-    "Language that may express intent to harm; context is required to assess seriousness.",
+    "Bahasa yang mungkin menyatakan niat mencelakai; diperlukan konteks untuk menilai tingkat keseriusannya.",
     hits,
   );
 }
@@ -123,13 +128,13 @@ function detectSpam(text: string, lower: string): Indicator {
     confidence += points;
     evidence.push(note);
   };
-  if (urls >= 2) add(0.3, `${urls} links`);
+  if (urls >= 2) add(0.3, `${urls} tautan`);
   confidence += Math.min(0.5, 0.25 * phrases.length);
-  if (tags >= 5) add(0.2, `${tags} hashtags`);
-  if (upperRatio > 0.5) add(0.1, "mostly capital letters");
-  if (/!{3,}/.test(text)) add(0.1, "repeated exclamation marks");
+  if (tags >= 5) add(0.2, `${tags} tagar`);
+  if (upperRatio > 0.5) add(0.1, "sebagian besar huruf kapital");
+  if (/!{3,}/.test(text)) add(0.1, "tanda seru berulang");
 
-  return make("spam", confidence >= 0.5, confidence, "Promotional / link-farming patterns typical of spam.", evidence);
+  return make("spam", confidence >= 0.5, confidence, "Pola promosi atau penumpukan tautan yang lazim pada spam.", evidence);
 }
 
 function detectMisinformation(lower: string): Indicator {
@@ -140,7 +145,7 @@ function detectMisinformation(lower: string): Indicator {
     "misinformation",
     confidence >= 0.5,
     confidence,
-    "Unverified-claim language (secrecy, urgency, call to amplify) detected. This is NOT a finding that the claim is false; verify against sources.",
+    "Terdeteksi bahasa klaim yang belum diverifikasi (kerahasiaan, urgensi, ajakan menyebarkan). Ini BUKAN temuan bahwa klaim tersebut keliru; verifikasi dengan sumber.",
     cues,
   );
 }
@@ -149,14 +154,14 @@ function detectDefamation(text: string, lower: string, tokens: string[]): Indica
   const accusations = unique(tokens.filter((t) => ACCUSATION_TERMS.has(t)));
   const target = TARGET_RE.exec(text)?.[0] ?? /(^|\s)(@\w+)/.exec(text)?.[2] ?? null;
   const attributed = ATTRIBUTION_MARKERS.some((m) => lower.includes(m));
-  const boast = /everyone knows|no proof needed|pasti benar/i.test(text);
+  const boast = BOAST_RE.test(text);
   const confidence =
     0.45 + 0.1 * Math.max(0, Math.min(accusations.length, 4) - 1) + (attributed ? 0 : 0.15) + (boast ? 0.1 : 0);
   return make(
     "defamation",
     accusations.length > 0 && target !== null,
     confidence,
-    `Accusation directed at a named person without a cited source${attributed ? " (attribution wording present)" : ""}. Requires human / legal review.`,
+    `Tuduhan yang ditujukan kepada orang tertentu tanpa sumber yang disebutkan${attributed ? " (ada kata atribusi)" : ""}. Memerlukan peninjauan manusia / hukum.`,
     [...(target ? [target] : []), ...accusations],
   );
 }
@@ -167,7 +172,7 @@ function detectPhishing(text: string, lower: string): Indicator {
     "impersonation",
     phrases.length > 0 && countUrls(text) >= 1,
     0.55 + 0.1 * Math.max(0, phrases.length - 1),
-    "Authority-style wording combined with a link, a pattern used in impersonation / phishing.",
+    "Bahasa bernada otoritas yang disertai tautan, pola yang dipakai pada peniruan identitas / phishing.",
     phrases,
   );
 }

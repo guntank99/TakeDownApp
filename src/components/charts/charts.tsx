@@ -78,7 +78,7 @@ export function HorizontalBarChart({
   ariaLabel,
   labelWidth = 110,
   height,
-  valueName = "Count",
+  valueName = "Jumlah",
 }: {
   data: BarDatum[];
   ariaLabel: string;

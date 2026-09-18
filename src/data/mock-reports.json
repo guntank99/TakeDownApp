@@ -2,16 +2,16 @@
  {
   "id": "RPT-001",
   "caseId": "CASE-005",
-  "title": "Report: promotional spam with link farming",
+  "title": "Laporan: spam promosi dengan tautan berantai",
   "status": "submitted",
   "createdBy": "USR-002",
   "approvedBy": "USR-003",
-  "reviewerNotes": "Indicators confirmed on manual review.",
-  "recommendedAction": "Submit through the platform's official reporting page.",
+  "reviewerNotes": "Indikator terkonfirmasi pada tinjauan manual.",
+  "recommendedAction": "Ajukan melalui halaman pelaporan resmi platform.",
   "submission": {
    "platform": "x",
    "method": "official_page",
-   "submittedAt": "2026-09-12T12:00:00Z",
+   "submittedAt": "2026-09-14T05:00:00Z",
    "submittedBy": "USR-003",
    "status": "SUBMITTED"
   }
@@ -19,23 +19,23 @@
  {
   "id": "RPT-002",
   "caseId": "CASE-004",
-  "title": "Report: support-desk impersonation",
+  "title": "Laporan: peniruan identitas pusat layanan",
   "status": "approved",
   "createdBy": "USR-002",
   "approvedBy": "USR-003",
-  "reviewerNotes": "Display name mimics a support desk; account is unverified and new.",
-  "recommendedAction": "Report via official impersonation form.",
+  "reviewerNotes": "Nama tampilan menyerupai pusat layanan; akun belum terverifikasi dan baru dibuat.",
+  "recommendedAction": "Laporkan melalui formulir peniruan identitas resmi.",
   "submission": null
  },
  {
   "id": "RPT-003",
   "caseId": "CASE-002",
-  "title": "Report: group-targeting wording",
+  "title": "Laporan: ujaran yang menyasar kelompok",
   "status": "in_review",
   "createdBy": "USR-002",
   "approvedBy": null,
   "reviewerNotes": "",
-  "recommendedAction": "Pending reviewer decision.",
+  "recommendedAction": "Menunggu keputusan peninjau.",
   "submission": null
  }
 ]

@@ -9,7 +9,7 @@ import { listCases } from "@/lib/services/cases";
 import { evidenceIntegrity, listEvidence } from "@/lib/services/evidence";
 import { pageParam, paginate, param } from "@/lib/utils/params";
 
-export const metadata: Metadata = { title: "Evidence" };
+export const metadata: Metadata = { title: "Bukti" };
 
 export default async function EvidencePage({ searchParams }: PageProps<"/evidence">) {
   await verifySession();
@@ -27,19 +27,19 @@ export default async function EvidencePage({ searchParams }: PageProps<"/evidenc
   return (
     <div>
       <PageHeader
-        title="Evidence"
-        description="Content snapshots preserved from the data source, each with a SHA-256 hash so later changes can be detected. Capture evidence from a case page."
+        title="Bukti"
+        description="Snapshot konten yang disimpan dari sumber data, masing-masing dengan hash SHA-256 agar perubahan di kemudian hari dapat terdeteksi. Ambil bukti dari halaman kasus."
       />
       <FilterPanel
         action="/evidence"
         values={values}
         fields={[
-          { name: "q", label: "Search", type: "text", placeholder: "evidence, post, account, text" },
-          { name: "case", label: "Case", options: cases.map((c) => ({ value: c.id, label: `${c.id} — ${c.title.slice(0, 40)}` })) },
+          { name: "q", label: "Cari", type: "text", placeholder: "bukti, postingan, akun, teks" },
+          { name: "case", label: "Kasus", options: cases.map((c) => ({ value: c.id, label: `${c.id}: ${c.title.slice(0, 40)}` })) },
         ]}
       />
       {rows.length === 0 ? (
-        <EmptyState message="No evidence matches these filters." />
+        <EmptyState message="Tidak ada bukti yang cocok dengan filter ini." />
       ) : (
         <div className="grid gap-4 lg:grid-cols-2">
           {rows.map((e) => <EvidenceCard key={e.id} evidence={e} intact={evidenceIntegrity(e)} />)}

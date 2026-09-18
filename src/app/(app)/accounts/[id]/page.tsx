@@ -16,8 +16,10 @@ import { formatDate, formatNumber } from "@/lib/utils/format";
 
 export async function generateMetadata({ params }: PageProps<"/accounts/[id]">): Promise<Metadata> {
   const { id } = await params;
-  return { title: `Account ${id}` };
+  return { title: `Akun ${id}` };
 }
+
+const NODE_TYPE_LABEL = { account: "akun", post: "postingan", hashtag: "tagar", topic: "topik" } as const;
 
 export default async function AccountDetailPage({ params, searchParams }: PageProps<"/accounts/[id]">) {
   const user = await verifySession();
@@ -42,46 +44,47 @@ export default async function AccountDetailPage({ params, searchParams }: PagePr
   const posts = ctx.posts.filter((p) => p.authorId === id);
   const rows: PostRow[] = posts.map((post) => ({ post, handle: account.handle, analysis: ctx.postAnalysis.get(post.id)! }));
   const openCases = listCases().filter((c) => c.status !== "CLOSED" && !c.accountIds.includes(id));
+  const inauthentic = an.authenticityLabel === "Berpotensi Tidak Autentik";
 
   return (
     <div className="space-y-6">
       <PageHeader
         title={account.displayName}
-        description={`${account.handle} — indicators about behaviour and network position. They are not conclusions about the person behind the account.`}
+        description={`${account.handle}: indikator perilaku dan posisi dalam jaringan. Ini bukan kesimpulan tentang orang di balik akun.`}
         mock={account.provenance.isMock}
         actions={<PlatformBadge platform={account.platform} />}
       />
       <Flash searchParams={sp} />
 
-      <Card title="Profile" description="Observed data">
+      <Card title="Profil" description="Data hasil pengamatan">
         <KeyValue
           items={[
-            { label: "Account ID", value: account.id },
-            { label: "Created", value: `${formatDate(account.createdAt)} (${accountAgeDays(account, ctx.now)} days)` },
-            { label: "Verified", value: account.verified ? "Yes" : "No" },
-            { label: "Followers / following", value: `${formatNumber(account.followers)} / ${formatNumber(account.following)}` },
-            { label: "Posts per day", value: account.postsPerDay },
-            { label: "Profile completeness", value: `${account.profileCompleteness}%` },
+            { label: "ID akun", value: account.id },
+            { label: "Dibuat", value: `${formatDate(account.createdAt)} (${accountAgeDays(account, ctx.now)} hari)` },
+            { label: "Terverifikasi", value: account.verified ? "Ya" : "Tidak" },
+            { label: "Pengikut / mengikuti", value: `${formatNumber(account.followers)} / ${formatNumber(account.following)}` },
+            { label: "Posting per hari", value: account.postsPerDay },
+            { label: "Kelengkapan profil", value: `${account.profileCompleteness}%` },
           ]}
         />
       </Card>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="space-y-6 lg:col-span-2">
+        <div className="min-w-0 space-y-6 lg:col-span-2">
           <Card
-            title="Account authenticity indicators"
-            action={an.authenticityLabel === "Potentially Inauthentic" ? <Badge tone="warning">POTENTIALLY INAUTHENTIC</Badge> : <Badge>NO STRONG CONCERNS</Badge>}
-            description={`Concern score ${an.authenticityConcern}/100. Each signal is an indicator; several together raise the concern.`}
+            title="Indikator autentisitas akun"
+            action={inauthentic ? <Badge tone="warning">BERPOTENSI TIDAK AUTENTIK</Badge> : <Badge>TIDAK ADA KEKHAWATIRAN KUAT</Badge>}
+            description={`Skor kekhawatiran ${an.authenticityConcern}/100. Setiap sinyal hanyalah indikator; beberapa sinyal sekaligus meningkatkan kekhawatiran.`}
           >
             <DataTable
-              caption="Authenticity signals"
+              caption="Sinyal autentisitas"
               rows={an.signals}
               rowKey={(s) => s.key}
               columns={[
-                { header: "Indicator", cell: (s) => s.label },
-                { header: "Value", cell: (s) => s.value },
-                { header: "Flagged", cell: (s) => (s.flagged ? <Badge tone="warning">YES · +{s.weight}</Badge> : <span className="text-slate-500">no</span>) },
-                { header: "Why it matters", className: "max-w-xs whitespace-normal text-slate-400", cell: (s) => s.note },
+                { header: "Indikator", cell: (s) => s.label },
+                { header: "Nilai", cell: (s) => s.value },
+                { header: "Ditandai", cell: (s) => (s.flagged ? <Badge tone="warning">YA · +{s.weight}</Badge> : <span className="text-slate-500">tidak</span>) },
+                { header: "Mengapa penting", className: "max-w-xs whitespace-normal text-slate-400", cell: (s) => s.note },
               ]}
             />
             {an.impersonation.detected ? (
@@ -91,13 +94,13 @@ export default async function AccountDetailPage({ params, searchParams }: PagePr
             ) : null}
           </Card>
 
-          <Card title="Network indicators" description="Neutral descriptions of connections in the available data">
+          <Card title="Indikator jaringan" description="Deskripsi netral tentang koneksi pada data yang tersedia">
             <KeyValue
               items={[
-                { label: "Network role", value: an.networkRole ?? "No notable role" },
-                { label: "Degree centrality", value: an.degreeCentrality.toFixed(3) },
+                { label: "Peran jaringan", value: an.networkRole ?? "Tidak ada peran yang menonjol" },
+                { label: "Sentralitas derajat", value: an.degreeCentrality.toFixed(3) },
                 { label: "Betweenness", value: (metrics?.betweenness ?? 0).toFixed(3) },
-                { label: "Cluster", value: cluster ? `${cluster.name} (${cluster.nodeCount} nodes)` : "—" },
+                { label: "Klaster", value: cluster ? `${cluster.name} (${cluster.nodeCount} simpul)` : "—" },
               ]}
             />
             {neighbors.length ? (
@@ -105,33 +108,33 @@ export default async function AccountDetailPage({ params, searchParams }: PagePr
                 {neighbors.map((n) => (
                   <li key={n.node.id}>
                     {n.node.type === "account" ? <Link href={`/accounts/${n.node.id}`} className="text-sky-400 hover:underline">{n.node.label}</Link> : n.node.label}{" "}
-                    <span className="text-xs text-slate-500">{n.node.type} · weight {n.weight}</span>
+                    <span className="text-xs text-slate-500">{NODE_TYPE_LABEL[n.node.type]} · bobot {n.weight}</span>
                   </li>
                 ))}
               </ul>
             ) : null}
-            <p className="mt-3 text-xs text-slate-500">A highly connected account is not necessarily a leader or a controller; the graph shows connections, not intent.</p>
+            <p className="mt-3 text-xs text-slate-500">Akun yang sangat terhubung belum tentu pemimpin atau pengendali; graf hanya menunjukkan koneksi, bukan niat.</p>
           </Card>
         </div>
-        <div><RiskBreakdown risk={an.risk} title="Account risk" /></div>
+        <div className="min-w-0"><RiskBreakdown risk={an.risk} title="Risiko akun" /></div>
       </div>
 
-      <Card title={`Posts by this account (${posts.length})`}>
+      <Card title={`Postingan akun ini (${posts.length})`}>
         <PostsTable rows={rows} variant="review" />
       </Card>
 
       {can(user.role, "case:update") && openCases.length ? (
-        <Card title="Add to a case">
+        <Card title="Tambahkan ke kasus">
           <form action={updateCaseAction} className="flex flex-wrap items-end gap-3">
             <input type="hidden" name="addAccountId" value={id} />
             <input type="hidden" name="returnTo" value={`/accounts/${id}`} />
             <div>
-              <label htmlFor="caseId" className="mb-1 block text-xs text-slate-400">Case</label>
+              <label htmlFor="caseId" className="mb-1 block text-xs text-slate-400">Kasus</label>
               <select id="caseId" name="caseId" required className="rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-sm text-slate-100">
-                {openCases.map((c) => <option key={c.id} value={c.id}>{c.id} — {c.title.slice(0, 60)}</option>)}
+                {openCases.map((c) => <option key={c.id} value={c.id}>{c.id}: {c.title.slice(0, 60)}</option>)}
               </select>
             </div>
-            <button type="submit" className="rounded-lg bg-sky-500 px-4 py-1.5 text-sm font-semibold text-slate-950 hover:bg-sky-400">Add to case</button>
+            <button type="submit" className="rounded-lg bg-sky-500 px-4 py-1.5 text-sm font-semibold text-slate-950 hover:bg-sky-400">Tambahkan ke kasus</button>
           </form>
         </Card>
       ) : null}

@@ -13,12 +13,13 @@ import { getCase } from "@/lib/services/cases";
 import { getReport } from "@/lib/services/reports";
 import { PLATFORM_REPORTING } from "@/lib/toc/reporting";
 import { formatDateTime } from "@/lib/utils/format";
+import { REPORT_STATUS_LABEL } from "@/lib/i18n/labels";
 import { PLATFORM_LABEL } from "@/lib/utils/platforms";
 import { canSubmitReport, canTransitionReport } from "@/lib/workflow/rules";
 
 export async function generateMetadata({ params }: PageProps<"/reports/[id]">): Promise<Metadata> {
   const { id } = await params;
-  return { title: `Report ${id}` };
+  return { title: `Laporan ${id}` };
 }
 
 const btn = "rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40";
@@ -47,24 +48,24 @@ export default async function ReportDetailPage({ params, searchParams }: PagePro
     <div className="space-y-6">
       <PageHeader
         title={`${report.id} — ${report.title}`}
-        description="The analytical sections were frozen when this report was generated. Reviewer notes and the recommended action stay editable until submission."
+        description="Bagian analitis dibekukan saat laporan ini dibuat. Catatan peninjau dan rekomendasi tindakan tetap dapat diubah sampai laporan diajukan."
         actions={<StatusBadge status={report.status} />}
       />
       <Flash searchParams={sp} />
 
-      <Card title="Details">
+      <Card title="Rincian">
         <KeyValue
           items={[
-            { label: "Case", value: <Link href={`/cases/${c.id}`} className="text-sky-400 hover:underline">{c.id}</Link> },
+            { label: "Kasus", value: <Link href={`/cases/${c.id}`} className="text-sky-400 hover:underline">{c.id}</Link> },
             { label: "Platform", value: <PlatformBadge platform={c.platform} /> },
-            { label: "Prepared by", value: userName(report.createdBy) },
-            { label: "Approved by", value: userName(report.approvedBy) },
-            { label: "Created", value: formatDateTime(report.createdAt) },
-            { label: "Case status", value: <StatusBadge status={c.status} /> },
+            { label: "Disusun oleh", value: userName(report.createdBy) },
+            { label: "Disetujui oleh", value: userName(report.approvedBy) },
+            { label: "Dibuat", value: formatDateTime(report.createdAt) },
+            { label: "Status kasus", value: <StatusBadge status={c.status} /> },
           ]}
         />
         <div className="mt-4 flex flex-wrap gap-2">
-          <span className="self-center text-xs text-slate-500">Export:</span>
+          <span className="self-center text-xs text-slate-500">Ekspor:</span>
           {(["pdf", "csv", "json"] as const).map((f) => (
             <a key={f} href={exportLink(f)} className={btn} download>{f.toUpperCase()}</a>
           ))}
@@ -74,18 +75,18 @@ export default async function ReportDetailPage({ params, searchParams }: PagePro
       <ReportPreview report={report} />
 
       {editable ? (
-        <Card title="Review" description="Notes and next action; then move the report through the workflow">
+        <Card title="Tinjauan" description="Catatan dan tindakan berikutnya; lalu gerakkan laporan melalui alur kerja">
           <form action={updateReportAction} className="space-y-3">
             <input type="hidden" name="reportId" value={report.id} />
             <div>
-              <label htmlFor="reviewerNotes" className="mb-1 block text-sm text-slate-300">Reviewer notes {canEditNotes ? "" : "(reviewers only)"}</label>
+              <label htmlFor="reviewerNotes" className="mb-1 block text-sm text-slate-300">Catatan peninjau {canEditNotes ? "" : "(khusus peninjau)"}</label>
               <textarea id="reviewerNotes" name="reviewerNotes" rows={4} defaultValue={report.reviewerNotes} readOnly={!canEditNotes} disabled={!canEditNotes} className={`${field} disabled:opacity-60`} />
             </div>
             <div>
-              <label htmlFor="recommendedAction" className="mb-1 block text-sm text-slate-300">Recommended next action</label>
+              <label htmlFor="recommendedAction" className="mb-1 block text-sm text-slate-300">Rekomendasi tindakan berikutnya</label>
               <textarea id="recommendedAction" name="recommendedAction" rows={3} defaultValue={report.recommendedAction} readOnly={!canEditAction} disabled={!canEditAction} className={`${field} disabled:opacity-60`} />
             </div>
-            {canEditNotes || canEditAction ? <button type="submit" className={btn}>Save changes</button> : null}
+            {canEditNotes || canEditAction ? <button type="submit" className={btn}>Simpan perubahan</button> : null}
           </form>
 
           <div className="mt-4 flex flex-wrap gap-3 border-t border-slate-800 pt-4">
@@ -94,38 +95,38 @@ export default async function ReportDetailPage({ params, searchParams }: PagePro
                 <input type="hidden" name="reportId" value={report.id} />
                 <input type="hidden" name="status" value={to} />
                 <button type="submit" disabled={!d.ok} className={btn}>
-                  {to === "in_review" ? "Send for review" : to === "approved" ? "Approve" : "Return to draft"}
+                  {to === "in_review" ? "Kirim untuk ditinjau" : to === "approved" ? "Setujui" : "Kembalikan ke draf"}
                 </button>
               </form>
             ))}
           </div>
           {transitions.some(({ d }) => !d.ok) ? (
             <ul className="mt-2 space-y-0.5 text-xs text-amber-300">
-              {transitions.filter(({ d }) => !d.ok).map(({ to, d }) => <li key={to}>{to.replace("_", " ")}: {d.ok ? "" : d.reason}</li>)}
+              {transitions.filter(({ d }) => !d.ok).map(({ to, d }) => <li key={to}>{REPORT_STATUS_LABEL[to]}: {d.ok ? "" : d.reason}</li>)}
             </ul>
           ) : null}
         </Card>
       ) : null}
 
-      <Card title="Official reporting" description="The app never submits reports on its own">
+      <Card title="Pelaporan resmi" description="Aplikasi tidak pernah mengajukan laporan sendiri">
         {report.submission ? (
           <div className="space-y-1 text-sm text-slate-300">
             <p><StatusBadge status="submitted" /></p>
-            <p>Report ID: <span className="font-mono">{report.id}</span></p>
+            <p>ID Laporan: <span className="font-mono">{report.id}</span></p>
             <p>Platform: {PLATFORM_LABEL[report.submission.platform]}</p>
-            <p>Timestamp: {formatDateTime(report.submission.submittedAt)} by {userName(report.submission.submittedBy)}</p>
-            <p>Method: {report.submission.method === "official_page" ? "Official reporting page (filed manually)" : "Authorized API"}</p>
+            <p>Waktu: {formatDateTime(report.submission.submittedAt)} oleh {userName(report.submission.submittedBy)}</p>
+            <p>Metode: {report.submission.method === "official_page" ? "Halaman pelaporan resmi (diajukan manual)" : "API resmi"}</p>
           </div>
         ) : submitDecision.ok ? (
           <SubmitReportForm reportId={report.id} platformLabel={PLATFORM_LABEL[c.platform]} reportingUrl={reporting.officialReportingUrl} note={reporting.note} />
         ) : (
           <div className="space-y-2">
-            <Notice tone="warning">Not ready to submit: {submitDecision.reason}</Notice>
-            {reporting.officialReportingUrl ? <p className="text-xs text-slate-500">Official page for {PLATFORM_LABEL[c.platform]}: {reporting.officialReportingUrl}</p> : null}
+            <Notice tone="warning">Belum dapat diajukan: {submitDecision.reason}</Notice>
+            {reporting.officialReportingUrl ? <p className="text-xs text-slate-500">Halaman resmi {PLATFORM_LABEL[c.platform]}: {reporting.officialReportingUrl}</p> : null}
           </div>
         )}
       </Card>
-      <div><LinkButton href="/reports">Back to reports</LinkButton></div>
+      <div><LinkButton href="/reports">Kembali ke laporan</LinkButton></div>
     </div>
   );
 }

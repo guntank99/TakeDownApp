@@ -145,7 +145,7 @@ export function createYouTubeProvider(apiKey: string, fetchImpl: FetchLike = fet
 
   const provider: SocialMediaProvider = {
     id: "youtube",
-    label: "YOUTUBE DATA API v3 (OFFICIAL)",
+    label: "YOUTUBE DATA API v3 (RESMI)",
     isMock: false,
 
     async searchPosts(query) {

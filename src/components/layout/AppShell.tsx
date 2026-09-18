@@ -72,7 +72,7 @@ export function AppShell({
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
-                aria-label="Close navigation"
+                aria-label="Tutup navigasi"
                 className="rounded-md p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-50"
               >
                 <X className="size-5" aria-hidden="true" />
@@ -88,7 +88,7 @@ export function AppShell({
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            aria-label="Open navigation"
+            aria-label="Buka navigasi"
             className="rounded-md p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-50 lg:hidden"
           >
             <Menu className="size-5" aria-hidden="true" />
@@ -96,7 +96,7 @@ export function AppShell({
           <button
             type="button"
             onClick={() => setCollapsed((c) => !c)}
-            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            aria-label={collapsed ? "Perluas bilah samping" : "Ciutkan bilah samping"}
             aria-pressed={collapsed}
             className="hidden rounded-md p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-50 lg:block"
           >
@@ -117,8 +117,8 @@ export function AppShell({
               name="q"
               required
               maxLength={200}
-              aria-label="Global search"
-              placeholder="Search keyword, hashtag, username, URL..."
+              aria-label="Pencarian global"
+              placeholder="Cari kata kunci, tagar, nama pengguna, URL..."
               className="w-full rounded-lg border border-slate-800 bg-slate-900 py-1.5 pl-9 pr-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
             />
           </form>
@@ -139,8 +139,8 @@ export function AppShell({
                 className="flex items-center gap-1.5 rounded-lg border border-slate-800 px-3 py-1.5 text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:text-slate-50"
               >
                 <LogOut className="size-4" aria-hidden="true" />
-                <span className="hidden sm:inline">Logout</span>
-                <span className="sr-only sm:hidden">Logout</span>
+                <span className="hidden sm:inline">Keluar</span>
+                <span className="sr-only sm:hidden">Keluar</span>
               </button>
             </form>
           </div>

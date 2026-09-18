@@ -8,7 +8,7 @@ import { getAnalysisContext } from "@/lib/services/analysis";
 import { filterPosts, filtersToParams, parsePostFilters } from "@/lib/services/queries";
 import { pageParam, paginate } from "@/lib/utils/params";
 
-export const metadata: Metadata = { title: "Monitoring" };
+export const metadata: Metadata = { title: "Pemantauan" };
 
 export default async function MonitoringPage({ searchParams }: PageProps<"/monitoring">) {
   await verifySession();
@@ -26,8 +26,8 @@ export default async function MonitoringPage({ searchParams }: PageProps<"/monit
   return (
     <div>
       <PageHeader
-        title="Monitoring"
-        description="Search and filter monitored posts across platforms. Sources: Facebook, X, Instagram, TikTok, YouTube, Reddit, Telegram and News/Web (mock provider in the prototype)."
+        title="Pemantauan"
+        description="Cari dan filter postingan yang dipantau di berbagai platform: Facebook, X, Instagram, TikTok, YouTube, Reddit, Telegram, dan Berita/Web (penyedia mock pada prototipe). Untuk berita dan konten yang sedang ramai di Indonesia, buka halaman Viral Indonesia."
         mock={ctx.source.isMock}
       />
       <FilterPanel action="/monitoring" fields={postFilterFields()} values={filtersToParams(filters)} />

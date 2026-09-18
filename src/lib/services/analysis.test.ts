@@ -40,8 +40,8 @@ describe("analysis context on the mock dataset", () => {
     const ctx = await getAnalysisContext();
     expect(ctx.coordination.size).toBeGreaterThanOrEqual(10);
     const labels = new Set([...ctx.accountAnalysis.values()].map((a) => a.authenticityLabel));
-    expect([...labels].every((l) => l === "Potentially Inauthentic" || l === "No strong authenticity concerns")).toBe(true);
-    const inauthentic = [...ctx.accountAnalysis.values()].filter((a) => a.authenticityLabel === "Potentially Inauthentic");
+    expect([...labels].every((l) => l === "Berpotensi Tidak Autentik" || l === "Tidak ada kekhawatiran autentisitas yang kuat")).toBe(true);
+    const inauthentic = [...ctx.accountAnalysis.values()].filter((a) => a.authenticityLabel === "Berpotensi Tidak Autentik");
     expect(inauthentic.length).toBeGreaterThanOrEqual(6);
   });
 
@@ -50,7 +50,7 @@ describe("analysis context on the mock dataset", () => {
     expect(ctx.network.graph.nodes.length).toBeGreaterThan(100);
     expect(ctx.network.clusters.length).toBeGreaterThanOrEqual(3);
     for (const role of Object.values(ctx.network.roles)) {
-      expect(["Highly Connected Account", "Potential Network Hub"]).toContain(role);
+      expect(["Akun Sangat Terhubung", "Potensi Hub Jaringan"]).toContain(role);
     }
     for (const pos of Object.values(ctx.network.positions)) expect(Number.isFinite(pos.x + pos.y)).toBe(true);
   });

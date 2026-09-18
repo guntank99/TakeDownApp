@@ -1,3 +1,12 @@
+import {
+  CASE_STATUS_LABEL,
+  ISSUE_STATUS_LABEL,
+  POST_STATUS_LABEL,
+  REPORT_STATUS_LABEL,
+  REVIEW_STATUS_LABEL,
+  RISK_LABEL,
+  SENTIMENT_LABEL,
+} from "@/lib/i18n/labels";
 import { getRiskLevel } from "@/lib/risk/level";
 import { PLATFORM_COLOR, PLATFORM_LABEL } from "@/lib/utils/platforms";
 import type { Platform, RiskLevel, Sentiment } from "@/types";
@@ -31,15 +40,15 @@ const RISK_TONE: Record<RiskLevel, Tone> = { low: "success", medium: "warning", 
 export function RiskBadge({ score, showScore = true }: { score: number; showScore?: boolean }) {
   const level = getRiskLevel(score);
   return (
-    <Badge tone={RISK_TONE[level]} title={`Risk score ${score}/100 — an analytical indicator, not a decision`}>
-      {level.toUpperCase()}
+    <Badge tone={RISK_TONE[level]} title={`Skor risiko ${score}/100: indikator analitis, bukan keputusan`}>
+      {RISK_LABEL[level]}
       {showScore ? <span className="font-normal opacity-80">· {score}</span> : null}
     </Badge>
   );
 }
 
 export function RiskLevelBadge({ level }: { level: RiskLevel }) {
-  return <Badge tone={RISK_TONE[level]}>{level.toUpperCase()}</Badge>;
+  return <Badge tone={RISK_TONE[level]}>{RISK_LABEL[level]}</Badge>;
 }
 
 export function PlatformBadge({ platform }: { platform: Platform }) {
@@ -54,7 +63,7 @@ export function PlatformBadge({ platform }: { platform: Platform }) {
 const SENTIMENT_TONE: Record<Sentiment, Tone> = { positive: "info", neutral: "neutral", negative: "danger" };
 
 export function SentimentBadge({ sentiment }: { sentiment: Sentiment }) {
-  return <Badge tone={SENTIMENT_TONE[sentiment]}>{sentiment.toUpperCase()}</Badge>;
+  return <Badge tone={SENTIMENT_TONE[sentiment]}>{SENTIMENT_LABEL[sentiment].toUpperCase()}</Badge>;
 }
 
 const STATUS_TONE: Record<string, Tone> = {
@@ -70,14 +79,25 @@ const STATUS_TONE: Record<string, Tone> = {
   NEEDS_HUMAN_REVIEW: "warning", NO_INDICATORS: "neutral",
 };
 
+/** Display labels for every status code the app uses (codes stay English in data/API). */
+const STATUS_LABEL: Record<string, string> = {
+  ...POST_STATUS_LABEL,
+  ...ISSUE_STATUS_LABEL,
+  ...CASE_STATUS_LABEL,
+  ...REPORT_STATUS_LABEL,
+  ...REVIEW_STATUS_LABEL,
+  // "closed" (issue) and "CLOSED" (case) differ only by case
+  closed: ISSUE_STATUS_LABEL.closed,
+};
+
 export function StatusBadge({ status }: { status: string }) {
-  return <Badge tone={STATUS_TONE[status] ?? "neutral"}>{status.replace(/_/g, " ").toUpperCase()}</Badge>;
+  return <Badge tone={STATUS_TONE[status] ?? "neutral"}>{(STATUS_LABEL[status] ?? status.replace(/_/g, " ")).toUpperCase()}</Badge>;
 }
 
 export function ConfidenceMeter({ value }: { value: number }) {
   const pct = Math.round(value * 100);
   return (
-    <span className="inline-flex items-center gap-2 text-xs tabular-nums text-slate-300" title={`Confidence ${pct}%`}>
+    <span className="inline-flex items-center gap-2 text-xs tabular-nums text-slate-300" title={`Keyakinan ${pct}%`}>
       <span className="h-1.5 w-14 overflow-hidden rounded-full bg-slate-800" aria-hidden="true">
         <span className="block h-full rounded-full bg-sky-400" style={{ width: `${pct}%` }} />
       </span>

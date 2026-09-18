@@ -29,7 +29,7 @@ export function LoginForm() {
           htmlFor="identifier"
           className="mb-1 block text-sm font-medium text-slate-300"
         >
-          Username / Email
+          Nama pengguna / Email
         </label>
         <input
           id="identifier"
@@ -48,7 +48,7 @@ export function LoginForm() {
           htmlFor="password"
           className="mb-1 block text-sm font-medium text-slate-300"
         >
-          Password
+          Kata sandi
         </label>
         <div className="relative">
           <input
@@ -63,7 +63,7 @@ export function LoginForm() {
           <button
             type="button"
             onClick={() => setShowPassword((s) => !s)}
-            aria-label={showPassword ? "Hide password" : "Show password"}
+            aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
             aria-pressed={showPassword}
             className="absolute inset-y-0 right-0 flex items-center px-3 text-slate-400 hover:text-slate-100"
           >
@@ -82,7 +82,7 @@ export function LoginForm() {
           name="remember"
           className="size-4 rounded border-slate-600 bg-slate-950 accent-sky-500"
         />
-        Remember me
+        Ingat saya
       </label>
 
       <button
@@ -90,14 +90,14 @@ export function LoginForm() {
         disabled={pending}
         className="w-full rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {pending ? "Signing in..." : "LOGIN"}
+        {pending ? "Memproses..." : "MASUK"}
       </button>
 
       <p
         className="text-center text-xs text-slate-600"
-        title="Password reset is not available in the prototype"
+        title="Pengaturan ulang kata sandi belum tersedia pada prototipe"
       >
-        Forgot password? Contact your administrator.
+        Lupa kata sandi? Hubungi administrator.
       </p>
     </form>
   );

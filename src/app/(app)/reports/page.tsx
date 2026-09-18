@@ -8,10 +8,11 @@ import { userName } from "@/lib/auth/directory";
 import { verifySession } from "@/lib/auth/dal";
 import { getCase } from "@/lib/services/cases";
 import { listReports } from "@/lib/services/reports";
-import { formatDateTime, titleCase, truncate } from "@/lib/utils/format";
+import { formatDateTime, truncate } from "@/lib/utils/format";
+import { REPORT_STATUS_LABEL } from "@/lib/i18n/labels";
 import { enumParam, pageParam, paginate, param } from "@/lib/utils/params";
 
-export const metadata: Metadata = { title: "Reports" };
+export const metadata: Metadata = { title: "Laporan" };
 
 export default async function ReportsPage({ searchParams }: PageProps<"/reports">) {
   await verifySession();
@@ -24,30 +25,30 @@ export default async function ReportsPage({ searchParams }: PageProps<"/reports"
 
   return (
     <div>
-      <PageHeader title="Reports" description="Draft → review → approve → record submission through the platform's official mechanism. Reports are generated from a case; create one on the case page." />
-      <div className="mb-4"><Notice>There is no automatic deletion, banning or mass reporting. Submission is always a person acting through an official page.</Notice></div>
+      <PageHeader title="Laporan" description="Draf → tinjau → setujui → catat pengajuan melalui mekanisme resmi platform. Laporan dibuat dari sebuah kasus; buat dari halaman kasus." />
+      <div className="mb-4"><Notice>Tidak ada penghapusan, pemblokiran, atau pelaporan massal otomatis. Pengajuan selalu dilakukan oleh manusia melalui halaman resmi.</Notice></div>
       <Flash searchParams={sp} />
       <FilterPanel
         action="/reports"
         values={values}
         fields={[
-          { name: "q", label: "Search", type: "text" },
-          { name: "status", label: "Status", options: ["draft", "in_review", "approved", "submitted"].map((s) => ({ value: s, label: titleCase(s) })) },
+          { name: "q", label: "Cari", type: "text" },
+          { name: "status", label: "Status", options: (["draft", "in_review", "approved", "submitted"] as const).map((s) => ({ value: s, label: REPORT_STATUS_LABEL[s] })) },
         ]}
       />
       <DataTable
-        caption="Reports"
+        caption="Laporan"
         rows={rows}
         rowKey={(r) => r.id}
-        empty="No reports match these filters."
+        empty="Tidak ada laporan yang cocok dengan filter ini."
         columns={[
-          { header: "Report", cell: (r) => <Link href={`/reports/${r.id}`} className="font-medium text-sky-400 hover:underline">{r.id}</Link> },
-          { header: "Title", className: "max-w-sm whitespace-normal", cell: (r) => truncate(r.title, 80) },
-          { header: "Case", cell: (r) => <Link href={`/cases/${r.caseId}`} className="text-sky-400 hover:underline">{r.caseId}</Link> },
+          { header: "Laporan", cell: (r) => <Link href={`/reports/${r.id}`} className="font-medium text-sky-400 hover:underline">{r.id}</Link> },
+          { header: "Judul", className: "max-w-sm whitespace-normal", cell: (r) => truncate(r.title, 80) },
+          { header: "Kasus", cell: (r) => <Link href={`/cases/${r.caseId}`} className="text-sky-400 hover:underline">{r.caseId}</Link> },
           { header: "Platform", cell: (r) => { const c = getCase(r.caseId); return c ? <PlatformBadge platform={c.platform} /> : "—"; } },
-          { header: "Prepared by", cell: (r) => userName(r.createdBy) },
+          { header: "Disusun oleh", cell: (r) => userName(r.createdBy) },
           { header: "Status", cell: (r) => <StatusBadge status={r.status} /> },
-          { header: "Created", className: "whitespace-nowrap", cell: (r) => formatDateTime(r.createdAt) },
+          { header: "Dibuat", className: "whitespace-nowrap", cell: (r) => formatDateTime(r.createdAt) },
         ]}
       />
       <Pagination page={page} pages={pages} total={total} basePath="/reports" params={values} />

@@ -10,7 +10,7 @@ export function PageHeader({
   title: string;
   description?: string;
   actions?: React.ReactNode;
-  /** Show the MOCK DATA badge (default; the dashboard passes the real flag). */
+  /** Show the DATA MOCK badge (default; pages pass the real provider flag). */
   mock?: boolean;
 }) {
   return (
@@ -22,7 +22,7 @@ export function PageHeader({
       <div className="flex flex-wrap items-center gap-2">
         {mock ? (
           <span className="flex items-center gap-2 text-xs text-slate-400">
-            DATA SOURCE: MOCK / SIMULATED <MockDataBadge />
+            SUMBER DATA: MOCK / SIMULASI <MockDataBadge />
           </span>
         ) : null}
         {actions}

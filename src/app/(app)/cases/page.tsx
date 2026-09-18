@@ -9,11 +9,12 @@ import { verifySession } from "@/lib/auth/dal";
 import { can } from "@/lib/auth/permissions";
 import { listCases } from "@/lib/services/cases";
 import { CASE_STATUSES, POLICY_CATEGORIES, PRIORITIES } from "@/lib/validation/schemas";
-import { formatDate, titleCase, truncate } from "@/lib/utils/format";
+import { formatDate, truncate } from "@/lib/utils/format";
+import { CASE_STATUS_LABEL, POLICY_CATEGORY_LABEL, PRIORITY_LABEL } from "@/lib/i18n/labels";
 import { enumParam, pageParam, paginate, param } from "@/lib/utils/params";
 import { PLATFORMS, PLATFORM_LABEL } from "@/lib/utils/platforms";
 
-export const metadata: Metadata = { title: "Cases" };
+export const metadata: Metadata = { title: "Kasus" };
 
 export default async function CasesPage({ searchParams }: PageProps<"/cases">) {
   const user = await verifySession();
@@ -34,38 +35,38 @@ export default async function CasesPage({ searchParams }: PageProps<"/cases">) {
   return (
     <div>
       <PageHeader
-        title="Cases"
-        description="Investigation workspace. Cases move OPEN → INVESTIGATING → NEEDS REVIEW → VERIFIED → REPORTED; verification always needs a human reviewer other than the analyst."
-        actions={can(user.role, "case:create") ? <LinkButton href="/cases/new" variant="primary">New case</LinkButton> : undefined}
+        title="Kasus"
+        description="Ruang kerja investigasi. Kasus bergerak Terbuka → Diselidiki → Perlu ditinjau → Terverifikasi → Sudah dilaporkan; verifikasi selalu memerlukan peninjau manusia selain analis yang menangani."
+        actions={can(user.role, "case:create") ? <LinkButton href="/cases/new" variant="primary">Kasus baru</LinkButton> : undefined}
       />
       <Flash searchParams={sp} />
       <FilterPanel
         action="/cases"
         values={values}
         fields={[
-          { name: "q", label: "Search", type: "text" },
-          { name: "status", label: "Status", options: CASE_STATUSES.map((s) => ({ value: s, label: s.replace("_", " ") })) },
-          { name: "priority", label: "Priority", options: PRIORITIES.map((p) => ({ value: p, label: titleCase(p) })) },
+          { name: "q", label: "Cari", type: "text" },
+          { name: "status", label: "Status", options: CASE_STATUSES.map((s) => ({ value: s, label: CASE_STATUS_LABEL[s] })) },
+          { name: "priority", label: "Prioritas", options: PRIORITIES.map((p) => ({ value: p, label: PRIORITY_LABEL[p] })) },
           { name: "platform", label: "Platform", options: PLATFORMS.map((p) => ({ value: p, label: PLATFORM_LABEL[p] })) },
-          { name: "category", label: "Category", options: POLICY_CATEGORIES.map((c) => ({ value: c, label: c })) },
+          { name: "category", label: "Kategori", options: POLICY_CATEGORIES.map((c) => ({ value: c, label: POLICY_CATEGORY_LABEL[c] })) },
         ]}
       />
       <DataTable
-        caption="Cases"
+        caption="Kasus"
         rows={rows}
         rowKey={(c) => c.id}
-        empty="No cases match these filters."
+        empty="Tidak ada kasus yang cocok dengan filter ini."
         columns={[
-          { header: "Case ID", cell: (c) => <Link href={`/cases/${c.id}`} className="font-medium text-sky-400 hover:underline">{c.id}</Link> },
-          { header: "Title", className: "max-w-sm whitespace-normal", cell: (c) => truncate(c.title, 90) },
+          { header: "ID Kasus", cell: (c) => <Link href={`/cases/${c.id}`} className="font-medium text-sky-400 hover:underline">{c.id}</Link> },
+          { header: "Judul", className: "max-w-sm whitespace-normal", cell: (c) => truncate(c.title, 90) },
           { header: "Platform", cell: (c) => <PlatformBadge platform={c.platform} /> },
-          { header: "Category", cell: (c) => c.category },
-          { header: "Priority", cell: (c) => <Badge tone={c.priority === "critical" ? "critical" : c.priority === "high" ? "danger" : c.priority === "medium" ? "warning" : "neutral"}>{c.priority.toUpperCase()}</Badge> },
-          { header: "Analyst", cell: (c) => userName(c.analystId) },
-          { header: "Reviewer", cell: (c) => userName(c.reviewerId) },
+          { header: "Kategori", cell: (c) => POLICY_CATEGORY_LABEL[c.category] },
+          { header: "Prioritas", cell: (c) => <Badge tone={c.priority === "critical" ? "critical" : c.priority === "high" ? "danger" : c.priority === "medium" ? "warning" : "neutral"}>{PRIORITY_LABEL[c.priority].toUpperCase()}</Badge> },
+          { header: "Analis", cell: (c) => userName(c.analystId) },
+          { header: "Peninjau", cell: (c) => userName(c.reviewerId) },
           { header: "Status", cell: (c) => <StatusBadge status={c.status} /> },
-          { header: "Created", className: "whitespace-nowrap", cell: (c) => formatDate(c.createdAt) },
-          { header: "Updated", className: "whitespace-nowrap", cell: (c) => formatDate(c.updatedAt) },
+          { header: "Dibuat", className: "whitespace-nowrap", cell: (c) => formatDate(c.createdAt) },
+          { header: "Diperbarui", className: "whitespace-nowrap", cell: (c) => formatDate(c.updatedAt) },
         ]}
       />
       <Pagination page={page} pages={pages} total={total} basePath="/cases" params={values} />

@@ -6,7 +6,7 @@ import { formatDateTime } from "@/lib/utils/format";
 import type { CaseTimelineEvent, EvidenceRecord, ReportRecord } from "@/types";
 
 export function CaseTimeline({ events }: { events: CaseTimelineEvent[] }) {
-  if (events.length === 0) return <p className="text-sm text-slate-500">No timeline events yet.</p>;
+  if (events.length === 0) return <p className="text-sm text-slate-500">Belum ada kejadian pada lini masa.</p>;
   return (
     <ol className="relative space-y-4 border-l border-slate-800 pl-5">
       {[...events].reverse().map((e) => (
@@ -29,20 +29,20 @@ export function EvidenceCard({ evidence, intact }: { evidence: EvidenceRecord; i
         <h3 className="text-sm font-semibold text-slate-100">{evidence.id}</h3>
         <PlatformBadge platform={evidence.snapshot.platform} />
         {intact ? (
-          <Badge tone="success"><CheckCircle2 className="size-3" aria-hidden="true" /> HASH VERIFIED</Badge>
+          <Badge tone="success"><CheckCircle2 className="size-3" aria-hidden="true" /> HASH TERVERIFIKASI</Badge>
         ) : (
-          <Badge tone="critical"><TriangleAlert className="size-3" aria-hidden="true" /> HASH MISMATCH</Badge>
+          <Badge tone="critical"><TriangleAlert className="size-3" aria-hidden="true" /> HASH TIDAK SESUAI</Badge>
         )}
       </div>
       <p className="mt-2 text-sm text-slate-300">{evidence.snapshot.text}</p>
       <dl className="mt-3 grid gap-x-6 gap-y-1 text-xs sm:grid-cols-2">
-        <div><dt className="inline text-slate-500">Case: </dt><dd className="inline"><Link href={`/cases/${evidence.caseId}`} className="text-sky-400 hover:underline">{evidence.caseId}</Link></dd></div>
-        <div><dt className="inline text-slate-500">Post: </dt><dd className="inline">{evidence.postId ? <Link href={`/posts/${evidence.postId}`} className="text-sky-400 hover:underline">{evidence.postId}</Link> : "—"}</dd></div>
-        <div><dt className="inline text-slate-500">Account: </dt><dd className="inline text-slate-300">{evidence.snapshot.accountHandle ?? "—"}</dd></div>
-        <div><dt className="inline text-slate-500">Captured: </dt><dd className="inline text-slate-300">{formatDateTime(evidence.capturedAt)} by {userName(evidence.collectedBy)}</dd></div>
+        <div><dt className="inline text-slate-500">Kasus: </dt><dd className="inline"><Link href={`/cases/${evidence.caseId}`} className="text-sky-400 hover:underline">{evidence.caseId}</Link></dd></div>
+        <div><dt className="inline text-slate-500">Postingan: </dt><dd className="inline">{evidence.postId ? <Link href={`/posts/${evidence.postId}`} className="text-sky-400 hover:underline">{evidence.postId}</Link> : "—"}</dd></div>
+        <div><dt className="inline text-slate-500">Akun: </dt><dd className="inline text-slate-300">{evidence.snapshot.accountHandle ?? "—"}</dd></div>
+        <div><dt className="inline text-slate-500">Diambil: </dt><dd className="inline text-slate-300">{formatDateTime(evidence.capturedAt)} oleh {userName(evidence.collectedBy)}</dd></div>
         <div className="sm:col-span-2"><dt className="inline text-slate-500">URL: </dt><dd className="inline break-all text-slate-300">{evidence.url}</dd></div>
-        <div className="sm:col-span-2"><dt className="inline text-slate-500">Source: </dt><dd className="inline text-slate-300">{evidence.source}</dd></div>
-        <div className="sm:col-span-2"><dt className="inline text-slate-500">Screenshot: </dt><dd className="inline text-slate-300">{evidence.screenshotRef ?? "none attached (record an external reference if you keep one)"}</dd></div>
+        <div className="sm:col-span-2"><dt className="inline text-slate-500">Sumber: </dt><dd className="inline text-slate-300">{evidence.source}</dd></div>
+        <div className="sm:col-span-2"><dt className="inline text-slate-500">Tangkapan layar: </dt><dd className="inline text-slate-300">{evidence.screenshotRef ?? "belum dilampirkan (catat referensi eksternal bila ada)"}</dd></div>
         <div className="sm:col-span-2"><dt className="text-slate-500">SHA-256</dt><dd className="break-all font-mono text-[11px] text-slate-400">{evidence.hash}</dd></div>
       </dl>
     </article>
@@ -52,8 +52,8 @@ export function EvidenceCard({ evidence, intact }: { evidence: EvidenceRecord; i
 export function ReportPreview({ report }: { report: ReportRecord }) {
   const sections = [
     ...report.sections,
-    { title: "Reviewer Notes", body: [report.reviewerNotes.trim() || "No reviewer notes recorded yet."] },
-    { title: "Recommended Next Action", body: [report.recommendedAction.trim() || "None recorded."] },
+    { title: "Catatan Peninjau", body: [report.reviewerNotes.trim() || "Belum ada catatan peninjau."] },
+    { title: "Rekomendasi Tindakan Berikutnya", body: [report.recommendedAction.trim() || "Belum ada."] },
   ];
   return (
     <div className="space-y-5 rounded-xl border border-slate-800 bg-slate-950/40 p-5">

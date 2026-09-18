@@ -5,6 +5,8 @@
  *
  * Everything here is invented: handles, groups ("Vellani", "Norrin",
  * "Tessarian"), people and .example domains. Nothing refers to real people.
+ * Content is written in Indonesian around plausible Indonesian scenarios; these
+ * are SIMULATED and are not real events. Real trending news comes from /viral.
  * Observed fields only — sentiment / risk are computed by the analysis engine.
  */
 import fs from "node:fs";
@@ -36,7 +38,7 @@ const shuffle = (arr) => {
   return a;
 };
 const pad = (n, w = 3) => String(n).padStart(w, "0");
-const ANCHOR = Date.parse("2026-09-17T12:00:00Z");
+const ANCHOR = Date.parse("2026-09-19T05:00:00Z");
 const HOUR = 3600e3;
 const DAY = 24 * HOUR;
 const iso = (ms) => new Date(ms).toISOString().replace(/\.\d+Z$/, "Z");
@@ -44,8 +46,8 @@ const write = (name, data) =>
   fs.writeFileSync(path.join(OUT, name), JSON.stringify(data, null, 1) + "\n");
 
 // ----------------------------------------------------------------- accounts
-const ADJ = ["quiet", "rapid", "north", "urban", "silver", "calm", "bright", "daily", "local", "open", "grand", "lunar"];
-const NOUN = ["river", "signal", "voice", "harbor", "lantern", "echo", "forum", "post", "watch", "circle", "bridge", "field"];
+const ADJ = ["tenang", "sigap", "cerdas", "lantang", "bijak", "sejuk", "terang", "gesit", "santun", "mandiri", "lugas", "cermat"];
+const NOUN = ["sungai", "suara", "kabar", "warga", "pantau", "pelita", "jembatan", "lentera", "nusa", "forum", "cakrawala", "ladang"];
 const usedHandles = new Set();
 const uniqueBase = () => {
   for (;;) {
@@ -86,7 +88,7 @@ ARCH.forEach((arch, i) => {
   if (arch === "amplifier") Object.assign(a, { followers: int(15, 300), following: int(1500, 4800), postsPerDay: +(22 + rnd() * 60).toFixed(1), profileCompleteness: int(10, 40), contentRepetition: +(0.6 + rnd() * 0.35).toFixed(2), activitySpike: true });
   if (arch === "agitator") Object.assign(a, { followers: int(2000, 25000), following: int(100, 900), postsPerDay: +(6 + rnd() * 10).toFixed(1), profileCompleteness: int(55, 85), contentRepetition: +(0.15 + rnd() * 0.2).toFixed(2), activitySpike: rnd() > 0.5 });
   if (arch === "impersonator") Object.assign(a, { followers: int(30, 200), following: int(900, 2500), postsPerDay: +(4 + rnd() * 6).toFixed(1), profileCompleteness: int(35, 55), contentRepetition: +(0.5 + rnd() * 0.3).toFixed(2), activitySpike: true });
-  if (arch === "impersonator") a.displayName = i % 2 ? "Sample Bank Support (Official)" : "Sample Gov Help Desk Official";
+  if (arch === "impersonator") a.displayName = i % 2 ? "Layanan Pelanggan Bank Contoh (Resmi)" : "Pusat Bantuan Instansi Contoh Resmi";
   accounts.push(a);
   archOf[id] = arch;
 });
@@ -96,28 +98,29 @@ const acc = (id) => accounts.find((a) => a.id === id);
 // -------------------------------------------------------------------- issues
 const GROUPS = ["Vellani", "Norrin", "Tessarian"];
 const ISSUE_DEFS = [
-  ["neutral", "Regional transit schedule update", "#TransitUpdate", ["x", "facebook"]],
-  ["neutral", "Public library extended hours", "#LibraryHours", ["facebook", "instagram"]],
-  ["neutral", "Weather advisory for the coast", "#CoastAdvisory", ["x", "news"]],
-  ["neutral", "City budget consultation", "#BudgetTalk", ["facebook", "reddit"]],
-  ["neutral", "School term calendar", "#TermCalendar", ["facebook", "youtube"]],
-  ["positive", "Community clean-up campaign", "#CleanUpDay", ["instagram", "facebook"]],
-  ["positive", "Local hospital new wing opening", "#NewWing", ["facebook", "x"]],
-  ["positive", "Youth science fair results", "#ScienceFair", ["youtube", "instagram", "tiktok"]],
-  ["controversy", "Fictional tariff announcement backlash", "#SampleTariff", ["x", "facebook"]],
-  ["controversy", "Ride-share fee change", "#FeeChange", ["x", "reddit"]],
-  ["controversy", "Stadium construction delays", "#StadiumDelay", ["x", "facebook", "youtube"]],
-  ["controversy", "Water utility billing complaints", "#WaterBill", ["facebook", "x"]],
-  ["controversy", "Public transport fare rise", "#FareRise", ["x", "tiktok"]],
-  ["controversy", "New parking rules downtown", "#ParkingRules", ["facebook", "reddit"]],
-  ["rumor", "Unverified claim about a grain shortage", "#GrainShortage", ["telegram", "x", "tiktok"]],
-  ["rumor", "Viral claim of a secret dam release", "#DamRelease", ["x", "telegram"]],
-  ["rumor", "Claim that a vaccine batch was recalled", "#BatchRecall", ["telegram", "tiktok", "x"]],
-  ["agitation", "Group-targeting wording in reply threads", "#OurCityFirst", ["x", "telegram"]],
-  ["agitation", "Hostile posts about newcomers", "#NoNewcomers", ["x", "tiktok"]],
-  ["defamation", "Allegations against a local official", "#ValeExposed", ["x", "facebook"]],
+  // [kind, title, hashtag, platforms, topic phrase used inside post text (defaults to the lower-cased title)]
+  ["neutral", "Jadwal operasional transportasi umum", "#JadwalTransportasi", ["x", "facebook"]],
+  ["neutral", "Perpanjangan jam layanan perpustakaan daerah", "#JamPerpustakaan", ["facebook", "instagram"]],
+  ["neutral", "Peringatan cuaca ekstrem di wilayah pesisir", "#CuacaPesisir", ["x", "news"]],
+  ["neutral", "Konsultasi publik anggaran daerah", "#AnggaranDaerah", ["facebook", "reddit"]],
+  ["neutral", "Kalender akademik tahun ajaran baru", "#TahunAjaranBaru", ["facebook", "youtube"]],
+  ["positive", "Gerakan kerja bakti bersih sungai", "#KerjaBakti", ["instagram", "facebook"]],
+  ["positive", "Peresmian gedung baru puskesmas", "#GedungBaruPuskesmas", ["facebook", "x"]],
+  ["positive", "Hasil olimpiade sains pelajar", "#OlimpiadeSains", ["youtube", "instagram", "tiktok"]],
+  ["controversy", "Polemik kenaikan tarif angkutan umum", "#TarifAngkutan", ["x", "facebook"]],
+  ["controversy", "Perubahan biaya layanan ojek daring", "#BiayaOjekDaring", ["x", "reddit"]],
+  ["controversy", "Keterlambatan pembangunan stadion daerah", "#StadionTerlambat", ["x", "facebook", "youtube"]],
+  ["controversy", "Keluhan tagihan air PDAM", "#TagihanAir", ["facebook", "x"]],
+  ["controversy", "Kenaikan harga bahan pokok di pasar", "#HargaPokokNaik", ["x", "tiktok"]],
+  ["controversy", "Aturan parkir baru di pusat kota", "#AturanParkir", ["facebook", "reddit"]],
+  ["rumor", "Klaim viral kelangkaan beras (belum terverifikasi)", "#IsuBeras", ["telegram", "x", "tiktok"], "kelangkaan beras"],
+  ["rumor", "Klaim viral pelepasan air bendungan (belum terverifikasi)", "#IsuBendungan", ["x", "telegram"], "pelepasan air bendungan secara diam-diam"],
+  ["rumor", "Klaim viral penarikan batch vaksin (belum terverifikasi)", "#IsuVaksin", ["telegram", "tiktok", "x"], "penarikan batch vaksin"],
+  ["agitation", "Ujaran bermuatan kebencian terhadap kelompok Vellani (fiktif)", "#TolakVellani", ["x", "telegram"]],
+  ["agitation", "Provokasi terhadap kelompok Norrin (fiktif)", "#KotaKitaDuluan", ["x", "tiktok"]],
+  ["defamation", "Tuduhan terhadap seorang pejabat daerah (fiktif)", "#PejabatDiduga", ["x", "facebook"]],
 ];
-const issues = ISSUE_DEFS.map(([kind, t, tag, platforms], i) => {
+const issues = ISSUE_DEFS.map(([kind, t, tag, platforms, topic], i) => {
   const hot = kind === "rumor" || kind === "agitation";
   const volume = hot ? int(6000, 21000) : kind === "controversy" ? int(3000, 14000) : int(700, 4200);
   const growth = hot ? int(80, 260) : kind === "controversy" ? int(15, 120) : int(-12, 30);
@@ -130,56 +133,57 @@ const issues = ISSUE_DEFS.map(([kind, t, tag, platforms], i) => {
     id: `ISS-${pad(i + 1)}`, title: t, hashtag: tag, platforms, volume, growth, series, status,
     firstDetectedAt: iso(ANCHOR - daysOld * DAY), lastUpdatedAt: iso(ANCHOR - int(0, 5) * HOUR),
     _kind: kind,
+    _topic: topic ?? t.toLowerCase(),
   };
 });
 
 // --------------------------------------------------------------------- posts
 const T = {
   neutral: [
-    "Update on {topic}: the published schedule for the coming week is available. {tags}",
-    "Here is a summary of today's discussion about {topic}, according to the published report. {tags}",
-    "Pembaruan terkait {topic}: jadwal resmi sudah dipublikasikan. {tags}",
-    "Question for the community: what do you think about {topic}? {tags}",
+    "Informasi terbaru: {topic}. Jadwal lengkap sudah diumumkan untuk pekan ini. {tags}",
+    "Ringkasan diskusi hari ini tentang {topic}, menurut laporan resmi yang dipublikasikan. {tags}",
+    "Pembaruan terkait {topic}: pengumuman resmi sudah tersedia. {tags}",
+    "Bagaimana pendapat warga tentang {topic}? Mari berdiskusi dengan santun. {tags}",
   ],
   positive: [
-    "Great work by the team on {topic}, thank you for the support! {tags}",
-    "Really proud of the community effort on {topic}. Excellent result! {tags}",
-    "Terima kasih semuanya, {topic} berjalan dengan bagus dan sukses. {tags}",
-    "Wonderful news about {topic}, very helpful for everyone. {tags}",
+    "Kerja bagus untuk semua tim yang terlibat dalam {topic}, terima kasih atas dukungannya! {tags}",
+    "Bangga dengan kerja sama warga dalam {topic}. Hasilnya luar biasa! {tags}",
+    "Terima kasih semuanya, {topic} berjalan lancar dan sukses. {tags}",
+    "Kabar baik tentang {topic}, sangat bermanfaat bagi banyak orang. {tags}",
   ],
   controversy: [
-    "This handling of {topic} is terrible and disappointing. Unacceptable. {tags}",
-    "I am angry about {topic}. Worst decision, a complete failure. {tags}",
-    "Kebijakan {topic} sangat buruk dan mengecewakan, benar-benar gagal. {tags}",
-    "Not happy with {topic}. This is a shame, they should do better. {tags}",
-    "The officials behind {topic} are idiots and this is a disgusting failure. {tags}",
+    "Penanganan {topic} sangat buruk dan mengecewakan. Tidak bisa diterima. {tags}",
+    "Saya marah soal {topic}. Keputusan terburuk, benar-benar gagal. {tags}",
+    "Kebijakan soal {topic} benar-benar mengecewakan, warga jadi susah. {tags}",
+    "Tidak puas dengan {topic}. Ini memalukan, seharusnya bisa lebih baik. {tags}",
+    "Pihak yang mengurus {topic} itu bodoh dan hasilnya sampah. {tags}",
   ],
   rumor: [
-    "BREAKING: they don't want you to know that {topic} is a cover-up. 100% true, share before it's deleted! {tags}",
-    "Secret document proves {topic} was planned all along. Wake up and forward this to everyone! {tags}",
+    "HEBOH: yang tidak mau kamu tahu soal {topic}, ini rekayasa! 100% benar, sebarkan sebelum dihapus! {tags}",
+    "Dokumen rahasia membuktikan {topic} sudah direncanakan sejak awal. Bangun dan viralkan ke semua orang! {tags}",
     "Katanya {topic} ternyata rekayasa, viralkan sebelum dihapus! {tags}",
   ],
   agitation: [
-    "The {group} are vermin. Disgusting people, drive them out of our city. {tags}",
-    "All {group} are parasites and should be kicked out. {tags}",
-    "Those {group} are subhuman filth. Get out! {tags}",
+    "Orang-orang {group} itu hama. Menjijikkan, usir mereka dari kota kita. {tags}",
+    "Semua {group} itu parasit dan harus diusir. {tags}",
+    "Kaum {group} itu binatang kotor. Pergi dari sini! {tags}",
   ],
   defamation: [
-    "Mr. Dorian Vale is a corrupt thief and a fraud, he stole the community fund. Everyone knows it. {tags}",
-    "Dr. Marta Ilves is a liar and embezzled the charity money, no proof needed. {tags}",
-    "Koruptor Pak Dorian Vale, penipu yang menggelapkan dana warga. {tags}",
+    "Pak Ardan Velmora itu koruptor dan penipu, dia menggelapkan dana warga. Semua orang tahu. {tags}",
+    "Bu Marta Ilvessa pembohong dan mencuri uang amal, tidak perlu bukti. {tags}",
+    "Koruptor Pak Ardan Velmora, penipu yang menggelapkan dana warga. {tags}",
   ],
   harassment: [
-    "{target} you are a pathetic idiot, nobody likes you, shut up. {tags}",
+    "{target} kamu bodoh dan tolol, tidak ada yang suka sama kamu. Diam saja. {tags}",
     "{target} dasar bodoh, kamu tolol. Diam saja. {tags}",
   ],
   spam: [
-    "FREE followers!!! Click here http://promo-deals.example/a http://promo-deals.example/b buy now #promo #free #win #sale #deal #giveaway",
-    "Join now!!! DM for promo, link in bio http://promo-deals.example/c #promo #free #win #sale #deal #giveaway",
+    "GRATIS followers!!! Klik di sini http://promo-hemat.example/a http://promo-hemat.example/b beli sekarang #promo #gratis #menang #diskon #hadiah #giveaway",
+    "Gabung sekarang!!! Hubungi DM untuk promo, link di bio http://promo-hemat.example/c #promo #gratis #menang #diskon #hadiah #giveaway",
   ],
   impersonation: [
-    "Official notice: verify your account now at http://verify-support.example/login to avoid suspension. #support",
-    "Kami dari tim resmi, klik http://verify-support.example/akun untuk verifikasi akun Anda. #support",
+    "Pemberitahuan resmi: verifikasi akun Anda sekarang di http://verifikasi-layanan.example/masuk agar tidak diblokir. #layanan",
+    "Kami dari tim resmi, klik http://verifikasi-layanan.example/akun untuk verifikasi akun Anda. #layanan",
   ],
 };
 const MEDIA = ["text", "text", "text", "image", "image", "video", "link"];
@@ -215,7 +219,7 @@ const slotTime = (issue, hot = false) => ANCHOR - (hot ? int(1, 40) * HOUR : int
 
 for (const issue of issues) {
   const kind = issue._kind;
-  const topic = issue.title.toLowerCase();
+  const topic = issue._topic;
   const tagStr = issue.hashtag;
   if (kind === "neutral" || kind === "positive") {
     for (let n = 0; n < 3; n++) {
@@ -231,12 +235,12 @@ for (const issue of issues) {
     const base = fill(pick(T.rumor), { topic, tags: tagStr });
     claimTexts[cid] = topic;
     const seed = addPost({ authorId: pick(agits).id, kind, issue, at: ANCHOR - int(20, 40) * HOUR, text: base, claimId: cid, hot: 2.2 });
-    claims.push({ id: cid, extractedFromPostId: seed, text: `Claim: ${topic} is a cover-up / not as officially stated.` });
+    claims.push({ id: cid, extractedFromPostId: seed, text: `Klaim: ${topic} adalah rekayasa / tidak sesuai pernyataan resmi.` });
     const t0 = ANCHOR - int(10, 18) * HOUR;
     shuffle(amps).slice(0, 5).forEach((a, k) => {
       addPost({ authorId: a.id, kind, issue, at: t0 + k * int(8, 25) * 60e3, text: base + pick(["", " 🔥", " RT!", " #wakeup"]), claimId: cid, hot: 1.2, extraTags: ["#wakeup"].slice(0, k % 2) });
     });
-    addPost({ authorId: pick(organic).id, kind: "neutral", issue, at: ANCHOR - int(2, 9) * HOUR, text: `Has anyone seen an official source for the ${topic} claim? ${tagStr}`, claimId: cid });
+    addPost({ authorId: pick(organic).id, kind: "neutral", issue, at: ANCHOR - int(2, 9) * HOUR, text: `Adakah yang sudah melihat sumber resmi untuk klaim soal ${topic}? ${tagStr}`, claimId: cid });
   } else if (kind === "agitation") {
     for (let n = 0; n < 4; n++) {
       const a = agits[n % agits.length];
@@ -248,7 +252,7 @@ for (const issue of issues) {
     const cid = `CLM-${pad(++claimSeq)}`;
     claimTexts[cid] = "allegation";
     const ids = [0, 1, 2].map((n) => addPost({ authorId: agits[n % agits.length].id, kind, issue, at: slotTime(issue, true), text: T.defamation[n % 3] + " " + tagStr, claimId: n === 0 ? cid : null, hot: 1.5 }));
-    claims.push({ id: cid, extractedFromPostId: ids[0], text: "Claim: a local official embezzled community funds." });
+    claims.push({ id: cid, extractedFromPostId: ids[0], text: "Klaim: seorang pejabat daerah menggelapkan dana warga." });
   }
 }
 // spam + impersonation + general filler up to 100 posts
@@ -261,12 +265,12 @@ while (posts.length < 100) {
 posts.length = 100;
 
 // -------------------------------------------------------------------- claims
-const factcheck = (slug) => `https://factcheck.example/${slug}`;
+const factcheck = (slug) => `https://cekfakta.example/${slug}`;
 const ASSESS = {
-  "CLM-001": ["likely_false", 0.82, ["No official source found for the shortage.", "Regional agency data shows normal stock levels."], "USR-003"],
-  "CLM-002": ["disputed", 0.6, ["Two outlets report conflicting figures.", "Agency statement pending."], "USR-003"],
-  "CLM-003": ["unverified", 0.5, ["No primary source located yet."], null],
-  "CLM-004": ["unverified", 0.45, ["Allegation repeated across posts; no court record or report found."], "USR-003"],
+  "CLM-001": ["likely_false", 0.82, ["Tidak ditemukan sumber resmi yang menyebut adanya kelangkaan.", "Data stok instansi regional menunjukkan level normal."], "USR-003"],
+  "CLM-002": ["disputed", 0.6, ["Dua media melaporkan angka yang saling bertentangan.", "Pernyataan instansi masih ditunggu."], "USR-003"],
+  "CLM-003": ["unverified", 0.5, ["Belum ditemukan sumber primer."], null],
+  "CLM-004": ["unverified", 0.45, ["Tuduhan diulang di banyak postingan; belum ditemukan catatan pengadilan atau laporan resmi."], "USR-003"],
 };
 const claimsOut = claims.map((c) => {
   const a = ASSESS[c.id];
@@ -275,8 +279,8 @@ const claimsOut = claims.map((c) => {
     assessment: a ? {
       id: `ASM-${c.id.slice(4)}`, claimId: c.id, verdict: a[0], confidence: a[1], evidence: a[2],
       sources: [
-        { name: "Sample Fact-Check Desk", url: factcheck(c.id.toLowerCase()), reliability: "medium" },
-        { name: "Sample Regional Agency Bulletin", url: `https://agency.example/bulletin/${c.id.toLowerCase()}`, reliability: "high" },
+        { name: "Meja Cek Fakta Contoh", url: factcheck(c.id.toLowerCase()), reliability: "medium" },
+        { name: "Buletin Instansi Regional Contoh", url: `https://instansi.example/buletin/${c.id.toLowerCase()}`, reliability: "high" },
       ],
       assessedAt: iso(ANCHOR - int(1, 30) * HOUR), reviewer: a[3],
     } : null,
@@ -285,14 +289,14 @@ const claimsOut = claims.map((c) => {
 
 // ------------------------------------------------------------------ comments
 const C = {
-  positive: ["Thanks for sharing, very helpful.", "Great post, well said!", "Setuju, mantap sekali.", "Love this update, excellent."],
-  neutral: ["Can you share the source?", "Any update on this?", "Noted.", "Kapan jadwal resminya?", "Interesting, will follow."],
-  negative: ["This is terrible news.", "Very disappointing, I hate this.", "Ini buruk sekali.", "Total failure, shame on them."],
-  hate: ["Those {group} are vermin.", "Go away you filthy {group}, get out."],
-  harass: ["You are a pathetic idiot.", "Shut up, nobody likes you.", "Dasar bodoh, kamu tolol."],
-  spam: ["FREE followers click here http://promo-deals.example/x buy now", "DM for promo!!! join now"],
-  threat: ["You will regret this, watch your back.", "Awas kamu, akan kuhabisi."],
-  other: ["👍", "...", "lol"],
+  positive: ["Terima kasih infonya, sangat membantu.", "Postingan bagus, setuju sekali!", "Mantap, semoga lancar terus.", "Suka dengan pembaruan ini, luar biasa."],
+  neutral: ["Boleh minta sumbernya?", "Ada pembaruan lagi soal ini?", "Oke, dicatat.", "Kapan jadwal resminya keluar?", "Menarik, saya ikuti terus."],
+  negative: ["Ini kabar buruk sekali.", "Sangat mengecewakan, saya benci kebijakan ini.", "Buruk sekali pelayanannya.", "Gagal total, memalukan."],
+  hate: ["Orang-orang {group} itu hama.", "Pergi dari sini, {group} kotor, usir saja."],
+  harass: ["Kamu bodoh sekali.", "Diam saja, tidak ada yang suka sama kamu.", "Dasar bodoh, kamu tolol."],
+  spam: ["GRATIS followers klik di sini http://promo-hemat.example/x beli sekarang", "Hubungi DM untuk promo!!! gabung sekarang"],
+  threat: ["Awas kamu, tunggu saja akibatnya, kuhabisi.", "Kamu akan menyesal, awas kamu."],
+  other: ["👍", "...", "wkwk"],
 };
 const MIX = {
   neutral: { positive: 0.25, neutral: 0.55, negative: 0.1, other: 0.1 },
@@ -359,31 +363,33 @@ shuffle(organic).slice(0, 8).forEach((o) => addInter(o.id, media[0].id, "share",
 // --------------------------------------------------------------------- cases
 const firstOf = (k, n = 3) => posts.filter((p) => postKind[p.id] === k).slice(0, n);
 const rumorIssues = issues.filter((i) => i._kind === "rumor");
+const CAT_ID = { "Platform Manipulation": "Manipulasi Platform", "Hate Speech": "Ujaran Kebencian", Harassment: "Pelecehan", Impersonation: "Peniruan Identitas", Spam: "Spam", Misinformation: "Misinformasi", Other: "Lainnya" };
+const STATUS_ID = { INVESTIGATING: "Diselidiki", NEEDS_REVIEW: "Perlu ditinjau", VERIFIED: "Terverifikasi", REPORTED: "Sudah dilaporkan", CLOSED: "Ditutup", OPEN: "Terbuka" };
 const caseDefs = [
-  ["Coordinated amplification of an unverified grain claim", "Platform Manipulation", "x", "high", "INVESTIGATING", posts.filter((p) => p.issueId === rumorIssues[0].id).slice(0, 5)],
-  ["Derogatory wording targeting a fictional group", "Hate Speech", "x", "critical", "NEEDS_REVIEW", firstOf("agitation")],
-  ["Unverified allegations against a local official", "Harassment", "x", "medium", "OPEN", firstOf("defamation")],
-  ["Account impersonating a support desk", "Impersonation", "x", "high", "VERIFIED", firstOf("impersonation", 2)],
-  ["Promotional spam with link farming", "Spam", "x", "low", "REPORTED", firstOf("spam")],
-  ["Viral dam-release claim on channels", "Misinformation", "telegram", "high", "INVESTIGATING", posts.filter((p) => p.issueId === rumorIssues[1].id).slice(0, 4)],
-  ["Targeted harassment in reply threads", "Harassment", "x", "high", "NEEDS_REVIEW", firstOf("harassment")],
-  ["Vaccine-batch recall rumor spread", "Misinformation", "tiktok", "medium", "OPEN", posts.filter((p) => p.issueId === rumorIssues[2].id).slice(0, 4)],
-  ["Tariff backlash review (no violation found)", "Other", "x", "low", "CLOSED", firstOf("controversy")],
-  ["Earlier community page review", "Other", "facebook", "low", "CLOSED", firstOf("positive", 2)],
+  ["Amplifikasi terkoordinasi klaim kelangkaan beras", "Platform Manipulation", "x", "high", "INVESTIGATING", posts.filter((p) => p.issueId === rumorIssues[0].id).slice(0, 5)],
+  ["Ujaran merendahkan yang menyasar kelompok fiktif", "Hate Speech", "x", "critical", "NEEDS_REVIEW", firstOf("agitation")],
+  ["Tuduhan tanpa sumber terhadap seorang pejabat daerah", "Harassment", "x", "medium", "OPEN", firstOf("defamation")],
+  ["Akun meniru pusat layanan pelanggan", "Impersonation", "x", "high", "VERIFIED", firstOf("impersonation", 2)],
+  ["Spam promosi dengan tautan berantai", "Spam", "x", "low", "REPORTED", firstOf("spam")],
+  ["Klaim viral pelepasan air bendungan di kanal Telegram", "Misinformation", "telegram", "high", "INVESTIGATING", posts.filter((p) => p.issueId === rumorIssues[1].id).slice(0, 4)],
+  ["Pelecehan terarah di utas balasan", "Harassment", "x", "high", "NEEDS_REVIEW", firstOf("harassment")],
+  ["Rumor penarikan batch vaksin di media sosial", "Misinformation", "tiktok", "medium", "OPEN", posts.filter((p) => p.issueId === rumorIssues[2].id).slice(0, 4)],
+  ["Tinjauan gelombang keluhan tarif (tidak ditemukan pelanggaran)", "Other", "x", "low", "CLOSED", firstOf("controversy")],
+  ["Tinjauan awal halaman komunitas", "Other", "facebook", "low", "CLOSED", firstOf("positive", 2)],
 ].map(([t, cat, plat, pri, status, ps], i) => {
   const created = ANCHOR - (10 - i) * DAY + int(0, 8) * HOUR;
   const reviewer = ["VERIFIED", "REPORTED", "NEEDS_REVIEW", "CLOSED"].includes(status) ? "USR-003" : null;
-  const tl = [{ id: "TL-1", at: iso(created), actorId: "USR-002", type: "CASE_CREATED", message: "Case created" }];
-  if (status !== "OPEN") tl.push({ id: "TL-2", at: iso(created + 3 * HOUR), actorId: "USR-002", type: "STATUS_CHANGED", message: "Status changed to INVESTIGATING" });
-  if (["NEEDS_REVIEW", "VERIFIED", "REPORTED", "CLOSED"].includes(status)) tl.push({ id: "TL-3", at: iso(created + 20 * HOUR), actorId: "USR-002", type: "STATUS_CHANGED", message: "Status changed to NEEDS_REVIEW" });
-  if (["VERIFIED", "REPORTED"].includes(status)) tl.push({ id: "TL-4", at: iso(created + 30 * HOUR), actorId: "USR-003", type: "STATUS_CHANGED", message: "Status changed to VERIFIED by reviewer" });
-  if (status === "REPORTED") tl.push({ id: "TL-5", at: iso(created + 40 * HOUR), actorId: "USR-003", type: "STATUS_CHANGED", message: "Status changed to REPORTED" });
+  const tl = [{ id: "TL-1", at: iso(created), actorId: "USR-002", type: "CASE_CREATED", message: "Kasus dibuat" }];
+  if (status !== "OPEN") tl.push({ id: "TL-2", at: iso(created + 3 * HOUR), actorId: "USR-002", type: "STATUS_CHANGED", message: `Status diubah menjadi ${STATUS_ID.INVESTIGATING}` });
+  if (["NEEDS_REVIEW", "VERIFIED", "REPORTED", "CLOSED"].includes(status)) tl.push({ id: "TL-3", at: iso(created + 20 * HOUR), actorId: "USR-002", type: "STATUS_CHANGED", message: `Status diubah menjadi ${STATUS_ID.NEEDS_REVIEW}` });
+  if (["VERIFIED", "REPORTED"].includes(status)) tl.push({ id: "TL-4", at: iso(created + 30 * HOUR), actorId: "USR-003", type: "STATUS_CHANGED", message: `Status diubah menjadi ${STATUS_ID.VERIFIED} oleh peninjau` });
+  if (status === "REPORTED") tl.push({ id: "TL-5", at: iso(created + 40 * HOUR), actorId: "USR-003", type: "STATUS_CHANGED", message: `Status diubah menjadi ${STATUS_ID.REPORTED}` });
   return {
-    id: `CASE-${pad(i + 1, 3)}`, title: t, description: `Prototype case (fictional). Category: ${cat}. All findings are indicators for human review.`,
+    id: `CASE-${pad(i + 1, 3)}`, title: t, description: `Kasus prototipe (fiktif). Kategori: ${CAT_ID[cat]}. Semua temuan adalah indikator untuk ditinjau manusia.`,
     platform: plat, category: cat, priority: pri, status, analystId: "USR-002", reviewerId: reviewer,
     createdAt: iso(created), updatedAt: iso(created + (tl.length + 1) * 8 * HOUR),
     postIds: ps.map((p) => p.id), accountIds: [...new Set(ps.map((p) => p.authorId))],
-    notes: [{ id: "NOTE-1", authorId: "USR-002", text: "Initial triage complete. Collected posts and preserved snapshots as evidence.", createdAt: iso(created + 2 * HOUR) }],
+    notes: [{ id: "NOTE-1", authorId: "USR-002", text: "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.", createdAt: iso(created + 2 * HOUR) }],
     timeline: tl,
   };
 });
@@ -407,15 +413,16 @@ caseDefs.slice(0, 7).forEach((c) => {
 
 // ------------------------------------------------------------------- reports
 const reports = [
-  { id: "RPT-001", caseId: "CASE-005", title: "Report: promotional spam with link farming", status: "submitted", createdBy: "USR-002", approvedBy: "USR-003", reviewerNotes: "Indicators confirmed on manual review.", recommendedAction: "Submit through the platform's official reporting page.", submission: { platform: "x", method: "official_page", submittedAt: iso(ANCHOR - 5 * DAY), submittedBy: "USR-003", status: "SUBMITTED" } },
-  { id: "RPT-002", caseId: "CASE-004", title: "Report: support-desk impersonation", status: "approved", createdBy: "USR-002", approvedBy: "USR-003", reviewerNotes: "Display name mimics a support desk; account is unverified and new.", recommendedAction: "Report via official impersonation form.", submission: null },
-  { id: "RPT-003", caseId: "CASE-002", title: "Report: group-targeting wording", status: "in_review", createdBy: "USR-002", approvedBy: null, reviewerNotes: "", recommendedAction: "Pending reviewer decision.", submission: null },
+  { id: "RPT-001", caseId: "CASE-005", title: "Laporan: spam promosi dengan tautan berantai", status: "submitted", createdBy: "USR-002", approvedBy: "USR-003", reviewerNotes: "Indikator terkonfirmasi pada tinjauan manual.", recommendedAction: "Ajukan melalui halaman pelaporan resmi platform.", submission: { platform: "x", method: "official_page", submittedAt: iso(ANCHOR - 5 * DAY), submittedBy: "USR-003", status: "SUBMITTED" } },
+  { id: "RPT-002", caseId: "CASE-004", title: "Laporan: peniruan identitas pusat layanan", status: "approved", createdBy: "USR-002", approvedBy: "USR-003", reviewerNotes: "Nama tampilan menyerupai pusat layanan; akun belum terverifikasi dan baru dibuat.", recommendedAction: "Laporkan melalui formulir peniruan identitas resmi.", submission: null },
+  { id: "RPT-003", caseId: "CASE-002", title: "Laporan: ujaran yang menyasar kelompok", status: "in_review", createdBy: "USR-002", approvedBy: null, reviewerNotes: "", recommendedAction: "Menunggu keputusan peninjau.", submission: null },
 ];
 
 // -------------------------------------------------------------------- write
 const stripKind = (issue) => {
   const copy = { ...issue };
   delete copy._kind;
+  delete copy._topic;
   return copy;
 };
 write("mock-accounts.json", accounts);

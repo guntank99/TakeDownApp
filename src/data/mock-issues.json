@@ -1,8 +1,8 @@
 [
  {
   "id": "ISS-001",
-  "title": "Regional transit schedule update",
-  "hashtag": "#TransitUpdate",
+  "title": "Jadwal operasional transportasi umum",
+  "hashtag": "#JadwalTransportasi",
   "platforms": [
    "x",
    "facebook"
@@ -19,13 +19,13 @@
    638
   ],
   "status": "monitoring",
-  "firstDetectedAt": "2026-09-07T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+  "firstDetectedAt": "2026-09-09T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T03:00:00Z"
  },
  {
   "id": "ISS-002",
-  "title": "Public library extended hours",
-  "hashtag": "#LibraryHours",
+  "title": "Perpanjangan jam layanan perpustakaan daerah",
+  "hashtag": "#JamPerpustakaan",
   "platforms": [
    "facebook",
    "instagram"
@@ -42,13 +42,13 @@
    145
   ],
   "status": "monitoring",
-  "firstDetectedAt": "2026-09-10T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T11:00:00Z"
+  "firstDetectedAt": "2026-09-12T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T04:00:00Z"
  },
  {
   "id": "ISS-003",
-  "title": "Weather advisory for the coast",
-  "hashtag": "#CoastAdvisory",
+  "title": "Peringatan cuaca ekstrem di wilayah pesisir",
+  "hashtag": "#CuacaPesisir",
   "platforms": [
    "x",
    "news"
@@ -65,13 +65,13 @@
    136
   ],
   "status": "monitoring",
-  "firstDetectedAt": "2026-09-04T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T07:00:00Z"
+  "firstDetectedAt": "2026-09-06T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T00:00:00Z"
  },
  {
   "id": "ISS-004",
-  "title": "City budget consultation",
-  "hashtag": "#BudgetTalk",
+  "title": "Konsultasi publik anggaran daerah",
+  "hashtag": "#AnggaranDaerah",
   "platforms": [
    "facebook",
    "reddit"
@@ -88,13 +88,13 @@
    415
   ],
   "status": "monitoring",
-  "firstDetectedAt": "2026-09-08T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T07:00:00Z"
+  "firstDetectedAt": "2026-09-10T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T00:00:00Z"
  },
  {
   "id": "ISS-005",
-  "title": "School term calendar",
-  "hashtag": "#TermCalendar",
+  "title": "Kalender akademik tahun ajaran baru",
+  "hashtag": "#TahunAjaranBaru",
   "platforms": [
    "facebook",
    "youtube"
@@ -111,13 +111,13 @@
    448
   ],
   "status": "monitoring",
-  "firstDetectedAt": "2026-09-07T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T11:00:00Z"
+  "firstDetectedAt": "2026-09-09T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T04:00:00Z"
  },
  {
   "id": "ISS-006",
-  "title": "Community clean-up campaign",
-  "hashtag": "#CleanUpDay",
+  "title": "Gerakan kerja bakti bersih sungai",
+  "hashtag": "#KerjaBakti",
   "platforms": [
    "instagram",
    "facebook"
@@ -134,13 +134,13 @@
    527
   ],
   "status": "closed",
-  "firstDetectedAt": "2026-09-06T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T12:00:00Z"
+  "firstDetectedAt": "2026-09-08T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T05:00:00Z"
  },
  {
   "id": "ISS-007",
-  "title": "Local hospital new wing opening",
-  "hashtag": "#NewWing",
+  "title": "Peresmian gedung baru puskesmas",
+  "hashtag": "#GedungBaruPuskesmas",
   "platforms": [
    "facebook",
    "x"
@@ -157,13 +157,13 @@
    292
   ],
   "status": "monitoring",
-  "firstDetectedAt": "2026-09-05T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T12:00:00Z"
+  "firstDetectedAt": "2026-09-07T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T05:00:00Z"
  },
  {
   "id": "ISS-008",
-  "title": "Youth science fair results",
-  "hashtag": "#ScienceFair",
+  "title": "Hasil olimpiade sains pelajar",
+  "hashtag": "#OlimpiadeSains",
   "platforms": [
    "youtube",
    "instagram",
@@ -181,13 +181,13 @@
    337
   ],
   "status": "closed",
-  "firstDetectedAt": "2026-09-07T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T07:00:00Z"
+  "firstDetectedAt": "2026-09-09T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T00:00:00Z"
  },
  {
   "id": "ISS-009",
-  "title": "Fictional tariff announcement backlash",
-  "hashtag": "#SampleTariff",
+  "title": "Polemik kenaikan tarif angkutan umum",
+  "hashtag": "#TarifAngkutan",
   "platforms": [
    "x",
    "facebook"
@@ -204,13 +204,13 @@
    1783
   ],
   "status": "active",
-  "firstDetectedAt": "2026-09-04T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T12:00:00Z"
+  "firstDetectedAt": "2026-09-06T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T05:00:00Z"
  },
  {
   "id": "ISS-010",
-  "title": "Ride-share fee change",
-  "hashtag": "#FeeChange",
+  "title": "Perubahan biaya layanan ojek daring",
+  "hashtag": "#BiayaOjekDaring",
   "platforms": [
    "x",
    "reddit"
@@ -227,13 +227,13 @@
    1270
   ],
   "status": "monitoring",
-  "firstDetectedAt": "2026-09-06T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+  "firstDetectedAt": "2026-09-08T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T03:00:00Z"
  },
  {
   "id": "ISS-011",
-  "title": "Stadium construction delays",
-  "hashtag": "#StadiumDelay",
+  "title": "Keterlambatan pembangunan stadion daerah",
+  "hashtag": "#StadionTerlambat",
   "platforms": [
    "x",
    "facebook",
@@ -251,13 +251,13 @@
    504
   ],
   "status": "active",
-  "firstDetectedAt": "2026-09-12T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+  "firstDetectedAt": "2026-09-14T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T03:00:00Z"
  },
  {
   "id": "ISS-012",
-  "title": "Water utility billing complaints",
-  "hashtag": "#WaterBill",
+  "title": "Keluhan tagihan air PDAM",
+  "hashtag": "#TagihanAir",
   "platforms": [
    "facebook",
    "x"
@@ -274,13 +274,13 @@
    1438
   ],
   "status": "monitoring",
-  "firstDetectedAt": "2026-09-09T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T12:00:00Z"
+  "firstDetectedAt": "2026-09-11T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T05:00:00Z"
  },
  {
   "id": "ISS-013",
-  "title": "Public transport fare rise",
-  "hashtag": "#FareRise",
+  "title": "Kenaikan harga bahan pokok di pasar",
+  "hashtag": "#HargaPokokNaik",
   "platforms": [
    "x",
    "tiktok"
@@ -297,13 +297,13 @@
    1280
   ],
   "status": "active",
-  "firstDetectedAt": "2026-09-07T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T12:00:00Z"
+  "firstDetectedAt": "2026-09-09T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T05:00:00Z"
  },
  {
   "id": "ISS-014",
-  "title": "New parking rules downtown",
-  "hashtag": "#ParkingRules",
+  "title": "Aturan parkir baru di pusat kota",
+  "hashtag": "#AturanParkir",
   "platforms": [
    "facebook",
    "reddit"
@@ -320,13 +320,13 @@
    1085
   ],
   "status": "monitoring",
-  "firstDetectedAt": "2026-09-09T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T11:00:00Z"
+  "firstDetectedAt": "2026-09-11T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T04:00:00Z"
  },
  {
   "id": "ISS-015",
-  "title": "Unverified claim about a grain shortage",
-  "hashtag": "#GrainShortage",
+  "title": "Klaim viral kelangkaan beras (belum terverifikasi)",
+  "hashtag": "#IsuBeras",
   "platforms": [
    "telegram",
    "x",
@@ -344,13 +344,13 @@
    1565
   ],
   "status": "active",
-  "firstDetectedAt": "2026-09-14T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T09:00:00Z"
+  "firstDetectedAt": "2026-09-16T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T02:00:00Z"
  },
  {
   "id": "ISS-016",
-  "title": "Viral claim of a secret dam release",
-  "hashtag": "#DamRelease",
+  "title": "Klaim viral pelepasan air bendungan (belum terverifikasi)",
+  "hashtag": "#IsuBendungan",
   "platforms": [
    "x",
    "telegram"
@@ -367,13 +367,13 @@
    4103
   ],
   "status": "active",
-  "firstDetectedAt": "2026-09-14T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+  "firstDetectedAt": "2026-09-16T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T03:00:00Z"
  },
  {
   "id": "ISS-017",
-  "title": "Claim that a vaccine batch was recalled",
-  "hashtag": "#BatchRecall",
+  "title": "Klaim viral penarikan batch vaksin (belum terverifikasi)",
+  "hashtag": "#IsuVaksin",
   "platforms": [
    "telegram",
    "tiktok",
@@ -391,13 +391,13 @@
    2027
   ],
   "status": "active",
-  "firstDetectedAt": "2026-09-15T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+  "firstDetectedAt": "2026-09-17T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T03:00:00Z"
  },
  {
   "id": "ISS-018",
-  "title": "Group-targeting wording in reply threads",
-  "hashtag": "#OurCityFirst",
+  "title": "Ujaran bermuatan kebencian terhadap kelompok Vellani (fiktif)",
+  "hashtag": "#TolakVellani",
   "platforms": [
    "x",
    "telegram"
@@ -414,13 +414,13 @@
    3135
   ],
   "status": "active",
-  "firstDetectedAt": "2026-09-14T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+  "firstDetectedAt": "2026-09-16T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T03:00:00Z"
  },
  {
   "id": "ISS-019",
-  "title": "Hostile posts about newcomers",
-  "hashtag": "#NoNewcomers",
+  "title": "Provokasi terhadap kelompok Norrin (fiktif)",
+  "hashtag": "#KotaKitaDuluan",
   "platforms": [
    "x",
    "tiktok"
@@ -437,13 +437,13 @@
    2024
   ],
   "status": "active",
-  "firstDetectedAt": "2026-09-15T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T09:00:00Z"
+  "firstDetectedAt": "2026-09-17T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T02:00:00Z"
  },
  {
   "id": "ISS-020",
-  "title": "Allegations against a local official",
-  "hashtag": "#ValeExposed",
+  "title": "Tuduhan terhadap seorang pejabat daerah (fiktif)",
+  "hashtag": "#PejabatDiduga",
   "platforms": [
    "x",
    "facebook"
@@ -460,7 +460,7 @@
    227
   ],
   "status": "monitoring",
-  "firstDetectedAt": "2026-09-10T12:00:00Z",
-  "lastUpdatedAt": "2026-09-17T09:00:00Z"
+  "firstDetectedAt": "2026-09-12T05:00:00Z",
+  "lastUpdatedAt": "2026-09-19T02:00:00Z"
  }
 ]

@@ -7,6 +7,6 @@ import { formatZodError, textSchema } from "@/lib/validation/schemas";
 export const POST = withApi({}, async (req, { user }) => {
   const parsed = textSchema.safeParse(await readJson(req));
   if (!parsed.success) throw new HttpError(400, formatZodError(parsed.error));
-  logAudit({ user, action: "ANALYZE_POST", object: `api text (${parsed.data.text.length} chars)` });
+  logAudit({ user, action: "ANALYZE_POST", object: `analisis teks via API (${parsed.data.text.length} karakter)` });
   return analyzeContent(parsed.data.text);
 });

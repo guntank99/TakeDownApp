@@ -3,7 +3,7 @@ import { IMPERSONATION_NAME_HINTS } from "./lexicon";
 
 /**
  * Authenticity / behaviour signals for one account. Wording is deliberately
- * hedged: an account is "Potentially Inauthentic", never "fake".
+ * hedged: an account is "Berpotensi Tidak Autentik" (potentially inauthentic), never "palsu".
  */
 
 export interface AccountContext {
@@ -51,16 +51,16 @@ export function authenticitySignals(a: Account, ctx: AccountContext): Authentici
   const engagementPerFollower = ctx.avgEngagementPerPost / Math.max(a.followers, 1);
 
   return [
-    signal("age", "Account Age", `${age} days`, age < 30 ? 10 : 6, age < 90, "Recently created accounts carry less history."),
-    signal("frequency", "Posting Frequency", `${a.postsPerDay}/day`, a.postsPerDay > 20 ? 10 : 5, a.postsPerDay > 10, "Sustained very high posting rates are unusual for individuals."),
-    signal("ratio", "Follower/Following Ratio", ratio.toFixed(2), 8, a.following >= 1000 && ratio < 0.1, "Follows many accounts while having few followers."),
-    signal("engagement", "Engagement Pattern", `${engagementPerFollower.toFixed(2)} per follower`, 4, engagementPerFollower > 0.15, "Engagement disproportionate to audience size."),
-    signal("repetition", "Content Repetition", `${Math.round(a.contentRepetition * 100)}%`, a.contentRepetition >= 0.5 ? 12 : 6, a.contentRepetition >= 0.3, "Frequently repeats earlier content."),
-    signal("spike", "Activity Spike", a.activitySpike ? "observed" : "none", 6, a.activitySpike, "Sudden burst of activity."),
-    signal("completeness", "Profile Completeness", `${a.profileCompleteness}%`, a.profileCompleteness < 50 ? 8 : 3, a.profileCompleteness < 70, "Sparse public profile."),
-    signal("similarity", "Content Similarity", ctx.coordinationAccounts >= 3 ? "near-duplicates found" : "none", 10, ctx.coordinationAccounts >= 3, "Posts closely match posts from other accounts."),
-    signal("coordination", "Coordination Indicators", `${ctx.coordinationAccounts} accounts in group`, 8, ctx.coordinationAccounts >= 3, "Near-simultaneous posting of similar text with other accounts."),
-    signal("network", "Network Indicators", `${ctx.youngNeighbors} young neighbours`, 8, ctx.youngNeighbors >= 3, "Densely connected to other recently created accounts."),
+    signal("age", "Usia Akun", `${age} hari`, age < 30 ? 10 : 6, age < 90, "Akun yang baru dibuat memiliki rekam jejak yang lebih sedikit."),
+    signal("frequency", "Frekuensi Posting", `${a.postsPerDay}/hari`, a.postsPerDay > 20 ? 10 : 5, a.postsPerDay > 10, "Laju posting yang sangat tinggi secara terus-menerus tidak lazim bagi individu."),
+    signal("ratio", "Rasio Pengikut/Mengikuti", ratio.toFixed(2), 8, a.following >= 1000 && ratio < 0.1, "Mengikuti banyak akun tetapi hanya memiliki sedikit pengikut."),
+    signal("engagement", "Pola Interaksi", `${engagementPerFollower.toFixed(2)} per pengikut`, 4, engagementPerFollower > 0.15, "Interaksi tidak sebanding dengan ukuran audiens."),
+    signal("repetition", "Pengulangan Konten", `${Math.round(a.contentRepetition * 100)}%`, a.contentRepetition >= 0.5 ? 12 : 6, a.contentRepetition >= 0.3, "Sering mengulang konten sebelumnya."),
+    signal("spike", "Lonjakan Aktivitas", a.activitySpike ? "teramati" : "tidak ada", 6, a.activitySpike, "Aktivitas meningkat tiba-tiba."),
+    signal("completeness", "Kelengkapan Profil", `${a.profileCompleteness}%`, a.profileCompleteness < 50 ? 8 : 3, a.profileCompleteness < 70, "Profil publik minim informasi."),
+    signal("similarity", "Kemiripan Konten", ctx.coordinationAccounts >= 3 ? "ditemukan teks hampir identik" : "tidak ada", 10, ctx.coordinationAccounts >= 3, "Posting sangat mirip dengan posting akun lain."),
+    signal("coordination", "Indikator Koordinasi", `${ctx.coordinationAccounts} akun dalam kelompok`, 8, ctx.coordinationAccounts >= 3, "Memposting teks serupa hampir bersamaan dengan akun lain."),
+    signal("network", "Indikator Jaringan", `${ctx.youngNeighbors} tetangga akun baru`, 8, ctx.youngNeighbors >= 3, "Terhubung rapat dengan akun-akun yang baru dibuat."),
   ];
 }
 
@@ -87,12 +87,12 @@ export function impersonationIndicator(a: Account, now: number): Indicator {
   const detected = hints.length > 0 && !a.verified && young;
   return {
     key: "impersonation",
-    label: "Impersonation Indicator",
+    label: "Indikator Peniruan Identitas",
     detected,
     confidence: detected ? Math.min(0.85, 0.5 + 0.15 * hints.length + (a.profileCompleteness < 60 ? 0.1 : 0)) : 0,
     reason: detected
-      ? "Display name uses authority/support wording while the account is unverified and recently created."
-      : "No indicators detected.",
+      ? "Nama tampilan memakai kata bernada otoritas/layanan, sementara akun belum terverifikasi dan baru dibuat."
+      : "Tidak ada indikator yang terdeteksi.",
     evidence: detected ? [a.displayName, ...hints] : [],
   };
 }

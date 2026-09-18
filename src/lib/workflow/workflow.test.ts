@@ -33,7 +33,7 @@ describe("case transitions", () => {
     const self = user("reviewer", "USR-002"); // reviewer role, but is the analyst on the case
     const r = canTransitionCase(self, theCase("NEEDS_REVIEW"), "VERIFIED");
     expect(r.ok).toBe(false);
-    if (!r.ok) expect(r.reason).toMatch(/analyst/);
+    if (!r.ok) expect(r.reason).toMatch(/analis/);
   });
 
   it("never allows a manual move to REPORTED or skipping steps", () => {

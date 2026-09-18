@@ -1,16 +1,16 @@
 [
  {
   "id": "CASE-001",
-  "title": "Coordinated amplification of an unverified grain claim",
-  "description": "Prototype case (fictional). Category: Platform Manipulation. All findings are indicators for human review.",
+  "title": "Amplifikasi terkoordinasi klaim kelangkaan beras",
+  "description": "Kasus prototipe (fiktif). Kategori: Manipulasi Platform. Semua temuan adalah indikator untuk ditinjau manusia.",
   "platform": "x",
   "category": "Platform Manipulation",
   "priority": "high",
   "status": "INVESTIGATING",
   "analystId": "USR-002",
   "reviewerId": null,
-  "createdAt": "2026-09-07T17:00:00Z",
-  "updatedAt": "2026-09-08T17:00:00Z",
+  "createdAt": "2026-09-09T10:00:00Z",
+  "updatedAt": "2026-09-10T10:00:00Z",
   "postIds": [
    "POST-055",
    "POST-056",
@@ -29,39 +29,39 @@
    {
     "id": "NOTE-1",
     "authorId": "USR-002",
-    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
-    "createdAt": "2026-09-07T19:00:00Z"
+    "text": "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.",
+    "createdAt": "2026-09-09T12:00:00Z"
    }
   ],
   "timeline": [
    {
     "id": "TL-1",
-    "at": "2026-09-07T17:00:00Z",
+    "at": "2026-09-09T10:00:00Z",
     "actorId": "USR-002",
     "type": "CASE_CREATED",
-    "message": "Case created"
+    "message": "Kasus dibuat"
    },
    {
     "id": "TL-2",
-    "at": "2026-09-07T20:00:00Z",
+    "at": "2026-09-09T13:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to INVESTIGATING"
+    "message": "Status diubah menjadi Diselidiki"
    }
   ]
  },
  {
   "id": "CASE-002",
-  "title": "Derogatory wording targeting a fictional group",
-  "description": "Prototype case (fictional). Category: Hate Speech. All findings are indicators for human review.",
+  "title": "Ujaran merendahkan yang menyasar kelompok fiktif",
+  "description": "Kasus prototipe (fiktif). Kategori: Ujaran Kebencian. Semua temuan adalah indikator untuk ditinjau manusia.",
   "platform": "x",
   "category": "Hate Speech",
   "priority": "critical",
   "status": "NEEDS_REVIEW",
   "analystId": "USR-002",
   "reviewerId": "USR-003",
-  "createdAt": "2026-09-08T17:00:00Z",
-  "updatedAt": "2026-09-10T01:00:00Z",
+  "createdAt": "2026-09-10T10:00:00Z",
+  "updatedAt": "2026-09-11T18:00:00Z",
   "postIds": [
    "POST-076",
    "POST-077",
@@ -76,46 +76,46 @@
    {
     "id": "NOTE-1",
     "authorId": "USR-002",
-    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
-    "createdAt": "2026-09-08T19:00:00Z"
+    "text": "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.",
+    "createdAt": "2026-09-10T12:00:00Z"
    }
   ],
   "timeline": [
    {
     "id": "TL-1",
-    "at": "2026-09-08T17:00:00Z",
+    "at": "2026-09-10T10:00:00Z",
     "actorId": "USR-002",
     "type": "CASE_CREATED",
-    "message": "Case created"
+    "message": "Kasus dibuat"
    },
    {
     "id": "TL-2",
-    "at": "2026-09-08T20:00:00Z",
+    "at": "2026-09-10T13:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to INVESTIGATING"
+    "message": "Status diubah menjadi Diselidiki"
    },
    {
     "id": "TL-3",
-    "at": "2026-09-09T13:00:00Z",
+    "at": "2026-09-11T06:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to NEEDS_REVIEW"
+    "message": "Status diubah menjadi Perlu ditinjau"
    }
   ]
  },
  {
   "id": "CASE-003",
-  "title": "Unverified allegations against a local official",
-  "description": "Prototype case (fictional). Category: Harassment. All findings are indicators for human review.",
+  "title": "Tuduhan tanpa sumber terhadap seorang pejabat daerah",
+  "description": "Kasus prototipe (fiktif). Kategori: Pelecehan. Semua temuan adalah indikator untuk ditinjau manusia.",
   "platform": "x",
   "category": "Harassment",
   "priority": "medium",
   "status": "OPEN",
   "analystId": "USR-002",
   "reviewerId": null,
-  "createdAt": "2026-09-09T14:00:00Z",
-  "updatedAt": "2026-09-10T06:00:00Z",
+  "createdAt": "2026-09-11T07:00:00Z",
+  "updatedAt": "2026-09-11T23:00:00Z",
   "postIds": [
    "POST-086",
    "POST-087",
@@ -130,32 +130,32 @@
    {
     "id": "NOTE-1",
     "authorId": "USR-002",
-    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
-    "createdAt": "2026-09-09T16:00:00Z"
+    "text": "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.",
+    "createdAt": "2026-09-11T09:00:00Z"
    }
   ],
   "timeline": [
    {
     "id": "TL-1",
-    "at": "2026-09-09T14:00:00Z",
+    "at": "2026-09-11T07:00:00Z",
     "actorId": "USR-002",
     "type": "CASE_CREATED",
-    "message": "Case created"
+    "message": "Kasus dibuat"
    }
   ]
  },
  {
   "id": "CASE-004",
-  "title": "Account impersonating a support desk",
-  "description": "Prototype case (fictional). Category: Impersonation. All findings are indicators for human review.",
+  "title": "Akun meniru pusat layanan pelanggan",
+  "description": "Kasus prototipe (fiktif). Kategori: Peniruan Identitas. Semua temuan adalah indikator untuk ditinjau manusia.",
   "platform": "x",
   "category": "Impersonation",
   "priority": "high",
   "status": "VERIFIED",
   "analystId": "USR-002",
   "reviewerId": "USR-003",
-  "createdAt": "2026-09-10T15:00:00Z",
-  "updatedAt": "2026-09-12T07:00:00Z",
+  "createdAt": "2026-09-12T08:00:00Z",
+  "updatedAt": "2026-09-14T00:00:00Z",
   "postIds": [
    "POST-093",
    "POST-094"
@@ -167,53 +167,53 @@
    {
     "id": "NOTE-1",
     "authorId": "USR-002",
-    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
-    "createdAt": "2026-09-10T17:00:00Z"
+    "text": "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.",
+    "createdAt": "2026-09-12T10:00:00Z"
    }
   ],
   "timeline": [
    {
     "id": "TL-1",
-    "at": "2026-09-10T15:00:00Z",
+    "at": "2026-09-12T08:00:00Z",
     "actorId": "USR-002",
     "type": "CASE_CREATED",
-    "message": "Case created"
+    "message": "Kasus dibuat"
    },
    {
     "id": "TL-2",
-    "at": "2026-09-10T18:00:00Z",
+    "at": "2026-09-12T11:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to INVESTIGATING"
+    "message": "Status diubah menjadi Diselidiki"
    },
    {
     "id": "TL-3",
-    "at": "2026-09-11T11:00:00Z",
+    "at": "2026-09-13T04:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to NEEDS_REVIEW"
+    "message": "Status diubah menjadi Perlu ditinjau"
    },
    {
     "id": "TL-4",
-    "at": "2026-09-11T21:00:00Z",
+    "at": "2026-09-13T14:00:00Z",
     "actorId": "USR-003",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to VERIFIED by reviewer"
+    "message": "Status diubah menjadi Terverifikasi oleh peninjau"
    }
   ]
  },
  {
   "id": "CASE-005",
-  "title": "Promotional spam with link farming",
-  "description": "Prototype case (fictional). Category: Spam. All findings are indicators for human review.",
+  "title": "Spam promosi dengan tautan berantai",
+  "description": "Kasus prototipe (fiktif). Kategori: Spam. Semua temuan adalah indikator untuk ditinjau manusia.",
   "platform": "x",
   "category": "Spam",
   "priority": "low",
   "status": "REPORTED",
   "analystId": "USR-002",
   "reviewerId": "USR-003",
-  "createdAt": "2026-09-11T12:00:00Z",
-  "updatedAt": "2026-09-13T12:00:00Z",
+  "createdAt": "2026-09-13T05:00:00Z",
+  "updatedAt": "2026-09-15T05:00:00Z",
   "postIds": [
    "POST-089",
    "POST-090",
@@ -228,60 +228,60 @@
    {
     "id": "NOTE-1",
     "authorId": "USR-002",
-    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
-    "createdAt": "2026-09-11T14:00:00Z"
+    "text": "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.",
+    "createdAt": "2026-09-13T07:00:00Z"
    }
   ],
   "timeline": [
    {
     "id": "TL-1",
-    "at": "2026-09-11T12:00:00Z",
+    "at": "2026-09-13T05:00:00Z",
     "actorId": "USR-002",
     "type": "CASE_CREATED",
-    "message": "Case created"
+    "message": "Kasus dibuat"
    },
    {
     "id": "TL-2",
-    "at": "2026-09-11T15:00:00Z",
+    "at": "2026-09-13T08:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to INVESTIGATING"
+    "message": "Status diubah menjadi Diselidiki"
    },
    {
     "id": "TL-3",
-    "at": "2026-09-12T08:00:00Z",
+    "at": "2026-09-14T01:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to NEEDS_REVIEW"
+    "message": "Status diubah menjadi Perlu ditinjau"
    },
    {
     "id": "TL-4",
-    "at": "2026-09-12T18:00:00Z",
+    "at": "2026-09-14T11:00:00Z",
     "actorId": "USR-003",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to VERIFIED by reviewer"
+    "message": "Status diubah menjadi Terverifikasi oleh peninjau"
    },
    {
     "id": "TL-5",
-    "at": "2026-09-13T04:00:00Z",
+    "at": "2026-09-14T21:00:00Z",
     "actorId": "USR-003",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to REPORTED"
+    "message": "Status diubah menjadi Sudah dilaporkan"
    }
   ]
  },
  {
   "id": "CASE-006",
-  "title": "Viral dam-release claim on channels",
-  "description": "Prototype case (fictional). Category: Misinformation. All findings are indicators for human review.",
+  "title": "Klaim viral pelepasan air bendungan di kanal Telegram",
+  "description": "Kasus prototipe (fiktif). Kategori: Misinformasi. Semua temuan adalah indikator untuk ditinjau manusia.",
   "platform": "telegram",
   "category": "Misinformation",
   "priority": "high",
   "status": "INVESTIGATING",
   "analystId": "USR-002",
   "reviewerId": null,
-  "createdAt": "2026-09-12T19:00:00Z",
-  "updatedAt": "2026-09-13T19:00:00Z",
+  "createdAt": "2026-09-14T12:00:00Z",
+  "updatedAt": "2026-09-15T12:00:00Z",
   "postIds": [
    "POST-062",
    "POST-063",
@@ -298,39 +298,39 @@
    {
     "id": "NOTE-1",
     "authorId": "USR-002",
-    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
-    "createdAt": "2026-09-12T21:00:00Z"
+    "text": "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.",
+    "createdAt": "2026-09-14T14:00:00Z"
    }
   ],
   "timeline": [
    {
     "id": "TL-1",
-    "at": "2026-09-12T19:00:00Z",
+    "at": "2026-09-14T12:00:00Z",
     "actorId": "USR-002",
     "type": "CASE_CREATED",
-    "message": "Case created"
+    "message": "Kasus dibuat"
    },
    {
     "id": "TL-2",
-    "at": "2026-09-12T22:00:00Z",
+    "at": "2026-09-14T15:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to INVESTIGATING"
+    "message": "Status diubah menjadi Diselidiki"
    }
   ]
  },
  {
   "id": "CASE-007",
-  "title": "Targeted harassment in reply threads",
-  "description": "Prototype case (fictional). Category: Harassment. All findings are indicators for human review.",
+  "title": "Pelecehan terarah di utas balasan",
+  "description": "Kasus prototipe (fiktif). Kategori: Pelecehan. Semua temuan adalah indikator untuk ditinjau manusia.",
   "platform": "x",
   "category": "Harassment",
   "priority": "high",
   "status": "NEEDS_REVIEW",
   "analystId": "USR-002",
   "reviewerId": "USR-003",
-  "createdAt": "2026-09-13T19:00:00Z",
-  "updatedAt": "2026-09-15T03:00:00Z",
+  "createdAt": "2026-09-15T12:00:00Z",
+  "updatedAt": "2026-09-16T20:00:00Z",
   "postIds": [
    "POST-080",
    "POST-085"
@@ -342,46 +342,46 @@
    {
     "id": "NOTE-1",
     "authorId": "USR-002",
-    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
-    "createdAt": "2026-09-13T21:00:00Z"
+    "text": "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.",
+    "createdAt": "2026-09-15T14:00:00Z"
    }
   ],
   "timeline": [
    {
     "id": "TL-1",
-    "at": "2026-09-13T19:00:00Z",
+    "at": "2026-09-15T12:00:00Z",
     "actorId": "USR-002",
     "type": "CASE_CREATED",
-    "message": "Case created"
+    "message": "Kasus dibuat"
    },
    {
     "id": "TL-2",
-    "at": "2026-09-13T22:00:00Z",
+    "at": "2026-09-15T15:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to INVESTIGATING"
+    "message": "Status diubah menjadi Diselidiki"
    },
    {
     "id": "TL-3",
-    "at": "2026-09-14T15:00:00Z",
+    "at": "2026-09-16T08:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to NEEDS_REVIEW"
+    "message": "Status diubah menjadi Perlu ditinjau"
    }
   ]
  },
  {
   "id": "CASE-008",
-  "title": "Vaccine-batch recall rumor spread",
-  "description": "Prototype case (fictional). Category: Misinformation. All findings are indicators for human review.",
+  "title": "Rumor penarikan batch vaksin di media sosial",
+  "description": "Kasus prototipe (fiktif). Kategori: Misinformasi. Semua temuan adalah indikator untuk ditinjau manusia.",
   "platform": "tiktok",
   "category": "Misinformation",
   "priority": "medium",
   "status": "OPEN",
   "analystId": "USR-002",
   "reviewerId": null,
-  "createdAt": "2026-09-14T13:00:00Z",
-  "updatedAt": "2026-09-15T05:00:00Z",
+  "createdAt": "2026-09-16T06:00:00Z",
+  "updatedAt": "2026-09-16T22:00:00Z",
   "postIds": [
    "POST-069",
    "POST-070",
@@ -398,32 +398,32 @@
    {
     "id": "NOTE-1",
     "authorId": "USR-002",
-    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
-    "createdAt": "2026-09-14T15:00:00Z"
+    "text": "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.",
+    "createdAt": "2026-09-16T08:00:00Z"
    }
   ],
   "timeline": [
    {
     "id": "TL-1",
-    "at": "2026-09-14T13:00:00Z",
+    "at": "2026-09-16T06:00:00Z",
     "actorId": "USR-002",
     "type": "CASE_CREATED",
-    "message": "Case created"
+    "message": "Kasus dibuat"
    }
   ]
  },
  {
   "id": "CASE-009",
-  "title": "Tariff backlash review (no violation found)",
-  "description": "Prototype case (fictional). Category: Other. All findings are indicators for human review.",
+  "title": "Tinjauan gelombang keluhan tarif (tidak ditemukan pelanggaran)",
+  "description": "Kasus prototipe (fiktif). Kategori: Lainnya. Semua temuan adalah indikator untuk ditinjau manusia.",
   "platform": "x",
   "category": "Other",
   "priority": "low",
   "status": "CLOSED",
   "analystId": "USR-002",
   "reviewerId": "USR-003",
-  "createdAt": "2026-09-15T13:00:00Z",
-  "updatedAt": "2026-09-16T21:00:00Z",
+  "createdAt": "2026-09-17T06:00:00Z",
+  "updatedAt": "2026-09-18T14:00:00Z",
   "postIds": [
    "POST-025",
    "POST-026",
@@ -438,46 +438,46 @@
    {
     "id": "NOTE-1",
     "authorId": "USR-002",
-    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
-    "createdAt": "2026-09-15T15:00:00Z"
+    "text": "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.",
+    "createdAt": "2026-09-17T08:00:00Z"
    }
   ],
   "timeline": [
    {
     "id": "TL-1",
-    "at": "2026-09-15T13:00:00Z",
+    "at": "2026-09-17T06:00:00Z",
     "actorId": "USR-002",
     "type": "CASE_CREATED",
-    "message": "Case created"
+    "message": "Kasus dibuat"
    },
    {
     "id": "TL-2",
-    "at": "2026-09-15T16:00:00Z",
+    "at": "2026-09-17T09:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to INVESTIGATING"
+    "message": "Status diubah menjadi Diselidiki"
    },
    {
     "id": "TL-3",
-    "at": "2026-09-16T09:00:00Z",
+    "at": "2026-09-18T02:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to NEEDS_REVIEW"
+    "message": "Status diubah menjadi Perlu ditinjau"
    }
   ]
  },
  {
   "id": "CASE-010",
-  "title": "Earlier community page review",
-  "description": "Prototype case (fictional). Category: Other. All findings are indicators for human review.",
+  "title": "Tinjauan awal halaman komunitas",
+  "description": "Kasus prototipe (fiktif). Kategori: Lainnya. Semua temuan adalah indikator untuk ditinjau manusia.",
   "platform": "facebook",
   "category": "Other",
   "priority": "low",
   "status": "CLOSED",
   "analystId": "USR-002",
   "reviewerId": "USR-003",
-  "createdAt": "2026-09-16T16:00:00Z",
-  "updatedAt": "2026-09-18T00:00:00Z",
+  "createdAt": "2026-09-18T09:00:00Z",
+  "updatedAt": "2026-09-19T17:00:00Z",
   "postIds": [
    "POST-016",
    "POST-017"
@@ -490,31 +490,31 @@
    {
     "id": "NOTE-1",
     "authorId": "USR-002",
-    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
-    "createdAt": "2026-09-16T18:00:00Z"
+    "text": "Triase awal selesai. Postingan dikumpulkan dan snapshot disimpan sebagai bukti.",
+    "createdAt": "2026-09-18T11:00:00Z"
    }
   ],
   "timeline": [
    {
     "id": "TL-1",
-    "at": "2026-09-16T16:00:00Z",
+    "at": "2026-09-18T09:00:00Z",
     "actorId": "USR-002",
     "type": "CASE_CREATED",
-    "message": "Case created"
+    "message": "Kasus dibuat"
    },
    {
     "id": "TL-2",
-    "at": "2026-09-16T19:00:00Z",
+    "at": "2026-09-18T12:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to INVESTIGATING"
+    "message": "Status diubah menjadi Diselidiki"
    },
    {
     "id": "TL-3",
-    "at": "2026-09-17T12:00:00Z",
+    "at": "2026-09-19T05:00:00Z",
     "actorId": "USR-002",
     "type": "STATUS_CHANGED",
-    "message": "Status changed to NEEDS_REVIEW"
+    "message": "Status diubah menjadi Perlu ditinjau"
    }
   ]
  }

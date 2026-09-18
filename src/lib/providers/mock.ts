@@ -29,7 +29,7 @@ const accountById = new Map(accounts.map((a) => [a.id, a]));
 /** Simulated data only. Never represents live social media content. */
 export const mockProvider: SocialMediaProvider = {
   id: "mock",
-  label: "MOCK / SIMULATED",
+  label: "MOCK / SIMULASI",
   isMock: true,
 
   async searchPosts(query) {

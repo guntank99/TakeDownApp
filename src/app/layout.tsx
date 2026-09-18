@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     template: "%s · Social Sentinel",
   },
   description:
-    "Monitor • Analyze • Verify • Document • Report. Social media monitoring and SOCMINT workspace.",
+    "Pantau • Analisis • Verifikasi • Dokumentasikan • Laporkan. Ruang kerja pemantauan media sosial dan SOCMINT.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="id"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

@@ -17,7 +17,7 @@ const users: UserRecord[] = [
     id: "USR-001",
     username: "admin",
     email: "admin@sentinel.example",
-    name: "Demo Admin",
+    name: "Admin Demo",
     role: "admin",
     passwordHash:
       "$2b$10$eMlrS3O1lh/pyh6i8TTPxe7N9ChXUKTJwZel3sa/2fMWg/wFHmTVK",
@@ -26,7 +26,7 @@ const users: UserRecord[] = [
     id: "USR-002",
     username: "analyst",
     email: "analyst@sentinel.example",
-    name: "Demo Analyst",
+    name: "Analis Demo",
     role: "analyst",
     passwordHash:
       "$2b$10$G3E7QEcIMwI0Qu.i/ul5Duvzjj1skTE4YGr5UMxOV8bIFhVs9P5hS",
@@ -35,7 +35,7 @@ const users: UserRecord[] = [
     id: "USR-003",
     username: "reviewer",
     email: "reviewer@sentinel.example",
-    name: "Demo Reviewer",
+    name: "Peninjau Demo",
     role: "reviewer",
     passwordHash:
       "$2b$10$xojNsR1ykcGdutGc/Hsgcu3gpA4Lwh5A5Ba581CHUSPa.OsSeKPH.",

@@ -4,60 +4,103 @@ import { DataTable, Pagination } from "@/components/tables/DataTable";
 import { Badge } from "@/components/ui/badges";
 import { FilterPanel } from "@/components/ui/FilterPanel";
 import { Notice, PageHeader } from "@/components/ui/layout";
-import { requireRole } from "@/lib/auth/dal";
-import { listAudit } from "@/lib/services/audit";
-import { formatDateTime } from "@/lib/utils/format";
-import { pageParam, paginate, param } from "@/lib/utils/params";
+import { USER_DIRECTORY } from "@/lib/auth/directory";
+import { verifySession } from "@/lib/auth/dal";
+import { AUDIT_ACTION_LABEL, AUDIT_RESULT_LABEL } from "@/lib/i18n/labels";
+import { listAuditFor } from "@/lib/services/audit";
+import { formatAgo, formatDateTime } from "@/lib/utils/format";
+import { enumParam, pageParam, paginate, param } from "@/lib/utils/params";
+import { nowMs } from "@/lib/utils/time";
+import type { AuditAction } from "@/types";
 
-export const metadata: Metadata = { title: "Audit log" };
+export const metadata: Metadata = { title: "Riwayat Aktivitas" };
 
-const ACTIONS = [
-  "LOGIN", "LOGIN_FAILED", "LOGOUT", "CREATE_CASE", "UPDATE_CASE", "ANALYZE_POST", "ANALYZE_ACCOUNT",
-  "CREATE_EVIDENCE", "GENERATE_REPORT", "UPDATE_REPORT", "EXPORT_REPORT", "SUBMIT_REPORT", "UPDATE_POLICY",
-];
+const ACTIONS = Object.keys(AUDIT_ACTION_LABEL) as AuditAction[];
+const RESULTS = ["SUCCESS", "DENIED", "FAILED"] as const;
 
-export default async function AuditPage({ searchParams }: PageProps<"/audit">) {
-  // Audit trails are sensitive: reviewers and admins only.
-  await requireRole("admin", "reviewer");
+export default async function ActivityPage({ searchParams }: PageProps<"/audit">) {
+  const user = await verifySession();
   const sp = await searchParams;
-  const action = param(sp, "action");
-  const q = param(sp, "q").slice(0, 200);
-  const result = param(sp, "result");
+  const { entries, scope } = listAuditFor(user);
 
-  const all = listAudit().filter(
-    (e) => (!action || e.action === action) && (!result || e.result === result)
-      && (!q || `${e.userName} ${e.object} ${e.caseId ?? ""}`.toLowerCase().includes(q.toLowerCase())),
+  const action = enumParam(sp, "action", ACTIONS);
+  const result = enumParam(sp, "result", RESULTS);
+  const who = scope === "all" ? param(sp, "user").slice(0, 64) : "";
+  const q = param(sp, "q").slice(0, 200).toLowerCase();
+  const date = (k: string) => (/^\d{4}-\d{2}-\d{2}$/.test(param(sp, k)) ? param(sp, k) : "");
+  const from = date("from");
+  const to = date("to");
+
+  const filtered = entries.filter(
+    (e) =>
+      (!action || e.action === action) &&
+      (!result || e.result === result) &&
+      (!who || e.userId === who) &&
+      (!from || e.at.slice(0, 10) >= from) &&
+      (!to || e.at.slice(0, 10) <= to) &&
+      (!q || `${e.userName} ${e.object} ${e.caseId ?? ""} ${AUDIT_ACTION_LABEL[e.action]}`.toLowerCase().includes(q)),
   );
-  const { rows, page, pages, total } = paginate(all, pageParam(sp), 20);
-  const values = Object.fromEntries(Object.entries({ action, q, result }).filter(([, v]) => v)) as Record<string, string>;
+  const { rows, page, pages, total } = paginate(filtered, pageParam(sp), 20);
+  const values = Object.fromEntries(Object.entries({ q: param(sp, "q"), action, result, user: who, from, to }).filter(([, v]) => v)) as Record<string, string>;
+
+  const now = nowMs();
+  const day = filtered.filter((e) => now - Date.parse(e.at) < 24 * 3_600_000);
+  const stats = [
+    ["Aktivitas (sesuai filter)", filtered.length],
+    ["24 jam terakhir", day.length],
+    ["Ditolak / gagal", filtered.filter((e) => e.result !== "SUCCESS").length],
+    ["Pengguna", new Set(filtered.map((e) => e.userId)).size],
+  ] as const;
 
   return (
     <div>
-      <PageHeader title="Audit log" description="Append-only record of who did what, to which object, and whether it succeeded." />
-      <div className="mb-4">
-        <Notice tone="warning">Prototype store: entries live in memory and reset when the server restarts. Production keeps them in the database.</Notice>
+      <PageHeader
+        title="Riwayat Aktivitas"
+        description="Catatan kronologis siapa melakukan apa, pada objek apa, dan apakah berhasil: masuk/keluar, pencarian, analisis, kasus, bukti, dan laporan."
+        mock={false}
+      />
+      <div className="mb-4 space-y-2">
+        <Notice tone="info">
+          {scope === "all"
+            ? "Anda melihat aktivitas semua pengguna (hak peninjau/admin)."
+            : "Anda melihat aktivitas Anda sendiri. Peninjau dan admin dapat melihat aktivitas semua pengguna."}
+        </Notice>
+        <Notice tone="warning">Penyimpanan prototipe: riwayat berada di memori dan kembali ke data awal saat server dimulai ulang. Versi produksi menyimpannya di database.</Notice>
       </div>
+
+      <section aria-label="Ringkasan aktivitas" className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map(([label, value]) => (
+          <div key={label} className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+            <p className="text-xs uppercase tracking-wider text-slate-500">{label}</p>
+            <p className="mt-1 text-2xl font-semibold tabular-nums text-slate-50">{value}</p>
+          </div>
+        ))}
+      </section>
+
       <FilterPanel
         action="/audit"
         values={values}
         fields={[
-          { name: "q", label: "Search", type: "text", placeholder: "user, object, case" },
-          { name: "action", label: "Action", options: ACTIONS.map((a) => ({ value: a, label: a })) },
-          { name: "result", label: "Result", options: ["SUCCESS", "DENIED", "FAILED"].map((r) => ({ value: r, label: r })) },
+          { name: "q", label: "Cari", type: "text", placeholder: "pengguna, objek, kasus" },
+          { name: "action", label: "Aktivitas", options: ACTIONS.map((a) => ({ value: a, label: AUDIT_ACTION_LABEL[a] })) },
+          { name: "result", label: "Hasil", options: RESULTS.map((r) => ({ value: r, label: AUDIT_RESULT_LABEL[r] })) },
+          ...(scope === "all" ? [{ name: "user", label: "Pengguna", options: Object.entries(USER_DIRECTORY).map(([id, u]) => ({ value: id, label: u.name })) }] : []),
+          { name: "from", label: "Dari tanggal", type: "date" as const },
+          { name: "to", label: "Sampai tanggal", type: "date" as const },
         ]}
       />
       <DataTable
-        caption="Audit log"
+        caption="Riwayat aktivitas"
         rows={rows}
         rowKey={(e) => e.id}
-        empty="No audit entries match these filters."
+        empty="Belum ada aktivitas yang cocok dengan filter ini."
         columns={[
-          { header: "Timestamp", className: "whitespace-nowrap", cell: (e) => formatDateTime(e.at) },
-          { header: "User", cell: (e) => e.userName },
-          { header: "Action", cell: (e) => <span className="font-mono text-xs">{e.action}</span> },
-          { header: "Object", className: "max-w-xs whitespace-normal", cell: (e) => e.object },
-          { header: "Case ID", cell: (e) => e.caseId ? <Link href={`/cases/${e.caseId}`} className="text-sky-400 hover:underline">{e.caseId}</Link> : "—" },
-          { header: "Result", cell: (e) => <Badge tone={e.result === "SUCCESS" ? "success" : e.result === "DENIED" ? "warning" : "critical"}>{e.result}</Badge> },
+          { header: "Waktu", className: "whitespace-nowrap", cell: (e) => <span title={formatAgo(e.at, now)}>{formatDateTime(e.at)}</span> },
+          { header: "Pengguna", cell: (e) => e.userName },
+          { header: "Aktivitas", cell: (e) => <span className="font-medium">{AUDIT_ACTION_LABEL[e.action]}</span> },
+          { header: "Objek", className: "max-w-sm whitespace-normal", cell: (e) => e.object },
+          { header: "ID Kasus", cell: (e) => (e.caseId ? <Link href={`/cases/${e.caseId}`} className="text-sky-400 hover:underline">{e.caseId}</Link> : "—") },
+          { header: "Hasil", cell: (e) => <Badge tone={e.result === "SUCCESS" ? "success" : e.result === "DENIED" ? "warning" : "critical"}>{AUDIT_RESULT_LABEL[e.result].toUpperCase()}</Badge> },
         ]}
       />
       <Pagination page={page} pages={pages} total={total} basePath="/audit" params={values} />

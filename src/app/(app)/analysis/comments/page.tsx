@@ -7,14 +7,15 @@ import { PageHeader } from "@/components/ui/layout";
 import { verifySession } from "@/lib/auth/dal";
 import { getAnalysisContext } from "@/lib/services/analysis";
 import { SENTIMENTS } from "@/lib/services/queries";
-import { formatDateTime, titleCase, truncate } from "@/lib/utils/format";
+import { formatDateTime, truncate } from "@/lib/utils/format";
+import { SENTIMENT_LABEL } from "@/lib/i18n/labels";
 import { enumParam, pageParam, paginate, param } from "@/lib/utils/params";
 import type { CommentCategory } from "@/types";
 
-export const metadata: Metadata = { title: "Comment analysis" };
+export const metadata: Metadata = { title: "Analisis komentar" };
 
-const CATEGORIES: CommentCategory[] = ["Positive", "Neutral", "Negative", "Hate Speech Indicator", "Harassment", "Spam", "Threat Indicator", "Other"];
-const CONCERNING = new Set<CommentCategory>(["Hate Speech Indicator", "Harassment", "Spam", "Threat Indicator"]);
+const CATEGORIES: CommentCategory[] = ["Positif", "Netral", "Negatif", "Indikator Ujaran Kebencian", "Pelecehan", "Spam", "Indikator Ancaman", "Lainnya"];
+const CONCERNING = new Set<CommentCategory>(["Indikator Ujaran Kebencian", "Pelecehan", "Spam", "Indikator Ancaman"]);
 
 export default async function CommentAnalysisPage({ searchParams }: PageProps<"/analysis/comments">) {
   await verifySession();
@@ -35,31 +36,31 @@ export default async function CommentAnalysisPage({ searchParams }: PageProps<"/
 
   return (
     <div>
-      <PageHeader title="Comment analysis" description="Comments sorted by toxicity. Categories flagged as indicators need human review before any conclusion." mock={ctx.source.isMock} />
+      <PageHeader title="Analisis komentar" description="Komentar diurutkan menurut toksisitas. Kategori yang ditandai sebagai indikator memerlukan tinjauan manusia sebelum ada kesimpulan." mock={ctx.source.isMock} />
       <FilterPanel
         action="/analysis/comments"
         values={values}
         fields={[
-          { name: "q", label: "Search text", type: "text" },
-          { name: "category", label: "Category", options: CATEGORIES.map((c) => ({ value: c, label: c })) },
-          { name: "sentiment", label: "Sentiment", options: SENTIMENTS.map((s) => ({ value: s, label: titleCase(s) })) },
-          { name: "post", label: "Post ID", type: "text", placeholder: "POST-001" },
+          { name: "q", label: "Cari teks", type: "text" },
+          { name: "category", label: "Kategori", options: CATEGORIES.map((c) => ({ value: c, label: c })) },
+          { name: "sentiment", label: "Sentimen", options: SENTIMENTS.map((s) => ({ value: s, label: SENTIMENT_LABEL[s] })) },
+          { name: "post", label: "ID Postingan", type: "text", placeholder: "POST-001" },
         ]}
       />
       <DataTable
-        caption="Analysed comments"
+        caption="Komentar yang dianalisis"
         rows={rows}
         rowKey={({ c }) => c.id}
-        empty="No comments match these filters."
+        empty="Tidak ada komentar yang cocok dengan filter ini."
         columns={[
-          { header: "Comment", className: "max-w-md whitespace-normal", cell: ({ c }) => truncate(c.text, 140) },
-          { header: "Author", cell: ({ c }) => <Link href={`/accounts/${c.authorId}`} className="hover:underline">{ctx.accountById.get(c.authorId)?.handle ?? c.authorId}</Link> },
-          { header: "On post", cell: ({ c }) => <Link href={`/posts/${c.postId}`} className="text-sky-400 hover:underline">{c.postId}</Link> },
-          { header: "Sentiment", cell: ({ a }) => <SentimentBadge sentiment={a.sentiment} /> },
-          { header: "Toxicity", className: "text-right tabular-nums", cell: ({ a }) => a.toxicity },
-          { header: "Category", cell: ({ a }) => <Badge tone={CONCERNING.has(a.category) ? "warning" : "neutral"}>{a.category.toUpperCase()}</Badge> },
-          { header: "Confidence", cell: ({ a }) => <ConfidenceMeter value={a.confidence} /> },
-          { header: "Timestamp", className: "whitespace-nowrap", cell: ({ c }) => formatDateTime(c.createdAt) },
+          { header: "Komentar", className: "max-w-md whitespace-normal", cell: ({ c }) => truncate(c.text, 140) },
+          { header: "Penulis", cell: ({ c }) => <Link href={`/accounts/${c.authorId}`} className="hover:underline">{ctx.accountById.get(c.authorId)?.handle ?? c.authorId}</Link> },
+          { header: "Pada postingan", cell: ({ c }) => <Link href={`/posts/${c.postId}`} className="text-sky-400 hover:underline">{c.postId}</Link> },
+          { header: "Sentimen", cell: ({ a }) => <SentimentBadge sentiment={a.sentiment} /> },
+          { header: "Toksisitas", className: "text-right tabular-nums", cell: ({ a }) => a.toxicity },
+          { header: "Kategori", cell: ({ a }) => <Badge tone={CONCERNING.has(a.category) ? "warning" : "neutral"}>{a.category.toUpperCase()}</Badge> },
+          { header: "Keyakinan", cell: ({ a }) => <ConfidenceMeter value={a.confidence} /> },
+          { header: "Waktu", className: "whitespace-nowrap", cell: ({ c }) => formatDateTime(c.createdAt) },
         ]}
       />
       <Pagination page={page} pages={pages} total={total} basePath="/analysis/comments" params={values} />

@@ -19,6 +19,6 @@ export const POST = withApi({}, async (req) => {
     density: network.density,
     clusters: network.clusters,
     source,
-    note: "Roles describe connections in the available data, not intent or control.",
+    note: "Peran menggambarkan koneksi pada data yang tersedia, bukan niat atau kendali.",
   };
 });

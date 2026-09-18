@@ -38,11 +38,11 @@ function seed(): Store {
     (e) => ({ ...structuredClone(e), hash: hashSnapshot(e.snapshot) }),
   );
   const audit: AuditLogEntry[] = [
-    { id: "AUD-0001", at: "2026-09-16T09:00:00Z", userId: "USR-002", userName: "Demo Analyst", action: "LOGIN", object: "session", caseId: null, result: "SUCCESS" },
-    { id: "AUD-0002", at: "2026-09-16T10:00:00Z", userId: "USR-002", userName: "Demo Analyst", action: "CREATE_CASE", object: "CASE-001", caseId: "CASE-001", result: "SUCCESS" },
-    { id: "AUD-0003", at: "2026-09-16T10:30:00Z", userId: "USR-002", userName: "Demo Analyst", action: "CREATE_EVIDENCE", object: "EVD-001", caseId: "CASE-001", result: "SUCCESS" },
-    { id: "AUD-0004", at: "2026-09-17T08:00:00Z", userId: "USR-003", userName: "Demo Reviewer", action: "UPDATE_CASE", object: "CASE-004 → VERIFIED", caseId: "CASE-004", result: "SUCCESS" },
-    { id: "AUD-0005", at: "2026-09-12T14:00:00Z", userId: "USR-003", userName: "Demo Reviewer", action: "SUBMIT_REPORT", object: "RPT-001", caseId: "CASE-005", result: "SUCCESS" },
+    { id: "AUD-0001", at: "2026-09-16T09:00:00Z", userId: "USR-002", userName: "Analis Demo", action: "LOGIN", object: "sesi", caseId: null, result: "SUCCESS" },
+    { id: "AUD-0002", at: "2026-09-16T10:00:00Z", userId: "USR-002", userName: "Analis Demo", action: "CREATE_CASE", object: "CASE-001", caseId: "CASE-001", result: "SUCCESS" },
+    { id: "AUD-0003", at: "2026-09-16T10:30:00Z", userId: "USR-002", userName: "Analis Demo", action: "CREATE_EVIDENCE", object: "EVD-001", caseId: "CASE-001", result: "SUCCESS" },
+    { id: "AUD-0004", at: "2026-09-17T08:00:00Z", userId: "USR-003", userName: "Peninjau Demo", action: "UPDATE_CASE", object: "CASE-004 → Terverifikasi", caseId: "CASE-004", result: "SUCCESS" },
+    { id: "AUD-0005", at: "2026-09-12T14:00:00Z", userId: "USR-003", userName: "Peninjau Demo", action: "SUBMIT_REPORT", object: "RPT-001", caseId: "CASE-005", result: "SUCCESS" },
   ];
   return {
     cases,

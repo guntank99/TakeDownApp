@@ -1,86 +1,103 @@
 # Social Sentinel
 
-**Monitor • Analyze • Verify • Document • Report**
+**Pantau • Analisis • Verifikasi • Dokumentasikan • Laporkan**
 
-A web workspace for social media monitoring, SOCMINT, social network analysis, content analysis,
-ToC/ToS policy matching, evidence and case management, and reporting.
+Ruang kerja berbasis web untuk pemantauan media sosial, SOCMINT, analisis jaringan sosial (SNA), analisis konten,
+pencocokan kebijakan ToC/ToS, manajemen bukti dan kasus, serta pelaporan. Seluruh antarmuka berbahasa Indonesia.
 
-It is a **decision-support and investigation tool, not an automated censorship system.** It never
-deletes content, bans accounts, files mass reports, creates accounts, bypasses authentication or
-rate limits, or acts on an account. Every automated result is an *indicator* with a confidence, a
-reason and evidence, and stays **"needs human review"** until a person decides. Reports are filed
-by a person through the platform's **official** reporting page.
+Aplikasi ini adalah **alat bantu keputusan dan investigasi, bukan sistem sensor otomatis.** Aplikasi tidak pernah
+menghapus konten, memblokir akun, melapor massal, membuat akun, melewati autentikasi atau pembatasan laju, maupun
+bertindak atas akun. Setiap hasil otomatis adalah *indikator* yang disertai keyakinan, alasan, dan bukti, serta tetap
+berstatus **"perlu tinjauan manusia"** sampai seseorang memutuskan. Laporan diajukan oleh manusia melalui halaman
+pelaporan **resmi** platform.
 
 ```text
-COLLECT → ANALYZE → CORRELATE → VERIFY → DOCUMENT → HUMAN REVIEW → REPORT → OFFICIAL PLATFORM MECHANISM
+KUMPULKAN → ANALISIS → KORELASI → VERIFIKASI → DOKUMENTASI → TINJAUAN MANUSIA → LAPORKAN → MEKANISME RESMI PLATFORM
 ```
 
-> **Data is mock / simulated by default** (fictional identities, `.example` domains). The UI says so
-> everywhere. An official YouTube Data API provider is included but disabled unless configured.
+> **Data postingan bersifat mock/simulasi secara bawaan** (identitas fiktif, domain `.example`) dan UI menandainya di
+> mana-mana. Halaman **Viral Indonesia** menampilkan **berita nyata** dari feed RSS resmi penerbit Indonesia.
+> Penyedia YouTube Data API resmi tersedia tetapi nonaktif sampai dikonfigurasi.
 
-## Stack
+## Teknologi
 
 Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · Recharts · React Flow (`@xyflow/react`) ·
-`jose` (sessions) · `bcryptjs` · `zod` · `pdf-lib` · `lucide-react` · Vitest
+`jose` (sesi) · `bcryptjs` · `zod` · `pdf-lib` · `fast-xml-parser` · `lucide-react` · Vitest
 
-## Run locally
+## Menjalankan secara lokal
 
 ```bash
 npm install
-cp .env.example .env.local        # then set AUTH_SECRET
+cp .env.example .env.local        # lalu isi AUTH_SECRET
 npm run dev                       # http://localhost:3000
 ```
 
-Generate `AUTH_SECRET` (32+ characters):
+Membuat `AUTH_SECRET` (minimal 32 karakter):
 
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 ```
 
-| Script | Purpose |
+| Skrip | Fungsi |
 | --- | --- |
-| `npm run dev` / `build` / `start` | development / production build / run the build |
+| `npm run dev` / `build` / `start` | pengembangan / build produksi / menjalankan hasil build |
 | `npm run lint` · `npm run typecheck` | ESLint · TypeScript |
-| `npm test` | 87 unit + integration tests (Vitest) |
-| `npm run data:generate` | regenerate the deterministic mock dataset (`src/data/mock-*.json`) |
+| `npm test` | uji unit + integrasi (Vitest) |
+| `npm run data:generate` | membuat ulang dataset mock deterministik (`src/data/mock-*.json`) |
 
-## Demo accounts (prototype only)
+## Akun demo (khusus prototipe)
 
-| Username | Email | Role |
+| Nama pengguna | Email | Peran |
 | --- | --- | --- |
 | `admin` | `admin@sentinel.example` | Administrator |
-| `analyst` | `analyst@sentinel.example` | Analyst |
-| `reviewer` | `reviewer@sentinel.example` | Reviewer |
+| `analyst` | `analyst@sentinel.example` | Analis |
+| `reviewer` | `reviewer@sentinel.example` | Peninjau |
 
-Password for all three: `SentinelDemo#2026`, **for local development only** (`npm run dev`). It is stored only as
-bcrypt hashes in `src/lib/auth/users.ts`.
+Kata sandi ketiganya: `SentinelDemo#2026`, **hanya untuk pengembangan lokal** (`npm run dev`). Kata sandi ini hanya
+tersimpan sebagai hash bcrypt di `src/lib/auth/users.ts`.
 
-**In production the demo accounts are disabled** unless you set both `DEMO_MODE=true` and
-`DEMO_PASSWORD_HASH` (a bcrypt hash of a password *you* choose, which then replaces the built-in one for
-every demo account). The documented password therefore never works against a deployment. Replace the user
-store with a database before real use.
+**Di production akun demo dinonaktifkan** kecuali `DEMO_MODE=true` dan `DEMO_PASSWORD_HASH` (hash bcrypt dari kata
+sandi *pilihan Anda*, yang lalu menggantikan kata sandi bawaan untuk semua akun demo) sama-sama diatur. Dengan begitu
+kata sandi yang terdokumentasi tidak pernah berlaku pada deployment. Ganti penyimpanan pengguna dengan database
+sebelum dipakai sungguhan.
 
-## What's in it
+## Fitur
 
-| Area | Routes | Notes |
+| Area | Rute | Catatan |
 | --- | --- | --- |
-| Auth | `/login` | signed HttpOnly session cookie, remember me, RBAC (admin / analyst / reviewer) |
-| Dashboard | `/dashboard` | 7 KPIs, 7 charts (each with a data-table view) |
-| Monitoring | `/monitoring`, `/posts`, `/posts/[id]`, `/issues`, `/search` | keyword/hashtag/@user/URL search, filters, pagination |
-| Accounts | `/accounts`, `/accounts/[id]` | authenticity signals ("Potentially Inauthentic", never "fake"), behaviour, network role |
-| Analysis | `/analysis`, `/analysis/comments`, `/analysis/claims`, `/sentiment` | sentiment, hate/harassment/threat/spam/misinformation/defamation/impersonation indicators, claim workflow |
-| SNA | `/sna` | interactive graph (zoom, pan, search, filters, selection), centrality, density, clusters. Neutral wording: "Highly Connected Account", "Potential Network Hub" |
-| ToC / ToS | `/toc` | policy database + policy matching; **unverified entries are flagged** |
-| Cases | `/cases`, `/cases/new`, `/cases/[id]` | workflow, notes, timeline, four-eyes verification |
-| Evidence | `/evidence` | hashed (SHA-256) snapshots with integrity check |
-| Reports | `/reports`, `/reports/[id]` | draft → review → approve → record submission; export PDF / CSV / JSON |
-| Audit | `/audit` | append-only log (admin / reviewer) |
-| Settings | `/settings` | profile, security, providers (presence only, never values), system info |
+| Autentikasi | `/login` | cookie sesi bertanda tangan HttpOnly, ingat saya, RBAC (admin / analis / peninjau) |
+| Dasbor | `/dashboard` | 7 KPI dan 7 grafik (masing-masing punya tampilan tabel data) |
+| **Viral Indonesia** | `/viral` | berita nyata yang sedang ramai diberitakan + postingan viral, **dengan kolom pencarian** |
+| Pemantauan | `/monitoring`, `/posts`, `/posts/[id]`, `/issues`, `/search` | pencarian kata kunci/tagar/@pengguna/URL, filter, paginasi |
+| Akun | `/accounts`, `/accounts/[id]` | sinyal autentikasi ("Berpotensi Tidak Autentik", tidak pernah "palsu"), perilaku, peran jaringan |
+| Analisis | `/analysis`, `/analysis/comments`, `/analysis/claims`, `/sentiment` | sentimen; indikator ujaran kebencian, pelecehan, ancaman, spam, misinformasi, pencemaran nama baik, peniruan identitas; alur klaim |
+| SNA | `/sna` | graf interaktif (zoom, geser, cari, filter, pilih simpul), sentralitas, kepadatan, klaster. Istilah netral: "Akun Sangat Terhubung", "Potensi Hub Jaringan" |
+| Kebijakan | `/toc` | basis data kebijakan + pencocokan; **entri belum terverifikasi ditandai** |
+| Kasus | `/cases`, `/cases/new`, `/cases/[id]` | alur kerja, catatan, lini masa, verifikasi empat mata |
+| Bukti | `/evidence` | snapshot ber-hash (SHA-256) dengan pemeriksaan integritas |
+| Laporan | `/reports`, `/reports/[id]` | draf → tinjau → setujui → catat pengajuan; ekspor PDF / CSV / JSON |
+| **Riwayat Aktivitas** | `/audit` | log kronologis: masuk/keluar, pencarian, analisis, kasus, bukti, laporan. Analis melihat aktivitasnya sendiri; peninjau/admin melihat semua |
+| Pengaturan | `/settings` | profil, keamanan, penyedia (hanya ada/tidaknya kredensial), berita viral, info sistem |
+
+### Viral Indonesia: cara kerja dan batasannya
+
+* **Berita** diambil di server dari **feed RSS resmi** Antara, CNN Indonesia, Tempo, Republika, BBC News Indonesia, JPNN,
+  dan Okezone (`src/lib/news/feeds.ts`). Hanya judul, cuplikan singkat, dan tautan ke penerbit yang dipakai. Hak cipta isi
+  berita tetap milik penerbit. Penerbit yang menolak akses otomatis (mis. Tribunnews menjawab 403) tidak dipakai, dan
+  aplikasi tidak berusaha menembus pemblokiran.
+* **"Ramai diberitakan" = jumlah media berbeda yang memberitakan hal yang sama**, bukan jumlah pembaca. Judul dikelompokkan
+  otomatis lewat kemiripan kata (`src/lib/news/cluster.ts`); hasilnya heuristik dan bisa keliru. UI menyatakan ini.
+* **Postingan viral** diurutkan menurut kecepatan interaksi (`suka + 2×komentar + 3×bagikan` per jam). Skor ini tidak menilai
+  benar atau tidaknya sebuah postingan. Pada mode mock, datanya **simulasi**; untuk postingan nyata dari Indonesia aktifkan
+  penyedia YouTube (`DATA_PROVIDER=youtube`, `YOUTUBE_REGION=ID`). Tidak ada API resmi gratis untuk tren X/Instagram/TikTok.
+* Feed di-cache 10 menit; bila semua feed gagal, hasil terakhir yang berhasil dipertahankan. Matikan sepenuhnya dengan
+  `NEWS_ENABLED=false`. Sebagian penyedia hosting bisa diblokir oleh penerbit tertentu; sumber yang gagal dilewati.
+* Setiap pencarian tercatat di Riwayat Aktivitas.
 
 ### API
 
-All endpoints require a session, are rate limited, validate input (zod) and check `Origin` on writes.
-Responses are `{ "data": … }` or `{ "error": "…" }`.
+Semua endpoint memerlukan sesi, dibatasi laju, memvalidasi input (zod), dan memeriksa `Origin` pada operasi tulis.
+Respons berbentuk `{ "data": … }` atau `{ "error": "…" }`.
 
 ```text
 GET  /api/posts  /api/posts/:id     GET  /api/accounts  /api/accounts/:id
@@ -89,36 +106,39 @@ POST /api/analysis  /api/sentiment  /api/sna
 GET  /api/cases   POST /api/cases   PATCH /api/cases/:id
 GET  /api/evidence  POST /api/evidence
 GET  /api/reports   POST /api/reports   GET /api/reports/:id/export?format=pdf|csv|json
-GET  /api/audit
+GET  /api/audit     (analis: aktivitas sendiri; peninjau/admin: semua)
 ```
 
-## Architecture
+## Arsitektur
 
 ```text
 UI (src/app, src/components)
-  → services (src/lib/services)          business rules, permissions, audit
-  → analysis engine (src/lib/analysis, risk, sna, toc)   pure, unit-tested functions
-  → provider layer (src/lib/providers)   SocialMediaProvider interface
-        MockProvider (default)  |  YouTube Data API v3 (official)  |  more later
+  → layanan (src/lib/services)              aturan bisnis, izin, audit
+  → mesin analisis (src/lib/analysis, risk, sna, toc)   fungsi murni yang diuji
+  → lapisan penyedia (src/lib/providers)    antarmuka SocialMediaProvider
+        MockProvider (bawaan)  |  YouTube Data API v3 (resmi)  |  lainnya menyusul
+  → berita (src/lib/news)                   RSS resmi penerbit → pengelompokan → cache
 ```
 
-* **Observed vs analysed data.** Providers return observed records only; sentiment, risk and
-  indicators are computed by the engine and never stored on records (data governance).
-* **Explainable risk.** `Content 40 + Behavior 25 + Network 20 + Coordination 15 = 100`, mapped to
-  LOW 0–24 / MEDIUM 25–49 / HIGH 50–74 / CRITICAL 75–100. It is a prioritisation aid, not a decision.
-* **Swappable analysis.** `analyzeSentiment`, `analyzeContent`, … can be replaced by an NLP API or a
-  local model without touching the UI. The default `lexicon-v1` engine is keyword-based (English +
-  Indonesian) and *will* miss sarcasm and context — hence mandatory human review.
-* **Human review built in.** Only a reviewer other than the analyst can verify a case or approve a
-  report; `REPORTED` is reachable only by recording a submission; nothing is submitted automatically.
-* **ToC accuracy.** Rule names come from official pages (Meta Community Standards, YouTube Community
-  Guidelines, Telegram ToS). X, TikTok and Reddit could not be retrieved automatically, so those
-  entries are **placeholders marked "needs verification"** and matches show a warning. Reporting page
-  URLs were checked on 2026-09-18 (X and Reddit block bots; confirm in a browser).
-* **Auth.** `src/proxy.ts` does the fast optimistic redirect; the real check is `verifySession()` /
-  `requireRole()` in every page, server action and API route (`src/lib/auth/dal.ts`, `src/lib/api/handler.ts`).
+* **Data teramati vs hasil analisis.** Penyedia hanya mengembalikan data teramati; sentimen, risiko, dan indikator
+  dihitung mesin dan tidak disimpan pada rekaman (tata kelola data).
+* **Risiko yang dapat dijelaskan.** `Konten 40 + Perilaku 25 + Jaringan 20 + Koordinasi 15 = 100`, dipetakan ke
+  RENDAH 0–24 / SEDANG 25–49 / TINGGI 50–74 / KRITIS 75–100. Ini alat prioritas, bukan keputusan.
+* **Analisis dapat diganti.** `analyzeSentiment`, `analyzeContent`, dst. dapat diganti API NLP atau model lokal tanpa
+  mengubah UI. Mesin bawaan `lexicon-v1` berbasis kata kunci (Indonesia + Inggris) dan *akan* meleset pada sarkasme,
+  slang, dan konteks. Karena itu tinjauan manusia wajib.
+* **Tinjauan manusia tertanam.** Hanya peninjau selain analis yang dapat memverifikasi kasus atau menyetujui laporan;
+  status `REPORTED` hanya dicapai dengan mencatat pengajuan; tidak ada yang diajukan otomatis.
+* **Bahasa.** Nilai enum di kode, database, dan API tetap bahasa Inggris agar integrasi tidak rusak; yang diterjemahkan
+  hanya tampilan (`src/lib/i18n/labels.ts`). Waktu ditampilkan dalam WIB.
+* **Akurasi ToC.** Nama aturan berasal dari halaman resmi (Meta Community Standards, YouTube Community Guidelines,
+  Telegram ToS) dan tetap memakai judul aslinya. X, TikTok, dan Reddit tidak dapat diambil otomatis sehingga entrinya
+  **placeholder bertanda "perlu verifikasi"**. URL halaman pelaporan dicek pada 2026-09-18 (X dan Reddit memblokir bot;
+  pastikan terbuka di peramban).
+* **Autentikasi.** `src/proxy.ts` melakukan pengalihan cepat; pemeriksaan sesungguhnya ada di `verifySession()` /
+  `requireRole()` pada setiap halaman, aksi server, dan rute API (`src/lib/auth/dal.ts`, `src/lib/api/handler.ts`).
 
-## Real data provider (Phase 8)
+## Penyedia data nyata
 
 ```env
 DATA_PROVIDER=youtube
@@ -126,66 +146,61 @@ YOUTUBE_API_KEY=…
 YOUTUBE_REGION=ID
 ```
 
-Read-only, official YouTube Data API v3; the key is sent in a header, responses are cached 5 minutes
-to save quota (`search.list` costs 100 of the default 10,000 daily units). If `youtube` is requested
-without a key the app falls back to the clearly-labelled mock provider. **Not verified against the live
-API in development** (no key was available): mapping and error handling are covered by tests using
-recorded-shape fixtures. Review the YouTube API Services Terms before production use. One platform is
-integrated at a time; others need official API access and permissions first.
+YouTube Data API v3 resmi, hanya-baca; kunci dikirim lewat header, respons di-cache 5 menit untuk menghemat kuota
+(`search.list` memakai 100 dari 10.000 unit harian bawaan). Jika `youtube` diminta tanpa kunci, aplikasi jatuh ke
+penyedia mock yang berlabel jelas. **Belum diverifikasi terhadap API sungguhan** (tidak ada kunci saat pengembangan):
+pemetaan dan penanganan error diuji dengan fixture berbentuk respons asli. Tinjau Ketentuan Layanan YouTube API sebelum
+dipakai di production. Platform lain diintegrasikan satu per satu, hanya lewat API resmi dengan izin yang sesuai.
 
 ## Deploy: GitHub → Vercel
 
-```bash
-git add .
-git status                         # confirm .env.local is NOT listed
-git commit -m "Initial Social Sentinel application"
-git branch -M main
-git remote add origin <GITHUB_REPOSITORY_URL>
-git push -u origin main
-```
+Di Vercel: **Add New → Project → Import** repositori, lalu isi **Environment Variables**:
 
-In Vercel: **Add New → Project → Import** the repository, then set **Environment Variables**:
-
-| Name | Value |
+| Nama | Nilai |
 | --- | --- |
-| `AUTH_SECRET` | 32+ random characters (required) |
-| `DEMO_MODE` | `true` to allow the demo accounts (otherwise nobody can sign in) |
-| `DEMO_PASSWORD_HASH` | bcrypt hash of a password you choose (**required** together with `DEMO_MODE`) |
-| `DATA_PROVIDER`, `YOUTUBE_API_KEY` | optional, see above |
+| `AUTH_SECRET` | 32+ karakter acak (wajib; **hasil** perintah di atas, bukan perintahnya) |
+| `DEMO_MODE` | `true` agar akun demo dapat dipakai (kalau tidak, tidak ada yang bisa masuk) |
+| `DEMO_PASSWORD_HASH` | hash bcrypt dari kata sandi pilihan Anda (**wajib** bersama `DEMO_MODE`) |
+| `NEWS_ENABLED` | opsional; `false` untuk mematikan pengambilan berita |
+| `DATA_PROVIDER`, `YOUTUBE_API_KEY`, `YOUTUBE_REGION` | opsional, lihat di atas |
 
-Then **Deploy**. Vercel does not give the app a static public IP. For a custom domain: add it in
-Vercel → point DNS as instructed → SSL is issued automatically.
+Perubahan variabel hanya berlaku pada build baru: lakukan **Redeploy** setelah mengubahnya. Vercel tidak memberi IP
+publik statis. Untuk domain kustom: tambahkan di Vercel → arahkan DNS → SSL terbit otomatis.
 
-## Known limitations (read before production)
+## Keterbatasan (baca sebelum production)
 
-* **Storage is in memory.** Cases, evidence, reports and the audit log reset on restart and on a
-  serverless cold start; on Vercel they will not persist reliably. Replace `src/lib/store` with
-  PostgreSQL/Supabase behind the same service functions.
-* **Users are hard-coded demo accounts.** Sessions are stateless JWTs and cannot be revoked
-  server-side before they expire (logout only clears the cookie). No password reset / MFA.
-* **Rate limiting is per server instance** (in memory), and the login form itself has no lockout.
-* **No Content-Security-Policy** yet (Next.js needs nonces for a strict one). Other security headers are set.
-* **Evidence screenshots** are reference text only; no file upload/storage yet.
-* **Policy database is read-only**; editing (admin, audited as `UPDATE_POLICY`) needs the database.
-* Assessments on `/analysis/claims` are read-only seed data; there is no assessment editor yet.
-* The lexicon engine is deliberately simple. Expect false positives/negatives.
+* **Penyimpanan di memori.** Kasus, bukti, laporan, dan riwayat aktivitas kembali ke data awal saat restart dan saat
+  cold start serverless; di Vercel tidak akan persisten. Ganti `src/lib/store` dengan PostgreSQL/Supabase di balik
+  fungsi layanan yang sama.
+* **Pengguna adalah akun demo yang ditanam di kode.** Sesi berupa JWT tanpa status dan tidak dapat dicabut di server
+  sebelum kedaluwarsa (keluar hanya menghapus cookie). Belum ada reset kata sandi / MFA.
+* **Pembatasan laju per instance server** (di memori), dan formulir login sendiri belum punya penguncian.
+* **Belum ada Content-Security-Policy** (Next.js butuh nonce untuk yang ketat). Header keamanan lain sudah diatur.
+* **Tangkapan layar bukti** hanya berupa teks referensi; belum ada unggah/penyimpanan berkas.
+* **Basis data kebijakan bersifat baca-saja**; penyuntingan (admin, tercatat `UPDATE_POLICY`) memerlukan database.
+* Penilaian di `/analysis/claims` adalah data awal baca-saja; belum ada editor penilaian.
+* Mesin lexicon sengaja sederhana. Harapkan false positive/negative, terutama pada bahasa gaul dan sarkasme.
+* Berita bergantung pada ketersediaan feed penerbit; pengelompokan judul bersifat heuristik.
 
-## Project layout
+## Tata letak proyek
 
 ```text
 src/
-├── app/            (app)/ = authenticated pages · api/ = route handlers · login/
+├── app/            (app)/ = halaman terautentikasi · api/ = route handler · login/
 ├── components/     layout, charts, network, tables, analysis, ui
-├── data/           mock-*.json (fictional, generated by scripts/generate-mock-data.mjs)
+├── data/           mock-*.json (fiktif, dibuat oleh scripts/generate-mock-data.mjs)
 ├── lib/
-│   ├── analysis/   sentiment, indicators, comments, coordination, account signals
-│   ├── risk/       score → level, explainable risk model
-│   ├── sna/        graph build, centrality, communities, layout
-│   ├── toc/        policy matching, rules, official reporting pages
-│   ├── workflow/   case/report state machine (four-eyes)
-│   ├── providers/  interface, mock, youtube
+│   ├── analysis/   sentimen, indikator, komentar, koordinasi, sinyal akun
+│   ├── risk/       skor → tingkat, model risiko yang dapat dijelaskan
+│   ├── sna/        pembuatan graf, sentralitas, komunitas, tata letak
+│   ├── news/       feed RSS, parser, pengelompokan judul, layanan berita
+│   ├── viral/      skor viral postingan
+│   ├── toc/        pencocokan kebijakan, aturan, halaman pelaporan resmi
+│   ├── workflow/   mesin status kasus/laporan (empat mata)
+│   ├── providers/  antarmuka, mock, youtube
 │   ├── services/   analysis, cases, evidence, reports, audit, dashboard
+│   ├── i18n/       label tampilan berbahasa Indonesia
 │   ├── auth/ api/ store/ reports/ evidence/ validation/ utils/
-├── proxy.ts        optimistic route protection
+├── proxy.ts        proteksi rute optimistis
 └── types/
 ```
