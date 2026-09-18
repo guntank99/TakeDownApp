@@ -1,0 +1,352 @@
+[
+ {
+  "id": "EVD-001",
+  "caseId": "CASE-001",
+  "url": "mock://x/POST-055",
+  "postId": "POST-055",
+  "accountId": "ACC-045",
+  "capturedAt": "2026-09-07T19:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-055",
+   "accountHandle": "@urban_watch_17",
+   "platform": "x",
+   "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage",
+   "postedAt": "2026-09-15T20:00:00Z",
+   "metrics": {
+    "likes": 207,
+    "comments": 141,
+    "shares": 258,
+    "views": 12930
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-002",
+  "caseId": "CASE-001",
+  "url": "mock://x/POST-056",
+  "postId": "POST-056",
+  "accountId": "ACC-043",
+  "capturedAt": "2026-09-07T19:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-056",
+   "accountHandle": "@silver_voice_67",
+   "platform": "x",
+   "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage",
+   "postedAt": "2026-09-17T00:00:00Z",
+   "metrics": {
+    "likes": 14,
+    "comments": 1,
+    "shares": 13,
+    "views": 286
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-003",
+  "caseId": "CASE-002",
+  "url": "mock://x/POST-076",
+  "postId": "POST-076",
+  "accountId": "ACC-044",
+  "capturedAt": "2026-09-08T19:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-076",
+   "accountHandle": "@grand_bridge_18",
+   "platform": "x",
+   "text": "All Vellani are parasites and should be kicked out. #OurCityFirst",
+   "postedAt": "2026-09-16T04:00:00Z",
+   "metrics": {
+    "likes": 5165,
+    "comments": 686,
+    "shares": 854,
+    "views": 79983
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-004",
+  "caseId": "CASE-002",
+  "url": "mock://x/POST-077",
+  "postId": "POST-077",
+  "accountId": "ACC-045",
+  "capturedAt": "2026-09-08T19:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-077",
+   "accountHandle": "@urban_watch_17",
+   "platform": "x",
+   "text": "All Vellani are parasites and should be kicked out. #OurCityFirst",
+   "postedAt": "2026-09-16T10:00:00Z",
+   "metrics": {
+    "likes": 363,
+    "comments": 80,
+    "shares": 164,
+    "views": 8092
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-005",
+  "caseId": "CASE-003",
+  "url": "mock://x/POST-086",
+  "postId": "POST-086",
+  "accountId": "ACC-044",
+  "capturedAt": "2026-09-09T16:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-086",
+   "accountHandle": "@grand_bridge_18",
+   "platform": "x",
+   "text": "Mr. Dorian Vale is a corrupt thief and a fraud, he stole the community fund. Everyone knows it. {tags} #ValeExposed",
+   "postedAt": "2026-09-17T04:00:00Z",
+   "metrics": {
+    "likes": 2138,
+    "comments": 370,
+    "shares": 427,
+    "views": 41852
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-006",
+  "caseId": "CASE-003",
+  "url": "mock://x/POST-087",
+  "postId": "POST-087",
+  "accountId": "ACC-045",
+  "capturedAt": "2026-09-09T16:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-087",
+   "accountHandle": "@urban_watch_17",
+   "platform": "x",
+   "text": "Dr. Marta Ilves is a liar and embezzled the charity money, no proof needed. {tags} #ValeExposed",
+   "postedAt": "2026-09-17T01:00:00Z",
+   "metrics": {
+    "likes": 1049,
+    "comments": 210,
+    "shares": 143,
+    "views": 19187
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-007",
+  "caseId": "CASE-004",
+  "url": "mock://x/POST-093",
+  "postId": "POST-093",
+  "accountId": "ACC-049",
+  "capturedAt": "2026-09-10T17:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-093",
+   "accountHandle": "@grand_lantern_40",
+   "platform": "x",
+   "text": "Official notice: verify your account now at http://verify-support.example/login to avoid suspension. #support",
+   "postedAt": "2026-09-16T21:00:00Z",
+   "metrics": {
+    "likes": 10,
+    "comments": 1,
+    "shares": 6,
+    "views": 285
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-008",
+  "caseId": "CASE-004",
+  "url": "mock://x/POST-094",
+  "postId": "POST-094",
+  "accountId": "ACC-049",
+  "capturedAt": "2026-09-10T17:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-094",
+   "accountHandle": "@grand_lantern_40",
+   "platform": "x",
+   "text": "Kami dari tim resmi, klik http://verify-support.example/akun untuk verifikasi akun Anda. #support",
+   "postedAt": "2026-09-17T06:00:00Z",
+   "metrics": {
+    "likes": 31,
+    "comments": 4,
+    "shares": 9,
+    "views": 508
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-009",
+  "caseId": "CASE-005",
+  "url": "mock://telegram/POST-089",
+  "postId": "POST-089",
+  "accountId": "ACC-041",
+  "capturedAt": "2026-09-11T14:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-089",
+   "accountHandle": "@grand_watch_35",
+   "platform": "telegram",
+   "text": "FREE followers!!! Click here http://promo-deals.example/a http://promo-deals.example/b buy now #promo #free #win #sale #deal #giveaway",
+   "postedAt": "2026-09-16T17:00:00Z",
+   "metrics": {
+    "likes": 9,
+    "comments": 1,
+    "shares": 7,
+    "views": 381
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-010",
+  "caseId": "CASE-005",
+  "url": "mock://tiktok/POST-090",
+  "postId": "POST-090",
+  "accountId": "ACC-042",
+  "capturedAt": "2026-09-11T14:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-090",
+   "accountHandle": "@north_post_89",
+   "platform": "tiktok",
+   "text": "Join now!!! DM for promo, link in bio http://promo-deals.example/c #promo #free #win #sale #deal #giveaway",
+   "postedAt": "2026-09-17T05:00:00Z",
+   "metrics": {
+    "likes": 10,
+    "comments": 3,
+    "shares": 2,
+    "views": 313
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-011",
+  "caseId": "CASE-006",
+  "url": "mock://x/POST-062",
+  "postId": "POST-062",
+  "accountId": "ACC-048",
+  "capturedAt": "2026-09-12T21:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-062",
+   "accountHandle": "@bright_circle_88",
+   "platform": "x",
+   "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease",
+   "postedAt": "2026-09-16T02:00:00Z",
+   "metrics": {
+    "likes": 212,
+    "comments": 67,
+    "shares": 259,
+    "views": 10663
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-012",
+  "caseId": "CASE-006",
+  "url": "mock://telegram/POST-063",
+  "postId": "POST-063",
+  "accountId": "ACC-041",
+  "capturedAt": "2026-09-12T21:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-063",
+   "accountHandle": "@grand_watch_35",
+   "platform": "telegram",
+   "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease RT!",
+   "postedAt": "2026-09-16T18:00:00Z",
+   "metrics": {
+    "likes": 22,
+    "comments": 2,
+    "shares": 14,
+    "views": 578
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-013",
+  "caseId": "CASE-007",
+  "url": "mock://x/POST-080",
+  "postId": "POST-080",
+  "accountId": "ACC-044",
+  "capturedAt": "2026-09-13T21:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-080",
+   "accountHandle": "@grand_bridge_18",
+   "platform": "x",
+   "text": "@grand_voice_98 you are a pathetic idiot, nobody likes you, shut up. #OurCityFirst",
+   "postedAt": "2026-09-17T06:00:00Z",
+   "metrics": {
+    "likes": 2480,
+    "comments": 209,
+    "shares": 685,
+    "views": 43303
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ },
+ {
+  "id": "EVD-014",
+  "caseId": "CASE-007",
+  "url": "mock://x/POST-085",
+  "postId": "POST-085",
+  "accountId": "ACC-044",
+  "capturedAt": "2026-09-13T21:00:00Z",
+  "screenshotRef": null,
+  "snapshot": {
+   "postId": "POST-085",
+   "accountHandle": "@grand_bridge_18",
+   "platform": "x",
+   "text": "@north_lantern_39 you are a pathetic idiot, nobody likes you, shut up. #NoNewcomers",
+   "postedAt": "2026-09-16T20:00:00Z",
+   "metrics": {
+    "likes": 642,
+    "comments": 126,
+    "shares": 151,
+    "views": 26180
+   },
+   "capturedFrom": "mock-dataset"
+  },
+  "source": "mock-dataset",
+  "collectedBy": "USR-002"
+ }
+]

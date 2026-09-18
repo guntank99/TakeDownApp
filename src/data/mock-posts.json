@@ -1,0 +1,2014 @@
+[
+ {
+  "id": "POST-001",
+  "platform": "news",
+  "url": "mock://news/POST-001",
+  "authorId": "ACC-034",
+  "text": "Update on regional transit schedule update: the published schedule for the coming week is available. #TransitUpdate",
+  "mediaType": "image",
+  "hashtags": [
+   "#TransitUpdate"
+  ],
+  "mentions": [
+   "@calm_watch_57"
+  ],
+  "issueId": "ISS-001",
+  "claimId": null,
+  "createdAt": "2026-09-04T22:00:00Z",
+  "likes": 2364,
+  "comments": 1468,
+  "shares": 1352,
+  "views": 225786,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-002",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-002",
+  "authorId": "ACC-031",
+  "text": "Here is a summary of today's discussion about regional transit schedule update, according to the published report. #TransitUpdate",
+  "mediaType": "link",
+  "hashtags": [
+   "#TransitUpdate"
+  ],
+  "mentions": [],
+  "issueId": "ISS-001",
+  "claimId": null,
+  "createdAt": "2026-09-08T21:00:00Z",
+  "likes": 10972,
+  "comments": 1450,
+  "shares": 4162,
+  "views": 201509,
+  "status": "new"
+ },
+ {
+  "id": "POST-003",
+  "platform": "x",
+  "url": "mock://x/POST-003",
+  "authorId": "ACC-011",
+  "text": "Question for the community: what do you think about regional transit schedule update? #TransitUpdate",
+  "mediaType": "link",
+  "hashtags": [
+   "#TransitUpdate"
+  ],
+  "mentions": [],
+  "issueId": "ISS-001",
+  "claimId": null,
+  "createdAt": "2026-09-17T09:00:00Z",
+  "likes": 162,
+  "comments": 66,
+  "shares": 44,
+  "views": 10509,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-004",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-004",
+  "authorId": "ACC-033",
+  "text": "Pembaruan terkait public library extended hours: jadwal resmi sudah dipublikasikan. #LibraryHours",
+  "mediaType": "text",
+  "hashtags": [
+   "#LibraryHours"
+  ],
+  "mentions": [],
+  "issueId": "ISS-002",
+  "claimId": null,
+  "createdAt": "2026-09-15T09:00:00Z",
+  "likes": 2824,
+  "comments": 704,
+  "shares": 1834,
+  "views": 111563,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-005",
+  "platform": "x",
+  "url": "mock://x/POST-005",
+  "authorId": "ACC-014",
+  "text": "Question for the community: what do you think about public library extended hours? #LibraryHours",
+  "mediaType": "link",
+  "hashtags": [
+   "#LibraryHours"
+  ],
+  "mentions": [],
+  "issueId": "ISS-002",
+  "claimId": null,
+  "createdAt": "2026-09-06T09:00:00Z",
+  "likes": 519,
+  "comments": 60,
+  "shares": 202,
+  "views": 13308,
+  "status": "new"
+ },
+ {
+  "id": "POST-006",
+  "platform": "telegram",
+  "url": "mock://telegram/POST-006",
+  "authorId": "ACC-013",
+  "text": "Pembaruan terkait public library extended hours: jadwal resmi sudah dipublikasikan. #LibraryHours",
+  "mediaType": "link",
+  "hashtags": [
+   "#LibraryHours"
+  ],
+  "mentions": [],
+  "issueId": "ISS-002",
+  "claimId": null,
+  "createdAt": "2026-09-06T23:00:00Z",
+  "likes": 43,
+  "comments": 3,
+  "shares": 11,
+  "views": 1010,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-007",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-007",
+  "authorId": "ACC-033",
+  "text": "Here is a summary of today's discussion about weather advisory for the coast, according to the published report. #CoastAdvisory",
+  "mediaType": "text",
+  "hashtags": [
+   "#CoastAdvisory"
+  ],
+  "mentions": [],
+  "issueId": "ISS-003",
+  "claimId": null,
+  "createdAt": "2026-09-06T10:00:00Z",
+  "likes": 3514,
+  "comments": 1417,
+  "shares": 2319,
+  "views": 137118,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-008",
+  "platform": "news",
+  "url": "mock://news/POST-008",
+  "authorId": "ACC-032",
+  "text": "Here is a summary of today's discussion about weather advisory for the coast, according to the published report. #CoastAdvisory",
+  "mediaType": "text",
+  "hashtags": [
+   "#CoastAdvisory"
+  ],
+  "mentions": [],
+  "issueId": "ISS-003",
+  "claimId": null,
+  "createdAt": "2026-09-16T02:00:00Z",
+  "likes": 4829,
+  "comments": 1099,
+  "shares": 2092,
+  "views": 268145,
+  "status": "new"
+ },
+ {
+  "id": "POST-009",
+  "platform": "news",
+  "url": "mock://news/POST-009",
+  "authorId": "ACC-032",
+  "text": "Update on weather advisory for the coast: the published schedule for the coming week is available. #CoastAdvisory",
+  "mediaType": "text",
+  "hashtags": [
+   "#CoastAdvisory"
+  ],
+  "mentions": [],
+  "issueId": "ISS-003",
+  "claimId": null,
+  "createdAt": "2026-09-09T05:00:00Z",
+  "likes": 9855,
+  "comments": 1275,
+  "shares": 3656,
+  "views": 233376,
+  "status": "new"
+ },
+ {
+  "id": "POST-010",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-010",
+  "authorId": "ACC-035",
+  "text": "Pembaruan terkait city budget consultation: jadwal resmi sudah dipublikasikan. #BudgetTalk",
+  "mediaType": "link",
+  "hashtags": [
+   "#BudgetTalk"
+  ],
+  "mentions": [
+   "@north_post_89"
+  ],
+  "issueId": "ISS-004",
+  "claimId": null,
+  "createdAt": "2026-09-12T01:00:00Z",
+  "likes": 10827,
+  "comments": 1177,
+  "shares": 5294,
+  "views": 249530,
+  "status": "new"
+ },
+ {
+  "id": "POST-011",
+  "platform": "x",
+  "url": "mock://x/POST-011",
+  "authorId": "ACC-014",
+  "text": "Here is a summary of today's discussion about city budget consultation, according to the published report. #BudgetTalk",
+  "mediaType": "link",
+  "hashtags": [
+   "#BudgetTalk"
+  ],
+  "mentions": [],
+  "issueId": "ISS-004",
+  "claimId": null,
+  "createdAt": "2026-09-15T17:00:00Z",
+  "likes": 52,
+  "comments": 29,
+  "shares": 73,
+  "views": 3385,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-012",
+  "platform": "x",
+  "url": "mock://x/POST-012",
+  "authorId": "ACC-030",
+  "text": "Here is a summary of today's discussion about city budget consultation, according to the published report. #BudgetTalk",
+  "mediaType": "link",
+  "hashtags": [
+   "#BudgetTalk"
+  ],
+  "mentions": [],
+  "issueId": "ISS-004",
+  "claimId": null,
+  "createdAt": "2026-09-13T22:00:00Z",
+  "likes": 109,
+  "comments": 26,
+  "shares": 13,
+  "views": 2423,
+  "status": "new"
+ },
+ {
+  "id": "POST-013",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-013",
+  "authorId": "ACC-033",
+  "text": "Pembaruan terkait school term calendar: jadwal resmi sudah dipublikasikan. #TermCalendar",
+  "mediaType": "text",
+  "hashtags": [
+   "#TermCalendar"
+  ],
+  "mentions": [
+   "@urban_signal_62"
+  ],
+  "issueId": "ISS-005",
+  "claimId": null,
+  "createdAt": "2026-09-07T16:00:00Z",
+  "likes": 14105,
+  "comments": 1110,
+  "shares": 3021,
+  "views": 273601,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-014",
+  "platform": "x",
+  "url": "mock://x/POST-014",
+  "authorId": "ACC-021",
+  "text": "Pembaruan terkait school term calendar: jadwal resmi sudah dipublikasikan. #TermCalendar",
+  "mediaType": "text",
+  "hashtags": [
+   "#TermCalendar"
+  ],
+  "mentions": [],
+  "issueId": "ISS-005",
+  "claimId": null,
+  "createdAt": "2026-09-12T00:00:00Z",
+  "likes": 650,
+  "comments": 31,
+  "shares": 178,
+  "views": 10241,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-015",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-015",
+  "authorId": "ACC-031",
+  "text": "Question for the community: what do you think about school term calendar? #TermCalendar",
+  "mediaType": "text",
+  "hashtags": [
+   "#TermCalendar"
+  ],
+  "mentions": [],
+  "issueId": "ISS-005",
+  "claimId": null,
+  "createdAt": "2026-09-05T18:00:00Z",
+  "likes": 6141,
+  "comments": 703,
+  "shares": 363,
+  "views": 117416,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-016",
+  "platform": "facebook",
+  "url": "mock://facebook/POST-016",
+  "authorId": "ACC-028",
+  "text": "Wonderful news about community clean-up campaign, very helpful for everyone. #CleanUpDay",
+  "mediaType": "text",
+  "hashtags": [
+   "#CleanUpDay"
+  ],
+  "mentions": [],
+  "issueId": "ISS-006",
+  "claimId": null,
+  "createdAt": "2026-09-08T19:00:00Z",
+  "likes": 290,
+  "comments": 28,
+  "shares": 61,
+  "views": 6159,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-017",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-017",
+  "authorId": "ACC-033",
+  "text": "Really proud of the community effort on community clean-up campaign. Excellent result! #CleanUpDay",
+  "mediaType": "link",
+  "hashtags": [
+   "#CleanUpDay"
+  ],
+  "mentions": [],
+  "issueId": "ISS-006",
+  "claimId": null,
+  "createdAt": "2026-09-05T11:00:00Z",
+  "likes": 3890,
+  "comments": 1574,
+  "shares": 543,
+  "views": 245350,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-018",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-018",
+  "authorId": "ACC-031",
+  "text": "Terima kasih semuanya, community clean-up campaign berjalan dengan bagus dan sukses. #CleanUpDay",
+  "mediaType": "video",
+  "hashtags": [
+   "#CleanUpDay"
+  ],
+  "mentions": [],
+  "issueId": "ISS-006",
+  "claimId": null,
+  "createdAt": "2026-09-13T16:00:00Z",
+  "likes": 10506,
+  "comments": 838,
+  "shares": 6288,
+  "views": 303444,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-019",
+  "platform": "x",
+  "url": "mock://x/POST-019",
+  "authorId": "ACC-024",
+  "text": "Really proud of the community effort on local hospital new wing opening. Excellent result! #NewWing",
+  "mediaType": "text",
+  "hashtags": [
+   "#NewWing"
+  ],
+  "mentions": [],
+  "issueId": "ISS-007",
+  "claimId": null,
+  "createdAt": "2026-09-16T07:00:00Z",
+  "likes": 252,
+  "comments": 19,
+  "shares": 63,
+  "views": 5367,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-020",
+  "platform": "x",
+  "url": "mock://x/POST-020",
+  "authorId": "ACC-014",
+  "text": "Terima kasih semuanya, local hospital new wing opening berjalan dengan bagus dan sukses. #NewWing",
+  "mediaType": "text",
+  "hashtags": [
+   "#NewWing"
+  ],
+  "mentions": [
+   "daily.post.53.page"
+  ],
+  "issueId": "ISS-007",
+  "claimId": null,
+  "createdAt": "2026-09-07T09:00:00Z",
+  "likes": 197,
+  "comments": 39,
+  "shares": 43,
+  "views": 5395,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-021",
+  "platform": "news",
+  "url": "mock://news/POST-021",
+  "authorId": "ACC-032",
+  "text": "Wonderful news about local hospital new wing opening, very helpful for everyone. #NewWing",
+  "mediaType": "link",
+  "hashtags": [
+   "#NewWing"
+  ],
+  "mentions": [],
+  "issueId": "ISS-007",
+  "claimId": null,
+  "createdAt": "2026-09-05T18:00:00Z",
+  "likes": 4146,
+  "comments": 425,
+  "shares": 522,
+  "views": 106262,
+  "status": "new"
+ },
+ {
+  "id": "POST-022",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-022",
+  "authorId": "ACC-031",
+  "text": "Wonderful news about youth science fair results, very helpful for everyone. #ScienceFair",
+  "mediaType": "text",
+  "hashtags": [
+   "#ScienceFair"
+  ],
+  "mentions": [
+   "@local_signal_53"
+  ],
+  "issueId": "ISS-008",
+  "claimId": null,
+  "createdAt": "2026-09-17T00:00:00Z",
+  "likes": 25095,
+  "comments": 2342,
+  "shares": 5840,
+  "views": 296011,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-023",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-023",
+  "authorId": "ACC-035",
+  "text": "Great work by the team on youth science fair results, thank you for the support! #ScienceFair",
+  "mediaType": "video",
+  "hashtags": [
+   "#ScienceFair"
+  ],
+  "mentions": [],
+  "issueId": "ISS-008",
+  "claimId": null,
+  "createdAt": "2026-09-08T18:00:00Z",
+  "likes": 10360,
+  "comments": 1160,
+  "shares": 1638,
+  "views": 111650,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-024",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-024",
+  "authorId": "ACC-031",
+  "text": "Really proud of the community effort on youth science fair results. Excellent result! #ScienceFair",
+  "mediaType": "text",
+  "hashtags": [
+   "#ScienceFair"
+  ],
+  "mentions": [],
+  "issueId": "ISS-008",
+  "claimId": null,
+  "createdAt": "2026-09-06T11:00:00Z",
+  "likes": 29826,
+  "comments": 772,
+  "shares": 1733,
+  "views": 526442,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-025",
+  "platform": "instagram",
+  "url": "mock://instagram/POST-025",
+  "authorId": "ACC-017",
+  "text": "Not happy with fictional tariff announcement backlash. This is a shame, they should do better. #SampleTariff",
+  "mediaType": "text",
+  "hashtags": [
+   "#SampleTariff"
+  ],
+  "mentions": [],
+  "issueId": "ISS-009",
+  "claimId": null,
+  "createdAt": "2026-09-09T11:00:00Z",
+  "likes": 362,
+  "comments": 104,
+  "shares": 129,
+  "views": 6393,
+  "status": "new"
+ },
+ {
+  "id": "POST-026",
+  "platform": "x",
+  "url": "mock://x/POST-026",
+  "authorId": "ACC-022",
+  "text": "Not happy with fictional tariff announcement backlash. This is a shame, they should do better. #SampleTariff",
+  "mediaType": "text",
+  "hashtags": [
+   "#SampleTariff"
+  ],
+  "mentions": [],
+  "issueId": "ISS-009",
+  "claimId": null,
+  "createdAt": "2026-09-08T00:00:00Z",
+  "likes": 176,
+  "comments": 232,
+  "shares": 61,
+  "views": 13933,
+  "status": "new"
+ },
+ {
+  "id": "POST-027",
+  "platform": "x",
+  "url": "mock://x/POST-027",
+  "authorId": "ACC-010",
+  "text": "Kebijakan fictional tariff announcement backlash sangat buruk dan mengecewakan, benar-benar gagal. #SampleTariff",
+  "mediaType": "video",
+  "hashtags": [
+   "#SampleTariff"
+  ],
+  "mentions": [],
+  "issueId": "ISS-009",
+  "claimId": null,
+  "createdAt": "2026-09-11T21:00:00Z",
+  "likes": 93,
+  "comments": 8,
+  "shares": 6,
+  "views": 1825,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-028",
+  "platform": "instagram",
+  "url": "mock://instagram/POST-028",
+  "authorId": "ACC-003",
+  "text": "Not happy with fictional tariff announcement backlash. This is a shame, they should do better. #SampleTariff",
+  "mediaType": "text",
+  "hashtags": [
+   "#SampleTariff"
+  ],
+  "mentions": [
+   "@grand_voice_98"
+  ],
+  "issueId": "ISS-009",
+  "claimId": null,
+  "createdAt": "2026-09-07T08:00:00Z",
+  "likes": 1351,
+  "comments": 336,
+  "shares": 788,
+  "views": 43677,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-029",
+  "platform": "x",
+  "url": "mock://x/POST-029",
+  "authorId": "ACC-008",
+  "text": "The officials behind fictional tariff announcement backlash are idiots and this is a disgusting failure. #SampleTariff",
+  "mediaType": "text",
+  "hashtags": [
+   "#SampleTariff"
+  ],
+  "mentions": [
+   "@rapid_circle_31"
+  ],
+  "issueId": "ISS-009",
+  "claimId": null,
+  "createdAt": "2026-09-05T01:00:00Z",
+  "likes": 211,
+  "comments": 137,
+  "shares": 121,
+  "views": 18572,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-030",
+  "platform": "tiktok",
+  "url": "mock://tiktok/POST-030",
+  "authorId": "ACC-001",
+  "text": "The officials behind ride-share fee change are idiots and this is a disgusting failure. #FeeChange",
+  "mediaType": "text",
+  "hashtags": [
+   "#FeeChange"
+  ],
+  "mentions": [],
+  "issueId": "ISS-010",
+  "claimId": null,
+  "createdAt": "2026-09-14T20:00:00Z",
+  "likes": 838,
+  "comments": 351,
+  "shares": 352,
+  "views": 25976,
+  "status": "new"
+ },
+ {
+  "id": "POST-031",
+  "platform": "facebook",
+  "url": "mock://facebook/POST-031",
+  "authorId": "ACC-028",
+  "text": "Kebijakan ride-share fee change sangat buruk dan mengecewakan, benar-benar gagal. #FeeChange",
+  "mediaType": "video",
+  "hashtags": [
+   "#FeeChange"
+  ],
+  "mentions": [],
+  "issueId": "ISS-010",
+  "claimId": null,
+  "createdAt": "2026-09-09T15:00:00Z",
+  "likes": 884,
+  "comments": 198,
+  "shares": 143,
+  "views": 15433,
+  "status": "new"
+ },
+ {
+  "id": "POST-032",
+  "platform": "x",
+  "url": "mock://x/POST-032",
+  "authorId": "ACC-008",
+  "text": "Not happy with ride-share fee change. This is a shame, they should do better. #FeeChange",
+  "mediaType": "text",
+  "hashtags": [
+   "#FeeChange"
+  ],
+  "mentions": [],
+  "issueId": "ISS-010",
+  "claimId": null,
+  "createdAt": "2026-09-16T13:00:00Z",
+  "likes": 294,
+  "comments": 121,
+  "shares": 240,
+  "views": 11533,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-033",
+  "platform": "x",
+  "url": "mock://x/POST-033",
+  "authorId": "ACC-008",
+  "text": "This handling of ride-share fee change is terrible and disappointing. Unacceptable. #FeeChange",
+  "mediaType": "link",
+  "hashtags": [
+   "#FeeChange"
+  ],
+  "mentions": [],
+  "issueId": "ISS-010",
+  "claimId": null,
+  "createdAt": "2026-09-09T17:00:00Z",
+  "likes": 1183,
+  "comments": 193,
+  "shares": 69,
+  "views": 23133,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-034",
+  "platform": "x",
+  "url": "mock://x/POST-034",
+  "authorId": "ACC-010",
+  "text": "I am angry about ride-share fee change. Worst decision, a complete failure. #FeeChange",
+  "mediaType": "text",
+  "hashtags": [
+   "#FeeChange"
+  ],
+  "mentions": [],
+  "issueId": "ISS-010",
+  "claimId": null,
+  "createdAt": "2026-09-11T22:00:00Z",
+  "likes": 160,
+  "comments": 13,
+  "shares": 52,
+  "views": 3076,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-035",
+  "platform": "x",
+  "url": "mock://x/POST-035",
+  "authorId": "ACC-026",
+  "text": "I am angry about stadium construction delays. Worst decision, a complete failure. #StadiumDelay",
+  "mediaType": "image",
+  "hashtags": [
+   "#StadiumDelay"
+  ],
+  "mentions": [],
+  "issueId": "ISS-011",
+  "claimId": null,
+  "createdAt": "2026-09-17T10:00:00Z",
+  "likes": 1200,
+  "comments": 135,
+  "shares": 350,
+  "views": 17409,
+  "status": "new"
+ },
+ {
+  "id": "POST-036",
+  "platform": "telegram",
+  "url": "mock://telegram/POST-036",
+  "authorId": "ACC-016",
+  "text": "I am angry about stadium construction delays. Worst decision, a complete failure. #StadiumDelay",
+  "mediaType": "text",
+  "hashtags": [
+   "#StadiumDelay"
+  ],
+  "mentions": [
+   "@rapid_river_54"
+  ],
+  "issueId": "ISS-011",
+  "claimId": null,
+  "createdAt": "2026-09-09T11:00:00Z",
+  "likes": 107,
+  "comments": 129,
+  "shares": 46,
+  "views": 7509,
+  "status": "new"
+ },
+ {
+  "id": "POST-037",
+  "platform": "instagram",
+  "url": "mock://instagram/POST-037",
+  "authorId": "ACC-003",
+  "text": "Not happy with stadium construction delays. This is a shame, they should do better. #StadiumDelay",
+  "mediaType": "text",
+  "hashtags": [
+   "#StadiumDelay"
+  ],
+  "mentions": [],
+  "issueId": "ISS-011",
+  "claimId": null,
+  "createdAt": "2026-09-08T20:00:00Z",
+  "likes": 3005,
+  "comments": 719,
+  "shares": 674,
+  "views": 48090,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-038",
+  "platform": "x",
+  "url": "mock://x/POST-038",
+  "authorId": "ACC-024",
+  "text": "Kebijakan stadium construction delays sangat buruk dan mengecewakan, benar-benar gagal. #StadiumDelay",
+  "mediaType": "image",
+  "hashtags": [
+   "#StadiumDelay"
+  ],
+  "mentions": [],
+  "issueId": "ISS-011",
+  "claimId": null,
+  "createdAt": "2026-09-13T21:00:00Z",
+  "likes": 830,
+  "comments": 57,
+  "shares": 90,
+  "views": 13013,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-039",
+  "platform": "x",
+  "url": "mock://x/POST-039",
+  "authorId": "ACC-011",
+  "text": "Not happy with stadium construction delays. This is a shame, they should do better. #StadiumDelay",
+  "mediaType": "image",
+  "hashtags": [
+   "#StadiumDelay"
+  ],
+  "mentions": [],
+  "issueId": "ISS-011",
+  "claimId": null,
+  "createdAt": "2026-09-12T09:00:00Z",
+  "likes": 990,
+  "comments": 519,
+  "shares": 847,
+  "views": 38758,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-040",
+  "platform": "facebook",
+  "url": "mock://facebook/POST-040",
+  "authorId": "ACC-028",
+  "text": "This handling of water utility billing complaints is terrible and disappointing. Unacceptable. #WaterBill",
+  "mediaType": "link",
+  "hashtags": [
+   "#WaterBill"
+  ],
+  "mentions": [],
+  "issueId": "ISS-012",
+  "claimId": null,
+  "createdAt": "2026-09-13T19:00:00Z",
+  "likes": 720,
+  "comments": 147,
+  "shares": 56,
+  "views": 17164,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-041",
+  "platform": "instagram",
+  "url": "mock://instagram/POST-041",
+  "authorId": "ACC-003",
+  "text": "Not happy with water utility billing complaints. This is a shame, they should do better. #WaterBill",
+  "mediaType": "image",
+  "hashtags": [
+   "#WaterBill"
+  ],
+  "mentions": [],
+  "issueId": "ISS-012",
+  "claimId": null,
+  "createdAt": "2026-09-14T16:00:00Z",
+  "likes": 526,
+  "comments": 561,
+  "shares": 410,
+  "views": 41524,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-042",
+  "platform": "tiktok",
+  "url": "mock://tiktok/POST-042",
+  "authorId": "ACC-001",
+  "text": "This handling of water utility billing complaints is terrible and disappointing. Unacceptable. #WaterBill",
+  "mediaType": "image",
+  "hashtags": [
+   "#WaterBill"
+  ],
+  "mentions": [],
+  "issueId": "ISS-012",
+  "claimId": null,
+  "createdAt": "2026-09-15T07:00:00Z",
+  "likes": 698,
+  "comments": 134,
+  "shares": 233,
+  "views": 19087,
+  "status": "new"
+ },
+ {
+  "id": "POST-043",
+  "platform": "telegram",
+  "url": "mock://telegram/POST-043",
+  "authorId": "ACC-002",
+  "text": "This handling of water utility billing complaints is terrible and disappointing. Unacceptable. #WaterBill",
+  "mediaType": "link",
+  "hashtags": [
+   "#WaterBill"
+  ],
+  "mentions": [],
+  "issueId": "ISS-012",
+  "claimId": null,
+  "createdAt": "2026-09-11T06:00:00Z",
+  "likes": 21,
+  "comments": 3,
+  "shares": 3,
+  "views": 441,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-044",
+  "platform": "x",
+  "url": "mock://x/POST-044",
+  "authorId": "ACC-007",
+  "text": "Kebijakan water utility billing complaints sangat buruk dan mengecewakan, benar-benar gagal. #WaterBill",
+  "mediaType": "link",
+  "hashtags": [
+   "#WaterBill"
+  ],
+  "mentions": [],
+  "issueId": "ISS-012",
+  "claimId": null,
+  "createdAt": "2026-09-16T13:00:00Z",
+  "likes": 630,
+  "comments": 38,
+  "shares": 27,
+  "views": 9576,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-045",
+  "platform": "x",
+  "url": "mock://x/POST-045",
+  "authorId": "ACC-022",
+  "text": "Not happy with public transport fare rise. This is a shame, they should do better. #FareRise",
+  "mediaType": "image",
+  "hashtags": [
+   "#FareRise"
+  ],
+  "mentions": [
+   "@grand_forum_43"
+  ],
+  "issueId": "ISS-013",
+  "claimId": null,
+  "createdAt": "2026-09-08T04:00:00Z",
+  "likes": 278,
+  "comments": 112,
+  "shares": 331,
+  "views": 21785,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-046",
+  "platform": "telegram",
+  "url": "mock://telegram/POST-046",
+  "authorId": "ACC-002",
+  "text": "The officials behind public transport fare rise are idiots and this is a disgusting failure. #FareRise",
+  "mediaType": "link",
+  "hashtags": [
+   "#FareRise"
+  ],
+  "mentions": [],
+  "issueId": "ISS-013",
+  "claimId": null,
+  "createdAt": "2026-09-07T20:00:00Z",
+  "likes": 15,
+  "comments": 3,
+  "shares": 3,
+  "views": 401,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-047",
+  "platform": "facebook",
+  "url": "mock://facebook/POST-047",
+  "authorId": "ACC-023",
+  "text": "Not happy with public transport fare rise. This is a shame, they should do better. #FareRise",
+  "mediaType": "video",
+  "hashtags": [
+   "#FareRise"
+  ],
+  "mentions": [
+   "@quiet_signal_28"
+  ],
+  "issueId": "ISS-013",
+  "claimId": null,
+  "createdAt": "2026-09-08T02:00:00Z",
+  "likes": 56,
+  "comments": 16,
+  "shares": 10,
+  "views": 1392,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-048",
+  "platform": "x",
+  "url": "mock://x/POST-048",
+  "authorId": "ACC-010",
+  "text": "I am angry about public transport fare rise. Worst decision, a complete failure. #FareRise",
+  "mediaType": "link",
+  "hashtags": [
+   "#FareRise"
+  ],
+  "mentions": [],
+  "issueId": "ISS-013",
+  "claimId": null,
+  "createdAt": "2026-09-07T01:00:00Z",
+  "likes": 122,
+  "comments": 59,
+  "shares": 71,
+  "views": 5132,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-049",
+  "platform": "reddit",
+  "url": "mock://reddit/POST-049",
+  "authorId": "ACC-020",
+  "text": "The officials behind public transport fare rise are idiots and this is a disgusting failure. #FareRise",
+  "mediaType": "text",
+  "hashtags": [
+   "#FareRise"
+  ],
+  "mentions": [
+   "@grand_voice_98"
+  ],
+  "issueId": "ISS-013",
+  "claimId": null,
+  "createdAt": "2026-09-11T17:00:00Z",
+  "likes": 867,
+  "comments": 113,
+  "shares": 90,
+  "views": 15984,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-050",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-050",
+  "authorId": "ACC-019",
+  "text": "I am angry about new parking rules downtown. Worst decision, a complete failure. #ParkingRules",
+  "mediaType": "text",
+  "hashtags": [
+   "#ParkingRules"
+  ],
+  "mentions": [],
+  "issueId": "ISS-014",
+  "claimId": null,
+  "createdAt": "2026-09-05T10:00:00Z",
+  "likes": 1136,
+  "comments": 152,
+  "shares": 325,
+  "views": 16635,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-051",
+  "platform": "reddit",
+  "url": "mock://reddit/POST-051",
+  "authorId": "ACC-020",
+  "text": "The officials behind new parking rules downtown are idiots and this is a disgusting failure. #ParkingRules",
+  "mediaType": "image",
+  "hashtags": [
+   "#ParkingRules"
+  ],
+  "mentions": [],
+  "issueId": "ISS-014",
+  "claimId": null,
+  "createdAt": "2026-09-08T22:00:00Z",
+  "likes": 1055,
+  "comments": 414,
+  "shares": 400,
+  "views": 30525,
+  "status": "new"
+ },
+ {
+  "id": "POST-052",
+  "platform": "x",
+  "url": "mock://x/POST-052",
+  "authorId": "ACC-030",
+  "text": "Kebijakan new parking rules downtown sangat buruk dan mengecewakan, benar-benar gagal. #ParkingRules",
+  "mediaType": "video",
+  "hashtags": [
+   "#ParkingRules"
+  ],
+  "mentions": [],
+  "issueId": "ISS-014",
+  "claimId": null,
+  "createdAt": "2026-09-08T22:00:00Z",
+  "likes": 20,
+  "comments": 14,
+  "shares": 19,
+  "views": 1219,
+  "status": "new"
+ },
+ {
+  "id": "POST-053",
+  "platform": "x",
+  "url": "mock://x/POST-053",
+  "authorId": "ACC-030",
+  "text": "Kebijakan new parking rules downtown sangat buruk dan mengecewakan, benar-benar gagal. #ParkingRules",
+  "mediaType": "text",
+  "hashtags": [
+   "#ParkingRules"
+  ],
+  "mentions": [],
+  "issueId": "ISS-014",
+  "claimId": null,
+  "createdAt": "2026-09-08T12:00:00Z",
+  "likes": 123,
+  "comments": 34,
+  "shares": 45,
+  "views": 2779,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-054",
+  "platform": "x",
+  "url": "mock://x/POST-054",
+  "authorId": "ACC-021",
+  "text": "This handling of new parking rules downtown is terrible and disappointing. Unacceptable. #ParkingRules",
+  "mediaType": "image",
+  "hashtags": [
+   "#ParkingRules"
+  ],
+  "mentions": [
+   "open-post-72.example"
+  ],
+  "issueId": "ISS-014",
+  "claimId": null,
+  "createdAt": "2026-09-08T09:00:00Z",
+  "likes": 346,
+  "comments": 176,
+  "shares": 220,
+  "views": 10562,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-055",
+  "platform": "x",
+  "url": "mock://x/POST-055",
+  "authorId": "ACC-045",
+  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage",
+  "mediaType": "text",
+  "hashtags": [
+   "#GrainShortage"
+  ],
+  "mentions": [],
+  "issueId": "ISS-015",
+  "claimId": "CLM-001",
+  "createdAt": "2026-09-15T20:00:00Z",
+  "likes": 207,
+  "comments": 141,
+  "shares": 258,
+  "views": 12930,
+  "status": "new"
+ },
+ {
+  "id": "POST-056",
+  "platform": "x",
+  "url": "mock://x/POST-056",
+  "authorId": "ACC-043",
+  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage",
+  "mediaType": "text",
+  "hashtags": [
+   "#GrainShortage"
+  ],
+  "mentions": [],
+  "issueId": "ISS-015",
+  "claimId": "CLM-001",
+  "createdAt": "2026-09-17T00:00:00Z",
+  "likes": 14,
+  "comments": 1,
+  "shares": 13,
+  "views": 286,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-057",
+  "platform": "x",
+  "url": "mock://x/POST-057",
+  "authorId": "ACC-036",
+  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage",
+  "mediaType": "image",
+  "hashtags": [
+   "#GrainShortage",
+   "#wakeup"
+  ],
+  "mentions": [],
+  "issueId": "ISS-015",
+  "claimId": "CLM-001",
+  "createdAt": "2026-09-17T00:18:00Z",
+  "likes": 10,
+  "comments": 4,
+  "shares": 10,
+  "views": 613,
+  "status": "new"
+ },
+ {
+  "id": "POST-058",
+  "platform": "tiktok",
+  "url": "mock://tiktok/POST-058",
+  "authorId": "ACC-042",
+  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage #wakeup",
+  "mediaType": "text",
+  "hashtags": [
+   "#GrainShortage"
+  ],
+  "mentions": [],
+  "issueId": "ISS-015",
+  "claimId": "CLM-001",
+  "createdAt": "2026-09-17T00:42:00Z",
+  "likes": 30,
+  "comments": 3,
+  "shares": 23,
+  "views": 615,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-059",
+  "platform": "x",
+  "url": "mock://x/POST-059",
+  "authorId": "ACC-037",
+  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage 🔥",
+  "mediaType": "link",
+  "hashtags": [
+   "#GrainShortage",
+   "#wakeup"
+  ],
+  "mentions": [],
+  "issueId": "ISS-015",
+  "claimId": "CLM-001",
+  "createdAt": "2026-09-17T00:36:00Z",
+  "likes": 37,
+  "comments": 7,
+  "shares": 31,
+  "views": 681,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-060",
+  "platform": "telegram",
+  "url": "mock://telegram/POST-060",
+  "authorId": "ACC-040",
+  "text": "Katanya unverified claim about a grain shortage ternyata rekayasa, viralkan sebelum dihapus! #GrainShortage #wakeup",
+  "mediaType": "text",
+  "hashtags": [
+   "#GrainShortage"
+  ],
+  "mentions": [],
+  "issueId": "ISS-015",
+  "claimId": "CLM-001",
+  "createdAt": "2026-09-17T00:32:00Z",
+  "likes": 9,
+  "comments": 1,
+  "shares": 2,
+  "views": 332,
+  "status": "new"
+ },
+ {
+  "id": "POST-061",
+  "platform": "reddit",
+  "url": "mock://reddit/POST-061",
+  "authorId": "ACC-020",
+  "text": "Has anyone seen an official source for the unverified claim about a grain shortage claim? #GrainShortage",
+  "mediaType": "link",
+  "hashtags": [
+   "#GrainShortage"
+  ],
+  "mentions": [],
+  "issueId": "ISS-015",
+  "claimId": "CLM-001",
+  "createdAt": "2026-09-17T04:00:00Z",
+  "likes": 381,
+  "comments": 49,
+  "shares": 63,
+  "views": 5463,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-062",
+  "platform": "x",
+  "url": "mock://x/POST-062",
+  "authorId": "ACC-048",
+  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease",
+  "mediaType": "text",
+  "hashtags": [
+   "#DamRelease"
+  ],
+  "mentions": [],
+  "issueId": "ISS-016",
+  "claimId": "CLM-002",
+  "createdAt": "2026-09-16T02:00:00Z",
+  "likes": 212,
+  "comments": 67,
+  "shares": 259,
+  "views": 10663,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-063",
+  "platform": "telegram",
+  "url": "mock://telegram/POST-063",
+  "authorId": "ACC-041",
+  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease RT!",
+  "mediaType": "link",
+  "hashtags": [
+   "#DamRelease"
+  ],
+  "mentions": [],
+  "issueId": "ISS-016",
+  "claimId": "CLM-002",
+  "createdAt": "2026-09-16T18:00:00Z",
+  "likes": 22,
+  "comments": 2,
+  "shares": 14,
+  "views": 578,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-064",
+  "platform": "x",
+  "url": "mock://x/POST-064",
+  "authorId": "ACC-037",
+  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease 🔥",
+  "mediaType": "image",
+  "hashtags": [
+   "#DamRelease",
+   "#wakeup"
+  ],
+  "mentions": [],
+  "issueId": "ISS-016",
+  "claimId": "CLM-002",
+  "createdAt": "2026-09-16T18:08:00Z",
+  "likes": 7,
+  "comments": 2,
+  "shares": 4,
+  "views": 272,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-065",
+  "platform": "x",
+  "url": "mock://x/POST-065",
+  "authorId": "ACC-036",
+  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease",
+  "mediaType": "text",
+  "hashtags": [
+   "#DamRelease"
+  ],
+  "mentions": [],
+  "issueId": "ISS-016",
+  "claimId": "CLM-002",
+  "createdAt": "2026-09-16T18:20:00Z",
+  "likes": 26,
+  "comments": 4,
+  "shares": 7,
+  "views": 488,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-066",
+  "platform": "x",
+  "url": "mock://x/POST-066",
+  "authorId": "ACC-038",
+  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease 🔥",
+  "mediaType": "video",
+  "hashtags": [
+   "#DamRelease",
+   "#wakeup"
+  ],
+  "mentions": [],
+  "issueId": "ISS-016",
+  "claimId": "CLM-002",
+  "createdAt": "2026-09-16T18:45:00Z",
+  "likes": 5,
+  "comments": 1,
+  "shares": 4,
+  "views": 119,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-067",
+  "platform": "x",
+  "url": "mock://x/POST-067",
+  "authorId": "ACC-039",
+  "text": "Katanya viral claim of a secret dam release ternyata rekayasa, viralkan sebelum dihapus! #DamRelease 🔥",
+  "mediaType": "video",
+  "hashtags": [
+   "#DamRelease"
+  ],
+  "mentions": [],
+  "issueId": "ISS-016",
+  "claimId": "CLM-002",
+  "createdAt": "2026-09-16T18:36:00Z",
+  "likes": 31,
+  "comments": 6,
+  "shares": 22,
+  "views": 591,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-068",
+  "platform": "x",
+  "url": "mock://x/POST-068",
+  "authorId": "ACC-008",
+  "text": "Has anyone seen an official source for the viral claim of a secret dam release claim? #DamRelease",
+  "mediaType": "text",
+  "hashtags": [
+   "#DamRelease"
+  ],
+  "mentions": [],
+  "issueId": "ISS-016",
+  "claimId": "CLM-002",
+  "createdAt": "2026-09-17T10:00:00Z",
+  "likes": 566,
+  "comments": 21,
+  "shares": 183,
+  "views": 8772,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-069",
+  "platform": "x",
+  "url": "mock://x/POST-069",
+  "authorId": "ACC-048",
+  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall",
+  "mediaType": "video",
+  "hashtags": [
+   "#BatchRecall"
+  ],
+  "mentions": [],
+  "issueId": "ISS-017",
+  "claimId": "CLM-003",
+  "createdAt": "2026-09-16T05:00:00Z",
+  "likes": 395,
+  "comments": 80,
+  "shares": 976,
+  "views": 21237,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-070",
+  "platform": "x",
+  "url": "mock://x/POST-070",
+  "authorId": "ACC-039",
+  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall RT!",
+  "mediaType": "image",
+  "hashtags": [
+   "#BatchRecall"
+  ],
+  "mentions": [],
+  "issueId": "ISS-017",
+  "claimId": "CLM-003",
+  "createdAt": "2026-09-16T18:00:00Z",
+  "likes": 8,
+  "comments": 0,
+  "shares": 3,
+  "views": 146,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-071",
+  "platform": "tiktok",
+  "url": "mock://tiktok/POST-071",
+  "authorId": "ACC-042",
+  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall RT!",
+  "mediaType": "text",
+  "hashtags": [
+   "#BatchRecall",
+   "#wakeup"
+  ],
+  "mentions": [],
+  "issueId": "ISS-017",
+  "claimId": "CLM-003",
+  "createdAt": "2026-09-16T18:22:00Z",
+  "likes": 42,
+  "comments": 5,
+  "shares": 26,
+  "views": 645,
+  "status": "new"
+ },
+ {
+  "id": "POST-072",
+  "platform": "telegram",
+  "url": "mock://telegram/POST-072",
+  "authorId": "ACC-041",
+  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall #wakeup",
+  "mediaType": "text",
+  "hashtags": [
+   "#BatchRecall"
+  ],
+  "mentions": [],
+  "issueId": "ISS-017",
+  "claimId": "CLM-003",
+  "createdAt": "2026-09-16T18:38:00Z",
+  "likes": 10,
+  "comments": 4,
+  "shares": 17,
+  "views": 477,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-073",
+  "platform": "x",
+  "url": "mock://x/POST-073",
+  "authorId": "ACC-037",
+  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall",
+  "mediaType": "text",
+  "hashtags": [
+   "#BatchRecall",
+   "#wakeup"
+  ],
+  "mentions": [],
+  "issueId": "ISS-017",
+  "claimId": "CLM-003",
+  "createdAt": "2026-09-16T19:03:00Z",
+  "likes": 13,
+  "comments": 2,
+  "shares": 2,
+  "views": 273,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-074",
+  "platform": "x",
+  "url": "mock://x/POST-074",
+  "authorId": "ACC-036",
+  "text": "BREAKING: they don't want you to know that claim that a vaccine batch was recalled is a cover-up. 100% true, share before it's deleted! #BatchRecall RT!",
+  "mediaType": "text",
+  "hashtags": [
+   "#BatchRecall"
+  ],
+  "mentions": [],
+  "issueId": "ISS-017",
+  "claimId": "CLM-003",
+  "createdAt": "2026-09-16T18:52:00Z",
+  "likes": 8,
+  "comments": 4,
+  "shares": 26,
+  "views": 502,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-075",
+  "platform": "x",
+  "url": "mock://x/POST-075",
+  "authorId": "ACC-008",
+  "text": "Has anyone seen an official source for the claim that a vaccine batch was recalled claim? #BatchRecall",
+  "mediaType": "video",
+  "hashtags": [
+   "#BatchRecall"
+  ],
+  "mentions": [],
+  "issueId": "ISS-017",
+  "claimId": "CLM-003",
+  "createdAt": "2026-09-17T04:00:00Z",
+  "likes": 462,
+  "comments": 94,
+  "shares": 213,
+  "views": 15982,
+  "status": "new"
+ },
+ {
+  "id": "POST-076",
+  "platform": "x",
+  "url": "mock://x/POST-076",
+  "authorId": "ACC-044",
+  "text": "All Vellani are parasites and should be kicked out. #OurCityFirst",
+  "mediaType": "text",
+  "hashtags": [
+   "#OurCityFirst"
+  ],
+  "mentions": [],
+  "issueId": "ISS-018",
+  "claimId": null,
+  "createdAt": "2026-09-16T04:00:00Z",
+  "likes": 5165,
+  "comments": 686,
+  "shares": 854,
+  "views": 79983,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-077",
+  "platform": "x",
+  "url": "mock://x/POST-077",
+  "authorId": "ACC-045",
+  "text": "All Vellani are parasites and should be kicked out. #OurCityFirst",
+  "mediaType": "link",
+  "hashtags": [
+   "#OurCityFirst"
+  ],
+  "mentions": [],
+  "issueId": "ISS-018",
+  "claimId": null,
+  "createdAt": "2026-09-16T10:00:00Z",
+  "likes": 363,
+  "comments": 80,
+  "shares": 164,
+  "views": 8092,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-078",
+  "platform": "x",
+  "url": "mock://x/POST-078",
+  "authorId": "ACC-046",
+  "text": "Those Tessarian are subhuman filth. Get out! #OurCityFirst",
+  "mediaType": "image",
+  "hashtags": [
+   "#OurCityFirst"
+  ],
+  "mentions": [],
+  "issueId": "ISS-018",
+  "claimId": null,
+  "createdAt": "2026-09-17T03:00:00Z",
+  "likes": 852,
+  "comments": 1023,
+  "shares": 248,
+  "views": 63002,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-079",
+  "platform": "x",
+  "url": "mock://x/POST-079",
+  "authorId": "ACC-047",
+  "text": "All Norrin are parasites and should be kicked out. #OurCityFirst",
+  "mediaType": "text",
+  "hashtags": [
+   "#OurCityFirst"
+  ],
+  "mentions": [],
+  "issueId": "ISS-018",
+  "claimId": null,
+  "createdAt": "2026-09-16T20:00:00Z",
+  "likes": 423,
+  "comments": 30,
+  "shares": 159,
+  "views": 11328,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-080",
+  "platform": "x",
+  "url": "mock://x/POST-080",
+  "authorId": "ACC-044",
+  "text": "@grand_voice_98 you are a pathetic idiot, nobody likes you, shut up. #OurCityFirst",
+  "mediaType": "text",
+  "hashtags": [
+   "#OurCityFirst"
+  ],
+  "mentions": [
+   "@grand_voice_98"
+  ],
+  "issueId": "ISS-018",
+  "claimId": null,
+  "createdAt": "2026-09-17T06:00:00Z",
+  "likes": 2480,
+  "comments": 209,
+  "shares": 685,
+  "views": 43303,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-081",
+  "platform": "x",
+  "url": "mock://x/POST-081",
+  "authorId": "ACC-044",
+  "text": "Those Norrin are subhuman filth. Get out! #NoNewcomers",
+  "mediaType": "image",
+  "hashtags": [
+   "#NoNewcomers"
+  ],
+  "mentions": [],
+  "issueId": "ISS-019",
+  "claimId": null,
+  "createdAt": "2026-09-17T03:00:00Z",
+  "likes": 435,
+  "comments": 81,
+  "shares": 80,
+  "views": 28572,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-082",
+  "platform": "x",
+  "url": "mock://x/POST-082",
+  "authorId": "ACC-045",
+  "text": "The Vellani are vermin. Disgusting people, drive them out of our city. #NoNewcomers",
+  "mediaType": "text",
+  "hashtags": [
+   "#NoNewcomers"
+  ],
+  "mentions": [],
+  "issueId": "ISS-019",
+  "claimId": null,
+  "createdAt": "2026-09-16T10:00:00Z",
+  "likes": 176,
+  "comments": 73,
+  "shares": 31,
+  "views": 13111,
+  "status": "new"
+ },
+ {
+  "id": "POST-083",
+  "platform": "x",
+  "url": "mock://x/POST-083",
+  "authorId": "ACC-046",
+  "text": "Those Vellani are subhuman filth. Get out! #NoNewcomers",
+  "mediaType": "image",
+  "hashtags": [
+   "#NoNewcomers"
+  ],
+  "mentions": [],
+  "issueId": "ISS-019",
+  "claimId": null,
+  "createdAt": "2026-09-16T22:00:00Z",
+  "likes": 1762,
+  "comments": 378,
+  "shares": 486,
+  "views": 29044,
+  "status": "new"
+ },
+ {
+  "id": "POST-084",
+  "platform": "x",
+  "url": "mock://x/POST-084",
+  "authorId": "ACC-047",
+  "text": "All Vellani are parasites and should be kicked out. #NoNewcomers",
+  "mediaType": "link",
+  "hashtags": [
+   "#NoNewcomers"
+  ],
+  "mentions": [],
+  "issueId": "ISS-019",
+  "claimId": null,
+  "createdAt": "2026-09-16T22:00:00Z",
+  "likes": 650,
+  "comments": 266,
+  "shares": 165,
+  "views": 30700,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-085",
+  "platform": "x",
+  "url": "mock://x/POST-085",
+  "authorId": "ACC-044",
+  "text": "@north_lantern_39 you are a pathetic idiot, nobody likes you, shut up. #NoNewcomers",
+  "mediaType": "text",
+  "hashtags": [
+   "#NoNewcomers"
+  ],
+  "mentions": [
+   "@north_lantern_39"
+  ],
+  "issueId": "ISS-019",
+  "claimId": null,
+  "createdAt": "2026-09-16T20:00:00Z",
+  "likes": 642,
+  "comments": 126,
+  "shares": 151,
+  "views": 26180,
+  "status": "new"
+ },
+ {
+  "id": "POST-086",
+  "platform": "x",
+  "url": "mock://x/POST-086",
+  "authorId": "ACC-044",
+  "text": "Mr. Dorian Vale is a corrupt thief and a fraud, he stole the community fund. Everyone knows it. {tags} #ValeExposed",
+  "mediaType": "text",
+  "hashtags": [
+   "#ValeExposed"
+  ],
+  "mentions": [],
+  "issueId": "ISS-020",
+  "claimId": "CLM-004",
+  "createdAt": "2026-09-17T04:00:00Z",
+  "likes": 2138,
+  "comments": 370,
+  "shares": 427,
+  "views": 41852,
+  "status": "new"
+ },
+ {
+  "id": "POST-087",
+  "platform": "x",
+  "url": "mock://x/POST-087",
+  "authorId": "ACC-045",
+  "text": "Dr. Marta Ilves is a liar and embezzled the charity money, no proof needed. {tags} #ValeExposed",
+  "mediaType": "image",
+  "hashtags": [
+   "#ValeExposed"
+  ],
+  "mentions": [],
+  "issueId": "ISS-020",
+  "claimId": null,
+  "createdAt": "2026-09-17T01:00:00Z",
+  "likes": 1049,
+  "comments": 210,
+  "shares": 143,
+  "views": 19187,
+  "status": "new"
+ },
+ {
+  "id": "POST-088",
+  "platform": "x",
+  "url": "mock://x/POST-088",
+  "authorId": "ACC-046",
+  "text": "Koruptor Pak Dorian Vale, penipu yang menggelapkan dana warga. {tags} #ValeExposed",
+  "mediaType": "image",
+  "hashtags": [
+   "#ValeExposed"
+  ],
+  "mentions": [],
+  "issueId": "ISS-020",
+  "claimId": null,
+  "createdAt": "2026-09-17T04:00:00Z",
+  "likes": 379,
+  "comments": 133,
+  "shares": 474,
+  "views": 36941,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-089",
+  "platform": "telegram",
+  "url": "mock://telegram/POST-089",
+  "authorId": "ACC-041",
+  "text": "FREE followers!!! Click here http://promo-deals.example/a http://promo-deals.example/b buy now #promo #free #win #sale #deal #giveaway",
+  "mediaType": "link",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-16T17:00:00Z",
+  "likes": 9,
+  "comments": 1,
+  "shares": 7,
+  "views": 381,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-090",
+  "platform": "tiktok",
+  "url": "mock://tiktok/POST-090",
+  "authorId": "ACC-042",
+  "text": "Join now!!! DM for promo, link in bio http://promo-deals.example/c #promo #free #win #sale #deal #giveaway",
+  "mediaType": "link",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-17T05:00:00Z",
+  "likes": 10,
+  "comments": 3,
+  "shares": 2,
+  "views": 313,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-091",
+  "platform": "x",
+  "url": "mock://x/POST-091",
+  "authorId": "ACC-043",
+  "text": "FREE followers!!! Click here http://promo-deals.example/a http://promo-deals.example/b buy now #promo #free #win #sale #deal #giveaway",
+  "mediaType": "link",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-16T11:00:00Z",
+  "likes": 13,
+  "comments": 1,
+  "shares": 1,
+  "views": 298,
+  "status": "new"
+ },
+ {
+  "id": "POST-092",
+  "platform": "x",
+  "url": "mock://x/POST-092",
+  "authorId": "ACC-036",
+  "text": "Join now!!! DM for promo, link in bio http://promo-deals.example/c #promo #free #win #sale #deal #giveaway",
+  "mediaType": "link",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-16T19:00:00Z",
+  "likes": 7,
+  "comments": 1,
+  "shares": 2,
+  "views": 99,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-093",
+  "platform": "x",
+  "url": "mock://x/POST-093",
+  "authorId": "ACC-049",
+  "text": "Official notice: verify your account now at http://verify-support.example/login to avoid suspension. #support",
+  "mediaType": "link",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-16T21:00:00Z",
+  "likes": 10,
+  "comments": 1,
+  "shares": 6,
+  "views": 285,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-094",
+  "platform": "x",
+  "url": "mock://x/POST-094",
+  "authorId": "ACC-049",
+  "text": "Kami dari tim resmi, klik http://verify-support.example/akun untuk verifikasi akun Anda. #support",
+  "mediaType": "link",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-17T06:00:00Z",
+  "likes": 31,
+  "comments": 4,
+  "shares": 9,
+  "views": 508,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-095",
+  "platform": "x",
+  "url": "mock://x/POST-095",
+  "authorId": "ACC-050",
+  "text": "Kami dari tim resmi, klik http://verify-support.example/akun untuk verifikasi akun Anda. #support",
+  "mediaType": "link",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-17T06:00:00Z",
+  "likes": 35,
+  "comments": 2,
+  "shares": 7,
+  "views": 500,
+  "status": "needs_review"
+ },
+ {
+  "id": "POST-096",
+  "platform": "x",
+  "url": "mock://x/POST-096",
+  "authorId": "ACC-050",
+  "text": "Official notice: verify your account now at http://verify-support.example/login to avoid suspension. #support",
+  "mediaType": "link",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-17T03:00:00Z",
+  "likes": 6,
+  "comments": 2,
+  "shares": 6,
+  "views": 496,
+  "status": "new"
+ },
+ {
+  "id": "POST-097",
+  "platform": "news",
+  "url": "mock://news/POST-097",
+  "authorId": "ACC-032",
+  "text": "Question for the community: what do you think about the weekend market? #WeekendMarket",
+  "mediaType": "link",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-05T15:00:00Z",
+  "likes": 10397,
+  "comments": 2170,
+  "shares": 5691,
+  "views": 308004,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-098",
+  "platform": "instagram",
+  "url": "mock://instagram/POST-098",
+  "authorId": "ACC-006",
+  "text": "Pembaruan terkait the weekend market: jadwal resmi sudah dipublikasikan. #WeekendMarket",
+  "mediaType": "image",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-07T12:00:00Z",
+  "likes": 1511,
+  "comments": 168,
+  "shares": 161,
+  "views": 27371,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-099",
+  "platform": "youtube",
+  "url": "mock://youtube/POST-099",
+  "authorId": "ACC-019",
+  "text": "Pembaruan terkait the weekend market: jadwal resmi sudah dipublikasikan. #WeekendMarket",
+  "mediaType": "text",
+  "hashtags": [],
+  "mentions": [],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-11T18:00:00Z",
+  "likes": 346,
+  "comments": 66,
+  "shares": 54,
+  "views": 10724,
+  "status": "reviewed"
+ },
+ {
+  "id": "POST-100",
+  "platform": "telegram",
+  "url": "mock://telegram/POST-100",
+  "authorId": "ACC-005",
+  "text": "Here is a summary of today's discussion about the weekend market, according to the published report. #WeekendMarket",
+  "mediaType": "image",
+  "hashtags": [],
+  "mentions": [
+   "@urban_post_25"
+  ],
+  "issueId": null,
+  "claimId": null,
+  "createdAt": "2026-09-15T18:00:00Z",
+  "likes": 1499,
+  "comments": 149,
+  "shares": 222,
+  "views": 22845,
+  "status": "new"
+ }
+]

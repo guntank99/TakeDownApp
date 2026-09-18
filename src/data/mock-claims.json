@@ -1,0 +1,116 @@
+[
+ {
+  "id": "CLM-001",
+  "extractedFromPostId": "POST-055",
+  "text": "Claim: unverified claim about a grain shortage is a cover-up / not as officially stated.",
+  "assessment": {
+   "id": "ASM-001",
+   "claimId": "CLM-001",
+   "verdict": "likely_false",
+   "confidence": 0.82,
+   "evidence": [
+    "No official source found for the shortage.",
+    "Regional agency data shows normal stock levels."
+   ],
+   "sources": [
+    {
+     "name": "Sample Fact-Check Desk",
+     "url": "https://factcheck.example/clm-001",
+     "reliability": "medium"
+    },
+    {
+     "name": "Sample Regional Agency Bulletin",
+     "url": "https://agency.example/bulletin/clm-001",
+     "reliability": "high"
+    }
+   ],
+   "assessedAt": "2026-09-16T14:00:00Z",
+   "reviewer": "USR-003"
+  }
+ },
+ {
+  "id": "CLM-002",
+  "extractedFromPostId": "POST-062",
+  "text": "Claim: viral claim of a secret dam release is a cover-up / not as officially stated.",
+  "assessment": {
+   "id": "ASM-002",
+   "claimId": "CLM-002",
+   "verdict": "disputed",
+   "confidence": 0.6,
+   "evidence": [
+    "Two outlets report conflicting figures.",
+    "Agency statement pending."
+   ],
+   "sources": [
+    {
+     "name": "Sample Fact-Check Desk",
+     "url": "https://factcheck.example/clm-002",
+     "reliability": "medium"
+    },
+    {
+     "name": "Sample Regional Agency Bulletin",
+     "url": "https://agency.example/bulletin/clm-002",
+     "reliability": "high"
+    }
+   ],
+   "assessedAt": "2026-09-16T06:00:00Z",
+   "reviewer": "USR-003"
+  }
+ },
+ {
+  "id": "CLM-003",
+  "extractedFromPostId": "POST-069",
+  "text": "Claim: claim that a vaccine batch was recalled is a cover-up / not as officially stated.",
+  "assessment": {
+   "id": "ASM-003",
+   "claimId": "CLM-003",
+   "verdict": "unverified",
+   "confidence": 0.5,
+   "evidence": [
+    "No primary source located yet."
+   ],
+   "sources": [
+    {
+     "name": "Sample Fact-Check Desk",
+     "url": "https://factcheck.example/clm-003",
+     "reliability": "medium"
+    },
+    {
+     "name": "Sample Regional Agency Bulletin",
+     "url": "https://agency.example/bulletin/clm-003",
+     "reliability": "high"
+    }
+   ],
+   "assessedAt": "2026-09-17T08:00:00Z",
+   "reviewer": null
+  }
+ },
+ {
+  "id": "CLM-004",
+  "extractedFromPostId": "POST-086",
+  "text": "Claim: a local official embezzled community funds.",
+  "assessment": {
+   "id": "ASM-004",
+   "claimId": "CLM-004",
+   "verdict": "unverified",
+   "confidence": 0.45,
+   "evidence": [
+    "Allegation repeated across posts; no court record or report found."
+   ],
+   "sources": [
+    {
+     "name": "Sample Fact-Check Desk",
+     "url": "https://factcheck.example/clm-004",
+     "reliability": "medium"
+    },
+    {
+     "name": "Sample Regional Agency Bulletin",
+     "url": "https://agency.example/bulletin/clm-004",
+     "reliability": "high"
+    }
+   ],
+   "assessedAt": "2026-09-16T07:00:00Z",
+   "reviewer": "USR-003"
+  }
+ }
+]

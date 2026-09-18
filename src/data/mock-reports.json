@@ -1,0 +1,41 @@
+[
+ {
+  "id": "RPT-001",
+  "caseId": "CASE-005",
+  "title": "Report: promotional spam with link farming",
+  "status": "submitted",
+  "createdBy": "USR-002",
+  "approvedBy": "USR-003",
+  "reviewerNotes": "Indicators confirmed on manual review.",
+  "recommendedAction": "Submit through the platform's official reporting page.",
+  "submission": {
+   "platform": "x",
+   "method": "official_page",
+   "submittedAt": "2026-09-12T12:00:00Z",
+   "submittedBy": "USR-003",
+   "status": "SUBMITTED"
+  }
+ },
+ {
+  "id": "RPT-002",
+  "caseId": "CASE-004",
+  "title": "Report: support-desk impersonation",
+  "status": "approved",
+  "createdBy": "USR-002",
+  "approvedBy": "USR-003",
+  "reviewerNotes": "Display name mimics a support desk; account is unverified and new.",
+  "recommendedAction": "Report via official impersonation form.",
+  "submission": null
+ },
+ {
+  "id": "RPT-003",
+  "caseId": "CASE-002",
+  "title": "Report: group-targeting wording",
+  "status": "in_review",
+  "createdBy": "USR-002",
+  "approvedBy": null,
+  "reviewerNotes": "",
+  "recommendedAction": "Pending reviewer decision.",
+  "submission": null
+ }
+]

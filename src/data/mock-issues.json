@@ -1,0 +1,466 @@
+[
+ {
+  "id": "ISS-001",
+  "title": "Regional transit schedule update",
+  "hashtag": "#TransitUpdate",
+  "platforms": [
+   "x",
+   "facebook"
+  ],
+  "volume": 4086,
+  "growth": 24,
+  "series": [
+   698,
+   638,
+   474,
+   571,
+   501,
+   566,
+   638
+  ],
+  "status": "monitoring",
+  "firstDetectedAt": "2026-09-07T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+ },
+ {
+  "id": "ISS-002",
+  "title": "Public library extended hours",
+  "hashtag": "#LibraryHours",
+  "platforms": [
+   "facebook",
+   "instagram"
+  ],
+  "volume": 1733,
+  "growth": 13,
+  "series": [
+   304,
+   199,
+   250,
+   234,
+   352,
+   248,
+   145
+  ],
+  "status": "monitoring",
+  "firstDetectedAt": "2026-09-10T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T11:00:00Z"
+ },
+ {
+  "id": "ISS-003",
+  "title": "Weather advisory for the coast",
+  "hashtag": "#CoastAdvisory",
+  "platforms": [
+   "x",
+   "news"
+  ],
+  "volume": 1262,
+  "growth": 20,
+  "series": [
+   182,
+   220,
+   176,
+   125,
+   240,
+   182,
+   136
+  ],
+  "status": "monitoring",
+  "firstDetectedAt": "2026-09-04T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T07:00:00Z"
+ },
+ {
+  "id": "ISS-004",
+  "title": "City budget consultation",
+  "hashtag": "#BudgetTalk",
+  "platforms": [
+   "facebook",
+   "reddit"
+  ],
+  "volume": 4068,
+  "growth": 14,
+  "series": [
+   692,
+   535,
+   722,
+   714,
+   666,
+   324,
+   415
+  ],
+  "status": "monitoring",
+  "firstDetectedAt": "2026-09-08T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T07:00:00Z"
+ },
+ {
+  "id": "ISS-005",
+  "title": "School term calendar",
+  "hashtag": "#TermCalendar",
+  "platforms": [
+   "facebook",
+   "youtube"
+  ],
+  "volume": 3801,
+  "growth": 3,
+  "series": [
+   488,
+   492,
+   415,
+   699,
+   649,
+   611,
+   448
+  ],
+  "status": "monitoring",
+  "firstDetectedAt": "2026-09-07T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T11:00:00Z"
+ },
+ {
+  "id": "ISS-006",
+  "title": "Community clean-up campaign",
+  "hashtag": "#CleanUpDay",
+  "platforms": [
+   "instagram",
+   "facebook"
+  ],
+  "volume": 3682,
+  "growth": -11,
+  "series": [
+   595,
+   522,
+   520,
+   352,
+   658,
+   509,
+   527
+  ],
+  "status": "closed",
+  "firstDetectedAt": "2026-09-06T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T12:00:00Z"
+ },
+ {
+  "id": "ISS-007",
+  "title": "Local hospital new wing opening",
+  "hashtag": "#NewWing",
+  "platforms": [
+   "facebook",
+   "x"
+  ],
+  "volume": 1489,
+  "growth": 13,
+  "series": [
+   209,
+   169,
+   204,
+   207,
+   193,
+   217,
+   292
+  ],
+  "status": "monitoring",
+  "firstDetectedAt": "2026-09-05T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T12:00:00Z"
+ },
+ {
+  "id": "ISS-008",
+  "title": "Youth science fair results",
+  "hashtag": "#ScienceFair",
+  "platforms": [
+   "youtube",
+   "instagram",
+   "tiktok"
+  ],
+  "volume": 2838,
+  "growth": 27,
+  "series": [
+   351,
+   442,
+   474,
+   406,
+   390,
+   438,
+   337
+  ],
+  "status": "closed",
+  "firstDetectedAt": "2026-09-07T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T07:00:00Z"
+ },
+ {
+  "id": "ISS-009",
+  "title": "Fictional tariff announcement backlash",
+  "hashtag": "#SampleTariff",
+  "platforms": [
+   "x",
+   "facebook"
+  ],
+  "volume": 12612,
+  "growth": 39,
+  "series": [
+   1910,
+   1339,
+   2356,
+   2320,
+   1531,
+   1373,
+   1783
+  ],
+  "status": "active",
+  "firstDetectedAt": "2026-09-04T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T12:00:00Z"
+ },
+ {
+  "id": "ISS-010",
+  "title": "Ride-share fee change",
+  "hashtag": "#FeeChange",
+  "platforms": [
+   "x",
+   "reddit"
+  ],
+  "volume": 11326,
+  "growth": 65,
+  "series": [
+   1517,
+   1738,
+   1170,
+   1839,
+   2451,
+   1341,
+   1270
+  ],
+  "status": "monitoring",
+  "firstDetectedAt": "2026-09-06T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+ },
+ {
+  "id": "ISS-011",
+  "title": "Stadium construction delays",
+  "hashtag": "#StadiumDelay",
+  "platforms": [
+   "x",
+   "facebook",
+   "youtube"
+  ],
+  "volume": 3849,
+  "growth": 109,
+  "series": [
+   652,
+   586,
+   595,
+   524,
+   576,
+   412,
+   504
+  ],
+  "status": "active",
+  "firstDetectedAt": "2026-09-12T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+ },
+ {
+  "id": "ISS-012",
+  "title": "Water utility billing complaints",
+  "hashtag": "#WaterBill",
+  "platforms": [
+   "facebook",
+   "x"
+  ],
+  "volume": 10022,
+  "growth": 82,
+  "series": [
+   1714,
+   1192,
+   1540,
+   1086,
+   1091,
+   1963,
+   1438
+  ],
+  "status": "monitoring",
+  "firstDetectedAt": "2026-09-09T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T12:00:00Z"
+ },
+ {
+  "id": "ISS-013",
+  "title": "Public transport fare rise",
+  "hashtag": "#FareRise",
+  "platforms": [
+   "x",
+   "tiktok"
+  ],
+  "volume": 13101,
+  "growth": 36,
+  "series": [
+   2392,
+   2113,
+   2121,
+   2264,
+   1259,
+   1671,
+   1280
+  ],
+  "status": "active",
+  "firstDetectedAt": "2026-09-07T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T12:00:00Z"
+ },
+ {
+  "id": "ISS-014",
+  "title": "New parking rules downtown",
+  "hashtag": "#ParkingRules",
+  "platforms": [
+   "facebook",
+   "reddit"
+  ],
+  "volume": 6173,
+  "growth": 91,
+  "series": [
+   625,
+   952,
+   1013,
+   719,
+   1041,
+   737,
+   1085
+  ],
+  "status": "monitoring",
+  "firstDetectedAt": "2026-09-09T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T11:00:00Z"
+ },
+ {
+  "id": "ISS-015",
+  "title": "Unverified claim about a grain shortage",
+  "hashtag": "#GrainShortage",
+  "platforms": [
+   "telegram",
+   "x",
+   "tiktok"
+  ],
+  "volume": 10026,
+  "growth": 161,
+  "series": [
+   247,
+   643,
+   1059,
+   1630,
+   2319,
+   2563,
+   1565
+  ],
+  "status": "active",
+  "firstDetectedAt": "2026-09-14T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T09:00:00Z"
+ },
+ {
+  "id": "ISS-016",
+  "title": "Viral claim of a secret dam release",
+  "hashtag": "#DamRelease",
+  "platforms": [
+   "x",
+   "telegram"
+  ],
+  "volume": 12931,
+  "growth": 237,
+  "series": [
+   243,
+   738,
+   1725,
+   1911,
+   2078,
+   2133,
+   4103
+  ],
+  "status": "active",
+  "firstDetectedAt": "2026-09-14T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+ },
+ {
+  "id": "ISS-017",
+  "title": "Claim that a vaccine batch was recalled",
+  "hashtag": "#BatchRecall",
+  "platforms": [
+   "telegram",
+   "tiktok",
+   "x"
+  ],
+  "volume": 10955,
+  "growth": 115,
+  "series": [
+   294,
+   952,
+   1515,
+   1202,
+   1326,
+   3639,
+   2027
+  ],
+  "status": "active",
+  "firstDetectedAt": "2026-09-15T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+ },
+ {
+  "id": "ISS-018",
+  "title": "Group-targeting wording in reply threads",
+  "hashtag": "#OurCityFirst",
+  "platforms": [
+   "x",
+   "telegram"
+  ],
+  "volume": 11927,
+  "growth": 196,
+  "series": [
+   329,
+   1070,
+   1324,
+   1738,
+   2633,
+   1697,
+   3135
+  ],
+  "status": "active",
+  "firstDetectedAt": "2026-09-14T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T10:00:00Z"
+ },
+ {
+  "id": "ISS-019",
+  "title": "Hostile posts about newcomers",
+  "hashtag": "#NoNewcomers",
+  "platforms": [
+   "x",
+   "tiktok"
+  ],
+  "volume": 7696,
+  "growth": 124,
+  "series": [
+   144,
+   461,
+   682,
+   1156,
+   1505,
+   1724,
+   2024
+  ],
+  "status": "active",
+  "firstDetectedAt": "2026-09-15T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T09:00:00Z"
+ },
+ {
+  "id": "ISS-020",
+  "title": "Allegations against a local official",
+  "hashtag": "#ValeExposed",
+  "platforms": [
+   "x",
+   "facebook"
+  ],
+  "volume": 2669,
+  "growth": 28,
+  "series": [
+   476,
+   362,
+   352,
+   463,
+   458,
+   330,
+   227
+  ],
+  "status": "monitoring",
+  "firstDetectedAt": "2026-09-10T12:00:00Z",
+  "lastUpdatedAt": "2026-09-17T09:00:00Z"
+ }
+]

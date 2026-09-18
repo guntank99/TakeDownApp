@@ -1,0 +1,521 @@
+[
+ {
+  "id": "CASE-001",
+  "title": "Coordinated amplification of an unverified grain claim",
+  "description": "Prototype case (fictional). Category: Platform Manipulation. All findings are indicators for human review.",
+  "platform": "x",
+  "category": "Platform Manipulation",
+  "priority": "high",
+  "status": "INVESTIGATING",
+  "analystId": "USR-002",
+  "reviewerId": null,
+  "createdAt": "2026-09-07T17:00:00Z",
+  "updatedAt": "2026-09-08T17:00:00Z",
+  "postIds": [
+   "POST-055",
+   "POST-056",
+   "POST-057",
+   "POST-058",
+   "POST-059"
+  ],
+  "accountIds": [
+   "ACC-045",
+   "ACC-043",
+   "ACC-036",
+   "ACC-042",
+   "ACC-037"
+  ],
+  "notes": [
+   {
+    "id": "NOTE-1",
+    "authorId": "USR-002",
+    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
+    "createdAt": "2026-09-07T19:00:00Z"
+   }
+  ],
+  "timeline": [
+   {
+    "id": "TL-1",
+    "at": "2026-09-07T17:00:00Z",
+    "actorId": "USR-002",
+    "type": "CASE_CREATED",
+    "message": "Case created"
+   },
+   {
+    "id": "TL-2",
+    "at": "2026-09-07T20:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to INVESTIGATING"
+   }
+  ]
+ },
+ {
+  "id": "CASE-002",
+  "title": "Derogatory wording targeting a fictional group",
+  "description": "Prototype case (fictional). Category: Hate Speech. All findings are indicators for human review.",
+  "platform": "x",
+  "category": "Hate Speech",
+  "priority": "critical",
+  "status": "NEEDS_REVIEW",
+  "analystId": "USR-002",
+  "reviewerId": "USR-003",
+  "createdAt": "2026-09-08T17:00:00Z",
+  "updatedAt": "2026-09-10T01:00:00Z",
+  "postIds": [
+   "POST-076",
+   "POST-077",
+   "POST-078"
+  ],
+  "accountIds": [
+   "ACC-044",
+   "ACC-045",
+   "ACC-046"
+  ],
+  "notes": [
+   {
+    "id": "NOTE-1",
+    "authorId": "USR-002",
+    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
+    "createdAt": "2026-09-08T19:00:00Z"
+   }
+  ],
+  "timeline": [
+   {
+    "id": "TL-1",
+    "at": "2026-09-08T17:00:00Z",
+    "actorId": "USR-002",
+    "type": "CASE_CREATED",
+    "message": "Case created"
+   },
+   {
+    "id": "TL-2",
+    "at": "2026-09-08T20:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to INVESTIGATING"
+   },
+   {
+    "id": "TL-3",
+    "at": "2026-09-09T13:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to NEEDS_REVIEW"
+   }
+  ]
+ },
+ {
+  "id": "CASE-003",
+  "title": "Unverified allegations against a local official",
+  "description": "Prototype case (fictional). Category: Harassment. All findings are indicators for human review.",
+  "platform": "x",
+  "category": "Harassment",
+  "priority": "medium",
+  "status": "OPEN",
+  "analystId": "USR-002",
+  "reviewerId": null,
+  "createdAt": "2026-09-09T14:00:00Z",
+  "updatedAt": "2026-09-10T06:00:00Z",
+  "postIds": [
+   "POST-086",
+   "POST-087",
+   "POST-088"
+  ],
+  "accountIds": [
+   "ACC-044",
+   "ACC-045",
+   "ACC-046"
+  ],
+  "notes": [
+   {
+    "id": "NOTE-1",
+    "authorId": "USR-002",
+    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
+    "createdAt": "2026-09-09T16:00:00Z"
+   }
+  ],
+  "timeline": [
+   {
+    "id": "TL-1",
+    "at": "2026-09-09T14:00:00Z",
+    "actorId": "USR-002",
+    "type": "CASE_CREATED",
+    "message": "Case created"
+   }
+  ]
+ },
+ {
+  "id": "CASE-004",
+  "title": "Account impersonating a support desk",
+  "description": "Prototype case (fictional). Category: Impersonation. All findings are indicators for human review.",
+  "platform": "x",
+  "category": "Impersonation",
+  "priority": "high",
+  "status": "VERIFIED",
+  "analystId": "USR-002",
+  "reviewerId": "USR-003",
+  "createdAt": "2026-09-10T15:00:00Z",
+  "updatedAt": "2026-09-12T07:00:00Z",
+  "postIds": [
+   "POST-093",
+   "POST-094"
+  ],
+  "accountIds": [
+   "ACC-049"
+  ],
+  "notes": [
+   {
+    "id": "NOTE-1",
+    "authorId": "USR-002",
+    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
+    "createdAt": "2026-09-10T17:00:00Z"
+   }
+  ],
+  "timeline": [
+   {
+    "id": "TL-1",
+    "at": "2026-09-10T15:00:00Z",
+    "actorId": "USR-002",
+    "type": "CASE_CREATED",
+    "message": "Case created"
+   },
+   {
+    "id": "TL-2",
+    "at": "2026-09-10T18:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to INVESTIGATING"
+   },
+   {
+    "id": "TL-3",
+    "at": "2026-09-11T11:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to NEEDS_REVIEW"
+   },
+   {
+    "id": "TL-4",
+    "at": "2026-09-11T21:00:00Z",
+    "actorId": "USR-003",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to VERIFIED by reviewer"
+   }
+  ]
+ },
+ {
+  "id": "CASE-005",
+  "title": "Promotional spam with link farming",
+  "description": "Prototype case (fictional). Category: Spam. All findings are indicators for human review.",
+  "platform": "x",
+  "category": "Spam",
+  "priority": "low",
+  "status": "REPORTED",
+  "analystId": "USR-002",
+  "reviewerId": "USR-003",
+  "createdAt": "2026-09-11T12:00:00Z",
+  "updatedAt": "2026-09-13T12:00:00Z",
+  "postIds": [
+   "POST-089",
+   "POST-090",
+   "POST-091"
+  ],
+  "accountIds": [
+   "ACC-041",
+   "ACC-042",
+   "ACC-043"
+  ],
+  "notes": [
+   {
+    "id": "NOTE-1",
+    "authorId": "USR-002",
+    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
+    "createdAt": "2026-09-11T14:00:00Z"
+   }
+  ],
+  "timeline": [
+   {
+    "id": "TL-1",
+    "at": "2026-09-11T12:00:00Z",
+    "actorId": "USR-002",
+    "type": "CASE_CREATED",
+    "message": "Case created"
+   },
+   {
+    "id": "TL-2",
+    "at": "2026-09-11T15:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to INVESTIGATING"
+   },
+   {
+    "id": "TL-3",
+    "at": "2026-09-12T08:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to NEEDS_REVIEW"
+   },
+   {
+    "id": "TL-4",
+    "at": "2026-09-12T18:00:00Z",
+    "actorId": "USR-003",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to VERIFIED by reviewer"
+   },
+   {
+    "id": "TL-5",
+    "at": "2026-09-13T04:00:00Z",
+    "actorId": "USR-003",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to REPORTED"
+   }
+  ]
+ },
+ {
+  "id": "CASE-006",
+  "title": "Viral dam-release claim on channels",
+  "description": "Prototype case (fictional). Category: Misinformation. All findings are indicators for human review.",
+  "platform": "telegram",
+  "category": "Misinformation",
+  "priority": "high",
+  "status": "INVESTIGATING",
+  "analystId": "USR-002",
+  "reviewerId": null,
+  "createdAt": "2026-09-12T19:00:00Z",
+  "updatedAt": "2026-09-13T19:00:00Z",
+  "postIds": [
+   "POST-062",
+   "POST-063",
+   "POST-064",
+   "POST-065"
+  ],
+  "accountIds": [
+   "ACC-048",
+   "ACC-041",
+   "ACC-037",
+   "ACC-036"
+  ],
+  "notes": [
+   {
+    "id": "NOTE-1",
+    "authorId": "USR-002",
+    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
+    "createdAt": "2026-09-12T21:00:00Z"
+   }
+  ],
+  "timeline": [
+   {
+    "id": "TL-1",
+    "at": "2026-09-12T19:00:00Z",
+    "actorId": "USR-002",
+    "type": "CASE_CREATED",
+    "message": "Case created"
+   },
+   {
+    "id": "TL-2",
+    "at": "2026-09-12T22:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to INVESTIGATING"
+   }
+  ]
+ },
+ {
+  "id": "CASE-007",
+  "title": "Targeted harassment in reply threads",
+  "description": "Prototype case (fictional). Category: Harassment. All findings are indicators for human review.",
+  "platform": "x",
+  "category": "Harassment",
+  "priority": "high",
+  "status": "NEEDS_REVIEW",
+  "analystId": "USR-002",
+  "reviewerId": "USR-003",
+  "createdAt": "2026-09-13T19:00:00Z",
+  "updatedAt": "2026-09-15T03:00:00Z",
+  "postIds": [
+   "POST-080",
+   "POST-085"
+  ],
+  "accountIds": [
+   "ACC-044"
+  ],
+  "notes": [
+   {
+    "id": "NOTE-1",
+    "authorId": "USR-002",
+    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
+    "createdAt": "2026-09-13T21:00:00Z"
+   }
+  ],
+  "timeline": [
+   {
+    "id": "TL-1",
+    "at": "2026-09-13T19:00:00Z",
+    "actorId": "USR-002",
+    "type": "CASE_CREATED",
+    "message": "Case created"
+   },
+   {
+    "id": "TL-2",
+    "at": "2026-09-13T22:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to INVESTIGATING"
+   },
+   {
+    "id": "TL-3",
+    "at": "2026-09-14T15:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to NEEDS_REVIEW"
+   }
+  ]
+ },
+ {
+  "id": "CASE-008",
+  "title": "Vaccine-batch recall rumor spread",
+  "description": "Prototype case (fictional). Category: Misinformation. All findings are indicators for human review.",
+  "platform": "tiktok",
+  "category": "Misinformation",
+  "priority": "medium",
+  "status": "OPEN",
+  "analystId": "USR-002",
+  "reviewerId": null,
+  "createdAt": "2026-09-14T13:00:00Z",
+  "updatedAt": "2026-09-15T05:00:00Z",
+  "postIds": [
+   "POST-069",
+   "POST-070",
+   "POST-071",
+   "POST-072"
+  ],
+  "accountIds": [
+   "ACC-048",
+   "ACC-039",
+   "ACC-042",
+   "ACC-041"
+  ],
+  "notes": [
+   {
+    "id": "NOTE-1",
+    "authorId": "USR-002",
+    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
+    "createdAt": "2026-09-14T15:00:00Z"
+   }
+  ],
+  "timeline": [
+   {
+    "id": "TL-1",
+    "at": "2026-09-14T13:00:00Z",
+    "actorId": "USR-002",
+    "type": "CASE_CREATED",
+    "message": "Case created"
+   }
+  ]
+ },
+ {
+  "id": "CASE-009",
+  "title": "Tariff backlash review (no violation found)",
+  "description": "Prototype case (fictional). Category: Other. All findings are indicators for human review.",
+  "platform": "x",
+  "category": "Other",
+  "priority": "low",
+  "status": "CLOSED",
+  "analystId": "USR-002",
+  "reviewerId": "USR-003",
+  "createdAt": "2026-09-15T13:00:00Z",
+  "updatedAt": "2026-09-16T21:00:00Z",
+  "postIds": [
+   "POST-025",
+   "POST-026",
+   "POST-027"
+  ],
+  "accountIds": [
+   "ACC-017",
+   "ACC-022",
+   "ACC-010"
+  ],
+  "notes": [
+   {
+    "id": "NOTE-1",
+    "authorId": "USR-002",
+    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
+    "createdAt": "2026-09-15T15:00:00Z"
+   }
+  ],
+  "timeline": [
+   {
+    "id": "TL-1",
+    "at": "2026-09-15T13:00:00Z",
+    "actorId": "USR-002",
+    "type": "CASE_CREATED",
+    "message": "Case created"
+   },
+   {
+    "id": "TL-2",
+    "at": "2026-09-15T16:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to INVESTIGATING"
+   },
+   {
+    "id": "TL-3",
+    "at": "2026-09-16T09:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to NEEDS_REVIEW"
+   }
+  ]
+ },
+ {
+  "id": "CASE-010",
+  "title": "Earlier community page review",
+  "description": "Prototype case (fictional). Category: Other. All findings are indicators for human review.",
+  "platform": "facebook",
+  "category": "Other",
+  "priority": "low",
+  "status": "CLOSED",
+  "analystId": "USR-002",
+  "reviewerId": "USR-003",
+  "createdAt": "2026-09-16T16:00:00Z",
+  "updatedAt": "2026-09-18T00:00:00Z",
+  "postIds": [
+   "POST-016",
+   "POST-017"
+  ],
+  "accountIds": [
+   "ACC-028",
+   "ACC-033"
+  ],
+  "notes": [
+   {
+    "id": "NOTE-1",
+    "authorId": "USR-002",
+    "text": "Initial triage complete. Collected posts and preserved snapshots as evidence.",
+    "createdAt": "2026-09-16T18:00:00Z"
+   }
+  ],
+  "timeline": [
+   {
+    "id": "TL-1",
+    "at": "2026-09-16T16:00:00Z",
+    "actorId": "USR-002",
+    "type": "CASE_CREATED",
+    "message": "Case created"
+   },
+   {
+    "id": "TL-2",
+    "at": "2026-09-16T19:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to INVESTIGATING"
+   },
+   {
+    "id": "TL-3",
+    "at": "2026-09-17T12:00:00Z",
+    "actorId": "USR-002",
+    "type": "STATUS_CHANGED",
+    "message": "Status changed to NEEDS_REVIEW"
+   }
+  ]
+ }
+]

@@ -1,0 +1,505 @@
+/**
+ * Shared domain types.
+ *
+ * Data governance: OBSERVED data (what a provider returned) is kept separate
+ * from AUTOMATED ANALYSIS (computed by src/lib/analysis) and from ANALYST
+ * ASSESSMENT / REVIEWED RESULT (cases, reports). Risk scores and sentiment are
+ * therefore NOT stored on observed records.
+ */
+
+export type Platform =
+  | "facebook"
+  | "x"
+  | "instagram"
+  | "tiktok"
+  | "youtube"
+  | "reddit"
+  | "telegram"
+  | "news";
+
+export type Sentiment = "positive" | "neutral" | "negative";
+
+/** 0–24 LOW, 25–49 MEDIUM, 50–74 HIGH, 75–100 CRITICAL. */
+export type RiskLevel = "low" | "medium" | "high" | "critical";
+
+/** Where a record came from and how it was collected. */
+export interface Provenance {
+  source: string;
+  collectionMethod: "simulated" | "official_api" | "manual_import";
+  collectedAt: string; // ISO 8601
+  isMock: boolean;
+}
+
+interface Traceable {
+  provenance: Provenance;
+}
+
+// ---------------------------------------------------------------- observed
+
+export interface Account extends Traceable {
+  id: string;
+  platform: Platform;
+  handle: string;
+  displayName: string;
+  createdAt: string;
+  followers: number;
+  following: number;
+  verified: boolean;
+  /** Average posts per day over the observation window. */
+  postsPerDay: number;
+  /** 0–100, how complete the public profile is. */
+  profileCompleteness: number;
+  /** 0–1, share of the account's posts that repeat earlier content. */
+  contentRepetition: number;
+  /** True when a sudden burst of activity was observed. */
+  activitySpike: boolean;
+}
+
+export type PostStatus = "new" | "needs_review" | "reviewed";
+export type MediaType = "text" | "image" | "video" | "link";
+
+export interface Post extends Traceable {
+  id: string;
+  platform: Platform;
+  url: string;
+  authorId: string;
+  text: string;
+  mediaType: MediaType;
+  hashtags: string[];
+  /** Handles mentioned in the post, e.g. "@example". */
+  mentions: string[];
+  issueId: string | null;
+  claimId: string | null;
+  createdAt: string;
+  likes: number;
+  comments: number;
+  shares: number;
+  views: number;
+  status: PostStatus;
+}
+
+export interface Comment extends Traceable {
+  id: string;
+  postId: string;
+  authorId: string;
+  text: string;
+  createdAt: string;
+}
+
+export type IssueStatus = "active" | "monitoring" | "closed";
+
+export interface Issue extends Traceable {
+  id: string;
+  title: string;
+  hashtag: string;
+  platforms: Platform[];
+  /** Mention volume for the whole period. */
+  volume: number;
+  /** Percent change vs the previous period. */
+  growth: number;
+  /** Daily mention volume, oldest first (7 days). */
+  series: number[];
+  status: IssueStatus;
+  firstDetectedAt: string;
+  lastUpdatedAt: string;
+}
+
+export type InteractionType = "share" | "quote" | "interaction";
+
+/** Relationship that cannot be derived from post fields (shares, quotes, ...). */
+export interface Interaction extends Traceable {
+  id: string;
+  type: InteractionType;
+  sourceAccountId: string;
+  targetAccountId: string;
+  /** Present for share/quote: the post that was shared or quoted. */
+  postId: string | null;
+  createdAt: string;
+}
+
+// ---------------------------------------------------------------- analysis
+
+export type ReviewStatus = "NEEDS_HUMAN_REVIEW" | "NO_INDICATORS";
+
+export type IndicatorKey =
+  | "hate_speech"
+  | "harassment"
+  | "threat"
+  | "spam"
+  | "misinformation"
+  | "defamation"
+  | "impersonation";
+
+export interface SentimentResult {
+  sentiment: Sentiment;
+  confidence: number; // 0–1
+  reason: string;
+  keywords: string[];
+}
+
+export interface Indicator {
+  key: IndicatorKey;
+  label: string;
+  detected: boolean;
+  confidence: number; // 0–1
+  reason: string;
+  evidence: string[];
+}
+
+export interface ContentAnalysis {
+  sentiment: SentimentResult;
+  /** 0–100 */
+  toxicity: number;
+  indicators: Record<IndicatorKey, Indicator>;
+  flagged: IndicatorKey[];
+  status: ReviewStatus;
+  engine: string;
+}
+
+export interface RiskComponents {
+  content: number; // 0–40
+  behavior: number; // 0–25
+  network: number; // 0–20
+  coordination: number; // 0–15
+}
+
+export interface RiskAssessment {
+  score: number; // 0–100
+  level: RiskLevel;
+  components: RiskComponents;
+  factors: string[];
+  confidence: number; // 0–1
+}
+
+export interface PolicyMatch {
+  ruleId: string;
+  platform: Platform;
+  category: PolicyCategory;
+  rule: string;
+  officialUrl: string;
+  /** False when the rule text has not been checked against the official source. */
+  ruleVerified: boolean;
+  confidence: number; // 0–1
+  evidence: string[];
+  status: "NEEDS_REVIEW";
+}
+
+export interface PostAnalysis {
+  postId: string;
+  content: ContentAnalysis;
+  risk: RiskAssessment;
+  policyMatches: PolicyMatch[];
+  coordinationGroupSize: number;
+}
+
+export type CommentCategory =
+  | "Positive"
+  | "Neutral"
+  | "Negative"
+  | "Hate Speech Indicator"
+  | "Harassment"
+  | "Spam"
+  | "Threat Indicator"
+  | "Other";
+
+export interface CommentAnalysis {
+  commentId: string;
+  category: CommentCategory;
+  sentiment: Sentiment;
+  toxicity: number;
+  confidence: number;
+  reason: string;
+}
+
+export interface AuthenticitySignal {
+  key: string;
+  label: string;
+  value: string;
+  flagged: boolean;
+  weight: number;
+  note: string;
+}
+
+export interface AccountAnalysis {
+  accountId: string;
+  signals: AuthenticitySignal[];
+  /** 0–100, higher = more indicators of inauthentic behaviour. */
+  authenticityConcern: number;
+  /** Deliberately hedged wording: never "fake". */
+  authenticityLabel: "Potentially Inauthentic" | "No strong authenticity concerns";
+  risk: RiskAssessment;
+  degreeCentrality: number;
+  networkRole: NetworkRole | null;
+  impersonation: Indicator;
+}
+
+export type ClaimVerdict =
+  | "verified"
+  | "likely_accurate"
+  | "unverified"
+  | "disputed"
+  | "likely_false";
+
+export interface ClaimAssessment {
+  id: string;
+  claimId: string;
+  verdict: ClaimVerdict;
+  confidence: number; // 0–1
+  evidence: string[];
+  sources: { name: string; url: string; reliability: "high" | "medium" | "low" | "unknown" }[];
+  assessedAt: string;
+  reviewer: string | null;
+}
+
+export interface Claim extends Traceable {
+  id: string;
+  text: string;
+  extractedFromPostId: string;
+  assessment: ClaimAssessment | null;
+}
+
+// ------------------------------------------------------------------- SNA
+
+export type NodeType = "account" | "post" | "hashtag" | "topic";
+export type EdgeType =
+  | "mention"
+  | "reply"
+  | "share"
+  | "quote"
+  | "hashtag"
+  | "interaction";
+
+export interface NetNode {
+  id: string;
+  type: NodeType;
+  label: string;
+  platform?: Platform;
+}
+
+export interface NetEdge {
+  id: string;
+  source: string;
+  target: string;
+  type: EdgeType;
+  weight: number;
+}
+
+export interface NetworkGraph {
+  nodes: NetNode[];
+  edges: NetEdge[];
+}
+
+/** Neutral wording only; never "mastermind", "controller" or "main culprit". */
+export type NetworkRole = "Highly Connected Account" | "Potential Network Hub";
+
+export interface NodeMetrics {
+  id: string;
+  degree: number;
+  degreeCentrality: number;
+  betweenness: number;
+  community: number;
+}
+
+export interface ClusterSummary {
+  index: number;
+  name: string; // "Cluster A"
+  nodeCount: number;
+  dominantTopic: string | null;
+  dominantHashtags: string[];
+  sentiment: Record<Sentiment, number>;
+  platforms: Partial<Record<Platform, number>>;
+  importantNodes: { id: string; label: string; degree: number }[];
+}
+
+export interface NetworkAnalysis {
+  graph: NetworkGraph;
+  metrics: Record<string, NodeMetrics>;
+  density: number;
+  clusters: ClusterSummary[];
+  roles: Record<string, NetworkRole>;
+  positions: Record<string, { x: number; y: number }>;
+}
+
+// ------------------------------------------------------------------- ToC
+
+export type PolicyCategory =
+  | "Hate Speech"
+  | "Harassment"
+  | "Threats"
+  | "Violence"
+  | "Spam"
+  | "Impersonation"
+  | "Fraud"
+  | "Misinformation"
+  | "Privacy"
+  | "Copyright"
+  | "Adult Content"
+  | "Platform Manipulation"
+  | "Other";
+
+export type Severity = "low" | "medium" | "high";
+
+export interface PolicyRule {
+  id: string;
+  platform: Platform;
+  category: PolicyCategory;
+  rule: string;
+  description: string;
+  evidenceRequirement: string;
+  severity: Severity;
+  policyVersion: string;
+  officialUrl: string;
+  lastUpdated: string;
+  /** Where the entry stands with respect to the official source. */
+  verification: "verified_against_official_source" | "needs_verification";
+}
+
+export interface PlatformReportingInfo {
+  platform: Platform;
+  /** Official reporting page. Empty when the platform has no such mechanism. */
+  officialReportingUrl: string;
+  policyIndexUrl: string;
+  /** No authorized submission API is integrated; reports go through the official page. */
+  apiSubmissionAvailable: false;
+  /** Note shown to the analyst next to the link. */
+  note: string;
+}
+
+// -------------------------------------------------------- workspace / cases
+
+export type CaseStatus =
+  | "OPEN"
+  | "INVESTIGATING"
+  | "NEEDS_REVIEW"
+  | "VERIFIED"
+  | "REPORTED"
+  | "CLOSED";
+
+export type Priority = "low" | "medium" | "high" | "critical";
+
+export interface CaseNote {
+  id: string;
+  authorId: string;
+  text: string;
+  createdAt: string;
+}
+
+export interface CaseTimelineEvent {
+  id: string;
+  at: string;
+  actorId: string;
+  type: string;
+  message: string;
+}
+
+export interface CaseRecord {
+  id: string;
+  title: string;
+  description: string;
+  platform: Platform;
+  category: PolicyCategory;
+  priority: Priority;
+  status: CaseStatus;
+  analystId: string;
+  reviewerId: string | null;
+  createdAt: string;
+  updatedAt: string;
+  postIds: string[];
+  accountIds: string[];
+  notes: CaseNote[];
+  timeline: CaseTimelineEvent[];
+}
+
+export interface EvidenceSnapshot {
+  postId: string | null;
+  accountHandle: string | null;
+  platform: Platform;
+  text: string;
+  postedAt: string | null;
+  metrics: { likes: number; comments: number; shares: number; views: number } | null;
+  capturedFrom: string; // provenance source label
+}
+
+export interface EvidenceRecord {
+  id: string;
+  caseId: string;
+  url: string;
+  postId: string | null;
+  accountId: string | null;
+  capturedAt: string;
+  /** Free-text reference to an externally stored screenshot, if any. */
+  screenshotRef: string | null;
+  snapshot: EvidenceSnapshot;
+  /** SHA-256 of the canonical JSON of `snapshot`. */
+  hash: string;
+  source: string;
+  collectedBy: string;
+}
+
+export type ReportStatus = "draft" | "in_review" | "approved" | "submitted";
+
+export interface ReportSection {
+  title: string;
+  body: string[];
+}
+
+export interface ReportSubmission {
+  platform: Platform;
+  method: "official_page" | "authorized_api";
+  submittedAt: string;
+  submittedBy: string;
+  status: "SUBMITTED";
+}
+
+export interface ReportRecord {
+  id: string;
+  caseId: string;
+  title: string;
+  status: ReportStatus;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  /** Frozen at creation time so the report reflects what the reviewer saw. */
+  sections: ReportSection[];
+  reviewerNotes: string;
+  recommendedAction: string;
+  approvedBy: string | null;
+  submission: ReportSubmission | null;
+}
+
+export type AuditAction =
+  | "LOGIN"
+  | "LOGIN_FAILED"
+  | "LOGOUT"
+  | "CREATE_CASE"
+  | "UPDATE_CASE"
+  | "ANALYZE_POST"
+  | "ANALYZE_ACCOUNT"
+  | "CREATE_EVIDENCE"
+  | "GENERATE_REPORT"
+  | "UPDATE_REPORT"
+  | "EXPORT_REPORT"
+  | "SUBMIT_REPORT"
+  | "UPDATE_POLICY";
+
+export interface AuditLogEntry {
+  id: string;
+  at: string;
+  userId: string;
+  userName: string;
+  action: AuditAction;
+  object: string;
+  caseId: string | null;
+  result: "SUCCESS" | "DENIED" | "FAILED";
+}
+
+// ------------------------------------------------------------------ auth
+
+export type Role = "admin" | "analyst" | "reviewer";
+
+export interface SessionUser {
+  id: string;
+  username: string;
+  name: string;
+  role: Role;
+}
