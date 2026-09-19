@@ -1,16 +1,17 @@
 import Link from "next/link";
+import { isSimulatedData } from "@/lib/config/mode";
 import { MockDataBadge } from "./MockDataBadge";
 
 export function PageHeader({
   title,
   description,
   actions,
-  mock = true,
+  mock = isSimulatedData(),
 }: {
   title: string;
   description?: string;
   actions?: React.ReactNode;
-  /** Show the DATA MOCK badge (default; pages pass the real provider flag). */
+  /** Show the DATA MOCK badge. Defaults to whether the deployment serves simulated data. */
   mock?: boolean;
 }) {
   return (

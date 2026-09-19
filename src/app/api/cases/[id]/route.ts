@@ -2,7 +2,7 @@ import { HttpError, fromResult, readJson, withApi } from "@/lib/api/handler";
 import { getCase, updateCase } from "@/lib/services/cases";
 
 export const GET = withApi<{ id: string }>({}, async (_req, { params }) => {
-  const c = getCase(params.id);
+  const c = await getCase(params.id);
   if (!c) throw new HttpError(404, "Kasus tidak ditemukan.");
   return c;
 });

@@ -35,13 +35,13 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
   const posts = ctx.posts.filter((p) => has(p.id, p.text, p.url, ...p.hashtags, ctx.accountById.get(p.authorId)?.handle));
   const accounts = ctx.accounts.filter((a) => has(a.id, a.handle, a.displayName));
   const issues = ctx.issues.filter((i) => has(i.id, i.title, i.hashtag));
-  const cases = listCases().filter((c) => has(c.id, c.title, c.description));
+  const cases = (await listCases()).filter((c) => has(c.id, c.title, c.description));
   const reports = (await listReports()).filter((r) => has(r.id, r.title, r.caseId));
   const hashtags = [...new Set(ctx.posts.flatMap((p) => p.hashtags))].filter((h) => has(h));
   const urls = [...new Set(ctx.posts.flatMap((p) => [p.url, ...(p.text.match(URL_RE) ?? [])]))].filter((u) => has(u));
   const total = posts.length + accounts.length + issues.length + cases.length + reports.length + hashtags.length + urls.length;
 
-  logAudit({ user, action: "SEARCH", object: `pencarian: "${q.slice(0, 80)}" (${total} hasil)` });
+  await logAudit({ user, action: "SEARCH", object: `pencarian: "${q.slice(0, 80)}" (${total} hasil)` });
 
   const list = "space-y-2 text-sm";
   const row = "flex flex-wrap items-center justify-between gap-2 rounded-lg border border-slate-800 px-3 py-2";

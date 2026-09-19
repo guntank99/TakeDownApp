@@ -42,6 +42,13 @@ export const PLATFORM_REPORTING: Record<Platform, PlatformReportingInfo> = {
     apiSubmissionAvailable: false,
     note: "Gunakan opsi Laporkan di aplikasi pada konten bila memungkinkan.",
   },
+  threads: {
+    platform: "threads",
+    officialReportingUrl: "https://help.instagram.com/",
+    policyIndexUrl: "https://transparency.meta.com/policies/community-standards/",
+    apiSubmissionAvailable: false,
+    note: "Threads dikelola Meta. Cara paling andal: ketuk ••• pada postingan lalu Laporkan. Halaman ini adalah Pusat Bantuan Meta; carilah topik Threads (tautan langsung ke topik tertentu belum dapat kami pastikan).",
+  },
   reddit: {
     platform: "reddit",
     officialReportingUrl: "https://www.reddit.com/report",

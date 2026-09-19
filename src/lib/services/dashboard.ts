@@ -34,7 +34,7 @@ const day = (iso: string) => iso.slice(0, 10);
 
 export async function getDashboardSummary(): Promise<DashboardSummary> {
   const ctx = await getAnalysisContext();
-  const [cases, reports] = [listCases(), await listReports()];
+  const [cases, reports] = await Promise.all([listCases(), listReports()]);
 
   // last 14 days ending at the newest observed activity
   const end = new Date(ctx.now);

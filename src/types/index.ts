@@ -13,6 +13,7 @@ export type Platform =
   | "instagram"
   | "tiktok"
   | "youtube"
+  | "threads"
   | "reddit"
   | "telegram"
   | "news";
@@ -53,6 +54,11 @@ export interface Account extends Traceable {
   contentRepetition: number;
   /** True when a sudden burst of activity was observed. */
   activitySpike: boolean;
+  /**
+   * False when the numbers above are unknown (e.g. an account created from a
+   * pasted URL). Unknown values are never treated as evidence of anything.
+   */
+  metricsKnown?: boolean;
 }
 
 export type PostStatus = "new" | "needs_review" | "reviewed";
@@ -76,6 +82,16 @@ export interface Post extends Traceable {
   shares: number;
   views: number;
   status: PostStatus;
+  /** False when engagement metrics are unknown (imported by URL, none entered). */
+  metricsKnown?: boolean;
+  /** False when createdAt is only the import time. */
+  dateKnown?: boolean;
+  thumbnailUrl?: string | null;
+  /** Analyst note added when the link was collected. */
+  note?: string;
+  importedBy?: string;
+  /** Result of the last manual "is it still online?" check (imported posts only). */
+  lastCheck?: { status: "available" | "unavailable" | "unknown"; at: string; by: string };
 }
 
 export interface Comment extends Traceable {
@@ -458,11 +474,37 @@ export interface EvidenceRecord {
   collectedBy: string;
 }
 
+/** A file attached to a case (screenshot, video, document). Bytes are stored separately from this record. */
+export interface EvidenceFileMeta {
+  id: string;
+  caseId: string;
+  /** Name as uploaded (display only; never used as a path). */
+  filename: string;
+  /** Detected from the file's own bytes, not from what the browser claimed. */
+  mime: string;
+  size: number;
+  /** SHA-256 of the original bytes. */
+  sha256: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  note?: string;
+}
+
 export type ReportStatus = "draft" | "in_review" | "approved" | "submitted";
 
 export interface ReportSection {
   title: string;
   body: string[];
+}
+
+/** What the platform (or authority) did after the report. Recorded by a person. */
+export type TakedownOutcome = "pending" | "removed" | "restricted" | "rejected" | "no_action";
+
+export interface AvailabilityCheck {
+  checkedAt: string;
+  checkedBy: string;
+  status: "available" | "unavailable" | "unknown";
+  detail: string;
 }
 
 export interface ReportSubmission {
@@ -471,6 +513,12 @@ export interface ReportSubmission {
   submittedAt: string;
   submittedBy: string;
   status: "SUBMITTED";
+  /** Absent on older records: treated as "pending". */
+  outcome?: TakedownOutcome;
+  outcomeNote?: string;
+  outcomeAt?: string;
+  outcomeBy?: string;
+  lastCheck?: AvailabilityCheck;
 }
 
 export interface ReportRecord {
@@ -502,6 +550,17 @@ export type AuditAction =
   | "UPDATE_REPORT"
   | "EXPORT_REPORT"
   | "SEARCH"
+  | "IMPORT_POST"
+  | "DELETE_POST"
+  | "CHECK_AVAILABILITY"
+  | "UPLOAD_EVIDENCE"
+  | "DELETE_EVIDENCE"
+  | "DELETE_CASE"
+  | "EXPORT_PACKAGE"
+  | "RECORD_OUTCOME"
+  | "CREATE_USER"
+  | "UPDATE_USER"
+  | "CHANGE_PASSWORD"
   | "SUBMIT_REPORT"
   | "UPDATE_POLICY";
 
@@ -519,6 +578,21 @@ export interface AuditLogEntry {
 // ------------------------------------------------------------------ auth
 
 export type Role = "admin" | "analyst" | "reviewer";
+
+/** A stored user. The password hash never leaves the server. */
+export interface UserRecord extends SessionUserBase {
+  email: string;
+  passwordHash: string;
+  active: boolean;
+  createdAt: string;
+}
+
+interface SessionUserBase {
+  id: string;
+  username: string;
+  name: string;
+  role: Role;
+}
 
 export interface SessionUser {
   id: string;

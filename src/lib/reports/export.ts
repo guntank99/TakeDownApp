@@ -110,7 +110,7 @@ export async function reportToPdf(report: ReportRecord, c: CaseRecord, isMock: b
     y -= opts.gap ?? 0;
   };
 
-  draw("SOCIAL SENTINEL - Laporan Kasus", { size: 16, bold: true, gap: 4 });
+  draw("THE POWER - Laporan Kasus", { size: 16, bold: true, gap: 4 });
   if (isMock) draw("SUMBER DATA: MOCK / SIMULASI", { size: 9, bold: true, color: [0.7, 0.4, 0], gap: 4 });
   for (const [k, v] of metaLines(report, c)) draw(`${k}: ${v}`, { size: 9, color: [0.3, 0.3, 0.33] });
   y -= 8;

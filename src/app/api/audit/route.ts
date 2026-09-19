@@ -12,7 +12,7 @@ export const GET = withApi({}, async (req, { user }) => {
   const action = param(sp, "action");
   const caseId = param(sp, "caseId");
   const { page, pageSize } = pageOf(req);
-  const { entries, scope } = listAuditFor(user);
+  const { entries, scope } = await listAuditFor(user);
   const res = paginate(entries.filter((e) => (!action || e.action === action) && (!caseId || e.caseId === caseId)), page, pageSize);
   return { items: res.rows, page: res.page, pages: res.pages, total: res.total, scope };
 });

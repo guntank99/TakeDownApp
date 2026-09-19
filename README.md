@@ -1,4 +1,4 @@
-# Social Sentinel
+# The Power
 
 **Pantau • Analisis • Verifikasi • Dokumentasikan • Laporkan**
 
@@ -152,6 +152,29 @@ penyedia mock yang berlabel jelas. **Belum diverifikasi terhadap API sungguhan**
 pemetaan dan penanganan error diuji dengan fixture berbentuk respons asli. Tinjau Ketentuan Layanan YouTube API sebelum
 dipakai di production. Platform lain diintegrasikan satu per satu, hanya lewat API resmi dengan izin yang sesuai.
 
+## Mode live: aplikasi yang berfungsi nyata
+
+`APP_MODE=live` mengubah aplikasi dari demo menjadi alat kerja:
+
+* **Tanpa data simulasi dan tanpa akun demo.** Pengguna, kasus, bukti, berkas, laporan, dan riwayat aktivitas disimpan di **PostgreSQL** (`DATABASE_URL`, mis. Supabase). Tabel dibuat otomatis di skema `thepower` dengan Row Level Security aktif.
+* **Admin pertama** dari environment (`ADMIN_USERNAME` + `ADMIN_PASSWORD_HASH`); selanjutnya admin membuat pengguna di halaman **Pengguna**. Pengguna nonaktif langsung terkunci, bahkan pada sesi yang sedang berjalan.
+* **Video Viral** (`/video`): tempel tautan YouTube, Instagram, Facebook, X, TikTok, atau Threads, lalu tonton lewat **pemutar resmi** masing-masing platform (dimuat hanya setelah diklik, dalam iframe ber-sandbox). Judul, penulis, dan teks diambil dari **oEmbed resmi** (YouTube, TikTok, X) atau YouTube Data API bila kunci ada. Angka yang tidak diketahui tetap "tidak diketahui" dan tidak pernah dijadikan bukti.
+* **Pusat Take Down** (`/takedown`): tempel URL → kasus → bukti (snapshot ber-hash dan **berkas unggahan** ber-SHA-256) → verifikasi peninjau → laporan dengan **pemeriksaan kesiapan** → pengajuan lewat kanal resmi (oleh manusia) → catat hasil dari platform. Ada deteksi laporan ganda, pembatasan laju, ekspor PDF/CSV/JSON/Markdown/paket, dan penghapusan kasus (retensi).
+
+Keterbatasan yang jujur: tidak ada API resmi yang gratis untuk daftar video *trending* X, Instagram, TikTok, Threads, atau Facebook, dan tidak ada API publik untuk melaporkan konten orang lain; aplikasi ini **tidak** melakukan scraping, otomatisasi form pelaporan, atau pelaporan massal. Hasil pemeriksaan "masih tayang" (YouTube/TikTok/X) hanya petunjuk untuk manusia.
+
+Contoh menjalankan lokal dengan database:
+
+```bash
+# .env.local
+APP_MODE=live
+DATABASE_URL=postgresql://…
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD_HASH='$2b$10$…'   # node -e "console.log(require('bcryptjs').hashSync('kata-sandi-anda', 10))"
+AUTH_SECRET=…
+npm run build && npm start
+```
+
 ## Deploy: GitHub → Vercel
 
 Di Vercel: **Add New → Project → Import** repositori, lalu isi **Environment Variables**:
@@ -161,6 +184,7 @@ Di Vercel: **Add New → Project → Import** repositori, lalu isi **Environment
 | `AUTH_SECRET` | 32+ karakter acak (wajib; **hasil** perintah di atas, bukan perintahnya) |
 | `DEMO_MODE` | `true` agar akun demo dapat dipakai (kalau tidak, tidak ada yang bisa masuk) |
 | `DEMO_PASSWORD_HASH` | hash bcrypt dari kata sandi pilihan Anda (**wajib** bersama `DEMO_MODE`) |
+| `APP_MODE`, `DATABASE_URL`, `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH` | untuk mode live (lihat bagian di atas); tidak perlu `DEMO_MODE` |
 | `NEWS_ENABLED` | opsional; `false` untuk mematikan pengambilan berita |
 | `DATA_PROVIDER`, `YOUTUBE_API_KEY`, `YOUTUBE_REGION` | opsional, lihat di atas |
 
@@ -169,14 +193,14 @@ publik statis. Untuk domain kustom: tambahkan di Vercel → arahkan DNS → SSL 
 
 ## Keterbatasan (baca sebelum production)
 
-* **Penyimpanan di memori.** Kasus, bukti, laporan, dan riwayat aktivitas kembali ke data awal saat restart dan saat
-  cold start serverless; di Vercel tidak akan persisten. Ganti `src/lib/store` dengan PostgreSQL/Supabase di balik
-  fungsi layanan yang sama.
-* **Pengguna adalah akun demo yang ditanam di kode.** Sesi berupa JWT tanpa status dan tidak dapat dicabut di server
-  sebelum kedaluwarsa (keluar hanya menghapus cookie). Belum ada reset kata sandi / MFA.
-* **Pembatasan laju per instance server** (di memori), dan formulir login sendiri belum punya penguncian.
+* **Mode demo menyimpan di memori** (kembali ke data awal saat restart; di Vercel tidak persisten). Untuk data yang
+  bertahan, pakai mode live dengan PostgreSQL.
+* **Sesi berupa JWT tanpa status**: keluar hanya menghapus cookie, tetapi status aktif dan peran pengguna dicek ke
+  database di setiap permintaan, jadi menonaktifkan pengguna langsung berlaku. Belum ada reset kata sandi mandiri / MFA.
+* **Pembatasan laju (termasuk percobaan login) per instance server** (di memori). Untuk banyak instance, pindahkan ke
+  penyimpanan bersama (mis. Redis/Upstash).
+* **Berkas bukti disimpan di database** (base64, maks. 4 MB per berkas). Untuk berkas besar/banyak, pindahkan ke object storage.
 * **Belum ada Content-Security-Policy** (Next.js butuh nonce untuk yang ketat). Header keamanan lain sudah diatur.
-* **Tangkapan layar bukti** hanya berupa teks referensi; belum ada unggah/penyimpanan berkas.
 * **Basis data kebijakan bersifat baca-saja**; penyuntingan (admin, tercatat `UPDATE_POLICY`) memerlukan database.
 * Penilaian di `/analysis/claims` adalah data awal baca-saja; belum ada editor penilaian.
 * Mesin lexicon sengaja sederhana. Harapkan false positive/negative, terutama pada bahasa gaul dan sarkasme.

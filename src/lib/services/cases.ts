@@ -2,47 +2,56 @@ import "server-only";
 
 import { can } from "@/lib/auth/permissions";
 import { CASE_STATUS_LABEL, PRIORITY_LABEL } from "@/lib/i18n/labels";
-import { getProvider } from "@/lib/providers";
-import { getStore, nextId } from "@/lib/store";
+import { getRepository } from "@/lib/store";
 import { formatZodError, createCaseSchema, updateCaseSchema } from "@/lib/validation/schemas";
 import { canTransitionCase } from "@/lib/workflow/rules";
 import type { CaseRecord, CaseStatus, SessionUser } from "@/types";
 import { logAudit } from "./audit";
+import { getActiveProvider } from "./source";
 import { failure, success, type Result } from "./result";
 
-export function listCases(): CaseRecord[] {
-  return [...getStore().cases].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+export async function listCases(): Promise<CaseRecord[]> {
+  const all = await (await getRepository()).listCases();
+  return all.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
 
-export function getCase(id: string): CaseRecord | null {
-  return getStore().cases.find((c) => c.id === id) ?? null;
+export async function getCase(id: string): Promise<CaseRecord | null> {
+  return (await getRepository()).getCase(id);
 }
 
-function addTimeline(c: CaseRecord, actor: SessionUser, type: string, message: string) {
+/** Mutates the given copy only; the caller saves it. */
+export function addTimeline(c: CaseRecord, actor: Pick<SessionUser, "id">, type: string, message: string) {
   const at = new Date().toISOString();
   c.timeline.push({ id: `TL-${c.timeline.length + 1}`, at, actorId: actor.id, type, message });
   c.updatedAt = at;
 }
 
+function applyStatus(c: CaseRecord, user: SessionUser, to: CaseStatus) {
+  const from = c.status;
+  c.status = to;
+  if (to === "VERIFIED") c.reviewerId = user.id;
+  addTimeline(c, user, "STATUS_CHANGED", `Status diubah dari ${CASE_STATUS_LABEL[from]} menjadi ${CASE_STATUS_LABEL[to]}${to === "VERIFIED" ? " oleh peninjau" : ""}`);
+}
+
 export async function createCase(user: SessionUser, raw: unknown): Promise<Result<CaseRecord>> {
   if (!can(user.role, "case:create")) {
-    logAudit({ user, action: "CREATE_CASE", object: "case", result: "DENIED" });
+    await logAudit({ user, action: "CREATE_CASE", object: "case", result: "DENIED" });
     return failure("Peran Anda tidak dapat membuat kasus.", 403);
   }
   const parsed = createCaseSchema.safeParse(raw);
   if (!parsed.success) return failure(formatZodError(parsed.error));
   const input = parsed.data;
 
-  const provider = getProvider();
+  const provider = await getActiveProvider();
   const posts = (await Promise.all(input.postIds.map((id) => provider.getPost(id)))).filter((p) => p !== null);
   if (posts.length !== input.postIds.length) return failure("Satu atau beberapa postingan tidak ditemukan.", 404);
   const accountIds = [...new Set([...input.accountIds, ...posts.map((p) => p.authorId)])];
   for (const a of accountIds) if (!(await provider.getAccount(a))) return failure(`Akun ${a} tidak ditemukan.`, 404);
 
-  const store = getStore();
+  const repo = await getRepository();
   const now = new Date().toISOString();
   const record: CaseRecord = {
-    id: nextId("CASE", store.cases.map((c) => c.id)),
+    id: await repo.newCaseId(),
     title: input.title,
     description: input.description,
     platform: input.platform as CaseRecord["platform"],
@@ -59,47 +68,48 @@ export async function createCase(user: SessionUser, raw: unknown): Promise<Resul
     timeline: [],
   };
   addTimeline(record, user, "CASE_CREATED", "Kasus dibuat");
-  store.cases.push(record);
-  logAudit({ user, action: "CREATE_CASE", object: record.id, caseId: record.id });
+  await repo.saveCase(record);
+  await logAudit({ user, action: "CREATE_CASE", object: record.id, caseId: record.id });
   return success(record);
 }
 
-export function transitionCase(user: SessionUser, id: string, to: CaseStatus): Result<CaseRecord> {
-  const c = getCase(id);
+export async function transitionCase(user: SessionUser, id: string, to: CaseStatus): Promise<Result<CaseRecord>> {
+  const repo = await getRepository();
+  const c = await repo.getCase(id);
   if (!c) return failure("Kasus tidak ditemukan.", 404);
   const decision = canTransitionCase(user, c, to);
   if (!decision.ok) {
-    logAudit({ user, action: "UPDATE_CASE", object: `${id} → ${to}`, caseId: id, result: "DENIED" });
+    await logAudit({ user, action: "UPDATE_CASE", object: `${id} → ${to}`, caseId: id, result: "DENIED" });
     return failure(decision.reason, 403);
   }
-  const from = c.status;
-  c.status = to;
-  if (to === "VERIFIED") c.reviewerId = user.id;
-  addTimeline(c, user, "STATUS_CHANGED", `Status diubah dari ${CASE_STATUS_LABEL[from]} menjadi ${CASE_STATUS_LABEL[to]}${to === "VERIFIED" ? " oleh peninjau" : ""}`);
-  logAudit({ user, action: "UPDATE_CASE", object: `${id} → ${to}`, caseId: id });
+  applyStatus(c, user, to);
+  await repo.saveCase(c);
+  await logAudit({ user, action: "UPDATE_CASE", object: `${id} → ${to}`, caseId: id });
   return success(c);
 }
 
 /** Applies a PATCH: status, priority, title/description, a note, or linking a post/account. */
 export async function updateCase(user: SessionUser, id: string, raw: unknown): Promise<Result<CaseRecord>> {
-  const c = getCase(id);
+  const repo = await getRepository();
+  const c = await repo.getCase(id);
   if (!c) return failure("Kasus tidak ditemukan.", 404);
   if (!can(user.role, "case:update")) {
-    logAudit({ user, action: "UPDATE_CASE", object: id, caseId: id, result: "DENIED" });
+    await logAudit({ user, action: "UPDATE_CASE", object: id, caseId: id, result: "DENIED" });
     return failure("Peran Anda tidak dapat memperbarui kasus.", 403);
   }
   const parsed = updateCaseSchema.safeParse(raw);
   if (!parsed.success) return failure(formatZodError(parsed.error));
   const u = parsed.data;
-  const provider = getProvider();
+  const provider = await getActiveProvider();
 
   // Validate everything before mutating so a failed PATCH changes nothing.
-  if (u.addPostId && !(await provider.getPost(u.addPostId))) return failure("Postingan tidak ditemukan.", 404);
+  const addedPost = u.addPostId ? await provider.getPost(u.addPostId) : null;
+  if (u.addPostId && !addedPost) return failure("Postingan tidak ditemukan.", 404);
   if (u.addAccountId && !(await provider.getAccount(u.addAccountId))) return failure("Akun tidak ditemukan.", 404);
   if (u.status && u.status !== c.status) {
     const d = canTransitionCase(user, c, u.status);
     if (!d.ok) {
-      logAudit({ user, action: "UPDATE_CASE", object: `${id} → ${u.status}`, caseId: id, result: "DENIED" });
+      await logAudit({ user, action: "UPDATE_CASE", object: `${id} → ${u.status}`, caseId: id, result: "DENIED" });
       return failure(d.reason, 403);
     }
   }
@@ -118,10 +128,9 @@ export async function updateCase(user: SessionUser, id: string, raw: unknown): P
     c.priority = u.priority;
     changes.push("priority");
   }
-  if (u.addPostId && !c.postIds.includes(u.addPostId)) {
+  if (u.addPostId && addedPost && !c.postIds.includes(u.addPostId)) {
     c.postIds.push(u.addPostId);
-    const post = await provider.getPost(u.addPostId);
-    if (post && !c.accountIds.includes(post.authorId)) c.accountIds.push(post.authorId);
+    if (!c.accountIds.includes(addedPost.authorId)) c.accountIds.push(addedPost.authorId);
     addTimeline(c, user, "POST_ADDED", `Postingan ${u.addPostId} ditambahkan`);
     changes.push("post");
   }
@@ -135,14 +144,11 @@ export async function updateCase(user: SessionUser, id: string, raw: unknown): P
     addTimeline(c, user, "NOTE_ADDED", "Catatan ditambahkan");
     changes.push("note");
   }
-  if (u.status && u.status !== c.status) {
-    const t = transitionCase(user, id, u.status);
-    if (!t.ok) return t;
-    return success(c);
-  }
-  if (changes.length) {
-    c.updatedAt = new Date().toISOString();
-    logAudit({ user, action: "UPDATE_CASE", object: `${id} (${changes.join(", ")})`, caseId: id });
-  }
+  const statusChanged = Boolean(u.status && u.status !== c.status);
+  if (statusChanged) applyStatus(c, user, u.status!);
+
+  if (changes.length || statusChanged) await repo.saveCase(c);
+  if (changes.length) await logAudit({ user, action: "UPDATE_CASE", object: `${id} (${changes.join(", ")})`, caseId: id });
+  if (statusChanged) await logAudit({ user, action: "UPDATE_CASE", object: `${id} → ${u.status}`, caseId: id });
   return success(c);
 }

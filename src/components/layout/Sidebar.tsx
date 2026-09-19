@@ -6,16 +6,18 @@ import { NAV_ITEMS } from "./nav-items";
 
 interface SidebarProps {
   collapsed: boolean;
+  /** Hides admin-only items for everyone else (the pages enforce this again on the server). */
+  isAdmin?: boolean;
   onNavigate?: () => void;
 }
 
-export function Sidebar({ collapsed, onNavigate }: SidebarProps) {
+export function Sidebar({ collapsed, isAdmin = false, onNavigate }: SidebarProps) {
   const pathname = usePathname();
 
   return (
     <nav aria-label="Navigasi utama" className="flex-1 overflow-y-auto p-3">
       <ul className="space-y-1">
-        {NAV_ITEMS.map(({ label, href, icon: Icon, enabled }) => {
+        {NAV_ITEMS.filter((item) => !item.adminOnly || isAdmin).map(({ label, href, icon: Icon, enabled }) => {
           const base =
             "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors";
           const content = (

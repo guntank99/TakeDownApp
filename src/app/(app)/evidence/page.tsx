@@ -16,9 +16,9 @@ export default async function EvidencePage({ searchParams }: PageProps<"/evidenc
   const sp = await searchParams;
   const caseId = param(sp, "case").slice(0, 64);
   const q = param(sp, "q").slice(0, 200);
-  const cases = listCases();
+  const cases = await listCases();
 
-  const all = listEvidence(caseId || undefined).filter(
+  const all = (await listEvidence(caseId || undefined)).filter(
     (e) => !q || `${e.id} ${e.postId ?? ""} ${e.snapshot.text} ${e.snapshot.accountHandle ?? ""}`.toLowerCase().includes(q.toLowerCase()),
   );
   const { rows, page, pages, total } = paginate(all, pageParam(sp), 8);

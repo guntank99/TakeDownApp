@@ -50,14 +50,20 @@ export function authenticitySignals(a: Account, ctx: AccountContext): Authentici
   const ratio = a.followers / Math.max(a.following, 1);
   const engagementPerFollower = ctx.avgEngagementPerPost / Math.max(a.followers, 1);
 
+  // Accounts created from a pasted link have no known numbers. Unknown is not evidence:
+  // profile-based signals are shown as "tidak diketahui" and never flagged.
+  const unknown = a.metricsKnown === false;
+  const profile = (key: string, label: string, value: string, weight: number, flagged: boolean, note: string) =>
+    unknown ? signal(key, label, "tidak diketahui", weight, false, "Data profil tidak tersedia dari tautan yang ditempel.") : signal(key, label, value, weight, flagged, note);
+
   return [
-    signal("age", "Usia Akun", `${age} hari`, age < 30 ? 10 : 6, age < 90, "Akun yang baru dibuat memiliki rekam jejak yang lebih sedikit."),
-    signal("frequency", "Frekuensi Posting", `${a.postsPerDay}/hari`, a.postsPerDay > 20 ? 10 : 5, a.postsPerDay > 10, "Laju posting yang sangat tinggi secara terus-menerus tidak lazim bagi individu."),
-    signal("ratio", "Rasio Pengikut/Mengikuti", ratio.toFixed(2), 8, a.following >= 1000 && ratio < 0.1, "Mengikuti banyak akun tetapi hanya memiliki sedikit pengikut."),
-    signal("engagement", "Pola Interaksi", `${engagementPerFollower.toFixed(2)} per pengikut`, 4, engagementPerFollower > 0.15, "Interaksi tidak sebanding dengan ukuran audiens."),
-    signal("repetition", "Pengulangan Konten", `${Math.round(a.contentRepetition * 100)}%`, a.contentRepetition >= 0.5 ? 12 : 6, a.contentRepetition >= 0.3, "Sering mengulang konten sebelumnya."),
-    signal("spike", "Lonjakan Aktivitas", a.activitySpike ? "teramati" : "tidak ada", 6, a.activitySpike, "Aktivitas meningkat tiba-tiba."),
-    signal("completeness", "Kelengkapan Profil", `${a.profileCompleteness}%`, a.profileCompleteness < 50 ? 8 : 3, a.profileCompleteness < 70, "Profil publik minim informasi."),
+    profile("age", "Usia Akun", `${age} hari`, age < 30 ? 10 : 6, age < 90, "Akun yang baru dibuat memiliki rekam jejak yang lebih sedikit."),
+    profile("frequency", "Frekuensi Posting", `${a.postsPerDay}/hari`, a.postsPerDay > 20 ? 10 : 5, a.postsPerDay > 10, "Laju posting yang sangat tinggi secara terus-menerus tidak lazim bagi individu."),
+    profile("ratio", "Rasio Pengikut/Mengikuti", ratio.toFixed(2), 8, a.following >= 1000 && ratio < 0.1, "Mengikuti banyak akun tetapi hanya memiliki sedikit pengikut."),
+    profile("engagement", "Pola Interaksi", `${engagementPerFollower.toFixed(2)} per pengikut`, 4, engagementPerFollower > 0.15, "Interaksi tidak sebanding dengan ukuran audiens."),
+    profile("repetition", "Pengulangan Konten", `${Math.round(a.contentRepetition * 100)}%`, a.contentRepetition >= 0.5 ? 12 : 6, a.contentRepetition >= 0.3, "Sering mengulang konten sebelumnya."),
+    profile("spike", "Lonjakan Aktivitas", a.activitySpike ? "teramati" : "tidak ada", 6, a.activitySpike, "Aktivitas meningkat tiba-tiba."),
+    profile("completeness", "Kelengkapan Profil", `${a.profileCompleteness}%`, a.profileCompleteness < 50 ? 8 : 3, a.profileCompleteness < 70, "Profil publik minim informasi."),
     signal("similarity", "Kemiripan Konten", ctx.coordinationAccounts >= 3 ? "ditemukan teks hampir identik" : "tidak ada", 10, ctx.coordinationAccounts >= 3, "Posting sangat mirip dengan posting akun lain."),
     signal("coordination", "Indikator Koordinasi", `${ctx.coordinationAccounts} akun dalam kelompok`, 8, ctx.coordinationAccounts >= 3, "Memposting teks serupa hampir bersamaan dengan akun lain."),
     signal("network", "Indikator Jaringan", `${ctx.youngNeighbors} tetangga akun baru`, 8, ctx.youngNeighbors >= 3, "Terhubung rapat dengan akun-akun yang baru dibuat."),
@@ -84,7 +90,7 @@ export function impersonationIndicator(a: Account, now: number): Indicator {
   const name = a.displayName.toLowerCase();
   const hints = IMPERSONATION_NAME_HINTS.filter((h) => name.includes(h));
   const young = accountAgeDays(a, now) < 90;
-  const detected = hints.length > 0 && !a.verified && young;
+  const detected = a.metricsKnown !== false && hints.length > 0 && !a.verified && young;
   return {
     key: "impersonation",
     label: "Indikator Peniruan Identitas",

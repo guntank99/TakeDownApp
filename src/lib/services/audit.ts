@@ -1,7 +1,7 @@
 import "server-only";
 
 import { can } from "@/lib/auth/permissions";
-import { getStore, nextId } from "@/lib/store";
+import { getRepository } from "@/lib/store";
 import type { AuditAction, AuditLogEntry, SessionUser } from "@/types";
 
 interface AuditInput {
@@ -12,12 +12,14 @@ interface AuditInput {
   result?: AuditLogEntry["result"];
 }
 
-/** Append-only audit trail. Never throws: auditing must not break the request. */
-export function logAudit({ user, action, object, caseId = null, result = "SUCCESS" }: AuditInput): void {
+/**
+ * Append-only audit trail. Always `await` it: on serverless hosts work that is
+ * still running when the response ends can be cut off. It never throws, so a
+ * storage problem cannot break the action being audited.
+ */
+export async function logAudit({ user, action, object, caseId = null, result = "SUCCESS" }: AuditInput): Promise<void> {
   try {
-    const store = getStore();
-    store.audit.push({
-      id: nextId("AUD", store.audit.map((a) => a.id), 4),
+    await (await getRepository()).appendAudit({
       at: new Date().toISOString(),
       userId: user.id,
       userName: user.name,
@@ -31,18 +33,13 @@ export function logAudit({ user, action, object, caseId = null, result = "SUCCES
   }
 }
 
-/** Everything, newest first. Use listAuditFor() for anything user-facing. */
-export function listAudit(): AuditLogEntry[] {
-  return [...getStore().audit].sort((a, b) => b.at.localeCompare(a.at));
-}
-
 /**
  * Activity visible to a user: reviewers and admins see everyone's activity,
  * everyone else sees only their own. Enforced here, on the server, so neither
  * the page nor the API can be tricked into showing other people's history.
  */
-export function listAuditFor(user: Pick<SessionUser, "id" | "role">): { entries: AuditLogEntry[]; scope: "all" | "own" } {
+export async function listAuditFor(user: Pick<SessionUser, "id" | "role">): Promise<{ entries: AuditLogEntry[]; scope: "all" | "own" }> {
   const all = can(user.role, "audit:read");
-  const entries = listAudit();
+  const entries = await (await getRepository()).listAudit();
   return all ? { entries, scope: "all" } : { entries: entries.filter((e) => e.userId === user.id), scope: "own" };
 }

@@ -11,6 +11,7 @@ import {
 import { analyzeComment } from "@/lib/analysis/comments";
 import { coordinationPoints, findCoordinatedGroups, type CoordinationInfo } from "@/lib/analysis/coordination";
 import { analyzeContent } from "@/lib/analysis/indicators";
+import { isLive } from "@/lib/config/mode";
 import { getProvider } from "@/lib/providers";
 import { calculateRisk, contentRiskPoints } from "@/lib/risk/score";
 import { analyzeNetwork, type AccountContentInfo } from "@/lib/sna/analyze";
@@ -18,6 +19,7 @@ import { buildNetwork } from "@/lib/sna/build";
 import { adjacency } from "@/lib/sna/metrics";
 import { matchPolicy } from "@/lib/toc/match";
 import { listPolicyRules } from "@/lib/toc/rules";
+import { getActiveProvider, importVersion } from "./source";
 import type {
   Account,
   AccountAnalysis,
@@ -58,7 +60,7 @@ const mockProvenance: Provenance = {
 };
 
 async function build(): Promise<AnalysisContext> {
-  const provider = getProvider();
+  const provider = await getActiveProvider();
   const [posts, accounts, comments, issues, interactions] = await Promise.all([
     provider.searchPosts(""),
     provider.listAccounts(),
@@ -176,12 +178,15 @@ const g = globalThis as unknown as { __sentinelAnalysis?: { at: number; key: str
 
 /** Builds (and caches) the full analysis for the active provider. */
 export function getAnalysisContext(): Promise<AnalysisContext> {
-  const provider = getProvider();
+  const base = getProvider();
+  // The key changes when a link is added/removed on THIS instance. Other instances (and live
+  // sources) catch up through the TTL. Only the simulated demo data never expires.
+  const key = `${base.id}:${importVersion()}`;
   const cached = g.__sentinelAnalysis;
-  const fresh = cached && cached.key === provider.id && (provider.isMock || Date.now() - cached.at < TTL_MS);
+  const fresh = cached && cached.key === key && ((base.isMock && !isLive()) || Date.now() - cached.at < TTL_MS);
   if (fresh) return cached.value;
   const value = build();
-  g.__sentinelAnalysis = { at: Date.now(), key: provider.id, value };
+  g.__sentinelAnalysis = { at: Date.now(), key, value };
   value.catch(() => {
     if (g.__sentinelAnalysis?.value === value) g.__sentinelAnalysis = undefined;
   });

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createEvidenceAction, createReportAction, updateCaseAction } from "@/app/(app)/actions";
+import { createEvidenceAction, createReportAction, deleteCaseAction, deleteEvidenceFileAction, updateCaseAction, uploadEvidenceFileAction } from "@/app/(app)/actions";
 import { CaseTimeline, EvidenceCard } from "@/components/analysis/CaseParts";
+import { TakedownStepper } from "@/components/takedown/TakedownStepper";
 import { DataTable } from "@/components/tables/DataTable";
 import { Badge, PlatformBadge, RiskBadge, StatusBadge } from "@/components/ui/badges";
 import { Card, Flash, KeyValue, Notice, PageHeader } from "@/components/ui/layout";
@@ -11,8 +12,11 @@ import { userName } from "@/lib/auth/directory";
 import { can } from "@/lib/auth/permissions";
 import { getAnalysisContext } from "@/lib/services/analysis";
 import { getCase } from "@/lib/services/cases";
+import { FILE_KINDS, INLINE_IMAGE_MIMES, MAX_FILE_BYTES, formatBytes } from "@/lib/evidence/files";
 import { evidenceIntegrity, listEvidence } from "@/lib/services/evidence";
+import { listCaseFiles } from "@/lib/services/evidence-files";
 import { listReports } from "@/lib/services/reports";
+import { takedownProgress } from "@/lib/takedown/steps";
 import { formatDateTime, truncate } from "@/lib/utils/format";
 import { CASE_STATUS_LABEL, POLICY_CATEGORY_LABEL, PRIORITY_LABEL } from "@/lib/i18n/labels";
 import { PRIORITIES } from "@/lib/validation/schemas";
@@ -29,17 +33,19 @@ export default async function CaseDetailPage({ params, searchParams }: PageProps
   const user = await verifySession();
   const { id } = await params;
   const sp = await searchParams;
-  const c = getCase(id);
+  const c = await getCase(id);
   if (!c) notFound();
 
   const ctx = await getAnalysisContext();
-  const evidence = listEvidence(c.id);
+  const evidence = await listEvidence(c.id);
+  const files = await listCaseFiles(c.id);
   const reports = (await listReports()).filter((r) => r.caseId === c.id);
   const posts = c.postIds.map((pid) => ctx.postById.get(pid)).filter((p) => p !== undefined);
   const accounts = c.accountIds.map((aid) => ctx.accountById.get(aid)).filter((a) => a !== undefined);
   const evidenceByPost = new Set(evidence.map((e) => e.postId));
   const nextStatuses = allowedNextStatuses(c.status).map((to) => ({ to, decision: canTransitionCase(user, c, to) }));
   const closed = c.status === "CLOSED";
+  const progress = takedownProgress(c, evidence.length, reports);
 
   return (
     <div className="space-y-6">
@@ -61,6 +67,16 @@ export default async function CaseDetailPage({ params, searchParams }: PageProps
             { label: "Diperbarui", value: formatDateTime(c.updatedAt) },
           ]}
         />
+      </Card>
+
+      <Card title="Jalur take down" description="Permintaan penghapusan diajukan oleh manusia lewat kanal resmi platform; keputusan akhir ada pada platform">
+        <TakedownStepper progress={progress} />
+        <p className="mt-3 text-sm text-slate-300"><span className="font-medium text-slate-100">Langkah berikutnya:</span> {progress.action}</p>
+        <p className="mt-1 text-xs text-slate-500">
+          {progress.reportId ? <Link href={`/reports/${progress.reportId}`} className="text-sky-400 hover:underline">Buka laporan {progress.reportId}</Link> : null}
+          {progress.reportId ? " · " : null}
+          <Link href="/takedown" className="text-sky-400 hover:underline">Panduan take down</Link>
+        </p>
       </Card>
 
       {can(user.role, "case:update") ? (
@@ -141,6 +157,52 @@ export default async function CaseDetailPage({ params, searchParams }: PageProps
         ) : <p className="text-sm text-slate-500">Belum ada bukti yang diambil.</p>}
       </Card>
 
+      <Card title={`Berkas bukti (${files.length})`} description="Tangkapan layar, video, atau dokumen asli. Berkas disimpan apa adanya beserta hash SHA-256, jenis, dan ukurannya.">
+        {files.length ? (
+          <ul className="mb-4 space-y-3">
+            {files.map((f) => (
+              <li key={f.id} className="flex flex-wrap items-start gap-3 rounded-lg border border-slate-800 p-3 text-sm">
+                {INLINE_IMAGE_MIMES.includes(f.mime) ? (
+                  // eslint-disable-next-line @next/next/no-img-element -- our own authenticated endpoint, served sandboxed
+                  <img src={`/api/evidence/files/${f.id}?inline=1`} alt={`Pratinjau ${f.filename}`} className="size-20 rounded-md border border-slate-800 object-cover" loading="lazy" />
+                ) : null}
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-slate-100">{f.filename} <span className="ml-1 text-xs font-normal text-slate-500">{f.id}</span></p>
+                  <p className="text-xs text-slate-400">{FILE_KINDS[f.mime as keyof typeof FILE_KINDS] ?? f.mime} · {f.mime} · {formatBytes(f.size)} · diunggah {formatDateTime(f.uploadedAt)} oleh {userName(f.uploadedBy)}</p>
+                  <p className="mt-1 break-all font-mono text-[11px] text-slate-500">SHA-256: {f.sha256}</p>
+                  {f.note ? <p className="mt-1 text-xs text-slate-400">Catatan: {f.note}</p> : null}
+                </div>
+                <div className="flex items-center gap-2">
+                  <a href={`/api/evidence/files/${f.id}`} className={btn}>Unduh</a>
+                  {can(user.role, "evidence:create") && !closed && (f.uploadedBy === user.id || can(user.role, "settings:admin")) ? (
+                    <form action={deleteEvidenceFileAction}>
+                      <input type="hidden" name="caseId" value={c.id} />
+                      <input type="hidden" name="fileId" value={f.id} />
+                      <button type="submit" className="rounded-lg border border-red-500/40 px-3 py-1.5 text-sm text-red-300 hover:bg-red-500/10">Hapus</button>
+                    </form>
+                  ) : null}
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : <p className="mb-4 text-sm text-slate-500">Belum ada berkas.</p>}
+        {can(user.role, "evidence:create") && !closed ? (
+          <form action={uploadEvidenceFileAction} encType="multipart/form-data" className="flex flex-wrap items-end gap-3">
+            <input type="hidden" name="caseId" value={c.id} />
+            <div>
+              <label htmlFor="evidence-file" className="mb-1 block text-xs text-slate-400">Berkas (maks. {formatBytes(MAX_FILE_BYTES)}; gambar, MP4/WebM, PDF, teks)</label>
+              <input id="evidence-file" name="file" type="file" required accept="image/png,image/jpeg,image/gif,image/webp,video/mp4,video/webm,application/pdf,text/plain" className="block text-sm text-slate-300 file:mr-3 file:rounded-lg file:border file:border-slate-700 file:bg-slate-900 file:px-3 file:py-1.5 file:text-sm file:text-slate-200" />
+            </div>
+            <div className="min-w-0 flex-1 basis-56">
+              <label htmlFor="evidence-note" className="mb-1 block text-xs text-slate-400">Keterangan (opsional)</label>
+              <input id="evidence-note" name="note" maxLength={500} className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100" />
+            </div>
+            <button type="submit" className={btn}>Unggah</button>
+          </form>
+        ) : null}
+        <p className="mt-3 text-xs text-slate-500">Jenis berkas ditentukan dari isi berkas itu sendiri, bukan namanya. Bukti mungkin memuat data pribadi: akses dibatasi untuk pengguna yang masuk, dan seluruh unggah/hapus tercatat.</p>
+      </Card>
+
       <div className="grid gap-6 lg:grid-cols-2">
         <Card title="Lini masa"><CaseTimeline events={c.timeline} /></Card>
         <Card title={`Catatan (${c.notes.length})`}>
@@ -182,6 +244,18 @@ export default async function CaseDetailPage({ params, searchParams }: PageProps
         ) : null}
         {evidence.length === 0 ? <div className="mt-3"><Notice tone="warning">Ambil bukti sebelum melapor agar laporan dapat merujuk pada snapshot yang tersimpan.</Notice></div> : null}
       </Card>
+      {can(user.role, "settings:admin") && closed ? (
+        <Card title="Hapus kasus" description="Penghapusan permanen sesuai kebijakan retensi: kasus, bukti, berkas, dan laporannya. Riwayat aktivitas hanya menyimpan bahwa kasus ini pernah ada dan dihapus.">
+          <form action={deleteCaseAction} className="flex flex-wrap items-end gap-3">
+            <input type="hidden" name="caseId" value={c.id} />
+            <div>
+              <label htmlFor="confirm-delete" className="mb-1 block text-xs text-slate-400">Ketik {c.id} untuk mengonfirmasi</label>
+              <input id="confirm-delete" name="confirm" required autoComplete="off" className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100" />
+            </div>
+            <button type="submit" className="rounded-lg border border-red-500/40 px-4 py-2 text-sm text-red-300 hover:bg-red-500/10">Hapus permanen</button>
+          </form>
+        </Card>
+      ) : null}
     </div>
   );
 }

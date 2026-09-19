@@ -21,7 +21,7 @@ function Brand() {
     <div className="flex items-center gap-2">
       <ShieldCheck className="size-6 text-sky-400" aria-hidden="true" />
       <span className="text-sm font-semibold tracking-wide text-slate-50">
-        SOCIAL SENTINEL
+        THE POWER
       </span>
     </div>
   );
@@ -50,12 +50,12 @@ export function AppShell({
       >
         <div className="flex h-14 items-center border-b border-slate-800 px-4">
           {collapsed ? (
-            <ShieldCheck className="size-6 text-sky-400" aria-label="Social Sentinel" />
+            <ShieldCheck className="size-6 text-sky-400" aria-label="The Power" />
           ) : (
             <Brand />
           )}
         </div>
-        <Sidebar collapsed={collapsed} />
+        <Sidebar collapsed={collapsed} isAdmin={user.role === "admin"} />
       </aside>
 
       {/* Mobile drawer */}
@@ -78,7 +78,7 @@ export function AppShell({
                 <X className="size-5" aria-hidden="true" />
               </button>
             </div>
-            <Sidebar collapsed={false} onNavigate={() => setMobileOpen(false)} />
+            <Sidebar collapsed={false} isAdmin={user.role === "admin"} onNavigate={() => setMobileOpen(false)} />
           </aside>
         </div>
       ) : null}

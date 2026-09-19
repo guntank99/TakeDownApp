@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Social Sentinel",
-    template: "%s · Social Sentinel",
+    default: "The Power",
+    template: "%s · The Power",
   },
   description:
     "Pantau • Analisis • Verifikasi • Dokumentasikan • Laporkan. Ruang kerja pemantauan media sosial dan SOCMINT.",

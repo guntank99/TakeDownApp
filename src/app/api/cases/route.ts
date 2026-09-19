@@ -7,7 +7,7 @@ export const GET = withApi({}, async (req) => {
   const sp = Object.fromEntries(req.nextUrl.searchParams);
   const status = param(sp, "status");
   const platform = param(sp, "platform");
-  const items = listCases().filter((c) => (!status || c.status === status) && (!platform || c.platform === platform));
+  const items = (await listCases()).filter((c) => (!status || c.status === status) && (!platform || c.platform === platform));
   return { items, total: items.length };
 });
 

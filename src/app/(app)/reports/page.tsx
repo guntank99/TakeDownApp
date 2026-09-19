@@ -6,7 +6,7 @@ import { FilterPanel } from "@/components/ui/FilterPanel";
 import { Flash, Notice, PageHeader } from "@/components/ui/layout";
 import { userName } from "@/lib/auth/directory";
 import { verifySession } from "@/lib/auth/dal";
-import { getCase } from "@/lib/services/cases";
+import { listCases } from "@/lib/services/cases";
 import { listReports } from "@/lib/services/reports";
 import { formatDateTime, truncate } from "@/lib/utils/format";
 import { REPORT_STATUS_LABEL } from "@/lib/i18n/labels";
@@ -21,6 +21,7 @@ export default async function ReportsPage({ searchParams }: PageProps<"/reports"
   const status = enumParam(sp, "status", ["draft", "in_review", "approved", "submitted"] as const);
   const all = (await listReports()).filter((r) => (!status || r.status === status) && (!q || `${r.id} ${r.title} ${r.caseId}`.toLowerCase().includes(q.toLowerCase())));
   const { rows, page, pages, total } = paginate(all, pageParam(sp), 15);
+  const caseById = new Map((await listCases()).map((c) => [c.id, c]));
   const values = Object.fromEntries(Object.entries({ q, status }).filter(([, v]) => v)) as Record<string, string>;
 
   return (
@@ -45,7 +46,7 @@ export default async function ReportsPage({ searchParams }: PageProps<"/reports"
           { header: "Laporan", cell: (r) => <Link href={`/reports/${r.id}`} className="font-medium text-sky-400 hover:underline">{r.id}</Link> },
           { header: "Judul", className: "max-w-sm whitespace-normal", cell: (r) => truncate(r.title, 80) },
           { header: "Kasus", cell: (r) => <Link href={`/cases/${r.caseId}`} className="text-sky-400 hover:underline">{r.caseId}</Link> },
-          { header: "Platform", cell: (r) => { const c = getCase(r.caseId); return c ? <PlatformBadge platform={c.platform} /> : "—"; } },
+          { header: "Platform", cell: (r) => { const c = caseById.get(r.caseId); return c ? <PlatformBadge platform={c.platform} /> : "—"; } },
           { header: "Disusun oleh", cell: (r) => userName(r.createdBy) },
           { header: "Status", cell: (r) => <StatusBadge status={r.status} /> },
           { header: "Dibuat", className: "whitespace-nowrap", cell: (r) => formatDateTime(r.createdAt) },

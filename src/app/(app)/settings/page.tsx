@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { changePasswordAction } from "@/app/(app)/actions";
 import { Badge } from "@/components/ui/badges";
-import { Card, KeyValue, Notice, PageHeader } from "@/components/ui/layout";
+import { Card, Flash, KeyValue, Notice, PageHeader } from "@/components/ui/layout";
 import { verifySession } from "@/lib/auth/dal";
 import { ROLE_LABELS } from "@/lib/auth/roles";
 import { can } from "@/lib/auth/permissions";
 import { NEWS_FEEDS } from "@/lib/news/feeds";
 import { newsEnabled } from "@/lib/news/service";
+import { appMode } from "@/lib/config/mode";
 import { getProvider } from "@/lib/providers";
+import { MIN_PASSWORD } from "@/lib/services/users";
+import { storageIsVolatile } from "@/lib/store";
 import { listPolicyRules } from "@/lib/toc/rules";
 import { PLATFORM_LABEL } from "@/lib/utils/platforms";
 import pkg from "../../../../package.json";
@@ -34,9 +38,12 @@ const PERMISSION_LABEL = {
   "report:review": "meninjau laporan",
   "report:submit": "mencatat pengajuan laporan",
   "audit:read": "melihat aktivitas semua pengguna",
+  "post:import": "menambahkan video/postingan lewat tautan",
+  "users:manage": "mengelola pengguna",
 } as const;
 
-export default async function SettingsPage() {
+export default async function SettingsPage({ searchParams }: PageProps<"/settings">) {
+  const sp = await searchParams;
   const user = await verifySession();
   const provider = getProvider();
   const admin = can(user.role, "settings:admin");
@@ -46,6 +53,7 @@ export default async function SettingsPage() {
   return (
     <div className="space-y-6">
       <PageHeader title="Pengaturan" description="Profil, keamanan, penyedia data, dan informasi sistem." mock={false} />
+      <Flash searchParams={sp} />
 
       <Card title="Profil">
         <KeyValue items={[
@@ -61,8 +69,29 @@ export default async function SettingsPage() {
           <li>Cookie sesi bertanda tangan: HttpOnly, SameSite=Lax, Secure di production. &ldquo;Ingat saya&rdquo; menyimpan sesi 7 hari; jika tidak, 8 jam.</li>
           <li>Peran ditegakkan di server untuk setiap halaman, aksi, dan rute API.</li>
           <li>Verifikasi dan persetujuan memerlukan peninjau selain analis yang menyusun (empat mata).</li>
-          <li>Ubah kata sandi belum tersedia pada prototipe; akun berasal dari penyimpanan pengguna demo.</li>
+          <li>Pengguna nonaktif langsung tidak bisa mengakses apa pun, termasuk sesi yang sedang berjalan.</li>
+          <li>Percobaan masuk dibatasi (8 kali per 10 menit per nama pengguna).</li>
         </ul>
+      </Card>
+
+      <Card title="Ganti kata sandi">
+        {appMode() === "demo" ? (
+          <Notice tone="warning">Mode demo memakai akun contoh; kata sandi tidak dapat diganti.</Notice>
+        ) : (
+          <form action={changePasswordAction} className="grid max-w-xl gap-3 sm:grid-cols-3">
+            {[
+              { name: "current", label: "Kata sandi saat ini", auto: "current-password" },
+              { name: "next", label: `Kata sandi baru (min. ${MIN_PASSWORD})`, auto: "new-password" },
+              { name: "confirm", label: "Ulangi kata sandi baru", auto: "new-password" },
+            ].map((f) => (
+              <div key={f.name}>
+                <label htmlFor={`pw-${f.name}`} className="mb-1 block text-xs text-slate-400">{f.label}</label>
+                <input id={`pw-${f.name}`} name={f.name} type="password" required minLength={f.name === "current" ? 1 : MIN_PASSWORD} maxLength={128} autoComplete={f.auto} className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" />
+              </div>
+            ))}
+            <div className="sm:col-span-3"><button type="submit" className="rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-sky-400">Ganti kata sandi</button></div>
+          </form>
+        )}
       </Card>
 
       <Card title="Penyedia API" description="Apakah kredensial ada di environment. Nilainya tidak pernah ditampilkan.">
@@ -115,9 +144,10 @@ export default async function SettingsPage() {
       <Card title="Sumber data">
         <KeyValue items={[
           { label: "Penyedia aktif", value: `${provider.id}: ${provider.label}` },
-          { label: "Jenis data", value: provider.isMock ? "Simulasi (bukan konten sebenarnya)" : "API resmi" },
+          { label: "Jenis data", value: provider.isMock ? "Simulasi (bukan konten sebenarnya)" : provider.id === "manual" ? "Tautan yang ditambahkan tim (tautan publik, metadata dari oEmbed resmi)" : "API resmi" },
           { label: "Platform yang dicakup", value: Object.values(PLATFORM_LABEL).join(", ") },
-          { label: "Penyimpanan ruang kerja", value: "Penyimpanan prototipe di memori (kembali ke awal saat restart)" },
+          { label: "Mode aplikasi", value: appMode() === "live" ? "LIVE: data nyata, tanpa data simulasi" : "DEMO: data simulasi untuk peragaan" },
+          { label: "Penyimpanan ruang kerja", value: appMode() === "demo" ? "Memori (demo; kembali ke awal saat restart)" : storageIsVolatile() ? "Memori TANPA database (data hilang saat restart)" : "PostgreSQL (permanen)" },
         ]} />
       </Card>
 

@@ -25,7 +25,7 @@ const TTL_MS = 10 * 60_000;
 const TIMEOUT_MS = 8_000;
 const MAX_BYTES = 3_000_000;
 const MAX_AGE_HOURS = 48;
-const USER_AGENT = "SocialSentinel/1.0 (RSS reader for media monitoring)";
+const USER_AGENT = "ThePower/1.0 (RSS reader for media monitoring)";
 
 type FetchLike = typeof fetch;
 

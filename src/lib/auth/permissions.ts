@@ -10,14 +10,16 @@ export type Permission =
   | "report:review"
   | "report:submit"
   | "audit:read"
-  | "settings:admin";
+  | "settings:admin"
+  | "users:manage"
+  | "post:import";
 
 const MATRIX: Record<Role, readonly Permission[]> = {
   admin: [
     "case:create", "case:update", "case:verify", "evidence:create",
-    "report:create", "report:review", "report:submit", "audit:read", "settings:admin",
+    "report:create", "report:review", "report:submit", "audit:read", "settings:admin", "users:manage", "post:import",
   ],
-  analyst: ["case:create", "case:update", "evidence:create", "report:create"],
+  analyst: ["case:create", "case:update", "evidence:create", "report:create", "post:import"],
   reviewer: ["case:update", "case:verify", "report:review", "report:submit", "audit:read"],
 };
 

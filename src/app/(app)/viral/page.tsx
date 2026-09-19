@@ -74,13 +74,15 @@ export default async function ViralPage({ searchParams }: PageProps<"/viral">) {
 
   // Posts: same filter as Monitoring, ranked by how fast they gather engagement.
   const scores = viralScores(ctx.posts, ctx.now);
+  // Posts whose numbers are unknown (added by link) cannot be ranked by engagement.
   const viralPosts = filterPosts(ctx, parsePostFilters({ q }))
+    .filter((post) => post.metricsKnown !== false)
     .map((post) => ({ post, viral: scores.get(post.id)! }))
     .sort((a, b) => b.viral.score - a.viral.score)
     .slice(0, 15);
 
   if (q) {
-    logAudit({ user, action: "SEARCH", object: `viral: "${q.slice(0, 80)}" (${matched.length} kelompok berita, ${viralPosts.length} postingan)` });
+    await logAudit({ user, action: "SEARCH", object: `viral: "${q.slice(0, 80)}" (${matched.length} kelompok berita, ${viralPosts.length} postingan)` });
   }
 
   const okFeeds = news.feeds.filter((f) => f.ok);

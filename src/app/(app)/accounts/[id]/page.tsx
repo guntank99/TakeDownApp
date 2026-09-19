@@ -43,7 +43,7 @@ export default async function AccountDetailPage({ params, searchParams }: PagePr
 
   const posts = ctx.posts.filter((p) => p.authorId === id);
   const rows: PostRow[] = posts.map((post) => ({ post, handle: account.handle, analysis: ctx.postAnalysis.get(post.id)! }));
-  const openCases = listCases().filter((c) => c.status !== "CLOSED" && !c.accountIds.includes(id));
+  const openCases = (await listCases()).filter((c) => c.status !== "CLOSED" && !c.accountIds.includes(id));
   const inauthentic = an.authenticityLabel === "Berpotensi Tidak Autentik";
 
   return (

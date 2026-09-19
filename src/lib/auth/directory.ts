@@ -1,13 +1,28 @@
 import type { Role } from "@/types";
 
-/** Public display info for user ids (no credentials), safe for any component. */
-export const USER_DIRECTORY: Record<string, { name: string; role: Role }> = {
-  "USR-001": { name: "Admin Demo", role: "admin" },
-  "USR-002": { name: "Analis Demo", role: "analyst" },
-  "USR-003": { name: "Peninjau Demo", role: "reviewer" },
-};
+/**
+ * Public display info (id → name, role), never credentials. It is refreshed
+ * by the server-side auth check (see user-store.ts) so pages can call the
+ * synchronous userName() while rendering.
+ */
+export interface DirectoryEntry {
+  id: string;
+  name: string;
+  role: Role;
+}
+
+const g = globalThis as unknown as { __tpDirectory?: Map<string, DirectoryEntry> };
+const store = () => (g.__tpDirectory ??= new Map());
+
+export function setDirectory(entries: DirectoryEntry[]) {
+  g.__tpDirectory = new Map(entries.map((e) => [e.id, e]));
+}
+
+export function listDirectory(): DirectoryEntry[] {
+  return [...store().values()];
+}
 
 export function userName(id: string | null | undefined): string {
   if (!id) return "—";
-  return USER_DIRECTORY[id]?.name ?? id;
+  return store().get(id)?.name ?? id;
 }

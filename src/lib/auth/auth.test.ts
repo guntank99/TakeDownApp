@@ -1,11 +1,13 @@
 import { SignJWT } from "jose";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { SESSION_TTL_SECONDS, signSession, verifySessionToken } from "./session-token";
-import { demoLoginEnabled, findUserById, findUserByIdentifier } from "./users";
+import { buildBootstrapAdmin } from "@/lib/store/bootstrap";
+import { findSessionUser, findUserByLogin, listUsersSafe, loginAvailability } from "./user-store";
+import { demoLoginEnabled } from "./users";
 
 const SECRET = "x".repeat(40);
 const env = process.env as Record<string, string | undefined>;
-const TOUCHED = ["AUTH_SECRET", "DEMO_PASSWORD_HASH", "DEMO_MODE", "NODE_ENV"];
+const TOUCHED = ["AUTH_SECRET", "DEMO_PASSWORD_HASH", "DEMO_MODE", "NODE_ENV", "APP_MODE"];
 const original = Object.fromEntries(TOUCHED.map((k) => [k, process.env[k]]));
 
 beforeEach(() => {
@@ -59,21 +61,21 @@ describe("session tokens", () => {
 });
 
 describe("demo user store", () => {
-  it("finds users by username or email, case-insensitively", () => {
-    expect(findUserByIdentifier("ANALYST")?.id).toBe("USR-002");
-    expect(findUserByIdentifier("Reviewer@Sentinel.Example")?.id).toBe("USR-003");
-    expect(findUserByIdentifier("nobody")).toBeNull();
+  it("finds users by username or email, case-insensitively", async () => {
+    expect((await findUserByLogin("ANALYST"))?.id).toBe("USR-002");
+    expect((await findUserByLogin("Reviewer@Sentinel.Example"))?.id).toBe("USR-003");
+    expect(await findUserByLogin("nobody")).toBeNull();
   });
 
-  it("stores only bcrypt hashes and never exposes them through findUserById", () => {
-    const u = findUserByIdentifier("admin")!;
-    expect(u.passwordHash).toMatch(/^\$2[aby]\$/);
-    expect(findUserById("USR-001")).not.toHaveProperty("passwordHash");
+  it("stores only bcrypt hashes and never exposes them to the session or the user list", async () => {
+    expect((await findUserByLogin("admin"))!.passwordHash).toMatch(/^\$2[aby]\$/);
+    expect(await findSessionUser("USR-001")).not.toHaveProperty("passwordHash");
+    for (const u of await listUsersSafe()) expect(u).not.toHaveProperty("passwordHash");
   });
 
-  it("DEMO_PASSWORD_HASH overrides the built-in demo password", () => {
+  it("DEMO_PASSWORD_HASH overrides the built-in demo password", async () => {
     env.DEMO_PASSWORD_HASH = "$2b$10$overrideoverrideoverrideoverrideoverrideoverrideoverri";
-    expect(findUserByIdentifier("admin")!.passwordHash).toBe(env.DEMO_PASSWORD_HASH);
+    expect((await findUserByLogin("admin"))!.passwordHash).toBe(env.DEMO_PASSWORD_HASH);
   });
 
   it("demo login is on in development, but in production needs DEMO_MODE=true AND a private password hash", () => {
@@ -89,5 +91,41 @@ describe("demo user store", () => {
     expect(demoLoginEnabled()).toBe(true);
     env.DEMO_MODE = "false";
     expect(demoLoginEnabled()).toBe(false);
+  });
+
+  it("explains on the login form why nobody can sign in", async () => {
+    env.NODE_ENV = "production";
+    delete env.DEMO_MODE;
+    delete env.DEMO_PASSWORD_HASH;
+    const res = await loginAvailability();
+    expect(res.ok).toBe(false);
+    if (!res.ok) expect(res.message).toMatch(/DEMO_MODE/);
+  });
+});
+
+describe("bootstrap administrator (live mode)", () => {
+  const HASH = "$2b$10$" + "a".repeat(53);
+  const now = "2026-09-19T00:00:00.000Z";
+
+  it("creates an admin from ADMIN_USERNAME + ADMIN_PASSWORD_HASH", () => {
+    const res = buildBootstrapAdmin({ ADMIN_USERNAME: "boss", ADMIN_PASSWORD_HASH: HASH }, "USR-001", now);
+    expect(res.user).toMatchObject({ id: "USR-001", username: "boss", role: "admin", active: true, passwordHash: HASH });
+  });
+
+  it("creates nothing (and no complaint) when neither variable is set", () => {
+    expect(buildBootstrapAdmin({}, "USR-001", now)).toEqual({ user: null, problem: null });
+  });
+
+  it("refuses a half-configured admin, a bad username, and a password that is not a bcrypt hash", () => {
+    for (const env of [
+      { ADMIN_USERNAME: "boss" },
+      { ADMIN_PASSWORD_HASH: HASH },
+      { ADMIN_USERNAME: "a b", ADMIN_PASSWORD_HASH: HASH },
+      { ADMIN_USERNAME: "boss", ADMIN_PASSWORD_HASH: "password123" },
+    ]) {
+      const res = buildBootstrapAdmin(env, "USR-001", now);
+      expect(res.user).toBeNull();
+      expect((res as { problem: string | null }).problem).toBeTruthy();
+    }
   });
 });

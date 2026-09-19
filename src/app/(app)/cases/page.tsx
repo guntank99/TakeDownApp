@@ -25,7 +25,7 @@ export default async function CasesPage({ searchParams }: PageProps<"/cases">) {
   const platform = enumParam(sp, "platform", PLATFORMS);
   const category = enumParam(sp, "category", POLICY_CATEGORIES);
 
-  const all = listCases().filter(
+  const all = (await listCases()).filter(
     (c) => (!status || c.status === status) && (!priority || c.priority === priority) && (!platform || c.platform === platform)
       && (!category || c.category === category) && (!q || `${c.id} ${c.title} ${c.description}`.toLowerCase().includes(q.toLowerCase())),
   );

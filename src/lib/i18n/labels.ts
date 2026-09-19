@@ -1,5 +1,6 @@
 import type {
   AuditAction,
+  TakedownOutcome,
   CaseStatus,
   ClaimVerdict,
   IssueStatus,
@@ -94,6 +95,25 @@ export const AUDIT_ACTION_LABEL: Record<AuditAction, string> = {
   SEARCH: "Pencarian",
   SUBMIT_REPORT: "Mencatat pengajuan laporan",
   UPDATE_POLICY: "Memperbarui kebijakan",
+  IMPORT_POST: "Menambah tautan postingan",
+  DELETE_POST: "Menghapus tautan postingan",
+  CHECK_AVAILABILITY: "Memeriksa ketersediaan konten",
+  UPLOAD_EVIDENCE: "Mengunggah berkas bukti",
+  DELETE_EVIDENCE: "Menghapus berkas bukti",
+  DELETE_CASE: "Menghapus kasus",
+  EXPORT_PACKAGE: "Mengekspor paket laporan",
+  RECORD_OUTCOME: "Mencatat hasil take down",
+  CREATE_USER: "Membuat pengguna",
+  UPDATE_USER: "Memperbarui pengguna",
+  CHANGE_PASSWORD: "Mengganti kata sandi",
+};
+
+export const TAKEDOWN_OUTCOME_LABEL: Record<TakedownOutcome, string> = {
+  pending: "Menunggu keputusan platform",
+  removed: "Konten dihapus",
+  restricted: "Konten dibatasi",
+  rejected: "Laporan ditolak",
+  no_action: "Tidak ada tindakan",
 };
 
 export const AUDIT_RESULT_LABEL = { SUCCESS: "Berhasil", DENIED: "Ditolak", FAILED: "Gagal" } as const;

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { isPolicyStale } from "@/lib/toc/freshness";
+import { nowMs } from "@/lib/utils/time";
 import { DataTable, Pagination } from "@/components/tables/DataTable";
 import { Badge, PlatformBadge } from "@/components/ui/badges";
 import { FilterPanel } from "@/components/ui/FilterPanel";
@@ -82,7 +84,7 @@ export default async function TocPage({ searchParams }: PageProps<"/toc">) {
             { header: "Versi kebijakan", className: "max-w-[12rem] whitespace-normal text-slate-400", cell: (r) => r.policyVersion },
             { header: "Verifikasi", cell: (r) => r.verification === "verified_against_official_source" ? <Badge tone="success">TERVERIFIKASI</Badge> : <Badge tone="warning">PERLU VERIFIKASI</Badge> },
             { header: "URL resmi", cell: (r) => <a href={r.officialUrl} target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:underline">Buka ↗</a> },
-            { header: "Dicek", className: "whitespace-nowrap", cell: (r) => formatDate(r.lastUpdated) },
+            { header: "Dicek", className: "whitespace-nowrap", cell: (r) => (<span>{formatDate(r.lastUpdated)}{isPolicyStale(r.lastUpdated, nowMs()) ? <span className="ml-2"><Badge tone="warning">KEBIJAKAN MUNGKIN USANG</Badge></span> : null}</span>) },
           ]}
         />
         <Pagination page={page} pages={pages} total={total} basePath="/toc" params={values} />

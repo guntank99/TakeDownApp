@@ -4,7 +4,7 @@ import { DataTable, Pagination } from "@/components/tables/DataTable";
 import { Badge } from "@/components/ui/badges";
 import { FilterPanel } from "@/components/ui/FilterPanel";
 import { Notice, PageHeader } from "@/components/ui/layout";
-import { USER_DIRECTORY } from "@/lib/auth/directory";
+import { listDirectory } from "@/lib/auth/directory";
 import { verifySession } from "@/lib/auth/dal";
 import { AUDIT_ACTION_LABEL, AUDIT_RESULT_LABEL } from "@/lib/i18n/labels";
 import { listAuditFor } from "@/lib/services/audit";
@@ -21,7 +21,7 @@ const RESULTS = ["SUCCESS", "DENIED", "FAILED"] as const;
 export default async function ActivityPage({ searchParams }: PageProps<"/audit">) {
   const user = await verifySession();
   const sp = await searchParams;
-  const { entries, scope } = listAuditFor(user);
+  const { entries, scope } = await listAuditFor(user);
 
   const action = enumParam(sp, "action", ACTIONS);
   const result = enumParam(sp, "result", RESULTS);
@@ -84,7 +84,7 @@ export default async function ActivityPage({ searchParams }: PageProps<"/audit">
           { name: "q", label: "Cari", type: "text", placeholder: "pengguna, objek, kasus" },
           { name: "action", label: "Aktivitas", options: ACTIONS.map((a) => ({ value: a, label: AUDIT_ACTION_LABEL[a] })) },
           { name: "result", label: "Hasil", options: RESULTS.map((r) => ({ value: r, label: AUDIT_RESULT_LABEL[r] })) },
-          ...(scope === "all" ? [{ name: "user", label: "Pengguna", options: Object.entries(USER_DIRECTORY).map(([id, u]) => ({ value: id, label: u.name })) }] : []),
+          ...(scope === "all" ? [{ name: "user", label: "Pengguna", options: listDirectory().map((u) => ({ value: u.id, label: u.name })) }] : []),
           { name: "from", label: "Dari tanggal", type: "date" as const },
           { name: "to", label: "Sampai tanggal", type: "date" as const },
         ]}

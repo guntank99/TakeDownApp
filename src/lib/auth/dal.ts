@@ -4,7 +4,7 @@ import { cache } from "react";
 import { redirect } from "next/navigation";
 import type { Role, SessionUser } from "@/types";
 import { getSession } from "./session";
-import { findUserById } from "./users";
+import { findSessionUser, refreshDirectory } from "./user-store";
 
 /**
  * Data Access Layer for auth. This is the real authorization check; the
@@ -17,7 +17,9 @@ import { findUserById } from "./users";
 export const getCurrentUser = cache(async (): Promise<SessionUser | null> => {
   const session = await getSession();
   if (!session) return null;
-  return findUserById(session.userId);
+  const user = await findSessionUser(session.userId);
+  if (user) await refreshDirectory();
+  return user;
 });
 
 /** Current user, or redirect to /login. */

@@ -6,7 +6,14 @@ import { analyzeContent } from "@/lib/analysis/indicators";
 import { logAudit } from "@/lib/services/audit";
 import { createCase, updateCase } from "@/lib/services/cases";
 import { createEvidence } from "@/lib/services/evidence";
-import { createReport, submitReport, updateReport } from "@/lib/services/reports";
+import { removeEvidenceFile, uploadEvidenceFile } from "@/lib/services/evidence-files";
+import { deleteCaseCascade } from "@/lib/services/retention";
+import { adapterForUrl } from "@/lib/adapters";
+import { explainUnsupported, parsePostUrl } from "@/lib/embed/parse";
+import { checkPostAvailability, deleteImportedPost, importPost, importedPostId } from "@/lib/services/imports";
+import { getRepository } from "@/lib/store";
+import { createReport, recordOutcome, submitReport, updateReport } from "@/lib/services/reports";
+import { changeOwnPassword, createUser, resetPassword, updateUser } from "@/lib/services/users";
 import { textSchema } from "@/lib/validation/schemas";
 import type { ContentAnalysis } from "@/types";
 
@@ -109,6 +116,141 @@ export async function analyzeTextAction(_prev: AnalyzeState, formData: FormData)
   const user = await verifySession();
   const parsed = textSchema.safeParse({ text: str(formData, "text") });
   if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? "Teks tidak valid.", text: str(formData, "text") };
-  logAudit({ user, action: "ANALYZE_POST", object: `analisis teks manual (${parsed.data.text.length} karakter)` });
+  await logAudit({ user, action: "ANALYZE_POST", object: `analisis teks manual (${parsed.data.text.length} karakter)` });
   return { text: parsed.data.text, analysis: analyzeContent(parsed.data.text) };
+}
+
+// ------------------------------------------------------------ links & viewing
+
+export async function importPostAction(formData: FormData) {
+  const user = await verifySession();
+  const returnTo = safePath(str(formData, "returnTo"), "/video");
+  const body: Record<string, string> = {};
+  for (const key of ["url", "caption", "note", "views", "likes", "comments", "shares", "postedAt"]) {
+    const v = str(formData, key);
+    if (v) body[key] = v;
+  }
+  const result = await importPost(user, body);
+  if (!result.ok) back(returnTo, "error", result.error);
+  back(returnTo, "notice", `Postingan ditambahkan: ${result.value.id}. Klik pemutar untuk menontonnya.`);
+}
+
+export async function deletePostAction(formData: FormData) {
+  const user = await verifySession();
+  const id = str(formData, "postId");
+  const result = await deleteImportedPost(user, id);
+  if (!result.ok) back(`/posts/${encodeURIComponent(id)}`, "error", result.error);
+  back("/video", "notice", `Tautan ${id} dihapus dari ruang kerja.`);
+}
+
+export async function checkAvailabilityAction(formData: FormData) {
+  const user = await verifySession();
+  const id = str(formData, "postId");
+  const path = `/posts/${encodeURIComponent(id)}`;
+  const result = await checkPostAvailability(user, id);
+  if (!result.ok) back(path, "error", result.error);
+  const { status, supported } = result.value;
+  if (!supported) back(path, "notice", "Platform ini tidak menyediakan pengecekan otomatis. Buka tautan asli di peramban untuk memastikan.");
+  const text = { available: "Konten masih dapat diakses menurut platform.", unavailable: "Platform tidak menemukan konten ini (mungkin sudah dihapus, dibuat privat, atau tidak dapat disematkan). Pastikan dengan membuka tautan asli.", unknown: "Status tidak dapat dipastikan saat ini (gangguan jaringan atau platform). Coba lagi nanti." }[status];
+  back(path, "notice", text);
+}
+
+export async function recordOutcomeAction(formData: FormData) {
+  const user = await verifySession();
+  const id = str(formData, "reportId");
+  const result = await recordOutcome(user, id, { outcome: str(formData, "outcome"), note: str(formData, "note") });
+  const path = `/reports/${encodeURIComponent(id)}`;
+  if (!result.ok) back(path, "error", result.error);
+  back(path, "notice", "Hasil dari platform dicatat.");
+}
+
+// -------------------------------------------------------------------- users
+
+export async function createUserAction(formData: FormData) {
+  const user = await verifySession();
+  const result = await createUser(user, {
+    username: str(formData, "username"),
+    email: str(formData, "email"),
+    name: str(formData, "name"),
+    role: str(formData, "role"),
+    password: String(formData.get("password") ?? ""),
+  });
+  if (!result.ok) back("/users", "error", result.error);
+  back("/users", "notice", `Pengguna ${result.value.username} dibuat.`);
+}
+
+export async function updateUserAction(formData: FormData) {
+  const user = await verifySession();
+  const id = str(formData, "userId");
+  const body: { role?: string; active?: boolean } = {};
+  if (formData.has("role")) body.role = str(formData, "role");
+  if (formData.has("active")) body.active = str(formData, "active") === "true";
+  const result = await updateUser(user, id, body);
+  if (!result.ok) back("/users", "error", result.error);
+  back("/users", "notice", "Pengguna diperbarui.");
+}
+
+export async function resetPasswordAction(formData: FormData) {
+  const user = await verifySession();
+  const result = await resetPassword(user, str(formData, "userId"), String(formData.get("password") ?? ""));
+  if (!result.ok) back("/users", "error", result.error);
+  back("/users", "notice", "Kata sandi diganti. Sampaikan kata sandi baru melalui saluran yang aman.");
+}
+
+export async function changePasswordAction(formData: FormData) {
+  const user = await verifySession();
+  const next = String(formData.get("next") ?? "");
+  if (next !== String(formData.get("confirm") ?? "")) back("/settings", "error", "Konfirmasi kata sandi tidak sama.");
+  const result = await changeOwnPassword(user, String(formData.get("current") ?? ""), next);
+  if (!result.ok) back("/settings", "error", result.error);
+  back("/settings", "notice", "Kata sandi diganti.");
+}
+
+// ----------------------------------------------------------- files & retention
+
+export async function uploadEvidenceFileAction(formData: FormData) {
+  const user = await verifySession();
+  const caseId = str(formData, "caseId");
+  const path = `/cases/${encodeURIComponent(caseId)}`;
+  const file = formData.get("file");
+  if (!(file instanceof File) || file.size === 0) back(path, "error", "Pilih berkas terlebih dahulu.");
+  const result = await uploadEvidenceFile(user, caseId, { name: (file as File).name, bytes: new Uint8Array(await (file as File).arrayBuffer()) }, str(formData, "note"));
+  if (!result.ok) back(path, "error", result.error);
+  back(path, "notice", `Berkas ${result.value.id} diunggah. SHA-256: ${result.value.sha256.slice(0, 16)}…`);
+}
+
+export async function deleteEvidenceFileAction(formData: FormData) {
+  const user = await verifySession();
+  const caseId = str(formData, "caseId");
+  const path = `/cases/${encodeURIComponent(caseId)}`;
+  const result = await removeEvidenceFile(user, str(formData, "fileId"));
+  if (!result.ok) back(path, "error", result.error);
+  back(path, "notice", "Berkas dihapus. Hash-nya tetap tercatat di riwayat aktivitas.");
+}
+
+export async function deleteCaseAction(formData: FormData) {
+  const user = await verifySession();
+  const caseId = str(formData, "caseId");
+  const result = await deleteCaseCascade(user, caseId, str(formData, "confirm"));
+  if (!result.ok) back(`/cases/${encodeURIComponent(caseId)}`, "error", result.error);
+  back("/cases", "notice", `Kasus ${caseId} dihapus beserta ${result.value.evidence} bukti, ${result.value.files} berkas, dan ${result.value.reports} laporan.`);
+}
+
+/**
+ * "Mulai dari URL": validate the link with the platform's adapter, collect it
+ * (or reuse it if it is already in the workspace), then open the case form.
+ * Nothing is reported here; this only starts the human workflow.
+ */
+export async function startTakedownAction(formData: FormData) {
+  const user = await verifySession();
+  const url = str(formData, "url");
+  if (!adapterForUrl(url)) back("/takedown", "error", explainUnsupported(url));
+  const parsed = parsePostUrl(url)!;
+  const id = importedPostId(parsed);
+  const repo = await getRepository();
+  if (!(await repo.getImported(id))) {
+    const result = await importPost(user, { url });
+    if (!result.ok) back("/takedown", "error", result.error);
+  }
+  redirect(`/cases/new?post=${encodeURIComponent(id)}`);
 }

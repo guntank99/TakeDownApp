@@ -4,7 +4,7 @@ import { param } from "@/lib/utils/params";
 
 export const GET = withApi({}, async (req) => {
   const caseId = param(Object.fromEntries(req.nextUrl.searchParams), "caseId");
-  const items = listEvidence(caseId || undefined);
+  const items = await listEvidence(caseId || undefined);
   return { items, total: items.length };
 });
 

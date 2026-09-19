@@ -2,7 +2,7 @@ import "server-only";
 
 import { NextResponse, type NextRequest } from "next/server";
 import { getSession } from "@/lib/auth/session";
-import { findUserById } from "@/lib/auth/users";
+import { findSessionUser, refreshDirectory } from "@/lib/auth/user-store";
 import { can, type Permission } from "@/lib/auth/permissions";
 import type { SessionUser } from "@/types";
 import { rateLimit } from "./rate-limit";
@@ -71,8 +71,9 @@ export function withApi<P = Record<string, never>>(
   return async (req: NextRequest, routeCtx?: { params: Promise<P> }): Promise<Response> => {
     try {
       const session = await getSession();
-      const user = session ? findUserById(session.userId) : null;
+      const user = session ? await findSessionUser(session.userId) : null;
       if (!user) return errorJson(401, "Autentikasi diperlukan.");
+      await refreshDirectory();
 
       const write = WRITE_METHODS.has(req.method);
       const limited = rateLimit(`${user.id}:${write ? "w" : "r"}`, write ? 30 : 120);

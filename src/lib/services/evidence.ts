@@ -2,21 +2,21 @@ import "server-only";
 
 import { can } from "@/lib/auth/permissions";
 import { hashSnapshot, verifyEvidenceIntegrity } from "@/lib/evidence/hash";
-import { getProvider } from "@/lib/providers";
-import { getStore, nextId } from "@/lib/store";
+import { getRepository } from "@/lib/store";
 import { createEvidenceSchema, formatZodError } from "@/lib/validation/schemas";
 import type { EvidenceRecord, SessionUser } from "@/types";
 import { logAudit } from "./audit";
-import { getCase } from "./cases";
+import { getActiveProvider } from "./source";
+import { addTimeline, getCase } from "./cases";
 import { failure, success, type Result } from "./result";
 
-export function listEvidence(caseId?: string): EvidenceRecord[] {
-  const all = getStore().evidence;
-  return (caseId ? all.filter((e) => e.caseId === caseId) : [...all]).sort((a, b) => b.capturedAt.localeCompare(a.capturedAt));
+export async function listEvidence(caseId?: string): Promise<EvidenceRecord[]> {
+  const all = await (await getRepository()).listEvidence(caseId);
+  return all.sort((a, b) => b.capturedAt.localeCompare(a.capturedAt));
 }
 
-export function getEvidence(id: string): EvidenceRecord | null {
-  return getStore().evidence.find((e) => e.id === id) ?? null;
+export async function getEvidence(id: string): Promise<EvidenceRecord | null> {
+  return (await getRepository()).getEvidence(id);
 }
 
 export const evidenceIntegrity = (e: EvidenceRecord) => verifyEvidenceIntegrity(e);
@@ -27,23 +27,23 @@ export const evidenceIntegrity = (e: EvidenceRecord) => verifyEvidenceIntegrity(
  */
 export async function createEvidence(user: SessionUser, raw: unknown): Promise<Result<EvidenceRecord>> {
   if (!can(user.role, "evidence:create")) {
-    logAudit({ user, action: "CREATE_EVIDENCE", object: "evidence", result: "DENIED" });
+    await logAudit({ user, action: "CREATE_EVIDENCE", object: "evidence", result: "DENIED" });
     return failure("Peran Anda tidak dapat membuat bukti.", 403);
   }
   const parsed = createEvidenceSchema.safeParse(raw);
   if (!parsed.success) return failure(formatZodError(parsed.error));
   const { caseId, postId, screenshotRef } = parsed.data;
 
-  const c = getCase(caseId);
+  const c = await getCase(caseId);
   if (!c) return failure("Kasus tidak ditemukan.", 404);
   if (c.status === "CLOSED") return failure("Tidak dapat menambah bukti pada kasus yang sudah ditutup.", 409);
 
-  const provider = getProvider();
+  const provider = await getActiveProvider();
   const post = await provider.getPost(postId);
   if (!post) return failure("Postingan tidak ditemukan.", 404);
   const author = await provider.getAccount(post.authorId);
 
-  const store = getStore();
+  const repo = await getRepository();
   const snapshot = {
     postId: post.id,
     accountHandle: author?.handle ?? null,
@@ -54,7 +54,7 @@ export async function createEvidence(user: SessionUser, raw: unknown): Promise<R
     capturedFrom: post.provenance.source,
   };
   const record: EvidenceRecord = {
-    id: nextId("EVD", store.evidence.map((e) => e.id)),
+    id: await repo.newEvidenceId(),
     caseId,
     url: post.url,
     postId: post.id,
@@ -66,11 +66,10 @@ export async function createEvidence(user: SessionUser, raw: unknown): Promise<R
     source: post.provenance.source,
     collectedBy: user.id,
   };
-  store.evidence.push(record);
+  await repo.saveEvidence(record);
 
-  const now = record.capturedAt;
-  c.timeline.push({ id: `TL-${c.timeline.length + 1}`, at: now, actorId: user.id, type: "EVIDENCE_ADDED", message: `Bukti ${record.id} diambil dari ${post.id}` });
-  c.updatedAt = now;
-  logAudit({ user, action: "CREATE_EVIDENCE", object: record.id, caseId });
+  addTimeline(c, user, "EVIDENCE_ADDED", `Bukti ${record.id} diambil dari ${post.id}`);
+  await repo.saveCase(c);
+  await logAudit({ user, action: "CREATE_EVIDENCE", object: record.id, caseId });
   return success(record);
 }

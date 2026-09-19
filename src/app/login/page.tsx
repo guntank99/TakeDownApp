@@ -20,7 +20,7 @@ export default async function LoginPage() {
             aria-hidden="true"
           />
           <h1 className="mt-3 text-lg font-semibold tracking-wide text-slate-50">
-            SOCIAL SENTINEL
+            THE POWER
           </h1>
           <p className="mt-1 text-xs text-slate-400">
             Pantau • Analisis • Verifikasi • Dokumentasikan • Laporkan
